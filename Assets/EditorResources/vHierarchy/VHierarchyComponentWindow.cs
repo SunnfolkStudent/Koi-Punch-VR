@@ -385,9 +385,9 @@ namespace VHierarchy
             floatingInstance.position = Rect.zero.SetPos(position).SetSize(300, 200);
             floatingInstance.targetPosition = position;
 
-            floatingInstance.minSize = Vector2.zero;
-            floatingInstance.maxSize = Vector2.one * 123212;
-
+            // floatingInstance.minSize = Vector2.zero;
+            // floatingInstance.minSize = new Vector2(300, 0);
+            // floatingInstance.maxSize = Vector2.one * 123212;
 
         }
 

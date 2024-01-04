@@ -78,7 +78,7 @@ namespace VHierarchy
                     {
                         if (i == 0) return;
 
-                        var brightness = i <= VHierarchyPalette.greyColorsCount ? 1.02f : 1.28f;
+                        var brightness = i <= VHierarchyPalette.greyColorsCount ? 1.02f : 1.35f;
                         var outlineColor = i <= VHierarchyPalette.greyColorsCount ? Greyscale(.0f, .4f) : Greyscale(.15f, .2f);
 
                         cellRect.Resize(3).DrawWithRoundedCorners(outlineColor, 4);
@@ -101,6 +101,9 @@ namespace VHierarchy
                         Close();
 
                     }
+
+
+                    cellRect.MarkInteractive();
 
                     backgroundSelected();
                     backgroundHovered();
@@ -197,6 +200,9 @@ namespace VHierarchy
 
                         }
 
+
+                        cellRect.MarkInteractive();
+
                         backgroundSelected();
                         backgroundHovered();
                         crossIcon();
@@ -277,6 +283,9 @@ namespace VHierarchy
                 lerpCurPos();
                 setCurPos();
 
+                if (!currentPosition.y.Approx(targetPosition.y))
+                    Repaint();
+
             }
             void closeOnEscape()
             {
@@ -305,8 +314,6 @@ namespace VHierarchy
             setColorsAndIcons();
             updatePosition();
             closeOnEscape();
-
-            Repaint();
 
             EditorApplication.RepaintHierarchyWindow();
 

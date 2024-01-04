@@ -108,8 +108,21 @@ namespace VHierarchy
 
 
 
-        [MenuItem(disablePlugin, false, 1001)] static void dadsadsdasadasdasdsadadsas() { pluginDisabled = !pluginDisabled; UnityEditor.Compilation.CompilationPipeline.RequestScriptCompilation(); }
-        [MenuItem(disablePlugin, true, 1001)] static bool dadsaddssdaasadsadadsdasadsas() { Menu.SetChecked(disablePlugin, pluginDisabled); return true; }
+        [MenuItem(dir + "More", false, 1001)] static void daasadsddsas() { }
+        [MenuItem(dir + "More", true, 1001)] static bool dadsadsdasas123() => false;
+
+        [MenuItem(dir + "Join our Discord", false, 1002)]
+        static void dadasdsas() => Application.OpenURL("https://discord.gg/4dG9KsbspG");
+
+        [MenuItem(dir + "Check out vFolders 2", false, 1003)]
+        static void dadadssadsas() => Application.OpenURL("https://assetstore.unity.com/packages/slug/263644?aid=1100lGLBn&pubref=menucheckout");
+
+
+
+
+
+        [MenuItem(disablePlugin, false, 10001)] static void dadsadsdasadasdasdsadadsas() { pluginDisabled = !pluginDisabled; UnityEditor.Compilation.CompilationPipeline.RequestScriptCompilation(); }
+        [MenuItem(disablePlugin, true, 10001)] static bool dadsaddssdaasadsadadsdasadsas() { Menu.SetChecked(disablePlugin, pluginDisabled); return true; }
 
 
 

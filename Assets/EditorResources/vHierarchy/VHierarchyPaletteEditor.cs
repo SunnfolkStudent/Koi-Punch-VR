@@ -81,7 +81,7 @@ namespace VHierarchy
                     {
                         var tint = palette.colorsEnabled ? Color.white : disabledRowTint;
 
-                        var brightness = i < VHierarchyPalette.greyColorsCount ? 1.02f : 1.28f;
+                        var brightness = i < VHierarchyPalette.greyColorsCount ? 1.02f : 1.35f;
                         var outlineColor = i < VHierarchyPalette.greyColorsCount ? Greyscale(.0f, .4f) : Greyscale(.15f, .2f);
 
                         cellRect.Resize(3).DrawWithRoundedCorners(outlineColor * tint, 4);
@@ -193,6 +193,25 @@ namespace VHierarchy
                         pickingIcon = false;
 
                     }
+                    void dragndrop()
+                    {
+                        if (!rowRect.IsHovered()) return;
+
+                        if (curEvent.isDragUpdate && DragAndDrop.objectReferences.First() is Texture2D)
+                            DragAndDrop.visualMode = DragAndDropVisualMode.Copy;
+
+                        if (!curEvent.isDragPerform) return;
+                        if (!(DragAndDrop.objectReferences.Any(r => r is Texture2D))) return;
+
+                        DragAndDrop.AcceptDrag();
+
+                        palette.RecordUndo();
+                        palette.Dirty();
+
+                        foreach (var icon in DragAndDrop.objectReferences.Where(r => r is Texture2D))
+                            row.customIcons.Add(icon.GetPath().ToGuid());
+
+                    }
 
                     void calcSpaceForCrossIcon()
                     {
@@ -302,10 +321,11 @@ namespace VHierarchy
                         {
                             if (!isCustomIcon) return;
                             if (cellRect.IsHovered()) return;
+                            if (!(AssetDatabase.LoadAssetAtPath<Texture2D>(row.customIcons[i - row.builtinIcons.Count].ToPath()) is Texture2D texture)) return;
 
                             SetGUIColor(row.enabled ? Color.white : disabledRowTint);
 
-                            GUI.DrawTexture(cellRect.SetSizeFromMid(iconSize), AssetDatabase.LoadAssetAtPath<Texture2D>(row.customIcons[i - row.builtinIcons.Count].ToPath()));
+                            GUI.DrawTexture(cellRect.SetSizeFromMid(iconSize), texture);
 
                             ResetGUIColor();
 
@@ -349,6 +369,7 @@ namespace VHierarchy
 
                     updatePickingIcon();
                     stopPickingIcon();
+                    dragndrop();
 
                     calcSpaceForCrossIcon();
                     backgroundHovered();

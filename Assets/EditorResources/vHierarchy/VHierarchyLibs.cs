@@ -171,6 +171,9 @@ namespace VHierarchy.Libs
 
 
 
+        public static TValue GetValueOrDefault<TKey, TValue>(this Dictionary<TKey, TValue> dic, TKey key) => dic.ContainsKey(key) ? dic[key] : default;
+
+
 
 
 
@@ -178,34 +181,122 @@ namespace VHierarchy.Libs
 
         #region Reflection
 
-
         public static object GetFieldValue(this object o, string fieldName, bool exceptionIfNotFound = true)
         {
-            if (o.GetFieldInfo(fieldName) is FieldInfo fieldInfo)
-                return fieldInfo.GetValue(o is Type ? null : o);
+            var type = (o as Type) ?? o.GetType();
+            var target = o is Type ? null : o;
 
-            else if (exceptionIfNotFound)
-                throw new System.Exception($"Field '{fieldName}' not found in '{((o as Type) ?? o.GetType()).Name}' type and its parent types");
 
-            else return null;
+            if (type.GetFieldInfo(fieldName) is FieldInfo fieldInfo)
+                return fieldInfo.GetValue(target);
+
+
+            if (exceptionIfNotFound)
+                throw new System.Exception($"Field '{fieldName}' not found in '{type.Name}' type and its parent types");
+
+            return null;
+
+        }
+        public static object GetPropertyValue(this object o, string propertyName, bool exceptionIfNotFound = true)
+        {
+            var type = (o as Type) ?? o.GetType();
+            var target = o is Type ? null : o;
+
+
+            if (type.GetPropertyInfo(propertyName) is PropertyInfo propertyInfo)
+                return propertyInfo.GetValue(target);
+
+
+            if (exceptionIfNotFound)
+                throw new System.Exception($"Property '{propertyName}' not found in '{type.Name}' type and its parent types");
+
+            return null;
+
+        }
+        public static object GetMemberValue(this object o, string memberName, bool exceptionIfNotFound = true)
+        {
+            var type = (o as Type) ?? o.GetType();
+            var target = o is Type ? null : o;
+
+
+            if (type.GetFieldInfo(memberName) is FieldInfo fieldInfo)
+                return fieldInfo.GetValue(target);
+
+            if (type.GetPropertyInfo(memberName) is PropertyInfo propertyInfo)
+                return propertyInfo.GetValue(target);
+
+
+            if (exceptionIfNotFound)
+                throw new System.Exception($"Member '{memberName}' not found in '{type.Name}' type and its parent types");
+
+            return null;
 
         }
 
         public static void SetFieldValue(this object o, string fieldName, object value, bool exceptionIfNotFound = true)
         {
-            if (o.GetFieldInfo(fieldName) is FieldInfo fieldInfo)
-                fieldInfo.SetValue(o is Type ? null : o, value);
+            var type = (o as Type) ?? o.GetType();
+            var target = o is Type ? null : o;
+
+
+            if (type.GetFieldInfo(fieldName) is FieldInfo fieldInfo)
+                fieldInfo.SetValue(target, value);
+
 
             else if (exceptionIfNotFound)
-                throw new System.Exception($"Field '{fieldName}' not found in '{((o as Type) ?? o.GetType()).Name}' type and its parent types");
+                throw new System.Exception($"Field '{fieldName}' not found in '{type.Name}' type and its parent types");
+
+        }
+        public static void SetPropertyValue(this object o, string propertyName, object value, bool exceptionIfNotFound = true)
+        {
+            var type = (o as Type) ?? o.GetType();
+            var target = o is Type ? null : o;
+
+
+            if (type.GetPropertyInfo(propertyName) is PropertyInfo propertyInfo)
+                propertyInfo.SetValue(target, value);
+
+
+            else if (exceptionIfNotFound)
+                throw new System.Exception($"Property '{propertyName}' not found in '{type.Name}' type and its parent types");
+
+        }
+        public static void SetMemberValue(this object o, string memberName, object value, bool exceptionIfNotFound = true)
+        {
+            var type = (o as Type) ?? o.GetType();
+            var target = o is Type ? null : o;
+
+
+            if (type.GetFieldInfo(memberName) is FieldInfo fieldInfo)
+                fieldInfo.SetValue(target, value);
+
+            else if (type.GetPropertyInfo(memberName) is PropertyInfo propertyInfo)
+                propertyInfo.SetValue(target, value);
+
+
+            else if (exceptionIfNotFound)
+                throw new System.Exception($"Member '{memberName}' not found in '{type.Name}' type and its parent types");
 
         }
 
-        static FieldInfo GetFieldInfo(this object o, string fieldName)
+        public static object InvokeMethod(this object o, string methodName, params object[] parameters)
         {
             var type = (o as Type) ?? o.GetType();
+            var target = o is Type ? null : o;
 
 
+            if (type.GetMethodInfo(methodName, parameters.Select(r => r.GetType()).ToArray()) is MethodInfo methodInfo)
+                return methodInfo.Invoke(target, parameters);
+
+
+            throw new System.Exception($"Method '{methodName}' not found in '{type.Name}' type, its parent types and interfaces");
+
+        }
+
+
+
+        static FieldInfo GetFieldInfo(this Type type, string fieldName)
+        {
             if (fieldInfoCache.TryGetValue(type, out var fieldInfosByNames))
                 if (fieldInfosByNames.TryGetValue(fieldName, out var fieldInfo))
                     return fieldInfo;
@@ -219,41 +310,13 @@ namespace VHierarchy.Libs
                     return fieldInfoCache[type][fieldName] = fieldInfo;
 
 
-            return null;
+            return fieldInfoCache[type][fieldName] = null;
 
         }
-
         static Dictionary<Type, Dictionary<string, FieldInfo>> fieldInfoCache = new Dictionary<Type, Dictionary<string, FieldInfo>>();
 
-
-
-        public static object GetPropertyValue(this object o, string propertyName, bool exceptionIfNotFound = true)
+        static PropertyInfo GetPropertyInfo(this Type type, string propertyName)
         {
-            if (o.GetPropertyInfo(propertyName) is PropertyInfo propertyInfo)
-                return propertyInfo.GetValue(o is Type ? null : o);
-
-            else if (exceptionIfNotFound)
-                throw new System.Exception($"Property '{propertyName}' not found in '{((o as Type) ?? o.GetType()).Name}' type and its parent types");
-
-            else return null;
-
-        }
-
-        public static void SetPropertyValue(this object o, string propertyName, object value, bool exceptionIfNotFound = true)
-        {
-            if (o.GetPropertyInfo(propertyName) is PropertyInfo propertyInfo)
-                propertyInfo.SetValue(o is Type ? null : o, value);
-
-            else if (exceptionIfNotFound)
-                throw new System.Exception($"Property '{propertyName}' not found in '{((o as Type) ?? o.GetType()).Name}' type and its parent types");
-
-        }
-
-        static PropertyInfo GetPropertyInfo(this object o, string propertyName)
-        {
-            var type = (o as Type) ?? o.GetType();
-
-
             if (propertyInfoCache.TryGetValue(type, out var propertyInfosByNames))
                 if (propertyInfosByNames.TryGetValue(propertyName, out var propertyInfo))
                     return propertyInfo;
@@ -267,39 +330,48 @@ namespace VHierarchy.Libs
                     return propertyInfoCache[type][propertyName] = propertyInfo;
 
 
-            return null;
+            return propertyInfoCache[type][propertyName] = null;
 
         }
-
         static Dictionary<Type, Dictionary<string, PropertyInfo>> propertyInfoCache = new Dictionary<Type, Dictionary<string, PropertyInfo>>();
 
-
-
-        public static object InvokeMethod(this object o, string methodName, params object[] parameters) // todo caching
+        static MethodInfo GetMethodInfo(this Type type, string methodName, params Type[] argumentTypes)
         {
-            var type = o is Type t ? t : o.GetType();
-            var target = o is Type ? null : o;
+            var methodHash = methodName.GetHashCode() ^ argumentTypes.Aggregate(0, (hash, r) => hash ^= r.GetHashCode());
 
-            // return type.InvokeMember(methodName, maxBindingFlags | BindingFlags.InvokeMethod, null, target, parameters);
 
-            try { return type.InvokeMember(methodName, maxBindingFlags | BindingFlags.InvokeMethod, null, target, parameters); }
-            catch
-            {
-                foreach (var interfaceType in type.GetInterfaces())
-                    try { return interfaceType.InvokeMember(methodName, maxBindingFlags | BindingFlags.InvokeMethod, null, target, parameters); } catch { }
-            }
+            if (methodInfoCache.TryGetValue(type, out var methodInfosByHashes))
+                if (methodInfosByHashes.TryGetValue(methodHash, out var methodInfo))
+                    return methodInfo;
 
-            throw new System.Exception("Method '" + methodName + "' not found in '" + type.Name + "' type, its parent types and interfaces; or it threw an exception");
+
+
+            if (!methodInfoCache.ContainsKey(type))
+                methodInfoCache[type] = new Dictionary<int, MethodInfo>();
+
+            for (var curType = type; curType != null; curType = curType.BaseType)
+                if (curType.GetMethod(methodName, maxBindingFlags, null, argumentTypes, null) is MethodInfo methodInfo)
+                    return methodInfoCache[type][methodHash] = methodInfo;
+
+            foreach (var interfaceType in type.GetInterfaces())
+                if (interfaceType.GetMethod(methodName, maxBindingFlags, null, argumentTypes, null) is MethodInfo methodInfo)
+                    return methodInfoCache[type][methodHash] = methodInfo;
+
+
+
+            return methodInfoCache[type][methodHash] = null;
 
         }
+        static Dictionary<Type, Dictionary<int, MethodInfo>> methodInfoCache = new Dictionary<Type, Dictionary<int, MethodInfo>>();
 
 
 
         public static T GetFieldValue<T>(this object o, string fieldName, bool exceptionIfNotFound = true) => (T)o.GetFieldValue(fieldName, exceptionIfNotFound);
-
         public static T GetPropertyValue<T>(this object o, string propertyName, bool exceptionIfNotFound = true) => (T)o.GetPropertyValue(propertyName, exceptionIfNotFound);
-
+        public static T GetMemberValue<T>(this object o, string memberName, bool exceptionIfNotFound = true) => (T)o.GetMemberValue(memberName, exceptionIfNotFound);
         public static T InvokeMethod<T>(this object o, string methodName, params object[] parameters) => (T)o.InvokeMethod(methodName, parameters);
+
+
 
 
 
@@ -563,6 +635,7 @@ namespace VHierarchy.Libs
         public static Color Greyscale(float brightness, float alpha = 1) => new Color(brightness, brightness, brightness, alpha);
 
         public static Color SetAlpha(this Color color, float alpha) { color.a = alpha; return color; }
+        public static Color MultiplyAlpha(this Color color, float k) { color.a *= k; return color; }
 
 
 
@@ -1211,7 +1284,6 @@ namespace VHierarchy.Libs
         public static string GetScriptPath(string scriptName) => AssetDatabase.FindAssets("t: script " + scriptName, null).FirstOrDefault()?.ToPath() ?? "scirpt not found";
 
 
-        public static bool IsValidGuid(this string guid) => AssetDatabase.AssetPathToGUID(AssetDatabase.GUIDToAssetPath(guid), AssetPathToGUIDOptions.OnlyExistingAssets) != "";
 
 
 
@@ -1441,8 +1513,12 @@ namespace VHierarchy.Libs
         }
 
         public static void Dirty(this Object o) => UnityEditor.EditorUtility.SetDirty(o);
-        public static void Save(this Object o) => AssetDatabase.SaveAssetIfDirty(o);
         public static void RecordUndo(this Object o) => Undo.RecordObject(o, "");
+#if UNITY_2021_1_OR_NEWER
+        public static void Save(this Object o) => AssetDatabase.SaveAssetIfDirty(o);
+#else
+        public static void Save(this Object o) { }
+#endif
 
 
         public static EditorWindow OpenObjectPicker<T>(Object obj = null, bool allowSceneObjects = false, string searchFilter = "", int controlID = 0) where T : Object
@@ -2748,21 +2824,21 @@ namespace VHierarchy.Libs
 
         #region Other 
 
-        public static void MarkInteractive(this Rect rect) // does a dummy toggle to trigger repaint on mouse enter/leave
+        public static void MarkInteractive(this Rect rect)
         {
-            if (curEvent.isMouse) return;
-            // if (!curEvent.isRepaint) return;
+            if (!curEvent.isRepaint) return;
 
-            var prev = GUI.color;
-            GUI.color = Color.clear;
+            var unclippedRect = (Rect)_mi_GUIClip_UnclipToWindow.Invoke(null, new object[] { rect });
 
-            GUI.Toggle(rect, false, "");
-            // GUI.Button(rect, ""); // won't allow pressed buttons in the rect to be blue, for some reason
+            var curGuiView = _pi_GUIView_current.GetValue(null);
 
-            GUI.color = prev;
-
+            _mi_GUIView_MarkHotRegion.Invoke(curGuiView, new object[] { unclippedRect });
 
         }
+        static PropertyInfo _pi_GUIView_current = typeof(Editor).Assembly.GetType("UnityEditor.GUIView").GetProperty("current", maxBindingFlags);
+        static MethodInfo _mi_GUIView_MarkHotRegion = typeof(Editor).Assembly.GetType("UnityEditor.GUIView").GetMethod("MarkHotRegion", maxBindingFlags);
+        static MethodInfo _mi_GUIClip_UnclipToWindow = typeof(GUI).Assembly.GetType("UnityEngine.GUIClip").GetMethod("UnclipToWindow", maxBindingFlags, null, new[] { typeof(Rect) }, null);
+
 
         #endregion
 
