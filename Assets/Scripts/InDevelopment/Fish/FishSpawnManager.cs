@@ -33,15 +33,16 @@ namespace InDevelopment.Fish
         // TODO: Turn same fish Inactive/Despawn it with a function from this FishSpawnManager.
 
         public GameObject[] spawnArea;
+        [SerializeField] private Transform player;
         
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             spawnArea = GameObject.FindGameObjectsWithTag("SpawnArea");
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             // Testing code, remove the below keyboardInput when we have proper functions for spawning fish.
             if (Keyboard.current.sKey.wasPressedThisFrame)
@@ -54,22 +55,15 @@ namespace InDevelopment.Fish
         
         private void SpawnFish()
         {
-            GameObject fish = FishObjectPool.SharedInstance.GetPooledObject();
-
-            if (fish != null)
-            {
-                fish.transform.position = spawnArea[0].transform.position;
-                // fish.transform.rotation = spawnArea[0].transform.rotation;
-                var rigidbodyFish = fish.GetComponent<Rigidbody>();
-                
-                FishTrajectory.LaunchObjectAtTargetWithInitialSpeed(rigidbodyFish, fish.transform.position, new Vector3(0,0,0), 15);
-                
-                fish.SetActive(true);
-            }
+            var fish = FishObjectPool.SharedInstance.GetPooledObject();
+            if (fish == null) return;
+            
+            fish.FishGameObject.transform.position = spawnArea[0].transform.position;
+            // fish.transform.rotation = spawnArea[0].transform.rotation;
+            
+            FishTrajectory.LaunchObjectAtTargetWithInitialSpeed(fish.Rigidbody, fish.FishGameObject.transform.position, player.position, 15);
+            
+            fish.FishGameObject.SetActive(true);
         }
-        
-        
-        
-        
     }
 }

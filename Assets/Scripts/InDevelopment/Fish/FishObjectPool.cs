@@ -1,44 +1,52 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace InDevelopment.Fish
 {
     public class FishObjectPool : MonoBehaviour
     {
         public static FishObjectPool SharedInstance;
-        public List<GameObject> pooledFishObjects;
+        private List<Fish> _pooledFishObjects;
         public GameObject fishObjectToPool;
         public int totalFishAmountInPool;
-    
-        void Awake()
+
+        public class Fish
+        {
+            public GameObject FishGameObject;
+            public Rigidbody Rigidbody;
+        }
+
+        private void Awake()
         {
             SharedInstance = this;
         }
-    
-        void Start()
+
+        private void Start()
         {
-            pooledFishObjects = new List<GameObject>();
-            for(int i = 0; i < totalFishAmountInPool; i++)
+            _pooledFishObjects = new List<Fish>();
+            for(var i = 0; i < totalFishAmountInPool; i++)
             {
                 // tmp = temporary gameObject that creates all the inactive Fish.
-                var tmp = Instantiate(fishObjectToPool);
-                tmp.SetActive(false);
-                pooledFishObjects.Add(tmp);
+                // var tmp = Instantiate(fishObjectToPool);
+                // tmp.SetActive(false);
+                
+                var f = new Fish { FishGameObject = Instantiate(fishObjectToPool) };
+                f.Rigidbody = f.FishGameObject.GetComponent<Rigidbody>();
+                f.FishGameObject.SetActive(false);
+                _pooledFishObjects.Add(f);
             }
         }
         
-        public GameObject GetPooledObject()
+        public Fish GetPooledObject()
         {
-            for(int i = 0; i < totalFishAmountInPool; i++)
+            for(var i = 0; i < totalFishAmountInPool; i++)
             {
-                if(!pooledFishObjects[i].activeInHierarchy)
+                if(!_pooledFishObjects[i].FishGameObject.activeInHierarchy)
                 {
-                    return pooledFishObjects[i];
+                    return _pooledFishObjects[i];
                 }
             }
             return null;
         }
-        
     }
 }

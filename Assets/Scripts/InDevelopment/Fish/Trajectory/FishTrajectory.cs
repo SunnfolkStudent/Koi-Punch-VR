@@ -10,9 +10,9 @@ namespace InDevelopment.Fish.Trajectory
 
         #region ---HowToUse---
         /*
-        FishTrajectory.LaunchObjectAtTargetWithInitialSpeed(_rigidbody, fishPosition, targetPosition, fishSpeed);
+        FishTrajectory.LaunchObjectAtTargetWithInitialSpeed(_rigidbody, fishPosition, playerPosition, fishSpeed);
         
-        FishTrajectory.LaunchObjectAtTargetWithInitialAngle(_rigidbody, fishPosition, targetPosition, fishAngle);
+        FishTrajectory.LaunchObjectAtTargetWithInitialAngle(_rigidbody, fishPosition, playerPosition, fishAngle);
         */
         #endregion
 
@@ -51,7 +51,7 @@ namespace InDevelopment.Fish.Trajectory
         }
         #endregion
 
-        #region ---TrajectoryCalculations---(TODO)
+        #region ---TrajectoryCalculations---(UnFinished)
         private static (float forward, float upwards) TrajectorySpeedFromAngleDistanceAltitude(float speed, float dist, float alt)
         {
             var angleInRadians = (float)Math.Atan((NumberExponent(speed, 2) + Math.Sqrt(NumberExponent(speed, 4) - Gravity * 
