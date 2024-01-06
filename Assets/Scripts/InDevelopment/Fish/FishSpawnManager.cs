@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using InDevelopment.Fish.Trajectory;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -42,6 +43,7 @@ namespace InDevelopment.Fish
         // Update is called once per frame
         void Update()
         {
+            // Testing code, remove the below keyboardInput when we have proper functions for spawning fish.
             if (Keyboard.current.sKey.wasPressedThisFrame)
             {
                 SpawnFish();
@@ -57,7 +59,11 @@ namespace InDevelopment.Fish
             if (fish != null)
             {
                 fish.transform.position = spawnArea[0].transform.position;
-                fish.transform.rotation = spawnArea[0].transform.rotation;
+                // fish.transform.rotation = spawnArea[0].transform.rotation;
+                var rigidbodyFish = fish.GetComponent<Rigidbody>();
+                
+                FishTrajectory.LaunchObjectAtTargetWithInitialSpeed(rigidbodyFish, fish.transform.position, new Vector3(0,0,0), 15);
+                
                 fish.SetActive(true);
             }
         }
