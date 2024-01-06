@@ -19,10 +19,10 @@ namespace InDevelopment.Fish
         void Start()
         {
             pooledFishObjects = new List<GameObject>();
-            GameObject tmp;
             for(int i = 0; i < totalFishAmountInPool; i++)
             {
-                tmp = Instantiate(fishObjectToPool);
+                // tmp = temporary gameObject that creates all the inactive Fish.
+                var tmp = Instantiate(fishObjectToPool);
                 tmp.SetActive(false);
                 pooledFishObjects.Add(tmp);
             }
