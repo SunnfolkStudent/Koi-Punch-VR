@@ -9,11 +9,11 @@ namespace InDevelopment.Fish
             FishSpawnManager.DespawnFish(gameObject);
         }
 
-        void Update()
+        private void Update()
         {
-            if (transform.position.y < -10)
+            if (transform.position.y < -100)
             {
-                Debug.Log("Destroyded by being to far down");
+                Debug.Log("Destroyed by being too far down");
                 FishSpawnManager.DespawnFish(gameObject);
             }
         }

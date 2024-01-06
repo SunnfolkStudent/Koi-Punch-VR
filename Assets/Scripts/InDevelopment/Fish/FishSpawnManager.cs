@@ -80,7 +80,8 @@ namespace InDevelopment.Fish
             if (fish == null) return;
             
             fish.GameObject.transform.position = spawnPos;
-            var speed = Random.Range(15, 100);
+            // TODO: Figure out minimum speed needed to hit player!
+            var speed = Random.Range(15, 40);
             
             FishTrajectory.LaunchObjectAtTargetWithInitialSpeed(fish.Rigidbody, fish.GameObject.transform.position, player.position, speed);
             fish.GameObject.SetActive(true);
