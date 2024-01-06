@@ -1,16 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
 using InDevelopment.Fish.Trajectory;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 namespace InDevelopment.Fish
 {
-    // This script will be set on an outside gameObject, and aids in spawning the Fish.
     public class FishSpawnManager : MonoBehaviour
     {
-            // Variables the FishSpawnManager handles:
+        #region ---TODO---
             // TODO: Spawn Frequency of fish, increased over time === Gradually increasing.
                 // Use Animation Curves inside Unity in Inspector, and make the code read off of the graph there
                 // to gradually increase fish spawn speed.
@@ -25,39 +22,73 @@ namespace InDevelopment.Fish
         
         // TODO: Object Pooling - When receiving input from a fish object about colliding, turn same fish Inactive/Despawn it with a function from this FishSpawnManager.
         // TODO: When fish are set to Inactive, fish variables will be reset.
+        #endregion
         
-        public GameObject[] spawnArea;
         [SerializeField] private Transform player;
+        private static List<SpawnArea> _spawnAreas;
+        private class SpawnArea
+        {
+            public GameObject GameObject;
+            public SpawnAreaScript SpawnAreaScript;
+        }
         
-        // Start is called before the first frame update
+        private void Awake()
+        {
+            _spawnAreas = new List<SpawnArea>();
+        }
+        
         private void Start()
         {
-            spawnArea = GameObject.FindGameObjectsWithTag("SpawnArea");
+            AddSpawnAreasToSpawnAreaList();
         }
 
-        // Update is called once per frame
-        private void Update()
+        private static void AddSpawnAreasToSpawnAreaList()
         {
-            // Testing code, remove the below keyboardInput when we have proper functions for spawning fish.
-            if (Keyboard.current.sKey.wasPressedThisFrame)
+            var spawnArea = GameObject.FindGameObjectsWithTag("SpawnArea");
+
+            foreach (var obj in spawnArea)
             {
-                SpawnFish();
+                var f = new SpawnArea { GameObject = obj };
+                f.SpawnAreaScript = f.GameObject.GetComponent<SpawnAreaScript>();
+                _spawnAreas.Add(f);
             }
         }
+
+        private void Update()
+        {
+            if (Keyboard.current.sKey.wasPressedThisFrame)
+            {
+                var spawnArea = RandomSpawnArea();
+                var offset = spawnArea.SpawnAreaScript.spawnAreaRadius;
+                SpawnFish(spawnArea.GameObject.transform.position + RandomOffset(offset));
+            }
+        }
+
+        private static SpawnArea RandomSpawnArea()
+        {
+            return _spawnAreas[Random.Range(0, _spawnAreas.Count)];
+        }
+
+        private static Vector3 RandomOffset(float offsetMax)
+        {
+            return new Vector3(Random.Range(-offsetMax, offsetMax), 0, Random.Range(-offsetMax, offsetMax));
+        }
         
-        // TODO: Use the below code in a "SpawnFish" void, for later usage with FishObjectPool Script.
-        
-        private void SpawnFish()
+        private void SpawnFish(Vector3 spawnPos)
         {
             var fish = FishObjectPool.SharedInstance.GetPooledObject();
             if (fish == null) return;
             
-            fish.FishGameObject.transform.position = spawnArea[0].transform.position;
-            // fish.transform.rotation = spawnArea[0].transform.rotation;
+            fish.GameObject.transform.position = spawnPos;
+            var speed = Random.Range(15, 100);
             
-            FishTrajectory.LaunchObjectAtTargetWithInitialSpeed(fish.Rigidbody, fish.FishGameObject.transform.position, player.position, 15);
-            
-            fish.FishGameObject.SetActive(true);
+            FishTrajectory.LaunchObjectAtTargetWithInitialSpeed(fish.Rigidbody, fish.GameObject.transform.position, player.position, speed);
+            fish.GameObject.SetActive(true);
+        }
+
+        public static void DespawnFish(GameObject fish)
+        {
+            fish.SetActive(false);
         }
     }
 }
