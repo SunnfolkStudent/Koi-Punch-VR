@@ -1,17 +1,15 @@
-using System;
 using UnityEngine;
 
 namespace InDevelopment.Fish
-{ 
+{
+    [ExecuteInEditMode]
     [RequireComponent(typeof(LineRenderer))]
-    public class SpawnAreaCircle : MonoBehaviour 
+    public class SpawnAreaCircle : MonoBehaviour
     {
-        [Range(0,180)]
-        private int _segments = 180;
-        [Range(0,2)]
-        public float xradius = 1;
-        [Range(0, 2)] 
-        public float yradius = 1;
+        [Range(0.1f, 20)] public float spawnAreaRadius;
+        
+        private readonly int _segments = 180;
+        
         LineRenderer _line;
 
         void Start ()
@@ -32,14 +30,14 @@ namespace InDevelopment.Fish
         {
             float x;
             float y;
-            float z;
+            // float z;
 
             float angle = 20f;
 
             for (int i = 0; i < (_segments + 1); i++)
             {
-                x = Mathf.Sin (Mathf.Deg2Rad * angle) * xradius;
-                y = Mathf.Cos (Mathf.Deg2Rad * angle) * yradius;
+                x = Mathf.Sin (Mathf.Deg2Rad * angle) * spawnAreaRadius;
+                y = Mathf.Cos (Mathf.Deg2Rad * angle) * spawnAreaRadius;
 
                 _line.SetPosition (i,new Vector3(x,y,0) );
 
