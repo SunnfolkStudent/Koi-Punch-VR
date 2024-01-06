@@ -92,6 +92,7 @@ public class ZenMetreManager : MonoBehaviour
     {
         StopCoroutine(attackFieldSpawnTimer());
         attackFieldsActive = false;
+        DestroyAllAttackFields();
         zenMetreValue = 0;
         tripleScoreActive = true;
         StartCoroutine(TripleScoreTimer());
@@ -105,7 +106,7 @@ public class ZenMetreManager : MonoBehaviour
     
     private IEnumerator TripleScoreTimer()
     {
-        yield return new WaitForSeconds(_tripleScoreTimer);
+        yield return new WaitForSecondsRealtime(_tripleScoreTimer);
         tripleScoreActive = false;
         if (zenMetreValue >= 100)
         {
@@ -121,10 +122,11 @@ public class ZenMetreManager : MonoBehaviour
     
     private IEnumerator attackFieldSpawnTimer()
     {
-        yield return new WaitForSeconds(_attackFieldsActiveTime);
+        yield return new WaitForSecondsRealtime(_attackFieldsActiveTime);
         attackFieldsActive = false;
         zenLevel = 1;
         SetZenLevel();
+        DestroyAllAttackFields();
     }
     
     private void DestroyAllAttackFields()
