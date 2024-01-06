@@ -29,9 +29,6 @@ namespace InDevelopment.Fish
         
         // TODO: Object Pooling - When receiving input from a fish object about colliding,
         // TODO: Turn same fish Inactive/Despawn it with a function from this FishSpawnManager.
-        
-        
-        // TODO: Use the below code in a "SpawnFish" void, for later usage with FishObjectPool Script.
 
         public GameObject spawnArea;
         
@@ -46,8 +43,10 @@ namespace InDevelopment.Fish
         {
 
         }
-
-        void SpawnFish()
+        
+        // TODO: Use the below code in a "SpawnFish" void, for later usage with FishObjectPool Script.
+        
+        private void SpawnFish()
         {
             GameObject fish = FishObjectPool.SharedInstance.GetPooledObject();
 
