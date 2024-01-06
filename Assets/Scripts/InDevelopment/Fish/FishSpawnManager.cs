@@ -10,11 +10,7 @@ namespace InDevelopment.Fish
     // This script will be set on an outside gameObject, and aids in spawning the Fish.
     public class FishSpawnManager : MonoBehaviour
     {
-        // TODO: Fetching / Working together with FishObjectPool Script.
-            // TODO: When fish are set to Inactive, fish variables will be reset.
-
             // Variables the FishSpawnManager handles:
-
             // TODO: Spawn Frequency of fish, increased over time === Gradually increasing.
                 // Use Animation Curves inside Unity in Inspector, and make the code read off of the graph there
                 // to gradually increase fish spawn speed.
@@ -26,12 +22,10 @@ namespace InDevelopment.Fish
             // TODO: Spawned Fish Properties; Size&Mass + Colour/Skin. === Random Weighted.
                 // Use a "weightTable" to help track what former/recent fish properties have been, and avoid the most recently used properties.
                 // Based on input from weightTable, choose size&mass, and colour/skin. 
-            
-        // TODO: FishSpawnManager will use the static functions created by FishTrajectory, to help launch the fish initially.
         
-        // TODO: Object Pooling - When receiving input from a fish object about colliding,
-        // TODO: Turn same fish Inactive/Despawn it with a function from this FishSpawnManager.
-
+        // TODO: Object Pooling - When receiving input from a fish object about colliding, turn same fish Inactive/Despawn it with a function from this FishSpawnManager.
+        // TODO: When fish are set to Inactive, fish variables will be reset.
+        
         public GameObject[] spawnArea;
         [SerializeField] private Transform player;
         
