@@ -226,6 +226,42 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &299499254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 299499255}
+  m_Layer: 0
+  m_Name: FishContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &299499255
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299499254}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 638166409}
+  - {fileID: 1307093244}
+  - {fileID: 1741983304}
+  - {fileID: 653049493}
+  - {fileID: 651514462}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &638166405
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,7 +275,7 @@ GameObject:
   - component: {fileID: 638166407}
   - component: {fileID: 638166412}
   - component: {fileID: 638166411}
-  - component: {fileID: 638166410}
+  - component: {fileID: 638166413}
   m_Layer: 0
   m_Name: Fish
   m_TagString: Untagged
@@ -307,27 +343,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 638166405}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -14.7, y: 1.25, z: 0.35}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -16, y: 1.11, z: -8}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 299499255}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &638166410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 638166405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50d01315cec34554db5c1295d2af5e28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTransform: {fileID: 60125175}
-  fishSpeed: 16.7
 --- !u!54 &638166411
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -376,6 +398,21 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &638166413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 638166405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c95b1e55bac594c8a2448ed7819a89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 60125175}
+  fishSpeed: 15
+  fishAngle: 0
 --- !u!1 &651514456
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,7 +426,7 @@ GameObject:
   - component: {fileID: 651514460}
   - component: {fileID: 651514459}
   - component: {fileID: 651514458}
-  - component: {fileID: 651514457}
+  - component: {fileID: 651514463}
   m_Layer: 0
   m_Name: Fish_04
   m_TagString: Untagged
@@ -397,20 +434,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &651514457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 651514456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50d01315cec34554db5c1295d2af5e28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTransform: {fileID: 60125175}
-  fishSpeed: 16.7
 --- !u!54 &651514458
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -519,13 +542,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 651514456}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -17.59, y: 0.14, z: 18.140001}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -7.2299995, y: 0, z: 20.32}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 299499255}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &651514463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 651514456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c95b1e55bac594c8a2448ed7819a89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 60125175}
+  fishSpeed: 15
+  fishAngle: 0
 --- !u!1 &653049487
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,7 +577,7 @@ GameObject:
   - component: {fileID: 653049491}
   - component: {fileID: 653049490}
   - component: {fileID: 653049489}
-  - component: {fileID: 653049488}
+  - component: {fileID: 653049494}
   m_Layer: 0
   m_Name: Fish_03
   m_TagString: Untagged
@@ -547,20 +585,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &653049488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 653049487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50d01315cec34554db5c1295d2af5e28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTransform: {fileID: 60125175}
-  fishSpeed: 16.7
 --- !u!54 &653049489
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -669,13 +693,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 653049487}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -17.619999, y: -0.03, z: 0.35}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -17.669998, y: -0.17, z: 1.25}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 299499255}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &653049494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653049487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c95b1e55bac594c8a2448ed7819a89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 60125175}
+  fishSpeed: 15
+  fishAngle: 0
 --- !u!1 &1307093238
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,7 +728,7 @@ GameObject:
   - component: {fileID: 1307093242}
   - component: {fileID: 1307093241}
   - component: {fileID: 1307093240}
-  - component: {fileID: 1307093239}
+  - component: {fileID: 1307093245}
   m_Layer: 0
   m_Name: Fish_01
   m_TagString: Untagged
@@ -697,20 +736,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1307093239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1307093238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50d01315cec34554db5c1295d2af5e28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTransform: {fileID: 60125175}
-  fishSpeed: 16.7
 --- !u!54 &1307093240
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -819,13 +844,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1307093238}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -8.03, y: 0.73, z: -13.53}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -8.08, y: 0.59000003, z: -12.630001}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 299499255}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &1307093245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307093238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c95b1e55bac594c8a2448ed7819a89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 60125175}
+  fishSpeed: 15
+  fishAngle: 0
 --- !u!1 &1735599884
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,7 +996,7 @@ GameObject:
   - component: {fileID: 1741983302}
   - component: {fileID: 1741983301}
   - component: {fileID: 1741983300}
-  - component: {fileID: 1741983299}
+  - component: {fileID: 1741983305}
   m_Layer: 0
   m_Name: Fish_02
   m_TagString: Untagged
@@ -964,20 +1004,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1741983299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1741983298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50d01315cec34554db5c1295d2af5e28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTransform: {fileID: 60125175}
-  fishSpeed: 16.7
 --- !u!54 &1741983300
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1086,13 +1112,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741983298}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -20.1, y: 1.8, z: 0.35}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -20.15, y: 1.66, z: 1.25}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 299499255}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &1741983305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741983298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c95b1e55bac594c8a2448ed7819a89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 60125175}
+  fishSpeed: 15
+  fishAngle: 0
 --- !u!1 &1885741120
 GameObject:
   m_ObjectHideFlags: 0
@@ -1192,8 +1233,4 @@ SceneRoots:
   - {fileID: 1885741123}
   - {fileID: 1735599886}
   - {fileID: 60125175}
-  - {fileID: 638166409}
-  - {fileID: 1307093244}
-  - {fileID: 1741983304}
-  - {fileID: 653049493}
-  - {fileID: 651514462}
+  - {fileID: 299499255}
