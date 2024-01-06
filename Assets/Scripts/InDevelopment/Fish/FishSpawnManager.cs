@@ -7,7 +7,7 @@ namespace InDevelopment.Fish
     // This script will be set on an outside gameObject, and aids in spawning the Fish.
     public class FishSpawnManager : MonoBehaviour
     {
-        // TODO: Object Pooling - Enabling and Disabling gameObjects, and duplicating if there's a need for more.
+        // TODO: Fetching / Working together with ObjectPool Script.
             // TODO: When fish are set to Inactive, fish variables will be reset.
 
             // Variables the FishSpawnManager handles:
@@ -28,6 +28,14 @@ namespace InDevelopment.Fish
         
         // TODO: Object Pooling - When receiving input from a fish object about colliding,
         // TODO: Turn same fish Inactive/Despawn it with a function from this FishSpawnManager.
+        
+        
+        // TODO: Use the below code for later usage with ObjectPool Script.
+        /* GameObject fish = ObjectPool.SharedInstance.GetPooledObject(); 
+            if (fish != null) {
+            fish.transform.position = spawnArea.transform.position;
+            fish.transform.rotation = spawnArea.transform.rotation;
+            fish.SetActive(true); */
         
         // Start is called before the first frame update
         void Start()
