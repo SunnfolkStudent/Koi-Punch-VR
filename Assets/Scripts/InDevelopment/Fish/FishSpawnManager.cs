@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace InDevelopment.Fish
 {
@@ -30,14 +31,9 @@ namespace InDevelopment.Fish
         // TODO: Turn same fish Inactive/Despawn it with a function from this FishSpawnManager.
         
         
-        // TODO: Use the below code for later usage with FishObjectPool Script.
-        /* GameObject fish = FishObjectPool.SharedInstance.GetPooledObject(); 
-            if (fish != null) {
-            fish.transform.position = spawnArea.transform.position;
-            fish.transform.rotation = spawnArea.transform.rotation;
-            fish.SetActive(true); */
-        
-        
+        // TODO: Use the below code in a "SpawnFish" void, for later usage with FishObjectPool Script.
+
+        public GameObject spawnArea;
         
         // Start is called before the first frame update
         void Start()
@@ -50,5 +46,21 @@ namespace InDevelopment.Fish
         {
 
         }
+
+        void SpawnFish()
+        {
+            GameObject fish = FishObjectPool.SharedInstance.GetPooledObject();
+
+            if (fish != null)
+            {
+                fish.transform.position = spawnArea.transform.position;
+                fish.transform.rotation = spawnArea.transform.rotation;
+                fish.SetActive(true);
+            }
+        }
+        
+        
+        
+        
     }
 }
