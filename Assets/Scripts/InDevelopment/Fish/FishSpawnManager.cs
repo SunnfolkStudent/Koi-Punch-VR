@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 namespace InDevelopment.Fish
@@ -30,18 +31,21 @@ namespace InDevelopment.Fish
         // TODO: Object Pooling - When receiving input from a fish object about colliding,
         // TODO: Turn same fish Inactive/Despawn it with a function from this FishSpawnManager.
 
-        public GameObject spawnArea;
+        public GameObject[] spawnArea;
         
         // Start is called before the first frame update
         void Start()
         {
-
+            spawnArea = GameObject.FindGameObjectsWithTag("SpawnArea");
         }
 
         // Update is called once per frame
         void Update()
         {
-
+            if (Keyboard.current.sKey.wasPressedThisFrame)
+            {
+                SpawnFish();
+            }
         }
         
         // TODO: Use the below code in a "SpawnFish" void, for later usage with FishObjectPool Script.
@@ -52,8 +56,8 @@ namespace InDevelopment.Fish
 
             if (fish != null)
             {
-                fish.transform.position = spawnArea.transform.position;
-                fish.transform.rotation = spawnArea.transform.rotation;
+                fish.transform.position = spawnArea[0].transform.position;
+                fish.transform.rotation = spawnArea[0].transform.rotation;
                 fish.SetActive(true);
             }
         }
