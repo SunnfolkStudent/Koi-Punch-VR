@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -6,25 +7,23 @@ using Random = UnityEngine.Random;
 public class AttackFieldSpawner : MonoBehaviour
 {
     public GameObject objectToSpawn; // Prefab of the object to spawn
-    public GameObject targetObject; // The game object onto which to spawn objects
+    private GameObject _targetObject; // The game object onto which to spawn objects
     public float spawnInterval = 2f; // Interval between spawns
-    
-    private List<GameObject> _spawnedObjects = new List<GameObject>();
 
     private bool isSpawning = false;
+    float timeSinceLastSpawn = 0f;
 
     private void Update()
     {
         if (ZenMetreManager.Instance.attackFieldsActive && !isSpawning)
         {
             isSpawning = true;
-            targetObject = GameObject.FindGameObjectWithTag("Boss");
-            InvokeRepeating("SpawnObjectOnSurface", 0f, spawnInterval);
+            _targetObject = GameObject.FindGameObjectWithTag("Boss");
+            StartCoroutine(Spawning());
         }
         else if (!ZenMetreManager.Instance.attackFieldsActive && isSpawning)
         {
             isSpawning = false;
-            CancelInvoke("SpawnObjectOnSurface");
         }
     }
 
@@ -36,12 +35,15 @@ public class AttackFieldSpawner : MonoBehaviour
         while (!isReady)
         {
             // Get a random point on the surface of the target object
-            randomPoint = GetRandomPointOnVisibleSide(targetObject);
+            randomPoint = GetRandomPointOnVisibleSide(_targetObject);
 
             isReady = true;
-            if (_spawnedObjects.Count > 0)
+            
+            GameObject[] attackFields = GameObject.FindGameObjectsWithTag("AttackField");
+            
+            if (attackFields.Length > 0)
             {
-                foreach (GameObject attackField in _spawnedObjects)
+                foreach (GameObject attackField in attackFields)
                 {
                     if (attackField != null)
                     {
@@ -56,35 +58,7 @@ public class AttackFieldSpawner : MonoBehaviour
         
         
         // Spawn the object at the random point on the surface
-        GameObject spawnedObject = Instantiate(objectToSpawn, randomPoint, Quaternion.identity);
-        _spawnedObjects.Add(spawnedObject);
-    }
-    
-    private Vector3 GetRandomPointOnSurface(GameObject target)
-    {
-        MeshCollider meshCollider = target.GetComponent<MeshCollider>();
-
-        if (meshCollider == null || meshCollider.sharedMesh == null)
-        {
-            Debug.LogError("MeshCollider or mesh not found on the target object.");
-            return Vector3.zero;
-        }
-
-        Vector3 randomPoint = Vector3.zero;
-
-        while (true)
-        {
-            Vector3 randomDirection = Random.onUnitSphere;
-
-            RaycastHit hit;
-            if (meshCollider.Raycast(new Ray(target.transform.position + randomDirection * meshCollider.bounds.extents.magnitude * 2f, -randomDirection), out hit, meshCollider.bounds.extents.magnitude * 4f))
-            {
-                randomPoint = hit.point;
-                break;
-            }
-        }
-
-        return randomPoint;
+        Instantiate(objectToSpawn, randomPoint, Quaternion.identity);
     }
 
     private Vector3 GetRandomPointOnVisibleSide(GameObject target)
@@ -129,4 +103,18 @@ public class AttackFieldSpawner : MonoBehaviour
         return randomPoint;
     }
 
+    private IEnumerator Spawning()
+    {
+        while (isSpawning)
+        {
+            timeSinceLastSpawn += Time.unscaledDeltaTime;
+            if (timeSinceLastSpawn >= spawnInterval)
+            {
+                timeSinceLastSpawn = 0f;
+                SpawnObjectOnSurface();
+            }
+
+            yield return null;
+        }
+    }
 }

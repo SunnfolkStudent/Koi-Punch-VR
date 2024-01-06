@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ZenMetreManager : MonoBehaviour
 {
@@ -12,14 +13,17 @@ public class ZenMetreManager : MonoBehaviour
     public bool attackFieldsActive;
     private float _attackFieldsActiveTime = 10f;
     
-    public float zenMetre;
-    private int _zenLevel;
+    public float zenMetreValue;
+    public int zenLevel;
+    
+    private float _slowdownFactor = 0.001f;
+    private float _slowdownTime = 0.5f;
     
     
-    private void Start()
+    private void Awake()
     {
-        zenMetre = 0;
-        _zenLevel = 1;
+        zenMetreValue = 0;
+        zenLevel = 1;
 
         if (Instance == null)
         {
@@ -34,27 +38,27 @@ public class ZenMetreManager : MonoBehaviour
     private void Update()
     {
         //If the zen metre is full, move on to the next level of zen
-        if (zenMetre >= 100)
+        if (zenMetreValue >= 100)
         {
-            _zenLevel++;
+            zenLevel++;
             SetZenLevel();
         }
     }
     
     //Method that adds zen to the zen metre based on the velocity of the fist
-    public void AddHitZen(float fistVelocity)
+    public void AddHitZen(float score)
     {
-        zenMetre += fistVelocity;
+        zenMetreValue += score;
     }
     
     public void AddAttackFieldZen(float attackFieldSize)
     {
-        zenMetre += attackFieldSize;
+        zenMetreValue += attackFieldSize;
     }
     
     private void SetZenLevel()
     {
-        switch (_zenLevel)
+        switch (zenLevel)
         {
             case 1:
                 LevelOne();
@@ -70,13 +74,16 @@ public class ZenMetreManager : MonoBehaviour
     
     private void LevelOne()
     {
-        zenMetre = 0;
+        Time.timeScale = 1f;
+        zenMetreValue = 0;
     }
     
     //Method that moves on to the second level of zen
     private void LevelTwo()
     {
-        zenMetre = 0;
+        zenMetreValue = 0;
+        StartCoroutine(TimeStop());
+        attackFieldsActive = true;
         StartCoroutine(attackFieldSpawnTimer());
     }
     
@@ -85,14 +92,14 @@ public class ZenMetreManager : MonoBehaviour
     {
         StopCoroutine(attackFieldSpawnTimer());
         attackFieldsActive = false;
-        zenMetre = 0;
+        zenMetreValue = 0;
         tripleScoreActive = true;
         StartCoroutine(TripleScoreTimer());
     }
     
     private void LevelFour()
     {
-        zenMetre = 0;
+        zenMetreValue = 0;
         zenAttackActive = true;
     }
     
@@ -100,14 +107,14 @@ public class ZenMetreManager : MonoBehaviour
     {
         yield return new WaitForSeconds(_tripleScoreTimer);
         tripleScoreActive = false;
-        if (zenMetre >= 100)
+        if (zenMetreValue >= 100)
         {
-            _zenLevel++;
+            zenLevel++;
             LevelFour();
         }
         else
         {
-            _zenLevel = 1;
+            zenLevel = 1;
             SetZenLevel();
         }
     }
@@ -116,7 +123,31 @@ public class ZenMetreManager : MonoBehaviour
     {
         yield return new WaitForSeconds(_attackFieldsActiveTime);
         attackFieldsActive = false;
-        _zenLevel = 1;
+        zenLevel = 1;
         SetZenLevel();
+    }
+    
+    private void DestroyAllAttackFields()
+    {
+        GameObject[] attackFields = GameObject.FindGameObjectsWithTag("AttackField");
+        foreach (GameObject attackField in attackFields)
+        {
+            Destroy(attackField);
+        }
+    }
+
+    private IEnumerator TimeStop()
+    {
+        float currentTimeScale = Time.timeScale;
+        float timePassed = 0f;
+
+        while (timePassed < _slowdownTime)
+        {
+            Time.timeScale = Mathf.Lerp(currentTimeScale, _slowdownFactor, timePassed / _slowdownTime);
+            timePassed += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        Time.timeScale = _slowdownFactor;
     }
 }
