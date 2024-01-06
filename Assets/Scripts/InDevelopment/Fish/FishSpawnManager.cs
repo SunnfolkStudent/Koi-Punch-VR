@@ -29,7 +29,7 @@ namespace InDevelopment.Fish
         private class SpawnArea
         {
             public GameObject GameObject;
-            public SpawnAreaScript SpawnAreaScript;
+            public SpawnAreaCircle SpawnAreaScript;
         }
         
         private void Awake()
@@ -49,7 +49,7 @@ namespace InDevelopment.Fish
             foreach (var obj in spawnArea)
             {
                 var f = new SpawnArea { GameObject = obj };
-                f.SpawnAreaScript = f.GameObject.GetComponent<SpawnAreaScript>();
+                f.SpawnAreaScript = f.GameObject.GetComponent<SpawnAreaCircle>();
                 _spawnAreas.Add(f);
             }
         }
