@@ -9,10 +9,12 @@ namespace InDevelopment.Fish
         private List<Fish> _pooledFishObjects;
         public GameObject fishObjectToPool;
         public int totalFishAmountInPool;
+        
+        [SerializeField] private GameObject fishContainer;
 
         public class Fish
         {
-            public GameObject FishGameObject;
+            public GameObject GameObject;
             public Rigidbody Rigidbody;
         }
 
@@ -26,13 +28,10 @@ namespace InDevelopment.Fish
             _pooledFishObjects = new List<Fish>();
             for(var i = 0; i < totalFishAmountInPool; i++)
             {
-                // tmp = temporary gameObject that creates all the inactive Fish.
-                // var tmp = Instantiate(fishObjectToPool);
-                // tmp.SetActive(false);
-                
-                var f = new Fish { FishGameObject = Instantiate(fishObjectToPool) };
-                f.Rigidbody = f.FishGameObject.GetComponent<Rigidbody>();
-                f.FishGameObject.SetActive(false);
+                var f = new Fish { GameObject = Instantiate(fishObjectToPool) };
+                f.Rigidbody = f.GameObject.GetComponent<Rigidbody>();
+                f.GameObject.SetActive(false);
+                f.GameObject.transform.SetParent(fishContainer.transform);
                 _pooledFishObjects.Add(f);
             }
         }
@@ -41,7 +40,7 @@ namespace InDevelopment.Fish
         {
             for(var i = 0; i < totalFishAmountInPool; i++)
             {
-                if(!_pooledFishObjects[i].FishGameObject.activeInHierarchy)
+                if(!_pooledFishObjects[i].GameObject.activeInHierarchy)
                 {
                     return _pooledFishObjects[i];
                 }
