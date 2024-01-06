@@ -10,8 +10,8 @@ namespace InDevelopment.Fish
         private int _segments = 180;
         [Range(0,2)]
         public float xradius = 1;
-        [Range(0,2)]
-        public float yradius = 1
+        [Range(0, 2)] 
+        public float yradius = 1;
         LineRenderer _line;
 
         void Start ()
