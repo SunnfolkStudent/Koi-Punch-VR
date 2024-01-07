@@ -2,6 +2,7 @@ using System.Numerics;
 using Unity.Android.Gradle.Manifest;
 using Unity.XR.CoreUtils.Bindings.Variables;
 using UnityEngine;
+using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
 namespace InDevelopment.Fish.Trajectory
@@ -42,8 +43,17 @@ namespace InDevelopment.Fish.Trajectory
             Physics.gravity = Vector3.up * gravity;
             ball.useGravity = true;
             ball.velocity = CalculateLaunchData().InitialVelocity;
+            var velocity = TranslateToOtherTrajectories();
         }
 
+        private (float,float) TranslateToOtherTrajectories()
+        {
+            var initialVelocity = CalculateLaunchData();
+            var velocityForward = new Vector2(initialVelocity.InitialVelocity.x, initialVelocity.InitialVelocity.z).magnitude;
+            var velocityUpwards = initialVelocity.InitialVelocity.y;
+            return (velocityForward, velocityUpwards);
+        }
+        
         LaunchData CalculateLaunchData()
         {
             var ballPosition = ball.position;
