@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using InDevelopment.Fish.Trajectory;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 namespace InDevelopment.Fish
 {
@@ -29,7 +30,7 @@ namespace InDevelopment.Fish
         private class SpawnArea
         {
             public GameObject GameObject;
-            public SpawnAreaCircle SpawnAreaScript;
+            public SpawnAreaCircle SpawnAreaCircle;
         }
         
         private void Awake()
@@ -49,17 +50,17 @@ namespace InDevelopment.Fish
             foreach (var obj in spawnArea)
             {
                 var f = new SpawnArea { GameObject = obj };
-                f.SpawnAreaScript = f.GameObject.GetComponent<SpawnAreaCircle>();
+                f.SpawnAreaCircle = f.GameObject.GetComponent<SpawnAreaCircle>();
                 _spawnAreas.Add(f);
             }
         }
 
         private void Update()
         {
-            if (Keyboard.current.sKey.wasPressedThisFrame)
+            if (Keyboard.current.lKey.wasPressedThisFrame)
             {
                 var spawnArea = RandomSpawnArea();
-                var offset = spawnArea.SpawnAreaScript.spawnAreaRadius;
+                var offset = spawnArea.SpawnAreaCircle.spawnAreaRadius;
                 SpawnFish(spawnArea.GameObject.transform.position + RandomOffset(offset));
             }
         }
@@ -80,10 +81,17 @@ namespace InDevelopment.Fish
             if (fish == null) return;
             
             fish.GameObject.transform.position = spawnPos;
-            // TODO: Figure out minimum speed needed to hit player!
-            var speed = Random.Range(15, 40);
             
-            FishTrajectory.LaunchObjectAtTargetWithInitialSpeed(fish.Rigidbody, fish.GameObject.transform.position, player.position, speed);
+            var speed = Random.Range(20, 40);
+            var tallArc = Random.Range(0, 2) == 1;
+            
+            // var angle = 42; // Always succeeds
+            // var angle = 52; // Always fails
+            // var angle =  Random.Range(15, 89);
+            
+            FishTrajectory.LaunchObjectAtTargetWithInitialSpeed(fish.Rigidbody, fish.GameObject.transform.position, player.position, speed, tallArc);
+            //FishTrajectory.LaunchObjectAtTargetWithInitialAngle(fish.Rigidbody, fish.GameObject.transform.position, player.position, angle);
+            
             fish.GameObject.SetActive(true);
         }
 

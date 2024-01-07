@@ -11,9 +11,9 @@ namespace InDevelopment.Fish
 
         private void Update()
         {
-            if (transform.position.y < -100)
+            if (transform.position.y < -25)
             {
-                Debug.Log("Destroyed by being too far down");
+                // Debug.Log("Destroyed by being too far down");
                 FishSpawnManager.DespawnFish(gameObject);
             }
         }
