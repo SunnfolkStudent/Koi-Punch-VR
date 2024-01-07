@@ -44,17 +44,18 @@ namespace InDevelopment.Fish.Trajectory
             return (directDistance, -altitudeDifference);
         }
 
-        private static void LaunchObjectAt(Rigidbody objRigidbody, Vector3 objPos, Vector3 targetPos, (float forward, float upwards) fishVelocity)
+        private static void LaunchObjectAt(Rigidbody objRigidbody, Vector3 objPos, Vector3 targetPos, (float velocityForward, float velocityUpwards) fishVelocity)
         {
             var targetDirection = (targetPos - objPos).normalized;
-            targetDirection *= fishVelocity.forward;
-            objRigidbody.velocity = new Vector3(targetDirection.x, fishVelocity.upwards, targetDirection.z);
+            targetDirection *= fishVelocity.velocityForward;
+            objRigidbody.velocity = new Vector3(targetDirection.x, fishVelocity.velocityUpwards, targetDirection.z);
         }
         #endregion
 
         #region ---TrajectoryCalculations---(UnFinished)
-        private static (float forward, float upwards) TrajectoryVelocityFromSpeedDistanceAltitude(float speed, float dist, float alt, bool tall)
+        private static (float velocityForward, float velocityUpwards) TrajectoryVelocityFromSpeedDistanceAltitude(float speed, float dist, float alt, bool tall)
         {
+            // TODO: Stop too low speeds from creating an error
             var angleInRadians = tall ? (float)Math.Atan((NumberExponent(speed, 2) + Math.Sqrt(NumberExponent(speed, 4) - Gravity * 
                     ((Gravity * NumberExponent(dist, 2)) + (2 * alt * NumberExponent(speed, 2))))) / (Gravity * dist))
                     : (float)Math.Atan((NumberExponent(speed, 2) - Math.Sqrt(NumberExponent(speed, 4) - Gravity * 
@@ -66,18 +67,13 @@ namespace InDevelopment.Fish.Trajectory
             return (velocityForward, velocityUpwards);
         }
         
-        private static (float forward, float upwards) TrajectoryVelocityFromAngleDistanceAltitude(float angle, float dist, float alt)
+        private static (float velocityForward, float velocityUpwards) TrajectoryVelocityFromAngleDistanceAltitude(float angle, float dist, float alt)
         {
-            // TODO: Fix why certain angles dont work
-
-            var velocityTotal = Mathf.Sqrt((NumberExponent(dist, 2) * Gravity) /
-                                   (dist * Mathf.Sin(2 * angle) - 2 * alt * NumberExponent(Mathf.Cos(angle), 2)));
+            var velocityTotal = Mathf.Sqrt((NumberExponent(dist, 2) * Gravity) / 
+                                           (dist * math.abs(Mathf.Sin(2 * angle)) - 2 * alt * NumberExponent(math.abs(Mathf.Cos(angle)), 2)));
             
-            var velocityForward = Mathf.Abs(velocityTotal * Mathf.Cos(angle));
-            var velocityUpwards = Mathf.Abs(velocityTotal * Mathf.Sin(angle));
-            
-            Debug.Log($"angle: {angle}, dist: {dist}, alt: {alt} | " +
-                      $"velocityTotal: {velocityTotal}, velocityForward: {velocityForward}, velocityUpwards: {velocityUpwards}");
+            var velocityForward = math.abs(velocityTotal * Mathf.Cos(angle));
+            var velocityUpwards = math.abs(velocityTotal * Mathf.Sin(angle));
             
             return (velocityForward, velocityUpwards);
         }

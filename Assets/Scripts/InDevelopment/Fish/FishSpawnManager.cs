@@ -82,15 +82,14 @@ namespace InDevelopment.Fish
             
             fish.GameObject.transform.position = spawnPos;
             
-            var speed = Random.Range(20, 40);
-            var tallArc = Random.Range(0, 2) == 1;
+            // var speed = Random.Range(27, 40);
+            // var tallArc = Random.Range(0, 2) == 1;
+            // FishTrajectory.LaunchObjectAtTargetWithInitialSpeed(fish.Rigidbody, fish.GameObject.transform.position, player.position, speed, tallArc);
             
             // var angle = 42; // Always succeeds
             // var angle = 52; // Always fails
-            // var angle =  Random.Range(15, 89);
-            
-            FishTrajectory.LaunchObjectAtTargetWithInitialSpeed(fish.Rigidbody, fish.GameObject.transform.position, player.position, speed, tallArc);
-            //FishTrajectory.LaunchObjectAtTargetWithInitialAngle(fish.Rigidbody, fish.GameObject.transform.position, player.position, angle);
+            var angle =  Random.Range(20f, 60f);
+            FishTrajectory.LaunchObjectAtTargetWithInitialAngle(fish.Rigidbody, fish.GameObject.transform.position, player.position, angle);
             
             fish.GameObject.SetActive(true);
         }
