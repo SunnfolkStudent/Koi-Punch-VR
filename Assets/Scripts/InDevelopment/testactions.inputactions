@@ -1,0 +1,54 @@
+{
+    "name": "testactions",
+    "maps": [
+        {
+            "name": "New action map",
+            "id": "339b0c6d-d1be-4f6c-8af0-25fc2793c9db",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "928f6c20-4bd3-468b-88c8-1134a1896bf8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "New action1",
+                    "type": "Button",
+                    "id": "3b3ae7a6-1364-4e99-a887-9de067e04f44",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a107e49d-2f9c-45a9-9be2-5c7f1aab5160",
+                    "path": "<XRInputV1::Oculus::OculusTouchControllerOpenXR>{RightHand}/{GripButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e4936a5f-29c4-441f-b8a0-f79bbbf544c0",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
