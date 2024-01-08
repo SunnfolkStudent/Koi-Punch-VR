@@ -9,10 +9,29 @@ public class FMOD_Manager : MonoBehaviour
     private static FMOD_Manager instance;
     private Camera cam;
     [SerializeField] [Range(0,100)] private float velocityFloor;
-
+    public Rigidbody leftHandRigid;
+    private GameObject leftHand;
+    private GameObject rightHand;
+    private EventInstance leftHandWoosh = RuntimeManager.CreateInstance("event:/SFX/PlayerSounds/HandSounds/Swoosh");
+    private EventInstance rightHandWoosh = RuntimeManager.CreateInstance("event:/SFX/PlayerSounds/HandSounds/Swoosh");
+    [Range(0, 1)] private float _SFXVolume;
+    [Range(0, 1)] private float _musicVolume;
+    private float playerLeftHandVelocity;
+    private float playerRightHandVelocity;
+    public float SFXVolume
+    {
+        get => _SFXVolume;
+        set => _SFXVolume = value;
+    }
+    public float MusicVolume
+    {
+        get => _musicVolume;
+        set => _musicVolume = value;
+    }
     void Awake()
     {
-       
+        leftHandRigid = gameObject.GetComponent<Rigidbody>();
+        
         if (FMOD_Manager.instance == null)
         {
             FMOD_Manager.instance = this;
@@ -26,26 +45,42 @@ public class FMOD_Manager : MonoBehaviour
         musicBus = RuntimeManager.GetBus("bus:/SFX");
     }
 
-    [Range(0, 1)] private float _SFXVolume;
-    [Range(0, 1)] private float _musicVolume;
+    private void Start()
+    {
+        
+        leftHand = GameObject.Find("leftHand");
+        rightHand = GameObject.Find("rightHand");
+        
+        RuntimeManager.AttachInstanceToGameObject(leftHandWoosh,  leftHand.GetComponent<Transform>(), leftHand.GetComponent<Rigidbody>());
+        RuntimeManager.AttachInstanceToGameObject(rightHandWoosh,  rightHand.GetComponent<Transform>(), rightHand.GetComponent<Rigidbody>());
+    }
     
-
-    public float SFXVolume
-    {
-        get => _SFXVolume;
-        set => _SFXVolume = value;
-    }
-    public float MusicVolume
-    {
-        get => _musicVolume;
-        set => _musicVolume = value;
-    }
     private Bus musicBus;
     private Bus sfxBus;
     private void Update()
     {
         sfxBus.setVolume(_SFXVolume);
         musicBus.setVolume(_musicVolume);
+        
+        if (playerLeftHandVelocity > velocityFloor)
+        {
+            leftHandWoosh.start();
+            leftHandWoosh.setParameterByName("soundVelocity", playerLeftHandVelocity);
+        }
+        else
+        {
+            leftHandWoosh.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+
+        if (playerRightHandVelocity > velocityFloor)
+        {
+            rightHandWoosh.start();
+            rightHandWoosh.setParameterByName("soundVelocity", playerRightHandVelocity);
+        }
+        else
+        {
+            rightHandWoosh.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
     }
     
     /*for å bruke:
@@ -101,38 +136,30 @@ public class FMOD_Manager : MonoBehaviour
     {
         
     }
+    
+    private EventInstance koiPunch = RuntimeManager.CreateInstance("event:/SFX/PlayerSounds/ChargeSounds/KoiPunch");
 
-    private EventInstance leftHandWoosh = RuntimeManager.CreateInstance("event:/SFX/PlayerSounds/HandSounds/Swoosh");
-    private EventInstance rightHandWoosh = RuntimeManager.CreateInstance("event:/SFX/PlayerSounds/HandSounds/Swoosh");
-    private void FixedUpdate(float playerLeftHandVelocity, float playerRightHandVelocity)
+    public FMOD_Manager(GameObject leftHand)
     {
-        if (playerLeftHandVelocity > velocityFloor)
-        {
-            leftHandWoosh.start();
-            leftHandWoosh.setParameterByName("soundVelocity", playerLeftHandVelocity);
-        }
-        else
-        {
-            leftHandWoosh.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        }
-
-        if (playerRightHandVelocity > velocityFloor)
-        {
-            rightHandWoosh.start();
-            rightHandWoosh.setParameterByName("soundVelocity", playerRightHandVelocity);
-        }
-        else
-        {
-            rightHandWoosh.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        }
-        
+        this.leftHand = leftHand;
     }
 
-    /*public void KoiPunchSounds()
+    public void KoiPunchSounds(int koiPunchState)
     {
         switch (koiPunchState)
         {
-            //legg til koipunchdengelyder :3
+            case 1:
+            {
+                koiPunch.start();
+                koiPunch.setParameterByName("koiPunchSoundState", 0);
+                break;
+            }
+            case 2:
+            {
+                koiPunch.start();
+                koiPunch.setParameterByName("koiPunchSoundState", 1);
+                break;
+            }
         }
-    }*/
+    }
 }
