@@ -14,6 +14,8 @@ namespace InDevelopment.Fish.Trajectory
         FishTrajectory.LaunchObjectAtTargetWithInitialSpeed(_rigidbody, fishPosition, playerPosition, fishSpeed, true); // Optional fifth parameter that chooses alternative tall arc
         
         FishTrajectory.LaunchObjectAtTargetWithInitialAngle(_rigidbody, fishPosition, playerPosition, fishAngle);
+        
+        FishTrajectory.LaunchObjectAtTargetWithPeakHeight(fish.Rigidbody, fish.GameObject.transform.position, player.position, height);
         */
         #endregion
 
@@ -31,6 +33,13 @@ namespace InDevelopment.Fish.Trajectory
             var spacialDifference = SpacialDifference(objPos, targetPos);
             var fishVelocity = TrajectoryVelocityFromAngleDistanceAltitude(angle, spacialDifference.distance, spacialDifference.altitude);
             
+            LaunchObjectAt(objRigidbody, objPos, targetPos, fishVelocity);
+        }
+        
+        public static void LaunchObjectAtTargetWithPeakHeight(Rigidbody objRigidbody, Vector3 objPos, Vector3 targetPos, float height)
+        {
+            var spacialDifference = SpacialDifference(objPos, targetPos);
+            var fishVelocity = CalculateLaunchData(height, spacialDifference.distance, spacialDifference.altitude);
             LaunchObjectAt(objRigidbody, objPos, targetPos, fishVelocity);
         }
         #endregion
@@ -52,7 +61,7 @@ namespace InDevelopment.Fish.Trajectory
         }
         #endregion
 
-        #region ---TrajectoryCalculations---(UnFinished)
+        #region ---TrajectoryCalculations---
         private static (float velocityForward, float velocityUpwards) TrajectoryVelocityFromSpeedDistanceAltitude(float speed, float dist, float alt, bool tall)
         {
             // TODO: Stop too low speeds from creating an error
@@ -64,23 +73,42 @@ namespace InDevelopment.Fish.Trajectory
             var velocityForward = Mathf.Cos(angleInRadians) * speed;
             var velocityUpwards = Mathf.Sin(angleInRadians) * speed;
             
+            Debug.Log($"speed: {speed}, dist: {dist}, alt: {alt} | velocityForward: {velocityForward}, velocityUpwards: {velocityUpwards}");
+            
             return (velocityForward, velocityUpwards);
         }
         
         private static (float velocityForward, float velocityUpwards) TrajectoryVelocityFromAngleDistanceAltitude(float angle, float dist, float alt)
         {
+            // TODO: Fix why 3% chance of missing
             var velocityTotal = Mathf.Sqrt((NumberExponent(dist, 2) * Gravity) / 
                                            (dist * math.abs(Mathf.Sin(2 * angle)) - 2 * alt * NumberExponent(math.abs(Mathf.Cos(angle)), 2)));
             
             var velocityForward = math.abs(velocityTotal * Mathf.Cos(angle));
             var velocityUpwards = math.abs(velocityTotal * Mathf.Sin(angle));
             
+            Debug.Log($"angle: {angle}, dist: {dist}, alt: {alt} | velocityForward: {velocityForward}, velocityUpwards: {velocityUpwards}");
+            
             return (velocityForward, velocityUpwards);
+        }
+        
+        private static (float velocityForward, float velocityUpwards) CalculateLaunchData(float height, float dist, float alt)
+        {
+            if (height < alt)
+            {
+                Debug.LogWarning("Peak trajectory height set lower than target altitude");
+                height = alt + 1;
+            }
+            var velocityForward = Mathf.Sqrt(-2 * -Gravity * height);
+            var velocityUpwards = dist / (Mathf.Sqrt(-((2 * height) / -Gravity)) + Mathf.Sqrt((2 * (alt - height)) / -Gravity));
+            
+            Debug.Log($"height: {height}, dist: {dist}, alt: {alt} | velocityForward: {velocityForward}, velocityUpwards: {velocityUpwards}");
+            
+            return (velocityUpwards, velocityForward);
         }
         #endregion
         
         #region ---Math Formulas---
-        
         private static float Hypotenuse(float a, float b)
         {
             return math.sqrt(a * a + b * b);
@@ -92,7 +120,6 @@ namespace InDevelopment.Fish.Trajectory
             for (var i = 1; i < exponent; i++) number *= num;
             return number;
         }
-
         #endregion
     }
 }

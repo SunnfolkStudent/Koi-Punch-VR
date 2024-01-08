@@ -59,8 +59,7 @@ namespace InDevelopment.Fish.Trajectory
             var ballPosition = ball.position;
             var targetPosition = target.position;
             float displacementY = targetPosition.y - ballPosition.y;
-            Vector3 displacementXZ =
-                new Vector3(targetPosition.x - ballPosition.x, 0, targetPosition.z - ballPosition.z);
+            Vector3 displacementXZ = new Vector3(targetPosition.x - ballPosition.x, 0, targetPosition.z - ballPosition.z);
             float time = Mathf.Sqrt(-2 * h / gravity) + Mathf.Sqrt(2 * (displacementY - h) / gravity);
             Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * h);
             Vector3 velocityXZ = displacementXZ / time;
