@@ -41,27 +41,27 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7d8db8df92937e9468b2dc11ffeb1191,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6778048
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7d8db8df92937e9468b2dc11ffeb1191,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.73524195
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7d8db8df92937e9468b2dc11ffeb1191,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7d8db8df92937e9468b2dc11ffeb1191,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7d8db8df92937e9468b2dc11ffeb1191,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 94.655
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7d8db8df92937e9468b2dc11ffeb1191,
         type: 3}
@@ -223,7 +223,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!59 &985991999071915648
 HingeJoint:
@@ -316,7 +316,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!59 &8409463207777093535
 HingeJoint:
@@ -454,7 +454,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!59 &8404292026536687975
 HingeJoint:
@@ -547,7 +547,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!135 &2473689575301471497
 SphereCollider:
@@ -601,7 +601,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!1 &5250887287929744950 stripped
 GameObject:
@@ -634,7 +634,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!59 &7434082527157802572
 HingeJoint:
@@ -727,7 +727,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!59 &4996445304260056197
 HingeJoint:
@@ -820,7 +820,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!59 &6012574062977484905
 HingeJoint:
@@ -913,7 +913,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!59 &2687069910331548241
 HingeJoint:

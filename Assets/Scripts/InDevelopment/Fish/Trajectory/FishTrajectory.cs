@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -20,7 +21,7 @@ namespace InDevelopment.Fish.Trajectory
         #endregion
 
         #region ---LaunchOptions---
-        public static void LaunchObjectAtTargetWithInitialSpeed(Rigidbody objRigidbody, Vector3 objPos, Vector3 targetPos, float speed, bool tall = false)
+        public static void LaunchObjectAtTargetWithInitialSpeed(IEnumerable<Rigidbody> objRigidbody, Vector3 objPos, Vector3 targetPos, float speed, bool tall = false)
         {
             var spacialDifference = SpacialDifference(objPos, targetPos);
             var fishVelocity = TrajectoryVelocityFromSpeedDistanceAltitude(speed, spacialDifference.distance, spacialDifference.altitude, tall);
@@ -28,7 +29,7 @@ namespace InDevelopment.Fish.Trajectory
             LaunchObjectAt(objRigidbody, objPos, targetPos, fishVelocity);
         }
         
-        public static void LaunchObjectAtTargetWithInitialAngle(Rigidbody objRigidbody, Vector3 objPos, Vector3 targetPos, float angle)
+        public static void LaunchObjectAtTargetWithInitialAngle(IEnumerable<Rigidbody> objRigidbody, Vector3 objPos, Vector3 targetPos, float angle)
         {
             var spacialDifference = SpacialDifference(objPos, targetPos);
             var fishVelocity = TrajectoryVelocityFromAngleDistanceAltitude(angle, spacialDifference.distance, spacialDifference.altitude);
@@ -36,7 +37,7 @@ namespace InDevelopment.Fish.Trajectory
             LaunchObjectAt(objRigidbody, objPos, targetPos, fishVelocity);
         }
         
-        public static void LaunchObjectAtTargetWithPeakHeight(Rigidbody objRigidbody, Vector3 objPos, Vector3 targetPos, float height)
+        public static void LaunchObjectAtTargetWithPeakHeight(IEnumerable<Rigidbody> objRigidbody, Vector3 objPos, Vector3 targetPos, float height)
         {
             var spacialDifference = SpacialDifference(objPos, targetPos);
             var fishVelocity = CalculateLaunchData(height, spacialDifference.distance, spacialDifference.altitude);
@@ -53,11 +54,14 @@ namespace InDevelopment.Fish.Trajectory
             return (directDistance, -altitudeDifference);
         }
 
-        private static void LaunchObjectAt(Rigidbody objRigidbody, Vector3 objPos, Vector3 targetPos, (float velocityForward, float velocityUpwards) fishVelocity)
+        private static void LaunchObjectAt(IEnumerable<Rigidbody> objRigidbody, Vector3 objPos, Vector3 targetPos, (float velocityForward, float velocityUpwards) fishVelocity)
         {
             var targetDirection = (targetPos - objPos).normalized;
             targetDirection *= fishVelocity.velocityForward;
-            objRigidbody.velocity = new Vector3(targetDirection.x, fishVelocity.velocityUpwards, targetDirection.z);
+            foreach (var rigidbody in objRigidbody)
+            {
+                rigidbody.velocity = new Vector3(targetDirection.x, fishVelocity.velocityUpwards, targetDirection.z);
+            }
         }
         #endregion
 

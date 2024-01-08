@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace InDevelopment.Fish.Trajectory
@@ -6,20 +8,23 @@ namespace InDevelopment.Fish.Trajectory
     {
         [SerializeField] private Transform playerTransform;
         [SerializeField] private float fishSpeed;
-        [SerializeField] private float fishAngle;
-
-        private Rigidbody _rigidbody;
+        [SerializeField] private Rigidbody[] _rigidbody;
         
         private void Start()
         {
-            _rigidbody = GetComponent<Rigidbody>();
-            
             var fishPosition = transform.position;
             var targetPosition = playerTransform.position;
+
+            RotateObjTowards(transform, targetPosition);
             
             FishTrajectory.LaunchObjectAtTargetWithInitialSpeed(_rigidbody, fishPosition, targetPosition, fishSpeed);
-            
-            //LaunchObjectAtTargetWithInitialAngle(_rigidbody, fishPosition, targetPosition, fishAngle);
+        }
+
+        private static void RotateObjTowards(Transform objTransform, Vector3 target)
+        {
+            var targetDir = objTransform.position - target;
+            var angle = Vector3.Angle(targetDir, objTransform.forward);
+            objTransform.rotation = new quaternion(0, angle, 0, (float)Space.World);
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using InDevelopment.Fish.Trajectory;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -36,6 +37,7 @@ namespace InDevelopment.Fish
         private void Awake()
         {
             _spawnAreas = new List<SpawnArea>();
+
         }
         
         private void Start()
@@ -46,7 +48,7 @@ namespace InDevelopment.Fish
         private static void AddSpawnAreasToSpawnAreaList()
         {
             var spawnArea = GameObject.FindGameObjectsWithTag("SpawnArea");
-
+            
             foreach (var obj in spawnArea)
             {
                 var f = new SpawnArea { GameObject = obj };
@@ -79,23 +81,41 @@ namespace InDevelopment.Fish
         {
             var fish = FishObjectPool.SharedInstance.GetPooledObject();
             if (fish == null) return;
+
+            var children = fish.Children;
+            for (var i = 0; i < children.Length; i++)
+            {
+                children[i].Transform.position = children[i].InitialPosition;
+                children[i].Transform.rotation = children[i].InitialRotation;
+            }
+            var rigidities = fish.Children.Where(child => child.ChildRigidbody != null).Select(child => child.ChildRigidbody).ToArray();
             
-            fish.GameObject.transform.position = spawnPos;
+            fish.ParentGameObject.transform.position = spawnPos;
+
+            var playerPosition = player.position;
+            RotateObjTowards(fish.ParentGameObject.transform, playerPosition);
             
             // ---Speed Known--- \\
             // var speed = Random.Range(27, 40);
             // var tallArc = Random.Range(0, 2) == 1;
-            // FishTrajectory.LaunchObjectAtTargetWithInitialSpeed(fish.Rigidbody, fish.GameObject.transform.position, player.position, speed, tallArc);
+            // FishTrajectory.LaunchObjectAtTargetWithInitialSpeed(fish.Rigidbody, fishTransform.position, player.position, speed, tallArc);
             
             // ---Angle Known--- \\
-            var angle =  Random.Range(20f, 60f);
-            FishTrajectory.LaunchObjectAtTargetWithInitialAngle(fish.Rigidbody, fish.GameObject.transform.position, player.position, angle);
+            // var angle =  Random.Range(20f, 60f);
+            // FishTrajectory.LaunchObjectAtTargetWithInitialAngle(fish.Rigidbody, fishTransform.position, player.position, angle);
 
             // ---Max Height Known--- \\
-            // var height = Random.Range(3f, 60f);;
-            // FishTrajectory.LaunchObjectAtTargetWithPeakHeight(fish.Rigidbody, fish.GameObject.transform.position, player.position, height);
+            var height = Random.Range(3f, 60f);
+            FishTrajectory.LaunchObjectAtTargetWithPeakHeight(rigidities, fish.ParentGameObject.transform.position, playerPosition, height);
             
-            fish.GameObject.SetActive(true);
+            fish.ParentGameObject.SetActive(true);
+        }
+        
+        private static void RotateObjTowards(Transform objTransform, Vector3 target)
+        {
+            var targetDir = objTransform.position - target;
+            var angle = Vector3.Angle(targetDir, objTransform.forward);
+            objTransform.rotation = new Quaternion(0, angle, 0, (float)Space.World);
         }
 
         public static void DespawnFish(GameObject fish)

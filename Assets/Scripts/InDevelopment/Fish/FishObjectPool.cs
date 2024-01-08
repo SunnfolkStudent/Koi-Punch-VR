@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace InDevelopment.Fish
@@ -14,8 +15,31 @@ namespace InDevelopment.Fish
 
         public class Fish
         {
-            public GameObject GameObject;
-            public Rigidbody Rigidbody;
+            public readonly GameObject ParentGameObject;
+            public readonly Child[] Children;
+
+            public Fish(GameObject parentGameObject, GameObject fishContainer)
+            {
+                ParentGameObject = parentGameObject;
+                ParentGameObject.SetActive(false);
+                ParentGameObject.transform.SetParent(fishContainer.transform);
+                
+                Children = ParentGameObject.GetComponentsInChildren<Transform>().Select(transform1 => new Child
+                {
+                    Transform = transform1, 
+                    ChildRigidbody = transform1.gameObject.GetComponent<Rigidbody>(),
+                    InitialPosition = transform1.position,
+                    InitialRotation = transform1.rotation
+                }).ToArray();
+            }
+        }
+
+        public struct Child
+        {
+            public Transform Transform;
+            public Rigidbody ChildRigidbody;
+            public Vector3 InitialPosition;
+            public Quaternion InitialRotation;
         }
 
         private void Awake()
@@ -28,19 +52,21 @@ namespace InDevelopment.Fish
             _pooledFishObjects = new List<Fish>();
             for(var i = 0; i < totalFishAmountInPool; i++)
             {
-                var f = new Fish { GameObject = Instantiate(fishObjectToPool) };
-                f.Rigidbody = f.GameObject.GetComponent<Rigidbody>();
-                f.GameObject.SetActive(false);
-                f.GameObject.transform.SetParent(fishContainer.transform);
-                _pooledFishObjects.Add(f);
+                AddFishToPool(fishObjectToPool);
             }
         }
-        
+
+        private void AddFishToPool(GameObject fishPrefab)
+        {
+            var f = new Fish(Instantiate(fishPrefab), fishContainer);
+            _pooledFishObjects.Add(f);
+        }
+
         public Fish GetPooledObject()
         {
             for(var i = 0; i < totalFishAmountInPool; i++)
             {
-                if(!_pooledFishObjects[i].GameObject.activeInHierarchy)
+                if(!_pooledFishObjects[i].ParentGameObject.activeInHierarchy)
                 {
                     return _pooledFishObjects[i];
                 }
