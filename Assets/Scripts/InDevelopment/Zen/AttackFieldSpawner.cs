@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -11,7 +9,7 @@ public class AttackFieldSpawner : MonoBehaviour
     public float spawnInterval = 2f; // Interval between spawns
 
     private bool _isSpawning;
-    float timeSinceLastSpawn;
+    private float _timeSinceLastSpawn;
 
     private void Update()
     {
@@ -56,10 +54,11 @@ public class AttackFieldSpawner : MonoBehaviour
                 }
             }
         }
-        
+        float randomScaleMultiplier = Random.Range(0.8f, 1.8f);
         
         // Spawn the object at the random point on the surface
-        Instantiate(objectToSpawn, randomPoint, Quaternion.identity);
+        GameObject spawnedObject = Instantiate(objectToSpawn, randomPoint, Quaternion.identity);
+        spawnedObject.transform.localScale *= randomScaleMultiplier;
     }
 
     private Vector3 GetRandomPointOnVisibleSide(GameObject target)
@@ -80,7 +79,7 @@ public class AttackFieldSpawner : MonoBehaviour
             return Vector3.zero;
         }
 
-        Vector3 randomPoint = Vector3.zero;
+        Vector3 randomPoint;
 
         while (true)
         {
@@ -108,10 +107,10 @@ public class AttackFieldSpawner : MonoBehaviour
     {
         while (_isSpawning)
         {
-            timeSinceLastSpawn += Time.unscaledDeltaTime;
-            if (timeSinceLastSpawn >= spawnInterval)
+            _timeSinceLastSpawn += Time.unscaledDeltaTime;
+            if (_timeSinceLastSpawn >= spawnInterval)
             {
-                timeSinceLastSpawn = 0f;
+                _timeSinceLastSpawn = 0f;
                 SpawnObjectOnSurface();
             }
 
