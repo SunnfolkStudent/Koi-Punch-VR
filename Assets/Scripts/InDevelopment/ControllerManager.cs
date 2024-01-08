@@ -1,18 +1,14 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.XR;
-using UnityEngine.XR.Interaction.Toolkit;
 
 using TMPro;
 
 public class ControllerManager : MonoBehaviour
 {
     //Declare Variables
-
-    //TODO: Round them all together and return a rounded number of all the vector 3 values. Min 0 Max 1. Add slider to control
+    
     [Header("Position")] 
     public Vector3 leftControllerPosition;
     public Vector3 rightControllerPosition;
