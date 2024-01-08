@@ -9,16 +9,6 @@ namespace InDevelopment.Fish
 {
     public class FishSpawnManager : MonoBehaviour
     {
-        #region ---TODO---
-            // TODO: Spawn Frequency of fish, increased over time === Gradually increasing.
-                // Use Animation Curves inside Unity in Inspector, and make the code read off of the graph there
-                // to gradually increase fish spawn speed.
-            
-            // TODO: Spawned Fish Properties; Size&Mass + Colour/Skin. === Random Weighted.
-                // Use a "weightTable" to help track what former/recent fish properties have been, and avoid the most recently used properties.
-                // Based on input from weightTable, choose size&mass, and colour/skin. 
-        #endregion
-        
         [SerializeField] private Transform player;
         private static List<SpawnArea> _spawnAreas;
         
@@ -27,7 +17,6 @@ namespace InDevelopment.Fish
             public GameObject GameObject;
             public SpawnAreaCircle SpawnAreaCircle;
         }
-
         #region ---Initialization---
         private void Start()
         {
@@ -35,7 +24,7 @@ namespace InDevelopment.Fish
             AddSpawnAreasToSpawnAreaList();
         }
         #endregion
-
+        
         #region ---SpawnArea---
         private static void AddSpawnAreasToSpawnAreaList()
         {
@@ -59,7 +48,7 @@ namespace InDevelopment.Fish
             return new Vector3(Random.Range(-offsetMax, offsetMax), 0, Random.Range(-offsetMax, offsetMax));
         }
         #endregion
-
+        
         #region ---Temp---
         private void Update()
         {
@@ -71,7 +60,7 @@ namespace InDevelopment.Fish
             }
         }
         #endregion
-
+        
         #region ---FishSpawning---
         private void SpawnFish(Vector3 spawnPos)
         {
@@ -118,6 +107,16 @@ namespace InDevelopment.Fish
         {
             fish.SetActive(false);
         }
+        #endregion
+
+        #region ---TODO---
+        // TODO: Spawn Frequency of fish, increased over time === Gradually increasing.
+            // Use Animation Curves inside Unity in Inspector, and make the code read off of the graph there
+            // to gradually increase fish spawn speed.
+        
+        // TODO: Spawned Fish Properties; Size&Mass + Colour/Skin. === Random Weighted.
+            // Use a "weightTable" to help track what former/recent fish properties have been, and avoid the most recently used properties.
+            // Based on input from weightTable, choose size&mass, and colour/skin. 
         #endregion
     }
 }
