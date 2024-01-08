@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Dissolve
-  m_Shader: {fileID: -6465566751694194690, guid: 6a38b69b6dd01204c93d86dde499a41f,
+  m_Name: Sun
+  m_Shader: {fileID: -6465566751694194690, guid: 14c29d12982ad1b4696aa547cd2afb9c,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -88,9 +88,6 @@ Material:
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
-    - _Border_size: 0.02
-    - _Border_size1: 0.01
-    - _Border_size2: 0.02
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -98,7 +95,6 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _Dissolve_Time: 2
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
@@ -106,11 +102,11 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _Noise_Size: 50
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _RadiencePower: 4.05
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
@@ -122,14 +118,16 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BorderColor1: {r: 0.18931697, g: 2, b: 0, a: 0}
-    - _BorderColor2: {r: 2, g: 0.3404321, b: 0, a: 0}
-    - _Color: {r: 2.1185474, g: 0.75033695, b: 0, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _RadienceColor: {r: 11.984313, g: 3.0745099, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _SpinSpeed: {r: 0.03, g: 0, b: 0, a: 0}
+    - _SunColor1: {r: 1, g: 0.9882354, b: 0, a: 0}
+    - _SunColor2: {r: 0.7660377, g: 0.08682056, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &7023572253794717359
+--- !u!114 &7428775158824731037
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
