@@ -6,72 +6,68 @@ namespace InDevelopment.Fish
 {
     public class FishObjectPool : MonoBehaviour
     {
-        public static FishObjectPool SharedInstance;
-        private List<Fish> _pooledFishObjects;
-        public GameObject fishObjectToPool;
-        public int totalFishAmountInPool;
-        
+        private static List<Fish> _fishPool;
+        [SerializeField] private GameObject fishObjectToPool;
+        [SerializeField] private int initialFishAmountInPool = 10;
         [SerializeField] private GameObject fishContainer;
-
+        
+        #region ---FishPoolInfo---
         public class Fish
         {
             public readonly GameObject ParentGameObject;
             public readonly Child[] Children;
-
-            public Fish(GameObject parentGameObject, GameObject fishContainer)
+            
+            public Fish(GameObject fishPrefab, GameObject fishContainer)
             {
-                ParentGameObject = parentGameObject;
+                ParentGameObject = Instantiate(fishPrefab, fishContainer.transform);
                 ParentGameObject.SetActive(false);
-                ParentGameObject.transform.SetParent(fishContainer.transform);
                 
                 Children = ParentGameObject.GetComponentsInChildren<Transform>().Select(transform1 => new Child
                 {
-                    Transform = transform1, 
-                    ChildRigidbody = transform1.gameObject.GetComponent<Rigidbody>(),
+                    Transform = transform1,
+                    Rigidbody = transform1.gameObject.GetComponent<Rigidbody>(),
                     InitialPosition = transform1.position,
                     InitialRotation = transform1.rotation
                 }).ToArray();
             }
         }
-
+        
         public struct Child
         {
             public Transform Transform;
-            public Rigidbody ChildRigidbody;
+            public Rigidbody Rigidbody;
             public Vector3 InitialPosition;
             public Quaternion InitialRotation;
         }
-
-        private void Awake()
-        {
-            SharedInstance = this;
-        }
-
+        #endregion
+        
+        #region ---Initialization---
         private void Start()
         {
-            _pooledFishObjects = new List<Fish>();
-            for(var i = 0; i < totalFishAmountInPool; i++)
+            _fishPool = new List<Fish>();
+            AddMultipleFishToPool(initialFishAmountInPool, fishObjectToPool);
+        }
+        #endregion
+        
+        #region ---PoolInteraction---
+        private void AddMultipleFishToPool(int amount, GameObject fishPrefab)
+        {
+            for(var i = 0; i < amount; i++)
             {
-                AddFishToPool(fishObjectToPool);
+                AddFishToPool(fishPrefab);
             }
         }
 
         private void AddFishToPool(GameObject fishPrefab)
         {
-            var f = new Fish(Instantiate(fishPrefab), fishContainer);
-            _pooledFishObjects.Add(f);
+            var f = new Fish(fishPrefab, fishContainer);
+            _fishPool.Add(f);
         }
-
-        public Fish GetPooledObject()
+        
+        public static Fish GetPooledObject()
         {
-            for(var i = 0; i < totalFishAmountInPool; i++)
-            {
-                if(!_pooledFishObjects[i].ParentGameObject.activeInHierarchy)
-                {
-                    return _pooledFishObjects[i];
-                }
-            }
-            return null;
+            return _fishPool.FirstOrDefault(t => !t.ParentGameObject.activeInHierarchy);
         }
+        #endregion
     }
 }

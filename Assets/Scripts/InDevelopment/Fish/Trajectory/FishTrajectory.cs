@@ -19,7 +19,7 @@ namespace InDevelopment.Fish.Trajectory
         FishTrajectory.LaunchObjectAtTargetWithPeakHeight(fish.Rigidbody, fish.GameObject.transform.position, player.position, height);
         */
         #endregion
-
+        
         #region ---LaunchOptions---
         public static void LaunchObjectAtTargetWithInitialSpeed(IEnumerable<Rigidbody> objRigidbody, Vector3 objPos, Vector3 targetPos, float speed, bool tall = false)
         {
@@ -44,7 +44,7 @@ namespace InDevelopment.Fish.Trajectory
             LaunchObjectAt(objRigidbody, objPos, targetPos, fishVelocity);
         }
         #endregion
-
+        
         #region ---LaunchRequirements---
         private static (float distance, float altitude) SpacialDifference(Vector3 objPos, Vector3 targetPos)
         {
@@ -64,7 +64,7 @@ namespace InDevelopment.Fish.Trajectory
             }
         }
         #endregion
-
+        
         #region ---TrajectoryCalculations---
         private static (float velocityForward, float velocityUpwards) TrajectoryVelocityFromSpeedDistanceAltitude(float speed, float dist, float alt, bool tall)
         {

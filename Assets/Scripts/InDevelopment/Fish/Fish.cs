@@ -6,7 +6,10 @@ namespace InDevelopment.Fish
     {
         private void OnCollisionEnter(Collision other)
         {
-            FishSpawnManager.DespawnFish(gameObject);
+            if (other.gameObject.CompareTag("Ground"))
+            {
+                FishSpawnManager.DespawnFish(gameObject);
+            }
         }
 
         private void Update()
