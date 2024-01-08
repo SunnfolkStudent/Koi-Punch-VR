@@ -12,9 +12,16 @@ public class ControllerManager : MonoBehaviour
 {
     //Declare Variables
 
+    //TODO: Round them all together and return a rounded number of all the vector 3 values. Min 0 Max 1. Add slider to control
+    [Header("Position")] 
+    public Vector3 leftControllerPosition;
+    public Vector3 rightControllerPosition;
+    
     [Header("Velocity")] 
     public Vector3 leftControllerVelocity;
     public Vector3 rightControllerVelocity;
+    public float leftVelMagnitude;
+    public float rightVelMagnitude;
 
     //Euler angles and quaternions because fuck quaternions
     [Header("Rotation in Euler Angles")] 
@@ -34,11 +41,13 @@ public class ControllerManager : MonoBehaviour
     {
         if (needsTesting)
             Test();
+        
+        UpdateInput();
     }
 
     void FixedUpdate()
     {
-        UpdateInput();
+        
     }
 
     // A function to test things inside of
@@ -61,19 +70,24 @@ public class ControllerManager : MonoBehaviour
         {
             if (node.nodeType == XRNode.LeftHand)
             {
+                node.TryGetPosition(out leftControllerPosition);
                 node.TryGetVelocity(out leftControllerVelocity);
                 node.TryGetRotation(out leftControllerQuaternionAngle);
-                
+                 
                 leftControllerAngle = leftControllerQuaternionAngle.eulerAngles;
             }
 
             if (node.nodeType == XRNode.RightHand)
             {
+                node.TryGetPosition(out rightControllerPosition);
                 node.TryGetVelocity(out rightControllerVelocity);
                 node.TryGetRotation(out rightControllerQuaternionAngle);
 
                 rightControllerAngle = rightControllerQuaternionAngle.eulerAngles;
             }
         }
+
+        leftVelMagnitude = leftControllerVelocity.magnitude;
+        rightVelMagnitude = rightControllerVelocity.magnitude;
     }
 }
