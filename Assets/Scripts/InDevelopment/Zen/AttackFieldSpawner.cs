@@ -10,20 +10,21 @@ public class AttackFieldSpawner : MonoBehaviour
     private GameObject _targetObject; // The game object onto which to spawn objects
     public float spawnInterval = 2f; // Interval between spawns
 
-    private bool isSpawning = false;
-    float timeSinceLastSpawn = 0f;
+    private bool _isSpawning;
+    float timeSinceLastSpawn;
 
     private void Update()
     {
-        if (ZenMetreManager.Instance.attackFieldsActive && !isSpawning)
+        if (ZenMetreManager.Instance.attackFieldsActive && !_isSpawning)
         {
-            isSpawning = true;
+            _isSpawning = true;
             _targetObject = GameObject.FindGameObjectWithTag("Boss");
             StartCoroutine(Spawning());
         }
-        else if (!ZenMetreManager.Instance.attackFieldsActive && isSpawning)
+        else if (!ZenMetreManager.Instance.attackFieldsActive && _isSpawning)
         {
-            isSpawning = false;
+            _isSpawning = false;
+            StopCoroutine(Spawning());
         }
     }
 
@@ -105,7 +106,7 @@ public class AttackFieldSpawner : MonoBehaviour
 
     private IEnumerator Spawning()
     {
-        while (isSpawning)
+        while (_isSpawning)
         {
             timeSinceLastSpawn += Time.unscaledDeltaTime;
             if (timeSinceLastSpawn >= spawnInterval)
