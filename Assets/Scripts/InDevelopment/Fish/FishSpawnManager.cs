@@ -9,6 +9,8 @@ namespace InDevelopment.Fish
 {
     public class FishSpawnManager : MonoBehaviour
     {
+        // TODO: Spawn frequency increased over time
+        // TODO: Spawn fish with properties; Size, Colour, type, flight trajectory type and area spawned in decided by random weighted tables
         [SerializeField] private Transform player;
         private static List<SpawnArea> _spawnAreas;
         [SerializeField] private float height = 10;
@@ -95,7 +97,7 @@ namespace InDevelopment.Fish
                 return;
             }
             
-            ResetPropertiesOfFishInPool(fish, fishPool);
+            FishObjectPool.ResetPropertiesOfFishInPool(fish, fishPool);
             
             var rigidities = fish.Children.Where(child => child.Rigidbody != null).Select(child => child.Rigidbody).ToArray();
             
@@ -120,38 +122,13 @@ namespace InDevelopment.Fish
             
             fish.ParentGameObject.SetActive(true);
         }
-
-        private static void ResetPropertiesOfFishInPool(FishObjectPool.Fish fish, FishObjectPool.FishPool fishPool)
-        {
-            for (var i = 0; i < fish.Children.Length; i++)
-            {
-                fish.Children[i].Transform.position = fishPool.Prefab.Children[i].InitialTransform.Position;
-                fish.Children[i].Transform.rotation = fishPool.Prefab.Children[i].InitialTransform.Rotation;
-                fish.Children[i].Transform.localScale = fishPool.Prefab.Children[i].InitialTransform.LocalScale;
-            }
-        }
-
+        
         private static void RotateObjTowards(Transform objTransform, Vector3 target)
         {
             var targetDir = objTransform.position - target;
             var angle = Vector3.Angle(targetDir, objTransform.forward);
             objTransform.rotation = new Quaternion(0, angle, 0, (float)Space.World);
         }
-        
-        public static void DespawnFish(GameObject fish)
-        {
-            fish.SetActive(false);
-        }
-        #endregion
-        
-        #region ---TODO---
-        // TODO: Spawn Frequency of fish, increased over time === Gradually increasing.
-            // Use Animation Curves inside Unity in Inspector, and make the code read off of the graph there
-            // to gradually increase fish spawn speed.
-        
-        // TODO: Spawned Fish Properties; Size&Mass + Colour/Skin. === Random Weighted.
-            // Use a "weightTable" to help track what former/recent fish properties have been, and avoid the most recently used properties.
-            // Based on input from weightTable, choose size&mass, and colour/skin. 
         #endregion
     }
 }

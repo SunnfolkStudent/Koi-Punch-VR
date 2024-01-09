@@ -9,7 +9,7 @@ namespace InDevelopment.Fish
         {
             if (other.gameObject.CompareTag("Ground"))
             {
-                FishSpawnManager.DespawnFish(gameObject);
+                FishObjectPool.DespawnFish(gameObject);
             }
         }
 
@@ -18,7 +18,7 @@ namespace InDevelopment.Fish
             if (transform.position.y < -25)
             {
                 // Debug.Log("Destroyed by being too far down");
-                FishSpawnManager.DespawnFish(gameObject);
+                FishObjectPool.DespawnFish(gameObject);
             }
         }
     }

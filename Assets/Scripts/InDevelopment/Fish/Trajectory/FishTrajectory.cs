@@ -7,6 +7,8 @@ namespace InDevelopment.Fish.Trajectory
 {
     public static class FishTrajectory
     {
+        // TODO: When using speed for trajectory stop too low speeds from creating an error
+        // TODO: When using angle for trajectory fix why 3% chance of error
         private static readonly float Gravity =  -Physics.gravity.y;
         
         #region ---LaunchOptions---
@@ -57,7 +59,6 @@ namespace InDevelopment.Fish.Trajectory
         #region ---TrajectoryCalculations---
         private static (float velocityForward, float velocityUpwards) TrajectoryVelocityFromSpeedDistanceAltitude(float speed, float dist, float alt, bool tall)
         {
-            // TODO: Stop too low speeds from creating an error
             var angleInRadians = tall ? (float)Math.Atan((NumberExponent(speed, 2) + Math.Sqrt(NumberExponent(speed, 4) - Gravity * 
                     ((Gravity * NumberExponent(dist, 2)) + (2 * alt * NumberExponent(speed, 2))))) / (Gravity * dist))
                     : (float)Math.Atan((NumberExponent(speed, 2) - Math.Sqrt(NumberExponent(speed, 4) - Gravity * 
@@ -73,7 +74,6 @@ namespace InDevelopment.Fish.Trajectory
         
         private static (float velocityForward, float velocityUpwards) TrajectoryVelocityFromAngleDistanceAltitude(float angle, float dist, float alt)
         {
-            // TODO: Fix why 3% chance of missing
             var velocityTotal = Mathf.Sqrt((NumberExponent(dist, 2) * Gravity) / 
                                            (dist * math.abs(Mathf.Sin(2 * angle)) - 2 * alt * NumberExponent(math.abs(Mathf.Cos(angle)), 2)));
             

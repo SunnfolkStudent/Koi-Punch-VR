@@ -7,9 +7,10 @@ namespace InDevelopment.Fish
 {
     public class FishObjectPool : MonoBehaviour
     {
+        // TODO: Other properties on fish
         public static List<FishPool> FishPools;
-        [SerializeField] private InspectorPrefab[] fishPrefab;
         private static Transform _fishContainer;
+        [SerializeField] private InspectorPrefab[] fishPrefab;
         
         [Serializable] private class InspectorPrefab
         {
@@ -127,6 +128,21 @@ namespace InDevelopment.Fish
         public static Fish GetPooledObject(FishPool fishPool)
         {
             return fishPool.Fishes.FirstOrDefault(t => !t.ParentGameObject.activeInHierarchy);
+        }
+        
+        public static void DespawnFish(GameObject fish)
+        {
+            fish.SetActive(false);
+        }
+        
+        public static void ResetPropertiesOfFishInPool(Fish fish, FishPool fishPool)
+        {
+            for (var i = 0; i < fish.Children.Length; i++)
+            {
+                fish.Children[i].Transform.position = fishPool.Prefab.Children[i].InitialTransform.Position;
+                fish.Children[i].Transform.rotation = fishPool.Prefab.Children[i].InitialTransform.Rotation;
+                fish.Children[i].Transform.localScale = fishPool.Prefab.Children[i].InitialTransform.LocalScale;
+            }
         }
         #endregion
     }
