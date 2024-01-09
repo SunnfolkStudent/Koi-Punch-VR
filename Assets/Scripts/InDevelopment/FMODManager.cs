@@ -1,40 +1,46 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using FMOD.Studio;
 using FMODUnity;
-public class FMOD_Manager : MonoBehaviour
+public class FMODManager: MonoBehaviour
 {
-    private static FMOD_Manager instance;
+    private static FMODManager instance;
+    
+    #region Variables
+    
     private Camera cam;
-    [SerializeField] [Range(0,100)] private float velocityFloor;
-    public Rigidbody leftHandRigid;
     private GameObject leftHand;
     private GameObject rightHand;
-    private EventInstance leftHandWoosh = RuntimeManager.CreateInstance("event:/SFX/PlayerSounds/HandSounds/Swoosh");
-    private EventInstance rightHandWoosh = RuntimeManager.CreateInstance("event:/SFX/PlayerSounds/HandSounds/Swoosh");
-    [Range(0, 1)] private float _SFXVolume;
-    [Range(0, 1)] private float _musicVolume;
+    
+    private EventInstance leftHandWind = RuntimeManager.CreateInstance("event:/SFX/PlayerSounds/HandSounds/HandWind");
+    private EventInstance rightHandWind = RuntimeManager.CreateInstance("event:/SFX/PlayerSounds/HandSounds/HandWind");
+    private EventInstance levelOne = RuntimeManager.CreateInstance("event:/Music/LevelMusic/SpringLevel");
+    private EventInstance levelTwo = RuntimeManager.CreateInstance("event:/Music/LevelMusic/FallLevel");
+    private EventInstance levelThree = RuntimeManager.CreateInstance("event:/Music/LevelMusic/WinterLevel");
+    private EventInstance koiPunch = RuntimeManager.CreateInstance("event:/SFX/PlayerSounds/ChargeSounds/KoiPunch");
+    
+    [SerializeField] [Range(0,100)] private float velocityFloor;
+    [Range(0, 1)] private float sfxVolume;
+    [Range(0, 1)] private float musicVolume;
     private float playerLeftHandVelocity;
     private float playerRightHandVelocity;
-    public float SFXVolume
+    
+    #endregion
+    
+    public float SfxVolume
     {
-        get => _SFXVolume;
-        set => _SFXVolume = value;
+        get => sfxVolume;
+        set => sfxVolume = value;
     }
     public float MusicVolume
     {
-        get => _musicVolume;
-        set => _musicVolume = value;
+        get => musicVolume;
+        set => musicVolume = value;
     }
-    void Awake()
+    private void Awake()
     {
-        leftHandRigid = gameObject.GetComponent<Rigidbody>();
-        
-        if (FMOD_Manager.instance == null)
+        if (FMODManager.instance == null)
         {
-            FMOD_Manager.instance = this;
+            FMODManager.instance = this;
         }
         else
         {
@@ -47,54 +53,52 @@ public class FMOD_Manager : MonoBehaviour
 
     private void Start()
     {
-        
         leftHand = GameObject.Find("leftHand");
         rightHand = GameObject.Find("rightHand");
         
-        RuntimeManager.AttachInstanceToGameObject(leftHandWoosh,  leftHand.GetComponent<Transform>(), leftHand.GetComponent<Rigidbody>());
-        RuntimeManager.AttachInstanceToGameObject(rightHandWoosh,  rightHand.GetComponent<Transform>(), rightHand.GetComponent<Rigidbody>());
+        RuntimeManager.AttachInstanceToGameObject(leftHandWind,  leftHand.GetComponent<Transform>(), leftHand.GetComponent<Rigidbody>());
+        RuntimeManager.AttachInstanceToGameObject(rightHandWind,  rightHand.GetComponent<Transform>(), rightHand.GetComponent<Rigidbody>());
+        RuntimeManager.AttachInstanceToGameObject(levelOne, cam.GetComponent<Transform>(), cam.GetComponent<Rigidbody>());
+        RuntimeManager.AttachInstanceToGameObject(levelTwo, cam.GetComponent<Transform>(), cam.GetComponent<Rigidbody>());
+        RuntimeManager.AttachInstanceToGameObject(levelThree, cam.GetComponent<Transform>(), cam.GetComponent<Rigidbody>());
     }
     
     private Bus musicBus;
     private Bus sfxBus;
     private void Update()
     {
-        sfxBus.setVolume(_SFXVolume);
-        musicBus.setVolume(_musicVolume);
+        sfxBus.setVolume(sfxVolume);
+        musicBus.setVolume(musicVolume);
         
         if (playerLeftHandVelocity > velocityFloor)
         {
-            leftHandWoosh.start();
-            leftHandWoosh.setParameterByName("soundVelocity", playerLeftHandVelocity);
+            leftHandWind.start();
+            leftHandWind.setParameterByName("soundVelocity", playerLeftHandVelocity);
         }
         else
         {
-            leftHandWoosh.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            leftHandWind.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
 
         if (playerRightHandVelocity > velocityFloor)
         {
-            rightHandWoosh.start();
-            rightHandWoosh.setParameterByName("soundVelocity", playerRightHandVelocity);
+            rightHandWind.start();
+            rightHandWind.setParameterByName("soundVelocity", playerRightHandVelocity);
         }
         else
         {
-            rightHandWoosh.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            rightHandWind.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
     }
     
-    /*for å bruke:
+    /*how to use:
      1: using FMODUnity
-     2: [SerializeField] private EventReference eksempelVariabel
-     3: FMODManager.instance.PlayOneShot(eksempelvariabel, this.transform.position)*/
+     2: [SerializeField] private EventReference exampleVariable
+     3: FMODManager.instance.PlayOneShot(exampleVariable, this.transform.position)*/
     public void PlayOneShot(string sound, Vector3 worldPos)
     {
         RuntimeManager.PlayOneShot(sound, worldPos);
     }
-
-    private EventInstance levelOne = RuntimeManager.CreateInstance("event:/Music/FallLevel");
-    private EventInstance levelTwo = RuntimeManager.CreateInstance("event:/Music/SpringLevel");
-    private EventInstance levelThree = RuntimeManager.CreateInstance("event:/Music/WinterLevel");
     
     public void OnStartLevelMusic(int levelNumber)
     {
@@ -102,7 +106,7 @@ public class FMOD_Manager : MonoBehaviour
         {
             case 0:
             {
-                //legg til hovedmeny-logikk
+                //add main menu logic
                 break;
             }
             case 1:
@@ -136,10 +140,8 @@ public class FMOD_Manager : MonoBehaviour
     {
         
     }
-    
-    private EventInstance koiPunch = RuntimeManager.CreateInstance("event:/SFX/PlayerSounds/ChargeSounds/KoiPunch");
 
-    public FMOD_Manager(GameObject leftHand)
+    public FMODManager(GameObject leftHand)
     {
         this.leftHand = leftHand;
     }
