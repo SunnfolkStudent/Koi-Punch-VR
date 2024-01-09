@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ZenMetreVisualManager : MonoBehaviour
 {
+    public static ZenMetreVisualManager Instance;
+    
     public Image zenMetreBarLevel1;
     public Image zenMetreBarLevel2;
     public Image zenMetreBarLevel3;
@@ -14,7 +14,19 @@ public class ZenMetreVisualManager : MonoBehaviour
     
     private float _maxZenMetreValue = 100f;
     private float _oldZenMetreValue;
-    
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,35 +38,34 @@ public class ZenMetreVisualManager : MonoBehaviour
         _zenMetreBarLevel2Material.SetFloat("_FillAmount", 0);
         _zenMetreBarLevel3Material.SetFloat("_FillAmount", 0);
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (ZenMetreManager.Instance.zenMetreValue - _oldZenMetreValue > 0 || ZenMetreManager.Instance.zenMetreValue - _oldZenMetreValue < 0)
         {
             _oldZenMetreValue = ZenMetreManager.Instance.zenMetreValue;
-            UpdateZenBar(ZenMetreManager.Instance.zenMetreValue);
+            UpdateZenBar(ZenMetreManager.Instance.zenLevel, ZenMetreManager.Instance.zenMetreValue);
         }
     }
     
-    public void UpdateZenBar(float currentZenValue)
+    public void UpdateZenBar(int workingZenLevel, float zenMetreValue)
     {
         // Calculate fill amount based on the current Zen value
-        float fillAmount = currentZenValue / _maxZenMetreValue;
+        float fillAmount = zenMetreValue / _maxZenMetreValue;
 
         // Ensure the fillAmount is within the range of 0 to 1
         fillAmount = Mathf.Clamp01(fillAmount);
 
         // Update the _FillAmount property in the shader
-        if (ZenMetreManager.Instance.zenLevel == 1)
+        if (workingZenLevel == 1)
         {
             _zenMetreBarLevel1Material.SetFloat("_FillAmount", fillAmount);
         }
-        else if (ZenMetreManager.Instance.zenLevel == 2)
+        else if (workingZenLevel == 2)
         {
             _zenMetreBarLevel2Material.SetFloat("_FillAmount", fillAmount);
         }
-        else if (ZenMetreManager.Instance.zenLevel == 3)
+        else if (workingZenLevel == 3)
         {
             _zenMetreBarLevel3Material.SetFloat("_FillAmount", fillAmount);
         }

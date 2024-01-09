@@ -7,7 +7,7 @@ public class AttackFieldScript : MonoBehaviour
 {
     private float _timeUntilDeath = 5f;
     
-    // Start is called before the first frame update
+    
     void Start()
     {
         StartCoroutine(DeathTimer());

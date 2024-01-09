@@ -18,6 +18,7 @@ public class ZenMetreManager : MonoBehaviour
     
     public float zenMetreValue;
     public int zenLevel;
+    private int _zenLevelCheckpoint;
     public bool timeStopActive;
     
     private float _slowdownFactor = 0.001f;
@@ -40,27 +41,41 @@ public class ZenMetreManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+
+    //Update is for testing purposes only
     private void Update()
     {
-        //If the zen metre is full, move on to the next level of zen
-        if (zenMetreValue >= 100)
+        if (zenMetreValue >= 100 && zenLevel == 1 && zenAttackActive == false)
         {
-            zenLevel++;
+            zenLevel = 2;
             SetZenLevel();
         }
     }
-    
+
     #region -- Zen Score Methods --
-    //Method that adds zen to the zen metre based on the velocity of the fist
+    //Method that adds zen to the zen metre based on score
     public void AddHitZen(float score)
     {
         zenMetreValue += score * _hitZenScoreMultiplier;
+        
+        if (zenMetreValue > 100)
+        {
+            zenMetreValue = 100;
+        }
+
+        ZenMetreVisualManager.Instance.UpdateZenBar(zenLevel, zenMetreValue);
     }
     
     public void AddAttackFieldZen(float attackFieldSize)
     {
         zenMetreValue += attackFieldSize * _attackFieldScoreMultiplier;
+        
+        if (zenMetreValue > 100)
+        {
+            zenMetreValue = 100;
+        }
+        
+        ZenMetreVisualManager.Instance.UpdateZenBar(zenLevel, zenMetreValue);
     }
     #endregion
     
@@ -87,6 +102,11 @@ public class ZenMetreManager : MonoBehaviour
     //Level one of zen is the start level. It is the level before anything happens with the zen.
     private void LevelOne()
     {
+        if (_zenLevelCheckpoint <= 2)
+            ZenMetreVisualManager.Instance.UpdateZenBar(2, 0f);
+        
+        ZenMetreVisualManager.Instance.UpdateZenBar(3, 0f);
+        
         timeStopActive = false;
         
         Time.timeScale = 1f;
@@ -103,6 +123,7 @@ public class ZenMetreManager : MonoBehaviour
     //Method that moves on to the second level of zen
     private void LevelTwo()
     {
+        _zenLevelCheckpoint = 2;
         timeStopActive = true;
         zenMetreValue = 0;
         StartCoroutine(TimeStop());
@@ -115,14 +136,11 @@ public class ZenMetreManager : MonoBehaviour
     //Method that moves on to the third level of zen
     private void LevelThree()
     {
-        //Cleanup
-        StopCoroutine(AttackFieldSpawnTimer());
-        attackFieldsActive = false;
-        DestroyAllAttackFields();
         zenMetreValue = 0;
         
         //Start of level 3
         tripleScoreActive = true;
+        _zenLevelCheckpoint = 3;
         StartCoroutine(TripleScoreTimer());
         
         //Add music for the third level of zen
@@ -131,13 +149,13 @@ public class ZenMetreManager : MonoBehaviour
     //Level four is the last level of zen and is the level where you unlock your ultimate move.
     private void LevelFour()
     {
-        //Cleanup
-        StopCoroutine(TripleScoreTimer());
         zenMetreValue = 0;
-        tripleScoreActive = false;
         
         //Start of level 4
         zenAttackActive = true;
+        _zenLevelCheckpoint = 4;
+        //ControllerRumble.Instance.RightControllerRumbling(0.4f,5f);
+        //ControllerRumble.Instance.LeftControllerRumbling(0.4f,5f);
         
         //Add music for the fourth level of zen
     }
@@ -147,18 +165,38 @@ public class ZenMetreManager : MonoBehaviour
     private IEnumerator TripleScoreTimer()
     {
         yield return new WaitForSecondsRealtime(_tripleScoreTimer);
+        
         tripleScoreActive = false;
-        zenLevel = 1;
-        SetZenLevel();
+        
+        if (zenMetreValue >= 100)
+        {
+            zenLevel = 4;
+            SetZenLevel();
+        }
+        else
+        {
+            zenLevel = 1;
+            SetZenLevel();
+        }
     }
     
     private IEnumerator AttackFieldSpawnTimer()
     {
         yield return new WaitForSecondsRealtime(_attackFieldsActiveTime);
+        
         attackFieldsActive = false;
-        zenLevel = 1;
-        SetZenLevel();
         DestroyAllAttackFields();
+        
+        if (zenMetreValue >= 100)
+        {
+            zenLevel = 3;
+            SetZenLevel();
+        }
+        else
+        {
+            zenLevel = 1;
+            SetZenLevel();
+        }
     }
     
     private void DestroyAllAttackFields()
