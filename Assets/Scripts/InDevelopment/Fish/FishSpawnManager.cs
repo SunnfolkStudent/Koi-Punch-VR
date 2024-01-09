@@ -11,12 +11,8 @@ namespace InDevelopment.Fish
     {
         [SerializeField] private Transform player;
         private static List<SpawnArea> _spawnAreas;
+        [SerializeField] private float height = 10;
         
-        private class SpawnArea
-        {
-            public GameObject GameObject;
-            public SpawnAreaCircle SpawnAreaCircle;
-        }
         #region ---Initialization---
         private void Start()
         {
@@ -26,6 +22,12 @@ namespace InDevelopment.Fish
         #endregion
         
         #region ---SpawnArea---
+        private class SpawnArea
+        {
+            public GameObject GameObject;
+            public SpawnAreaCircle SpawnAreaCircle;
+        }
+        
         private static void AddSpawnAreasToSpawnAreaList()
         {
             var spawnArea = GameObject.FindGameObjectsWithTag("SpawnArea");
@@ -52,36 +54,59 @@ namespace InDevelopment.Fish
         #region ---Temp---
         private void Update()
         {
-            if (Keyboard.current.lKey.wasPressedThisFrame)
+            if (Keyboard.current.lKey.isPressed)
             {
                 var spawnArea = RandomSpawnArea();
                 var offset = spawnArea.SpawnAreaCircle.spawnAreaRadius;
-                SpawnFish(spawnArea.GameObject.transform.position + RandomOffset(offset));
+                SpawnFishAtPosFromPool(spawnArea.GameObject.transform.position + RandomOffset(offset), FishObjectPool.FishPools[0]);
+            }
+            
+            if (Keyboard.current.kKey.isPressed)
+            {
+                var spawnArea = RandomSpawnArea();
+                var offset = spawnArea.SpawnAreaCircle.spawnAreaRadius;
+                SpawnFishAtPosFromPool(spawnArea.GameObject.transform.position + RandomOffset(offset), FishObjectPool.FishPools[1]);
+            }
+            
+            if (Keyboard.current.jKey.isPressed)
+            {
+                var spawnArea = RandomSpawnArea();
+                var offset = spawnArea.SpawnAreaCircle.spawnAreaRadius;
+                SpawnFishAtPosFromPool(spawnArea.GameObject.transform.position + RandomOffset(offset), FishObjectPool.FishPools[1]);
+            }
+            
+            if (Keyboard.current.hKey.isPressed)
+            {
+                var spawnArea = RandomSpawnArea();
+                var offset = spawnArea.SpawnAreaCircle.spawnAreaRadius;
+                SpawnFishAtPosFromPool(spawnArea.GameObject.transform.position + RandomOffset(offset), FishObjectPool.FishPools[1]);
             }
         }
         #endregion
         
         #region ---FishSpawning---
-        private void SpawnFish(Vector3 spawnPos)
+        private void SpawnFishAtPosFromPool(Vector3 spawnPos, FishObjectPool.FishPool fishPool)
         {
-            var fish = FishObjectPool.GetPooledObject();
-            if (fish == null) return;
-            
-            var children = fish.Children;
-            for (var i = 0; i < children.Length; i++)
+            var fish = FishObjectPool.GetPooledObject(fishPool);
+            if (fish == null)
             {
-                children[i].Transform.position = children[i].InitialPosition;
-                children[i].Transform.rotation = children[i].InitialRotation;
+                FishObjectPool.AddFishToPool(fishPool);
+                SpawnFishAtPosFromPool(spawnPos, fishPool);
+                return;
             }
+            
+            ResetPropertiesOfFishInPool(fish, fishPool);
+            
             var rigidities = fish.Children.Where(child => child.Rigidbody != null).Select(child => child.Rigidbody).ToArray();
             
             fish.ParentGameObject.transform.position = spawnPos;
+            fish.ParentGameObject.transform.localScale = Vector3.one * Random.Range(0.1f, 0.5f);
             
-            var playerPosition = player.position;
-            RotateObjTowards(fish.ParentGameObject.transform, playerPosition);
+            var targetPos = player.position;
+            RotateObjTowards(fish.ParentGameObject.transform, targetPos);
             
             // ---Speed Known--- \\
-            // var speed = Random.Range(27, 40);
+            // var speed = Random.Range(27f, 40f);
             // var tallArc = Random.Range(0, 2) == 1;
             // FishTrajectory.LaunchObjectAtTargetWithInitialSpeed(fish.Rigidbody, fishTransform.position, player.position, speed, tallArc);
             
@@ -90,12 +115,22 @@ namespace InDevelopment.Fish
             // FishTrajectory.LaunchObjectAtTargetWithInitialAngle(fish.Rigidbody, fishTransform.position, player.position, angle);
             
             // ---Max Height Known--- \\
-            var height = Random.Range(3f, 60f);
-            FishTrajectory.LaunchObjectAtTargetWithPeakHeight(rigidities, fish.ParentGameObject.transform.position, playerPosition, height);
+            //var height = Random.Range(3f, 60f);
+            FishTrajectory.LaunchObjectAtTargetWithPeakHeight(rigidities, fish.ParentGameObject.transform.position, targetPos, height + Random.Range(-3f, 7.5f));
             
             fish.ParentGameObject.SetActive(true);
         }
-        
+
+        private static void ResetPropertiesOfFishInPool(FishObjectPool.Fish fish, FishObjectPool.FishPool fishPool)
+        {
+            for (var i = 0; i < fish.Children.Length; i++)
+            {
+                fish.Children[i].Transform.position = fishPool.Prefab.Children[i].InitialTransform.Position;
+                fish.Children[i].Transform.rotation = fishPool.Prefab.Children[i].InitialTransform.Rotation;
+                fish.Children[i].Transform.localScale = fishPool.Prefab.Children[i].InitialTransform.LocalScale;
+            }
+        }
+
         private static void RotateObjTowards(Transform objTransform, Vector3 target)
         {
             var targetDir = objTransform.position - target;
@@ -108,7 +143,7 @@ namespace InDevelopment.Fish
             fish.SetActive(false);
         }
         #endregion
-
+        
         #region ---TODO---
         // TODO: Spawn Frequency of fish, increased over time === Gradually increasing.
             // Use Animation Curves inside Unity in Inspector, and make the code read off of the graph there
