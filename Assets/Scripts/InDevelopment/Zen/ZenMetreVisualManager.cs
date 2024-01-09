@@ -5,6 +5,7 @@ public class ZenMetreVisualManager : MonoBehaviour
 {
     public static ZenMetreVisualManager Instance;
     
+    [Header("Zen Metre Bar Images and materials")]
     public Image zenMetreBarLevel1;
     public Image zenMetreBarLevel2;
     public Image zenMetreBarLevel3;
@@ -12,7 +13,10 @@ public class ZenMetreVisualManager : MonoBehaviour
     private Material _zenMetreBarLevel2Material;
     private Material _zenMetreBarLevel3Material;
     
+    [Header("Max Zen Metre Value")]
     private float _maxZenMetreValue = 100f;
+    
+    [Header("Testing, please ignore")]
     private float _oldZenMetreValue;
 
     private void Awake()
@@ -39,6 +43,7 @@ public class ZenMetreVisualManager : MonoBehaviour
         _zenMetreBarLevel3Material.SetFloat("_FillAmount", 0);
     }
     
+    //Update is for testing purposes only
     void Update()
     {
         if (ZenMetreManager.Instance.zenMetreValue - _oldZenMetreValue > 0 || ZenMetreManager.Instance.zenMetreValue - _oldZenMetreValue < 0)

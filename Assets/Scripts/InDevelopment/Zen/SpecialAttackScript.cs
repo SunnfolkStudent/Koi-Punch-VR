@@ -3,9 +3,12 @@ using UnityEngine;
 
 public class SpecialAttackScript : MonoBehaviour
 {
+    [Header("Timers for charging punch")]
     private float _chargeTimer;
     private float _timeToCharge = 10f;
     private float _zenLostPerSecond;
+    
+    [Header("Bools for charging punch")]
     public bool chargingPunch;
     public static bool punchCharged;
     public static float punchForce;
