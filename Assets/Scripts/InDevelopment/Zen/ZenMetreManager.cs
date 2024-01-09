@@ -7,23 +7,28 @@ public class ZenMetreManager : MonoBehaviour
 {
     public static ZenMetreManager Instance;
     
+    [Header("Variables for zen events")]
     public bool tripleScoreActive;
     public bool zenAttackActive;
     private float _tripleScoreTimer = 10f;
     public bool attackFieldsActive;
     private float _attackFieldsActiveTime = 11f;
+    public bool timeStopActive;
 
+    [Header("Multipliers for adding zen")]
     private float _attackFieldScoreMultiplier = 10f;
     private float _hitZenScoreMultiplier = 0.1f;
     
+    [Header("Zen Metre Values")]
     public float zenMetreValue;
     public int zenLevel;
     private int _zenLevelCheckpoint;
-    public bool timeStopActive;
     
+    [Header("Time Stop Values")]
     private float _slowdownFactor = 0.001f;
     private float _slowdownTime = 0.5f;
     
+    [Header("Particle systems and originl simulation speeds for time stop")]
     private List<ParticleSystem> _particleSystems = new List<ParticleSystem>();
     private List<float> _originalSimulationSpeeds = new List<float>();
     
