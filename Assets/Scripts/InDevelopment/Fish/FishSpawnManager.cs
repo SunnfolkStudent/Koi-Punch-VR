@@ -51,8 +51,8 @@ namespace InDevelopment.Fish
         }
         #endregion
         
-        #region ---Temp---
-        private void Update()
+        #region ---TemporarySpawning---
+        private void FixedUpdate()
         {
             if (Keyboard.current.lKey.isPressed)
             {

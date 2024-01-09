@@ -9,6 +9,7 @@ namespace InDevelopment.Fish
     {
         public static List<FishPool> FishPools;
         [SerializeField] private InspectorPrefab[] fishPrefab;
+        private static Transform _fishContainer;
         
         [Serializable] private class InspectorPrefab
         {
@@ -19,6 +20,7 @@ namespace InDevelopment.Fish
         #region ---Initialization---
         private void Awake()
         {
+            _fishContainer = transform.GetChild(0);
             FishPools = new List<FishPool>();
             foreach (var prefab in fishPrefab)
             {
@@ -87,7 +89,7 @@ namespace InDevelopment.Fish
             
             public Fish(GameObject fishPrefab)
             {
-                ParentGameObject = Instantiate(fishPrefab);
+                ParentGameObject = Instantiate(fishPrefab, _fishContainer);
                 ParentGameObject.SetActive(false);
                 
                 Children = ParentGameObject.GetComponentsInChildren<Transform>().Select(transform1 => new Child(transform1)).ToArray();

@@ -5,6 +5,7 @@ namespace InDevelopment.Fish
 {
     public class FishSpawnForTesting : MonoBehaviour
     {
+        // TODO: Remove this script, it is only for testing
         [SerializeField] private GameObject testingFish;
         [SerializeField] private Transform areaToSpawn;
 

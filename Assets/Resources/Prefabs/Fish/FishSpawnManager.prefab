@@ -31,7 +31,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3450278972731656872}
+  - {fileID: 2086135243963545122}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &202575621013093645
@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  height: 10
 --- !u!114 &5264716505511531945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,11 +60,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2d7ae233db8a6f4599eaa35d20c183e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishObjectToPool: {fileID: 3166991864030310549, guid: c2d4857fa2a4265489c6bd0c88e79747,
-    type: 3}
-  totalFishAmountInPool: 20
-  fishContainer: {fileID: 7809490253499486916}
---- !u!1 &7809490253499486916
+  fishPrefab:
+  - prefabGameObject: {fileID: 1583399338037491617, guid: 35aa8376d0adbdc49936a5233dcb1642,
+      type: 3}
+    initialAmountInPool: 10
+  - prefabGameObject: {fileID: 1583399338037491617, guid: 65f9ea49c7c0ca5449838ec259f36720,
+      type: 3}
+    initialAmountInPool: 10
+--- !u!1 &1704413226205134399
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -71,7 +75,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3450278972731656872}
+  - component: {fileID: 2086135243963545122}
   m_Layer: 0
   m_Name: FishContainer
   m_TagString: Untagged
@@ -79,15 +83,15 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3450278972731656872
+--- !u!4 &2086135243963545122
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7809490253499486916}
+  m_GameObject: {fileID: 1704413226205134399}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

@@ -4,6 +4,7 @@ namespace InDevelopment.Fish
 {
     public class Fish : MonoBehaviour
     {
+        // TODO: Fish collision
         private void OnCollisionEnter(Collision other)
         {
             if (other.gameObject.CompareTag("Ground"))

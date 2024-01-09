@@ -4,6 +4,7 @@ namespace InDevelopment.Fish.Trajectory
 {
     public class MovePlayer : MonoBehaviour
     {
+        // TODO: Remove this script, it is only for testing
         [SerializeField] private float speed = 0.5f;
         
         private void FixedUpdate()

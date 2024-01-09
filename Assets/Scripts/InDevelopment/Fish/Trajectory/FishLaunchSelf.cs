@@ -5,6 +5,7 @@ namespace InDevelopment.Fish.Trajectory
 {
     public class FishLaunchSelf : MonoBehaviour
     {
+        // TODO: Remove this script, it is only for testing
         [SerializeField] private Transform playerTransform;
         [SerializeField] private float fishSpeed;
         [SerializeField] private Rigidbody[] _rigidbody;

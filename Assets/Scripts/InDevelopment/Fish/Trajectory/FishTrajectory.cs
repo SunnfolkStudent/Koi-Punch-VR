@@ -7,18 +7,7 @@ namespace InDevelopment.Fish.Trajectory
 {
     public static class FishTrajectory
     {
-        private const float Gravity = 9.81f;
-
-        #region ---HowToUse---
-        /*
-        FishTrajectory.LaunchObjectAtTargetWithInitialSpeed(_rigidbody, fishPosition, playerPosition, fishSpeed);
-        FishTrajectory.LaunchObjectAtTargetWithInitialSpeed(_rigidbody, fishPosition, playerPosition, fishSpeed, true); // Optional fifth parameter that chooses alternative tall arc
-        
-        FishTrajectory.LaunchObjectAtTargetWithInitialAngle(_rigidbody, fishPosition, playerPosition, fishAngle);
-        
-        FishTrajectory.LaunchObjectAtTargetWithPeakHeight(fish.Rigidbody, fish.GameObject.transform.position, player.position, height);
-        */
-        #endregion
+        private static readonly float Gravity =  -Physics.gravity.y;
         
         #region ---LaunchOptions---
         public static void LaunchObjectAtTargetWithInitialSpeed(IEnumerable<Rigidbody> objRigidbody, Vector3 objPos, Vector3 targetPos, float speed, bool tall = false)
