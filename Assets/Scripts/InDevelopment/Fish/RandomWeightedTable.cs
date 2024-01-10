@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using Random = System.Random;
 
 namespace InDevelopment.Fish
 {
@@ -37,13 +38,14 @@ namespace InDevelopment.Fish
 
     class Program
     {
-        // public static Random _random = new Random();
+        public static Random RandomInstance = new Random(); // Create Random instance locally; make sure to use System.Random!
+                                                            // (not UnityEngine.Random, unless you want to adapt the code)
 
         public static TypesOfFish GetFish(List<TypesOfFish> fishies, int totalWeightFishies)
         {
             // totalWeightFishies is the sum of all fishies' weight
 
-            var randomNumber = Random.Range(0, totalWeightFishies);
+            var randomNumber = RandomInstance.Next(0, totalWeightFishies);
 
             TypesOfFish selectedTypesOfFish = null;
             foreach (TypesOfFish fish in fishies)
@@ -107,5 +109,35 @@ namespace InDevelopment.Fish
                 Console.ReadLine();
             }
         }
+
+        class Program2
+        {
+            static List<int> WeightedSelectionWithoutReplacement(List<double> weights, int m)
+            {
+                Random random = new Random(); // Create Random instance locally; make sure to use System.Random!
+                                              // (not UnityEngine.Random, unless you want to adapt the code)
+                
+                List<Tuple<double, int>> elt = weights
+                    .Select((weight, index) => Tuple.Create(Math.Log(random.NextDouble()) / weight, index))
+                    .ToList();
+
+                return elt.OrderByDescending(x => x.Item1).Take(m).Select(x => x.Item2).ToList();
+            }
+
+            static void Main2()
+            {
+                // Example usage:
+                List<double> weights = new List<double> { 1.0, 2.0, 3.0, 4.0, 5.0 };
+                int m = 3;
+
+                List<int> result = WeightedSelectionWithoutReplacement(weights, m);
+
+                Console.WriteLine("Selected indices: " + string.Join(", ", result));
+            }
+        }
+
+        
+        
+        
     }
 }
