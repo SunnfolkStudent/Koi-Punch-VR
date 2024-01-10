@@ -50,7 +50,7 @@ public class ZenMetreManager : MonoBehaviour
     //Update is for testing purposes only
     private void Update()
     {
-        if (zenMetreValue >= 100 && zenLevel == 1 && zenAttackActive == false)
+        if (zenMetreValue >= 101 && zenLevel == 1 && zenAttackActive == false)
         {
             zenLevel = 2;
             SetZenLevel();
@@ -120,7 +120,6 @@ public class ZenMetreManager : MonoBehaviour
             var mainModule = _particleSystems[i].main;
             mainModule.simulationSpeed = _originalSimulationSpeeds[i];
         }
-        zenMetreValue = 0;
         
         //Reset music back to normal after zen mode is over
     }
@@ -181,6 +180,7 @@ public class ZenMetreManager : MonoBehaviour
         else
         {
             zenLevel = 1;
+            zenMetreValue = 100;
             SetZenLevel();
         }
     }
@@ -200,6 +200,7 @@ public class ZenMetreManager : MonoBehaviour
         else
         {
             zenLevel = 1;
+            zenMetreValue = 100;
             SetZenLevel();
         }
     }
