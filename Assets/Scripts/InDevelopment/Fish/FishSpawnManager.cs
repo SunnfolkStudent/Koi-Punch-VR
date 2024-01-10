@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using InDevelopment.Fish.Trajectory;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
@@ -18,7 +16,8 @@ namespace InDevelopment.Fish
         private static List<SpawnArea> _spawnAreas;
         [SerializeField] private float height = 10;
 
-        public static event Action SpawnFish;
+        public delegate void Delegate();
+        public static Delegate SpawnFish; 
         
         #region ---Initialization---
         private void Start()
@@ -59,21 +58,16 @@ namespace InDevelopment.Fish
             return new Vector3(Random.Range(-offsetMax, offsetMax), 0, Random.Range(-offsetMax, offsetMax));
         }
         #endregion
-
-        public static void InvokeSpawn()
-        {
-            SpawnFish.Invoke();
-        }
         
         #region ---TemporarySpawning---
-        private void Update()
-        {
-            if (Keyboard.current.lKey.wasPressedThisFrame)
-            {
-                SpawnFish.Invoke();
-                // SpawnRandomFish();
-            }
-        }
+        // private void Update()
+        // {
+        //     if (Keyboard.current.lKey.wasPressedThisFrame)
+        //     {
+        //         SpawnFish.Invoke();
+        //         // SpawnRandomFish();
+        //     }
+        // }
 
         private void SpawnRandomFish()
         {

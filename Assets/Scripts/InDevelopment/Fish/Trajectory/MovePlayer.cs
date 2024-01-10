@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace InDevelopment.Fish.Trajectory
 {
@@ -10,6 +11,15 @@ namespace InDevelopment.Fish.Trajectory
         private void FixedUpdate()
         {
             transform.position += new Vector3(-Input.GetAxis("Vertical"), 0, Input.GetAxis("Horizontal")) * speed;
+        }
+        
+        private void Update()
+        {
+            if (Keyboard.current.lKey.wasPressedThisFrame)
+            {
+                FishSpawnManager.SpawnFish.Invoke();
+                // SpawnRandomFish();
+            }
         }
     }
 }
