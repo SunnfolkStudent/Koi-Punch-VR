@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace InDevelopment.Fish
@@ -5,11 +6,27 @@ namespace InDevelopment.Fish
     public class Fish : MonoBehaviour
     {
         // TODO: Fish collision
+        private bool _canCollide;
+        
+        private void OnEnable()
+        {
+            _canCollide = false;
+            Invoke(nameof(CanCollide), 1);
+        }
+        
+        private void CanCollide()
+        {
+            _canCollide = true;
+        }
+        
         private void OnCollisionEnter(Collision other)
         {
-            if (other.gameObject.CompareTag("Ground"))
+            if (_canCollide)
             {
-                FishObjectPool.DespawnFish(gameObject);
+                if (other.gameObject.CompareTag("Ground"))
+                {
+                    FishObjectPool.DespawnFish(gameObject);
+                }
             }
         }
 
