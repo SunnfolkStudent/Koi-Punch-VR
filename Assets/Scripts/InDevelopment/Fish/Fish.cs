@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace InDevelopment.Fish
@@ -6,6 +5,7 @@ namespace InDevelopment.Fish
     public class Fish : MonoBehaviour
     {
         // TODO: Fish collision
+        public FishObjectPool.Fish fish { get; set; }
         private bool _canCollide;
         
         private void OnEnable()

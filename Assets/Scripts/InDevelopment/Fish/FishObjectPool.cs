@@ -80,6 +80,8 @@ namespace InDevelopment.Fish
                 ParentGameObject.SetActive(false);
                 
                 Children = ParentGameObject.GetComponentsInChildren<Transform>().Select(transform1 => new Child(transform1)).ToArray();
+                
+                ParentGameObject.GetComponent<InDevelopment.Fish.Fish>().fish = this;
             }
         }
         

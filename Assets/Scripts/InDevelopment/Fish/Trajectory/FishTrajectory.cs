@@ -31,7 +31,7 @@ namespace InDevelopment.Fish.Trajectory
         public static void LaunchObjectAtTargetWithPeakHeight(IEnumerable<Rigidbody> objRigidbody, Vector3 objPos, Vector3 targetPos, float height)
         {
             var spacialDifference = SpacialDifference(objPos, targetPos);
-            var fishVelocity = CalculateLaunchData(height, spacialDifference.distance, spacialDifference.altitude);
+            var fishVelocity = TrajectoryVelocityFromPeakHeightDistanceAltitude(height, spacialDifference.distance, spacialDifference.altitude);
             LaunchObjectAt(objRigidbody, objPos, targetPos, fishVelocity);
         }
         #endregion
@@ -85,7 +85,7 @@ namespace InDevelopment.Fish.Trajectory
             return (velocityForward, velocityUpwards);
         }
         
-        private static (float velocityForward, float velocityUpwards) CalculateLaunchData(float height, float dist, float alt)
+        private static (float velocityForward, float velocityUpwards) TrajectoryVelocityFromPeakHeightDistanceAltitude(float height, float dist, float alt)
         {
             if (height < alt)
             {
@@ -98,6 +98,11 @@ namespace InDevelopment.Fish.Trajectory
             Debug.Log($"height: {height}, dist: {dist}, alt: {alt} | velocityForward: {velocityForward}, velocityUpwards: {velocityUpwards}");
             
             return (velocityUpwards, velocityForward);
+        }
+        
+        public static float RangeFromSpeedAngleAltitude(float speed, float angle, float alt)
+        {
+            return speed / Gravity * Mathf.Sqrt(NumberExponent(speed, 2) + 2 * Gravity * alt);
         }
         #endregion
         
