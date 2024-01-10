@@ -69,6 +69,7 @@ public class ZenMetreManager : MonoBehaviour
         }
 
         ZenMetreVisualManager.Instance.UpdateZenBar(zenLevel, zenMetreValue);
+        CheckForMaxZen();
     }
     
     public void AddAttackFieldZen(float attackFieldSize)
@@ -237,5 +238,17 @@ public class ZenMetreManager : MonoBehaviour
             mainModule.simulationSpeed = 100.0f; // Change the speed value as needed
         }
     }
+    #endregion
+    
+    #region -- Visual --
+
+    public void CheckForMaxZen()
+    {
+        if (zenMetreValue >= 100 && zenLevel >= 3)
+        {
+            ZenMetreVisualManager.Instance.ShowSparkles();
+        }
+    }
+    
     #endregion
 }
