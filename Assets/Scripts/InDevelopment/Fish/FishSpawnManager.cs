@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using InDevelopment.Fish.Trajectory;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
@@ -15,12 +16,16 @@ namespace InDevelopment.Fish
         [SerializeField] private Transform player;
         private static List<SpawnArea> _spawnAreas;
         [SerializeField] private float height = 10;
+
+        public static UnityEvent SpawnFish;
         
         #region ---Initialization---
         private void Start()
         {
             _spawnAreas = new List<SpawnArea>();
             AddSpawnAreasToSpawnAreaList();
+            
+            SpawnFish.AddListener(SpawnRandomFish); //TODO: Remove temporary spawning
         }
         #endregion
         
@@ -59,33 +64,32 @@ namespace InDevelopment.Fish
         {
             if (Keyboard.current.lKey.wasPressedThisFrame)
             {
-                var spawnArea = RandomSpawnArea();
-                var offset = spawnArea.SpawnAreaCircle.spawnAreaRadius;
-                SpawnFishAtPosFromPool(spawnArea.GameObject.transform.position + RandomOffset(offset), FishObjectPool.FishPools[0]);
+                SpawnRandomFish();
             }
+        }
+
+        private void SpawnRandomFish()
+        {
+            var spawnArea = RandomSpawnArea();
+            var offset = spawnArea.SpawnAreaCircle.spawnAreaRadius;
+            SpawnFishAtPosFromPool(spawnArea.GameObject.transform.position + RandomOffset(offset), FishObjectPool.FishPools[0]);
         }
         
         private void FixedUpdate()
         {
             if (Keyboard.current.kKey.isPressed)
             {
-                var spawnArea = RandomSpawnArea();
-                var offset = spawnArea.SpawnAreaCircle.spawnAreaRadius;
-                SpawnFishAtPosFromPool(spawnArea.GameObject.transform.position + RandomOffset(offset), FishObjectPool.FishPools[0]);
+                SpawnRandomFish();
             }
             
             if (Keyboard.current.jKey.isPressed)
             {
-                var spawnArea = RandomSpawnArea();
-                var offset = spawnArea.SpawnAreaCircle.spawnAreaRadius;
-                SpawnFishAtPosFromPool(spawnArea.GameObject.transform.position + RandomOffset(offset), FishObjectPool.FishPools[0]);
+                SpawnRandomFish();
             }
             
             if (Keyboard.current.hKey.isPressed)
             {
-                var spawnArea = RandomSpawnArea();
-                var offset = spawnArea.SpawnAreaCircle.spawnAreaRadius;
-                SpawnFishAtPosFromPool(spawnArea.GameObject.transform.position + RandomOffset(offset), FishObjectPool.FishPools[0]);
+                SpawnRandomFish();
             }
         }
         #endregion
