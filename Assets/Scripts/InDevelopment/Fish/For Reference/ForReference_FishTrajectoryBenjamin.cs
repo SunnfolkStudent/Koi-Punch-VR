@@ -1,11 +1,8 @@
-using System.Numerics;
-using Unity.Android.Gradle.Manifest;
-using Unity.XR.CoreUtils.Bindings.Variables;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
-namespace InDevelopment.Fish.Trajectory
+namespace InDevelopment.Fish.For_Reference
 {
     public class ForReference_FishTrajectoryBenjamin : MonoBehaviour
     {
