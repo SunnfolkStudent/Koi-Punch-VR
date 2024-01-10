@@ -1,9 +1,24 @@
 fileFormatVersion: 2
-guid: 2da4dac7899dd8f439a4dab70a6a2157
+guid: 67c9a229cc5ed1f4cac3bebfd3284344
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Fish_Small_Green_Body
+    second: {fileID: 2800000, guid: 726fe5a4bf8326e4cb887d694fb9a024, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Fish_Small_Green_Eyes
+    second: {fileID: 2800000, guid: a838fdd5522b71941ad92d2695b2d944, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Fish_Small_Green_Fins
+    second: {fileID: 2800000, guid: 9fff44d1d03f0474fb16db19f17b4be8, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -29,36 +44,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Fly
-      takeName: Armature|ArmatureAction
-      internalID: 4781951162920444690
-      firstFrame: 0
-      lastFrame: 94
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 0
   meshes:
     lODScreenPercentages: []
