@@ -59,6 +59,11 @@ namespace InDevelopment.Fish
             return new Vector3(Random.Range(-offsetMax, offsetMax), 0, Random.Range(-offsetMax, offsetMax));
         }
         #endregion
+
+        public static void InvokeSpawn()
+        {
+            SpawnFish.Invoke();
+        }
         
         #region ---TemporarySpawning---
         private void Update()
