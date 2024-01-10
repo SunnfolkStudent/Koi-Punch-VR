@@ -9,6 +9,7 @@ namespace InDevelopment.Fish
 {
     public class FishSpawnManager : MonoBehaviour
     {
+        // TODO: Spawn Rotation
         // TODO: Spawn frequency increased over time
         // TODO: Spawn fish with properties; Size, Colour, type, flight trajectory type and area spawned in decided by random weighted tables
         [SerializeField] private Transform player;
@@ -54,34 +55,37 @@ namespace InDevelopment.Fish
         #endregion
         
         #region ---TemporarySpawning---
+        private void Update()
+        {
+            if (Keyboard.current.lKey.wasPressedThisFrame)
+            {
+                var spawnArea = RandomSpawnArea();
+                var offset = spawnArea.SpawnAreaCircle.spawnAreaRadius;
+                SpawnFishAtPosFromPool(spawnArea.GameObject.transform.position + RandomOffset(offset), FishObjectPool.FishPools[0]);
+            }
+        }
+        
         private void FixedUpdate()
         {
-            if (Keyboard.current.lKey.isPressed)
+            if (Keyboard.current.kKey.isPressed)
             {
                 var spawnArea = RandomSpawnArea();
                 var offset = spawnArea.SpawnAreaCircle.spawnAreaRadius;
                 SpawnFishAtPosFromPool(spawnArea.GameObject.transform.position + RandomOffset(offset), FishObjectPool.FishPools[0]);
             }
             
-            if (Keyboard.current.kKey.isPressed)
-            {
-                var spawnArea = RandomSpawnArea();
-                var offset = spawnArea.SpawnAreaCircle.spawnAreaRadius;
-                SpawnFishAtPosFromPool(spawnArea.GameObject.transform.position + RandomOffset(offset), FishObjectPool.FishPools[1]);
-            }
-            
             if (Keyboard.current.jKey.isPressed)
             {
                 var spawnArea = RandomSpawnArea();
                 var offset = spawnArea.SpawnAreaCircle.spawnAreaRadius;
-                SpawnFishAtPosFromPool(spawnArea.GameObject.transform.position + RandomOffset(offset), FishObjectPool.FishPools[1]);
+                SpawnFishAtPosFromPool(spawnArea.GameObject.transform.position + RandomOffset(offset), FishObjectPool.FishPools[0]);
             }
             
             if (Keyboard.current.hKey.isPressed)
             {
                 var spawnArea = RandomSpawnArea();
                 var offset = spawnArea.SpawnAreaCircle.spawnAreaRadius;
-                SpawnFishAtPosFromPool(spawnArea.GameObject.transform.position + RandomOffset(offset), FishObjectPool.FishPools[1]);
+                SpawnFishAtPosFromPool(spawnArea.GameObject.transform.position + RandomOffset(offset), FishObjectPool.FishPools[0]);
             }
         }
         #endregion
@@ -105,7 +109,7 @@ namespace InDevelopment.Fish
             fish.ParentGameObject.transform.localScale = Vector3.one * Random.Range(0.1f, 0.5f);
             
             var targetPos = player.position;
-            RotateObjTowards(fish.ParentGameObject.transform, targetPos);
+            RotateObjTowardsPos(fish.ParentGameObject.transform, targetPos);
             
             // ---Speed Known--- \\
             // var speed = Random.Range(27f, 40f);
@@ -123,7 +127,7 @@ namespace InDevelopment.Fish
             fish.ParentGameObject.SetActive(true);
         }
         
-        private static void RotateObjTowards(Transform objTransform, Vector3 target)
+        private static void RotateObjTowardsPos(Transform objTransform, Vector3 target)
         {
             var targetDir = objTransform.position - target;
             var angle = Vector3.Angle(targetDir, objTransform.forward);

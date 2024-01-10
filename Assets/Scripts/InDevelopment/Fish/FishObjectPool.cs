@@ -57,33 +57,19 @@ namespace InDevelopment.Fish
             }
         }
         
-        public class PrefabChild
+        public record PrefabChild
         {
-            public InitialTransform InitialTransform;
+            public readonly Transform InitialTransform;
 
             public PrefabChild(Transform transform)
             {
-                InitialTransform = new InitialTransform(transform);
-            }
-        }
-        
-        public struct InitialTransform
-        {
-            public Vector3 Position;
-            public Quaternion Rotation;
-            public Vector3 LocalScale;
-
-            public InitialTransform(Transform transform)
-            {
-                Position = transform.position;
-                Rotation = transform.rotation;
-                LocalScale = transform.localScale;
+                InitialTransform = transform;
             }
         }
         #endregion
         
         #region >>>---Fish---
-        public record Fish
+        public class Fish
         {
             public readonly GameObject ParentGameObject;
             public readonly Child[] Children;
@@ -139,9 +125,9 @@ namespace InDevelopment.Fish
         {
             for (var i = 0; i < fish.Children.Length; i++)
             {
-                fish.Children[i].Transform.position = fishPool.Prefab.Children[i].InitialTransform.Position;
-                fish.Children[i].Transform.rotation = fishPool.Prefab.Children[i].InitialTransform.Rotation;
-                fish.Children[i].Transform.localScale = fishPool.Prefab.Children[i].InitialTransform.LocalScale;
+                fish.Children[i].Transform.position = fishPool.Prefab.Children[i].InitialTransform.position;
+                fish.Children[i].Transform.rotation = fishPool.Prefab.Children[i].InitialTransform.rotation;
+                fish.Children[i].Transform.localScale = fishPool.Prefab.Children[i].InitialTransform.localScale;
             }
         }
         #endregion
