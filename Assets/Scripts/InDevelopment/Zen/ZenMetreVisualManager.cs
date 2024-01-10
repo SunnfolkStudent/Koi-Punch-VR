@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +17,9 @@ public class ZenMetreVisualManager : MonoBehaviour
     
     [Header("Max Zen Metre Value")]
     private float _maxZenMetreValue = 100f;
+    
+    [Header("Sparkle List")]
+    public List<GameObject> sparkleList = new List<GameObject>();
     
     [Header("Testing, please ignore")]
     private float _oldZenMetreValue;
@@ -41,6 +46,9 @@ public class ZenMetreVisualManager : MonoBehaviour
         _zenMetreBarLevel1Material.SetFloat("_FillAmount", 0);
         _zenMetreBarLevel2Material.SetFloat("_FillAmount", 0);
         _zenMetreBarLevel3Material.SetFloat("_FillAmount", 0);
+        
+        sparkleList = GameObject.FindGameObjectsWithTag("Sparkle").ToList();
+        HideSparkles();
     }
     
     //Update is for testing purposes only
@@ -50,6 +58,7 @@ public class ZenMetreVisualManager : MonoBehaviour
         {
             _oldZenMetreValue = ZenMetreManager.Instance.zenMetreValue;
             UpdateZenBar(ZenMetreManager.Instance.zenLevel, ZenMetreManager.Instance.zenMetreValue);
+            ZenMetreManager.Instance.CheckForMaxZen();
         }
     }
     
@@ -77,6 +86,22 @@ public class ZenMetreVisualManager : MonoBehaviour
         else
         {
             Debug.LogError("Zen level is not 1, 2 or 3");
+        }
+    }
+    
+    public void ShowSparkles()
+    {
+        foreach (GameObject sparkle in sparkleList)
+        {
+            sparkle.SetActive(true);
+        }
+    }
+    
+    public void HideSparkles()
+    {
+        foreach (GameObject sparkle in sparkleList)
+        {
+            sparkle.SetActive(false);
         }
     }
 }
