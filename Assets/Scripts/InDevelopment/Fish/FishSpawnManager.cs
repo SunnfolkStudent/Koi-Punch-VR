@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using InDevelopment.Fish.Trajectory;
@@ -17,7 +18,7 @@ namespace InDevelopment.Fish
         private static List<SpawnArea> _spawnAreas;
         [SerializeField] private float height = 10;
 
-        public static UnityEvent SpawnFish;
+        public static event Action SpawnFish;
         
         #region ---Initialization---
         private void Start()
@@ -25,7 +26,7 @@ namespace InDevelopment.Fish
             _spawnAreas = new List<SpawnArea>();
             AddSpawnAreasToSpawnAreaList();
             
-            SpawnFish.AddListener(SpawnRandomFish); //TODO: Remove temporary spawning
+            SpawnFish += SpawnRandomFish; //TODO: Remove temporary spawning
         }
         #endregion
         
@@ -64,7 +65,8 @@ namespace InDevelopment.Fish
         {
             if (Keyboard.current.lKey.wasPressedThisFrame)
             {
-                SpawnRandomFish();
+                SpawnFish.Invoke();
+                // SpawnRandomFish();
             }
         }
 
@@ -79,17 +81,17 @@ namespace InDevelopment.Fish
         {
             if (Keyboard.current.kKey.isPressed)
             {
-                SpawnRandomFish();
+                SpawnFish.Invoke();
             }
             
             if (Keyboard.current.jKey.isPressed)
             {
-                SpawnRandomFish();
+                SpawnFish.Invoke();
             }
             
             if (Keyboard.current.hKey.isPressed)
             {
-                SpawnRandomFish();
+                SpawnFish.Invoke();
             }
         }
         #endregion
