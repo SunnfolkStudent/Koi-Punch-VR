@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.46169513, g: 0.5124164, b: 0.58993304, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -988,6 +988,7 @@ GameObject:
   - component: {fileID: 1469536442}
   - component: {fileID: 1469536441}
   - component: {fileID: 1469536444}
+  - component: {fileID: 1469536445}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -1010,9 +1011,9 @@ MonoBehaviour:
   tripleScoreActive: 0
   zenAttackActive: 0
   attackFieldsActive: 0
+  timeStopActive: 0
   zenMetreValue: 0
   zenLevel: 0
-  timeStopActive: 0
 --- !u!114 &1469536442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1058,6 +1059,18 @@ MonoBehaviour:
   zenMetreBarLevel1: {fileID: 113037028}
   zenMetreBarLevel2: {fileID: 1196778899}
   zenMetreBarLevel3: {fileID: 444627729}
+--- !u!114 &1469536445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469536440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e408ec5d6cecc3b479fc5c6319b5f18f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1648362931
 GameObject:
   m_ObjectHideFlags: 0
