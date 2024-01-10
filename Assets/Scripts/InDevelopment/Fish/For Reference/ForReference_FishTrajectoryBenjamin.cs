@@ -7,7 +7,7 @@ using Vector3 = UnityEngine.Vector3;
 
 namespace InDevelopment.Fish.Trajectory
 {
-    public class FishTrajectoryBenjamin : MonoBehaviour
+    public class ForReference_FishTrajectoryBenjamin : MonoBehaviour
     {
         public Rigidbody ball;
         public Transform target;
@@ -33,7 +33,7 @@ namespace InDevelopment.Fish.Trajectory
 
             if (debugPath)
             {
-                DrawPath();
+                DebugDrawPath();
             }
         }
 
@@ -67,7 +67,7 @@ namespace InDevelopment.Fish.Trajectory
             return new LaunchData(velocityXZ + velocityY * -Mathf.Sign(gravity), time);
         }
 
-        void DrawPath()
+        void DebugDrawPath()
         {
             LaunchData launchData = CalculateLaunchData();
             Vector3 previousDrawPoint = ball.position;

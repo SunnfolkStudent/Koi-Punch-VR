@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace InDevelopment
 {
-    public class Punch2 : MonoBehaviour
+    public class PunchForReference : MonoBehaviour
     { 
-        private ControllerManagerMagnus _controllerManagerMagnus;
+        private ControllerManagerMagnusForReference _controllerManagerMagnusForReference;
         private new Rigidbody rigidbody;
 
         //If either are true then you cannot punch the object
@@ -39,7 +39,7 @@ namespace InDevelopment
         //Gather necessary components
         private void Start()
         {
-            _controllerManagerMagnus = GameObject.FindGameObjectWithTag("LeftFist").GetComponentInParent<ControllerManagerMagnus>();
+            _controllerManagerMagnusForReference = GameObject.FindGameObjectWithTag("LeftFist").GetComponentInParent<ControllerManagerMagnusForReference>();
             rigidbody = GetComponent<Rigidbody>();
         
             //No gravity at start (testing)
@@ -75,6 +75,8 @@ namespace InDevelopment
             avgPoint /= other.contacts.Length; 
 
             Vector3 dir = (avgPoint - transform.position).normalized;
+            
+            // TODO: Use the above code to calculate where the fish is going to go / where to add velocity.
         
             //make unPunchable if object has hit the ground
             if (other.transform.CompareTag("Ground")) {hitGround = true;}
@@ -109,12 +111,12 @@ namespace InDevelopment
 
             punched = true;
             //Set all the other parts of the fish to be unpunchable
-            foreach (Punch2 punchScript in GetComponentsInParent<Punch2>())
+            foreach (PunchForReference punchScript in GetComponentsInParent<PunchForReference>())
             {
                 if (punchScript != null)
                     punchScript.punched = true;
             }
-            foreach (Punch2 punchScript in GetComponentsInChildren<Punch2>())
+            foreach (PunchForReference punchScript in GetComponentsInChildren<PunchForReference>())
             {
                 if (punchScript != null)
                     punchScript.punched = true;
@@ -124,10 +126,10 @@ namespace InDevelopment
             if (fistUsed.Equals("LeftFist"))
             {
                 //Do not register punch if punch force was too weak
-                if (_controllerManagerMagnus.leftVelMagnitude < punchVelThreshold)
+                if (_controllerManagerMagnusForReference.leftVelMagnitude < punchVelThreshold)
                 { Debug.Log("Punch Velocity was too weak"); return; }
             
-                punchForceMultiplier = _controllerManagerMagnus.leftVelMagnitude * punchVelMultiplier;
+                punchForceMultiplier = _controllerManagerMagnusForReference.leftVelMagnitude * punchVelMultiplier;
                 var cubeLaunchDir = direction * -punchForceMultiplier;
             
                 Debug.Log("Punched with Left Fist with Force of " + punchForceMultiplier + "\nand a Direction of " + cubeLaunchDir);
@@ -137,10 +139,10 @@ namespace InDevelopment
             if (fistUsed.Equals("RightFist"))
             {
                 //Do not register punch if punch force was too weak
-                if (_controllerManagerMagnus.rightVelMagnitude < punchVelThreshold) 
+                if (_controllerManagerMagnusForReference.rightVelMagnitude < punchVelThreshold) 
                 { Debug.Log("Punch Velocity was too weak"); return; }
             
-                punchForceMultiplier = _controllerManagerMagnus.rightVelMagnitude * punchVelMultiplier;
+                punchForceMultiplier = _controllerManagerMagnusForReference.rightVelMagnitude * punchVelMultiplier;
                 var cubeLaunchDir = direction * -punchForceMultiplier;
             
                 Debug.Log("Punched with Right Fist with Force of " + punchForceMultiplier + "\nand a Direction of " + cubeLaunchDir);
@@ -163,9 +165,9 @@ namespace InDevelopment
                 testbox.GetComponent<Rigidbody>().useGravity = false;
                 testbox.GetComponent<Transform>().rotation = new Quaternion(0, 0, 0, 0);
                 punched = false;
-                testbox.GetComponent<Punch2>().punched = false;
-                testbox.GetComponent<Punch2>().hitGround = false;
-                testbox.GetComponent<Punch2>().lastPunchWasGood = false;
+                testbox.GetComponent<PunchForReference>().punched = false;
+                testbox.GetComponent<PunchForReference>().hitGround = false;
+                testbox.GetComponent<PunchForReference>().lastPunchWasGood = false;
                 testbox.GetComponent<BoxCollider>().enabled = true;
                 testbox.position = new Vector3(0.67f, 1.229f, 0f); 
                 return;
