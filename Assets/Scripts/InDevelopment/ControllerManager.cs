@@ -1,10 +1,8 @@
 using System.Collections.Generic;
-
+using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.XR;
-
 using TMPro;
-
 public class ControllerManager : MonoBehaviour
 {
     //Declare Variables
@@ -31,6 +29,16 @@ public class ControllerManager : MonoBehaviour
     [SerializeField] private GameObject objectToTestOn;
     [SerializeField] private bool needsTesting;
     
+    [Header("Button Inputs")]
+    [SerializeField] private InputActionReference gripAction;
+    
+    [Header("Input Values")]
+    [SerializeField] private float _grip;
+    
+    [Header("Hand Game Objects")]
+    [SerializeField] private GameObject openHand;
+    [SerializeField] private GameObject closedHand;
+    
     void Start() { }
 
     void Update()
@@ -39,6 +47,10 @@ public class ControllerManager : MonoBehaviour
             Test();
         
         UpdateInput();
+
+        GripValue();
+
+        handMotion();
     }
 
     void FixedUpdate()
@@ -85,5 +97,23 @@ public class ControllerManager : MonoBehaviour
 
         leftVelMagnitude = leftControllerVelocity.magnitude;
         rightVelMagnitude = rightControllerVelocity.magnitude;
+    }
+    void GripValue()
+    {
+        _grip = gripAction.action.ReadValue<float>();
+    }
+
+    private void handMotion()
+    {
+        if (_grip !=0)
+        {
+            openHand.SetActive(false); 
+            closedHand.SetActive(true);
+        }
+        else
+        {
+            openHand.SetActive(true); 
+            closedHand.SetActive(false); 
+        }
     }
 }
