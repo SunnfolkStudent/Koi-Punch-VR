@@ -76,7 +76,7 @@ namespace InDevelopment
 
             Vector3 dir = (avgPoint - transform.position).normalized;
         
-            //make unpunchable if object has hit the ground
+            //make unPunchable if object has hit the ground
             if (other.transform.CompareTag("Ground")) {hitGround = true;}
 
             //Calls punchObject method with fist and direction as parameters
