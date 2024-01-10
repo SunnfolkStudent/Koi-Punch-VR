@@ -136,7 +136,7 @@ namespace InDevelopment.Fish
         {
             var targetDir = objTransform.position - target;
             var angle = Vector3.Angle(targetDir, objTransform.forward);
-            objTransform.rotation = new Quaternion(0, angle, 0, (float)Space.World);
+            objTransform.rotation = new Quaternion(0, angle + 180, 0, (float)Space.World);
         }
         #endregion
     }
