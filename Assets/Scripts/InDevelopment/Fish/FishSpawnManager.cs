@@ -111,7 +111,7 @@ namespace InDevelopment.Fish
             var rigidities = fish.Children.Where(child => child.Rigidbody != null).Select(child => child.Rigidbody).ToArray();
             
             fish.ParentGameObject.transform.position = spawnPos;
-            fish.ParentGameObject.transform.localScale = Vector3.one * Random.Range(0.1f, 0.5f);
+            fish.ParentGameObject.transform.localScale = Vector3.one * Random.Range(0.1f, 0.2f);
             
             var targetPos = player.position;
             RotateObjTowardsPos(fish.ParentGameObject.transform, targetPos);
@@ -127,7 +127,7 @@ namespace InDevelopment.Fish
             
             // ---Max Height Known--- \\
             //var height = Random.Range(3f, 60f);
-            FishTrajectory.LaunchObjectAtTargetWithPeakHeight(rigidities, fish.ParentGameObject.transform.position, targetPos, height + Random.Range(-3f, 7.5f));
+            FishTrajectory.LaunchObjectAtTargetWithPeakHeight(rigidities, fish.ParentGameObject.transform.position, targetPos, height);
             
             fish.ParentGameObject.SetActive(true);
         }
