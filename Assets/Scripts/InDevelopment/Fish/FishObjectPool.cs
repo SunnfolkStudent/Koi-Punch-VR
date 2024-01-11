@@ -57,7 +57,7 @@ namespace InDevelopment.Fish
             }
         }
         
-        public record PrefabChild
+        public struct PrefabChild
         {
             public readonly Transform InitialTransform;
 
