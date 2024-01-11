@@ -9,7 +9,7 @@ namespace InDevelopment.Fish.Trajectory
     {
         // TODO: When using speed for trajectory stop too low speeds from creating an error
         // TODO: When using angle for trajectory fix why 3% chance of error
-        private static readonly float Gravity =  -Physics.gravity.y;
+        private static readonly float Gravity =  Physics.gravity.y;
         
         #region ---LaunchOptions---
         public static void LaunchObjectAtTargetWithInitialSpeed(IEnumerable<Rigidbody> objRigidbody, Vector3 objPos, Vector3 targetPos, float speed, bool tall = false)
@@ -57,10 +57,10 @@ namespace InDevelopment.Fish.Trajectory
         #region ---TrajectoryCalculations---
         private static (float velocityForward, float velocityUpwards) TrajectoryVelocityFromSpeedDistanceAltitude(float speed, float dist, float alt, bool tall)
         {
-            var angleInRadians = tall ? (float)Math.Atan((Math.Pow(speed, 2) + Math.Sqrt(Math.Pow(speed, 4) - Gravity * 
-                    ((Gravity * Math.Pow(dist, 2)) + (2 * alt * Math.Pow(speed, 2))))) / (Gravity * dist))
-                    : (float)Math.Atan((Math.Pow(speed, 2) - Math.Sqrt(Math.Pow(speed, 4) - Gravity * 
-                    ((Gravity * Math.Pow(dist, 2)) + (2 * alt * Math.Pow(speed, 2))))) / (Gravity * dist));
+            var angleInRadians = tall ? (float)Math.Atan((Math.Pow(speed, 2) + Math.Sqrt(Math.Pow(speed, 4) - -Gravity * 
+                    ((-Gravity * Math.Pow(dist, 2)) + (2 * alt * Math.Pow(speed, 2))))) / (-Gravity * dist))
+                    : (float)Math.Atan((Math.Pow(speed, 2) - Math.Sqrt(Math.Pow(speed, 4) - -Gravity * 
+                    ((-Gravity * Math.Pow(dist, 2)) + (2 * alt * Math.Pow(speed, 2))))) / (-Gravity * dist));
             
             var velocityForward = Mathf.Cos(angleInRadians) * speed;
             var velocityUpwards = Mathf.Sin(angleInRadians) * speed;
@@ -72,7 +72,7 @@ namespace InDevelopment.Fish.Trajectory
         
         private static (float velocityForward, float velocityUpwards) TrajectoryVelocityFromAngleDistanceAltitude(float angle, float dist, float alt)
         {
-            var velocityTotal = Math.Sqrt((Math.Pow(dist, 2) * Gravity) / 
+            var velocityTotal = Math.Sqrt((Math.Pow(dist, 2) * -Gravity) / 
                                            (dist * math.abs(Mathf.Sin(2 * angle)) - 2 * alt * Math.Pow(math.abs(Mathf.Cos(angle)), 2)));
             
             var velocityForward = (float)math.abs(velocityTotal * Mathf.Cos(angle));
@@ -90,8 +90,8 @@ namespace InDevelopment.Fish.Trajectory
                 Debug.LogWarning("Peak trajectory height set lower than target altitude");
                 height = alt + 1;
             }
-            var velocityForward = Mathf.Sqrt(-2 * -Gravity * height);
-            var velocityUpwards = dist / (Mathf.Sqrt(-((2 * height) / -Gravity)) + Mathf.Sqrt((2 * (alt - height)) / -Gravity));
+            var velocityForward = Mathf.Sqrt(-2 * Gravity * height);
+            var velocityUpwards = dist / (Mathf.Sqrt(-((2 * height) / Gravity)) + Mathf.Sqrt((2 * (alt - height)) / Gravity));
             
             Debug.Log($"height: {height}, dist: {dist}, alt: {alt} | velocityForward: {velocityForward}, velocityUpwards: {velocityUpwards}");
             
@@ -100,7 +100,7 @@ namespace InDevelopment.Fish.Trajectory
         
         public static float RangeFromSpeedAngleAltitude(float speed, float angle, float alt)
         {
-            return speed / Gravity * Mathf.Sqrt(Mathf.Pow(speed, 2) + 2 * Gravity * alt);
+            return speed / -Gravity * Mathf.Sqrt(Mathf.Pow(speed, 2) + 2 * -Gravity * alt);
         }
         #endregion
         
