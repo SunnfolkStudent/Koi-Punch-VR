@@ -15,7 +15,7 @@ namespace InDevelopment.Fish
         [SerializeField] private Transform player;
         private static List<SpawnArea> _spawnAreas;
         [SerializeField] private float height = 10;
-
+        
         public delegate void Delegate();
         public static Delegate SpawnFish; 
         
@@ -134,11 +134,8 @@ namespace InDevelopment.Fish
         
         private static void RotateObjTowardsPos(Transform objTransform, Vector3 target)
         {
-            // var targetDir = objTransform.position - target;
-            // var angle = Vector3.Angle(targetDir, objTransform.forward);
-            // objTransform.rotation = new Quaternion(0, angle, 0, (float)Space.World);
-            
             objTransform.LookAt(target, Vector3.up);
+            objTransform.Rotate(new Vector3(0,90,0));
         }
         #endregion
     }
