@@ -32,8 +32,6 @@ Transform:
   - {fileID: 4487488418083517841}
   - {fileID: 2756967106704940942}
   - {fileID: 8072660698296121535}
-  - {fileID: 8154389346661918249}
-  - {fileID: 5537074047865065663}
   m_Father: {fileID: 4936548526502338436}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1766742068160544996
@@ -125,17 +123,17 @@ MonoBehaviour:
   leftControllerQuaternionAngle: {x: 0, y: 0, z: 0, w: 0}
   rightControllerQuaternionAngle: {x: 0, y: 0, z: 0, w: 0}
   objectToTestOn: {fileID: 0}
-  needsTesting: 0
+  needsTesting: 1
   rightGripAction: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
   leftGripAction: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
   _leftGrip: 0
   _rightGrip: 0
-  leftOpenHand: {fileID: 0}
-  leftClosedHand: {fileID: 0}
-  rightOpenHand: {fileID: 0}
-  rightClosedHand: {fileID: 0}
+  leftOpenHand: {fileID: 8177036750549605822}
+  leftClosedHand: {fileID: 5029026800916818781}
+  rightOpenHand: {fileID: 4220376180466953979}
+  rightClosedHand: {fileID: 4897473096757052186}
 --- !u!1 &4220376180466953979
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,11 +161,11 @@ Transform:
   m_GameObject: {fileID: 4220376180466953979}
   serializedVersion: 2
   m_LocalRotation: {x: -0.58964634, y: 0.58964634, z: 0.39027837, w: 0.3902783}
-  m_LocalPosition: {x: 0.016, y: -0.019, z: 0.007}
+  m_LocalPosition: {x: 0.016, y: -0.019000053, z: 0.007}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6102629444566815224}
+  m_Father: {fileID: 8072660698296121535}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &317580834281690902
 BoxCollider:
@@ -230,7 +228,7 @@ GameObject:
   - component: {fileID: 4554584401787410696}
   m_Layer: 0
   m_Name: Left Controller
-  m_TagString: RightFist
+  m_TagString: LeftFist
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -329,6 +327,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2890772965759757048}
+  - {fileID: 8154389346661918249}
+  - {fileID: 5537074047865065663}
   m_Father: {fileID: 6102629444566815224}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!210 &4994748646043379012
@@ -406,7 +406,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6102629444566815224}
+  m_Father: {fileID: 8072660698296121535}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &9153707334431533306
 Rigidbody:
