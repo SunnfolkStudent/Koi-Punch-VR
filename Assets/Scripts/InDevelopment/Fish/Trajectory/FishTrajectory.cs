@@ -16,7 +16,6 @@ namespace InDevelopment.Fish.Trajectory
         {
             var spacialDifference = SpacialDifference(objPos, targetPos);
             var fishVelocity = TrajectoryVelocityFromSpeedDistanceAltitude(speed, spacialDifference.distance, spacialDifference.altitude, tall);
-
             LaunchObjectAt(objRigidbody, objPos, targetPos, fishVelocity);
         }
         
@@ -24,7 +23,6 @@ namespace InDevelopment.Fish.Trajectory
         {
             var spacialDifference = SpacialDifference(objPos, targetPos);
             var fishVelocity = TrajectoryVelocityFromAngleDistanceAltitude(angle, spacialDifference.distance, spacialDifference.altitude);
-            
             LaunchObjectAt(objRigidbody, objPos, targetPos, fishVelocity);
         }
         
@@ -59,10 +57,10 @@ namespace InDevelopment.Fish.Trajectory
         #region ---TrajectoryCalculations---
         private static (float velocityForward, float velocityUpwards) TrajectoryVelocityFromSpeedDistanceAltitude(float speed, float dist, float alt, bool tall)
         {
-            var angleInRadians = tall ? (float)Math.Atan((NumberExponent(speed, 2) + Math.Sqrt(NumberExponent(speed, 4) - Gravity * 
-                    ((Gravity * NumberExponent(dist, 2)) + (2 * alt * NumberExponent(speed, 2))))) / (Gravity * dist))
-                    : (float)Math.Atan((NumberExponent(speed, 2) - Math.Sqrt(NumberExponent(speed, 4) - Gravity * 
-                    ((Gravity * NumberExponent(dist, 2)) + (2 * alt * NumberExponent(speed, 2))))) / (Gravity * dist));
+            var angleInRadians = tall ? (float)Math.Atan((Math.Pow(speed, 2) + Math.Sqrt(Math.Pow(speed, 4) - Gravity * 
+                    ((Gravity * Math.Pow(dist, 2)) + (2 * alt * Math.Pow(speed, 2))))) / (Gravity * dist))
+                    : (float)Math.Atan((Math.Pow(speed, 2) - Math.Sqrt(Math.Pow(speed, 4) - Gravity * 
+                    ((Gravity * Math.Pow(dist, 2)) + (2 * alt * Math.Pow(speed, 2))))) / (Gravity * dist));
             
             var velocityForward = Mathf.Cos(angleInRadians) * speed;
             var velocityUpwards = Mathf.Sin(angleInRadians) * speed;
@@ -74,11 +72,11 @@ namespace InDevelopment.Fish.Trajectory
         
         private static (float velocityForward, float velocityUpwards) TrajectoryVelocityFromAngleDistanceAltitude(float angle, float dist, float alt)
         {
-            var velocityTotal = Mathf.Sqrt((NumberExponent(dist, 2) * Gravity) / 
-                                           (dist * math.abs(Mathf.Sin(2 * angle)) - 2 * alt * NumberExponent(math.abs(Mathf.Cos(angle)), 2)));
+            var velocityTotal = Math.Sqrt((Math.Pow(dist, 2) * Gravity) / 
+                                           (dist * math.abs(Mathf.Sin(2 * angle)) - 2 * alt * Math.Pow(math.abs(Mathf.Cos(angle)), 2)));
             
-            var velocityForward = math.abs(velocityTotal * Mathf.Cos(angle));
-            var velocityUpwards = math.abs(velocityTotal * Mathf.Sin(angle));
+            var velocityForward = (float)math.abs(velocityTotal * Mathf.Cos(angle));
+            var velocityUpwards = (float)math.abs(velocityTotal * Mathf.Sin(angle));
             
             Debug.Log($"angle: {angle}, dist: {dist}, alt: {alt} | velocityForward: {velocityForward}, velocityUpwards: {velocityUpwards}");
             
@@ -102,7 +100,7 @@ namespace InDevelopment.Fish.Trajectory
         
         public static float RangeFromSpeedAngleAltitude(float speed, float angle, float alt)
         {
-            return speed / Gravity * Mathf.Sqrt(NumberExponent(speed, 2) + 2 * Gravity * alt);
+            return speed / Gravity * Mathf.Sqrt(Mathf.Pow(speed, 2) + 2 * Gravity * alt);
         }
         #endregion
         
@@ -110,13 +108,6 @@ namespace InDevelopment.Fish.Trajectory
         private static float Hypotenuse(float a, float b)
         {
             return math.sqrt(a * a + b * b);
-        }
-
-        private static float NumberExponent(float number, int exponent)
-        {
-            var num = number;
-            for (var i = 1; i < exponent; i++) number *= num;
-            return number;
         }
         #endregion
     }

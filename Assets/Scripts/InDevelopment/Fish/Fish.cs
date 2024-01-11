@@ -29,7 +29,7 @@ namespace InDevelopment.Fish
                 }
             }
         }
-
+        
         private void Update()
         {
             if (transform.position.y < -25)
