@@ -42,20 +42,22 @@ public class ControllerManager : MonoBehaviour
     [SerializeField] private GameObject leftClosedHand;
     [SerializeField] private GameObject rightOpenHand;
     [SerializeField] private GameObject rightClosedHand;
-    
-    void Start() { }
 
+   
+    void Start() 
+    {
+        
+    }
+    
     void Update()
     {
         if (needsTesting)
             Test();
         
-        UpdateInput();
-
-        
-        
-        GripValue();
        
+        
+        UpdateInput();
+        GripValue();
         handMotion();
     }
 
