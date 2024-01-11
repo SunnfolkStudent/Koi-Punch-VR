@@ -18,7 +18,6 @@ namespace InDevelopment.Fish.Trajectory
             if (Keyboard.current.lKey.wasPressedThisFrame)
             {
                 FishSpawnManager.SpawnFish.Invoke();
-                // SpawnRandomFish();
             }
         }
     }

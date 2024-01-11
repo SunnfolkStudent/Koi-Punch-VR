@@ -28,6 +28,16 @@ namespace InDevelopment.Fish
                 {
                     FishObjectPool.DespawnFish(gameObject);
                 }
+                
+                if (other.gameObject.CompareTag("LeftFist") || other.gameObject.CompareTag("RightFist"))
+                {
+                    Debug.Log("Hit Player Fist", this);
+                    var rigidities = fish.Children.Where(child => child.Rigidbody != null).Select(child => child.Rigidbody).ToArray();
+                    foreach (var rigidbody1 in rigidities)
+                    {
+                        rigidbody1.velocity = Vector3.zero;
+                    }
+                }
             }
         }
 
@@ -35,7 +45,6 @@ namespace InDevelopment.Fish
         {
             if (transform.position.y < -25)
             {
-                // Debug.Log("Destroyed by being too far down");
                 FishObjectPool.DespawnFish(gameObject);
             }
         }
