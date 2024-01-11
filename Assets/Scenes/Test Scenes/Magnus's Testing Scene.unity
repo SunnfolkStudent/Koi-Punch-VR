@@ -1236,6 +1236,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &216308692 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6256722444940556663, guid: 62d65635dd823a74c9166df236601c19,
+    type: 3}
+  m_PrefabInstance: {fileID: 1459566277}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ae26e19cd956134bbdf3c6f65bf393a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &334287054 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8886960877153330189, guid: 35aa8376d0adbdc49936a5233dcb1642,
@@ -2357,14 +2369,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adf7f3d1978a0214c9e475d02ede2558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftController: {fileID: 0}
-  rightController: {fileID: 0}
-  leftTopButtonAction: {fileID: 0}
-  rightTopButtonAction: {fileID: 0}
+  leftController: {fileID: 1204975105}
+  rightController: {fileID: 216308692}
+  leftTopButtonAction: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  rightTopButtonAction: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
   _leftTopButton: 0
   _rightTopButton: 0
   zenCharge: 0
   zenAmplifier: 0.1
+--- !u!114 &1204975105 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4554584401787410696, guid: 62d65635dd823a74c9166df236601c19,
+    type: 3}
+  m_PrefabInstance: {fileID: 1459566277}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ae26e19cd956134bbdf3c6f65bf393a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1304930613
 GameObject:
   m_ObjectHideFlags: 0
