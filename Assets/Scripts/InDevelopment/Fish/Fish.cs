@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 
 namespace InDevelopment.Fish
@@ -28,16 +27,6 @@ namespace InDevelopment.Fish
                 {
                     FishObjectPool.DespawnFish(gameObject);
                 }
-                
-                // if (other.gameObject.CompareTag("LeftFist") || other.gameObject.CompareTag("RightFist"))
-                // {
-                //     Debug.Log("Hit Player Fist", this);
-                //     var rigidities = fish.Children.Where(child => child.Rigidbody != null).Select(child => child.Rigidbody).ToArray();
-                //     foreach (var rigidbody1 in rigidities)
-                //     {
-                //         rigidbody1.velocity = Vector3.zero;
-                //     }
-                // }
             }
         }
 
