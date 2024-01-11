@@ -111,7 +111,7 @@ namespace InDevelopment.Fish
             var rigidities = fish.Children.Where(child => child.Rigidbody != null).Select(child => child.Rigidbody).ToArray();
             
             fish.ParentGameObject.transform.position = spawnPos;
-            fish.ParentGameObject.transform.localScale = Vector3.one * Random.Range(0.02f, 2f);
+            fish.ParentGameObject.transform.localScale = Vector3.one * Random.Range(0.2f, 0.4f);
             
             var targetPos = player.position;
             RotateObjTowardsPos(fish.ParentGameObject.transform, targetPos);
@@ -134,9 +134,11 @@ namespace InDevelopment.Fish
         
         private static void RotateObjTowardsPos(Transform objTransform, Vector3 target)
         {
-            var targetDir = objTransform.position - target;
-            var angle = Vector3.Angle(targetDir, objTransform.forward);
-            objTransform.rotation = new Quaternion(0, angle + 180, 0, (float)Space.World);
+            // var targetDir = objTransform.position - target;
+            // var angle = Vector3.Angle(targetDir, objTransform.forward);
+            // objTransform.rotation = new Quaternion(0, angle, 0, (float)Space.World);
+            
+            objTransform.LookAt(target, Vector3.up);
         }
         #endregion
     }
