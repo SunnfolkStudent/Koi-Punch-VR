@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Punch : MonoBehaviour
 { 
@@ -15,17 +17,17 @@ public class Punch : MonoBehaviour
     public bool hitGround;
     
     private String punchingFistUsed;
-    
+
+    //Change punchVelMultiplier to modify how much force the object gets when punched (Higher makes it go farther/faster)
     [Header("Punch Force")] 
     private float punchForceMultiplier;
-     //Change punchVelMultiplier to modify how much force the object gets when punched (Higher makes it go farther/faster)
-    [Tooltip("A higher value will apply more force to the object after it is punched in addition to the force the speed of the punch itself applies.")]
-    public float punchVelMultiplier = 4.5f;
     
-    //Determines how hard the user has to punch for it to count as successful
+    [Tooltip("A higher value will apply more force to the object after it is punched in addition to the force the speed of the punch itself applies.")]
+    public float punchVelMultiplier = 40;
+    
     [Header("Punch Threshold")] [Range(0f, 5f)]
-    [Tooltip("The magnitude of the punch velocity needs to exceed this value for the punch to count. This value can go from 0 to 5 inclusive.")]
-    public float minPunchForceThreshold;
+    [Tooltip("The punch velocity need to exceed this value for the punch to count. This value can go from 0 to 5 inclusive.")]
+    public float punchVelThreshold;
 
     [Header("Punch Results")] 
     [Tooltip("Automatically set to true if the last punch qualified as a successful punch")]
@@ -42,12 +44,19 @@ public class Punch : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         
         //No gravity at start (testing)
-        rigidbody.useGravity = false;
+       // rigidbody.useGravity = false;
     }
-    
-    
+
+    private void OnEnable()
+    {
+        punched = false;
+        hitGround = false;
+        punchVelMultiplier = 40f;
+        punchVelThreshold = 3f;
+    }
+
     /////////////////////////////////////////////////////////////////////////////
-    /// I think you can safely ignore this method
+    /// I think you can safely ignore this method for now
     /////////////////////////////////////////////////////////////////////////////
     private void OnTriggerEnter(Collider other)
     {
@@ -81,12 +90,12 @@ public class Punch : MonoBehaviour
         //Calls punchObject method with fist and direction as parameters
         if (other.gameObject.CompareTag("LeftFist"))
         {
-                Debug.Log("Registered Left Fist Hit");
+            Debug.Log("Registered Left Fist Hit");
             PunchObject("LeftFist", dir);
         }
         else if (other.gameObject.CompareTag("RightFist"))
         {
-                Debug.Log("Registered Right Fist Hit");
+            Debug.Log("Registered Right Fist Hit");
             PunchObject("RightFist", dir);
         }
         
@@ -104,41 +113,45 @@ public class Punch : MonoBehaviour
         rigidbody.useGravity = true;
         
         // Do not allow punches if the object has already been punched/has hit the ground
-        if (punched || hitGround)
-        {
-                Debug.Log("Punch does not qualify as it has already been punched or hit the ground");
-            return;
-        }
-        
+        if (punched || hitGround) { Debug.Log("Punch does not qualify as it has already been punched or hit the ground"); return; }
+
         punched = true;
+        //Set all the other parts of the fish to be unpunchable
+        foreach (Punch punchScript in GetComponentsInParent<Punch>())
+        {
+            if (punchScript != null)
+                punchScript.punched = true;
+        }
+        foreach (Punch punchScript in GetComponentsInChildren<Punch>())
+        {
+            if (punchScript != null)
+                punchScript.punched = true;
+        }
         
         //Apply force to the object depending on the velocity, the specified multiplier, and the direction
         if (fistUsed.Equals("LeftFist"))
         {
             //Do not register punch if punch force was too weak
-            if (controllerManager.leftVelMagnitude < minPunchForceThreshold)
-            { Debug.Log("Punch Force was too weak"); return; }
+            if (controllerManager.leftVelMagnitude < punchVelThreshold)
+            { Debug.Log("Punch Velocity was too weak"); return; }
             
             punchForceMultiplier = controllerManager.leftVelMagnitude * punchVelMultiplier;
             var cubeLaunchDir = direction * -punchForceMultiplier;
             
-                Debug.Log("Punched with Left Fist with Force of " + punchForceMultiplier + "\nand a Direction of " + cubeLaunchDir);
+            Debug.Log("Punched with Left Fist with Force of " + punchForceMultiplier + "\nand a Direction of " + cubeLaunchDir);
             rigidbody.AddForce(cubeLaunchDir, ForceMode.VelocityChange);
         }
 
         if (fistUsed.Equals("RightFist"))
         {
             //Do not register punch if punch force was too weak
-            if (controllerManager.rightVelMagnitude < minPunchForceThreshold) 
-            { Debug.Log("Punch Force was too weak"); return; }
-
-            var amountOverThresh = controllerManager.rightVelMagnitude - minPunchForceThreshold; Debug.Log("Amount over thresh: " + amountOverThresh / 3.5f);
+            if (controllerManager.rightVelMagnitude < punchVelThreshold) 
+            { Debug.Log("Punch Velocity was too weak"); return; }
             
             punchForceMultiplier = controllerManager.rightVelMagnitude * punchVelMultiplier;
-            punchForceMultiplier *= ((amountOverThresh) / 3.5f); 
             var cubeLaunchDir = direction * -punchForceMultiplier;
             
-                Debug.Log("Punched with Right Fist with Force of " + punchForceMultiplier + "\nand a Direction of " + cubeLaunchDir);
+            Debug.Log("Punched with Right Fist with Force of " + punchForceMultiplier + "\nand a Direction of " + cubeLaunchDir);
             rigidbody.AddForce(cubeLaunchDir, ForceMode.VelocityChange);
         }
         

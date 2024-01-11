@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 4936548526502338436}
   - component: {fileID: 7443269884471826283}
   - component: {fileID: 4808725978220997472}
+  - component: {fileID: 3861852705838198514}
   m_Layer: 0
   m_Name: XR Origin (XR Rig)
   m_TagString: Untagged
@@ -60,7 +61,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1766742068160544996}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -99,6 +100,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ActionAssets:
   - {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+--- !u!114 &3861852705838198514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766742068160544996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43f46a3d033c4b745907c36fb8b47bf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftControllerPosition: {x: 0, y: 0, z: 0}
+  rightControllerPosition: {x: 0, y: 0, z: 0}
+  leftControllerVelocity: {x: 0, y: 0, z: 0}
+  rightControllerVelocity: {x: 0, y: 0, z: 0}
+  leftVelMagnitude: 0
+  rightVelMagnitude: 0
+  leftControllerAngle: {x: 0, y: 0, z: 0}
+  rightControllerAngle: {x: 0, y: 0, z: 0}
+  leftControllerQuaternionAngle: {x: 0, y: 0, z: 0, w: 0}
+  rightControllerQuaternionAngle: {x: 0, y: 0, z: 0, w: 0}
+  objectToTestOn: {fileID: 0}
+  needsTesting: 0
+  rightGripAction: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  leftGripAction: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  _leftGrip: 0
+  _rightGrip: 0
+  leftOpenHand: {fileID: 5414363995387192747}
+  leftClosedHand: {fileID: 3854574661789275377}
+  rightOpenHand: {fileID: 8327875119616700360}
+  rightClosedHand: {fileID: 1971858438419084732}
 --- !u!1 &1971858438419084732
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,9 +145,11 @@ GameObject:
   - component: {fileID: 7325798525745342005}
   - component: {fileID: 8618331706821579484}
   - component: {fileID: 3728410372028756278}
+  - component: {fileID: 8939980912720188260}
+  - component: {fileID: 3612614493190199823}
   m_Layer: 0
   m_Name: Right hand Closed
-  m_TagString: Untagged
+  m_TagString: RightFist
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -184,6 +221,54 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &8939980912720188260
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971858438419084732}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &3612614493190199823
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971858438419084732}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3854574661789275377
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,9 +280,11 @@ GameObject:
   - component: {fileID: 5265735566065151511}
   - component: {fileID: 7806752224218049262}
   - component: {fileID: 7093914718447811350}
+  - component: {fileID: 3550438433148218272}
+  - component: {fileID: 1120781850995835621}
   m_Layer: 0
   m_Name: Left hand Closed
-  m_TagString: Untagged
+  m_TagString: LeftFist
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -269,6 +356,54 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &3550438433148218272
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3854574661789275377}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &1120781850995835621
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3854574661789275377}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4406914458469338164
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,10 +414,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2756967106704940942}
   - component: {fileID: 382501455843213117}
-  - component: {fileID: 1935476407746798771}
   - component: {fileID: 4071571170311144210}
   - component: {fileID: 4554584401787410696}
-  - component: {fileID: 7575371244893354151}
   m_Layer: 0
   m_Name: Left Controller
   m_TagString: Untagged
@@ -319,27 +452,6 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_SortAtRoot: 0
---- !u!135 &1935476407746798771
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4406914458469338164}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.06
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4071571170311144210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -462,35 +574,6 @@ MonoBehaviour:
   m_MoveObjectOut: 15
   m_DirectionalAnchorRotation: 1
   m_PoseProvider: {fileID: 0}
---- !u!114 &7575371244893354151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4406914458469338164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43f46a3d033c4b745907c36fb8b47bf8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftControllerPosition: {x: 0, y: 0, z: 0}
-  rightControllerPosition: {x: 0, y: 0, z: 0}
-  leftControllerVelocity: {x: 0, y: 0, z: 0}
-  rightControllerVelocity: {x: 0, y: 0, z: 0}
-  leftVelMagnitude: 0
-  rightVelMagnitude: 0
-  leftControllerAngle: {x: 0, y: 0, z: 0}
-  rightControllerAngle: {x: 0, y: 0, z: 0}
-  leftControllerQuaternionAngle: {x: 0, y: 0, z: 0, w: 0}
-  rightControllerQuaternionAngle: {x: 0, y: 0, z: 0, w: 0}
-  objectToTestOn: {fileID: 0}
-  needsTesting: 0
-  gripAction: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
-  _grip: 0
-  openHand: {fileID: 5414363995387192747}
-  closedHand: {fileID: 3854574661789275377}
 --- !u!1 &4522494526516689763
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,10 +584,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8072660698296121535}
   - component: {fileID: 4994748646043379012}
-  - component: {fileID: 7737040212288145216}
   - component: {fileID: 6341234287751407101}
   - component: {fileID: 6256722444940556663}
-  - component: {fileID: 6381310819791925824}
   m_Layer: 0
   m_Name: Right Controller
   m_TagString: Untagged
@@ -541,27 +622,6 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_SortAtRoot: 0
---- !u!135 &7737040212288145216
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4522494526516689763}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.06
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6341234287751407101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -684,35 +744,6 @@ MonoBehaviour:
   m_MoveObjectOut: 15
   m_DirectionalAnchorRotation: 1
   m_PoseProvider: {fileID: 0}
---- !u!114 &6381310819791925824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4522494526516689763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43f46a3d033c4b745907c36fb8b47bf8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftControllerPosition: {x: 0, y: 0, z: 0}
-  rightControllerPosition: {x: 0, y: 0, z: 0}
-  leftControllerVelocity: {x: 0, y: 0, z: 0}
-  rightControllerVelocity: {x: 0, y: 0, z: 0}
-  leftVelMagnitude: 0
-  rightVelMagnitude: 0
-  leftControllerAngle: {x: 0, y: 0, z: 0}
-  rightControllerAngle: {x: 0, y: 0, z: 0}
-  leftControllerQuaternionAngle: {x: 0, y: 0, z: 0, w: 0}
-  rightControllerQuaternionAngle: {x: 0, y: 0, z: 0, w: 0}
-  objectToTestOn: {fileID: 0}
-  needsTesting: 0
-  gripAction: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
-  _grip: 0
-  openHand: {fileID: 8327875119616700360}
-  closedHand: {fileID: 1971858438419084732}
 --- !u!1 &5414363995387192747
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,9 +755,11 @@ GameObject:
   - component: {fileID: 7347328325437632182}
   - component: {fileID: 8353944262937609568}
   - component: {fileID: 1966604064929861563}
+  - component: {fileID: 5763805589285454997}
+  - component: {fileID: 5394249572911117503}
   m_Layer: 0
   m_Name: Left hand
-  m_TagString: Untagged
+  m_TagString: LeftFist
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -798,6 +831,54 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &5763805589285454997
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5414363995387192747}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &5394249572911117503
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5414363995387192747}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6564072810355661753
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,9 +1137,11 @@ GameObject:
   - component: {fileID: 8175046571306838551}
   - component: {fileID: 9080355901536958706}
   - component: {fileID: 4965504047642774855}
+  - component: {fileID: 6850291990925700268}
+  - component: {fileID: 1671274957886467921}
   m_Layer: 0
   m_Name: Right hand
-  m_TagString: Untagged
+  m_TagString: RightFist
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1130,3 +1213,51 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &6850291990925700268
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8327875119616700360}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &1671274957886467921
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8327875119616700360}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

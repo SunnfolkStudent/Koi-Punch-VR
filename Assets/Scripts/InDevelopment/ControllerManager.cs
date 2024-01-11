@@ -30,14 +30,18 @@ public class ControllerManager : MonoBehaviour
     [SerializeField] private bool needsTesting;
     
     [Header("Button Inputs")]
-    [SerializeField] private InputActionReference gripAction;
+    [SerializeField] private InputActionReference rightGripAction;
+    [SerializeField] private InputActionReference leftGripAction;
     
     [Header("Input Values")]
-    [SerializeField] private float _grip;
+    [SerializeField] private float _leftGrip;
+    [SerializeField] private float _rightGrip;
     
     [Header("Hand Game Objects")]
-    [SerializeField] private GameObject openHand;
-    [SerializeField] private GameObject closedHand;
+    [SerializeField] private GameObject leftOpenHand;
+    [SerializeField] private GameObject leftClosedHand;
+    [SerializeField] private GameObject rightOpenHand;
+    [SerializeField] private GameObject rightClosedHand;
     
     void Start() { }
 
@@ -48,8 +52,10 @@ public class ControllerManager : MonoBehaviour
         
         UpdateInput();
 
+        
+        
         GripValue();
-
+       
         handMotion();
     }
 
@@ -100,20 +106,31 @@ public class ControllerManager : MonoBehaviour
     }
     void GripValue()
     {
-        _grip = gripAction.action.ReadValue<float>();
+        _leftGrip = leftGripAction.action.ReadValue<float>();
+        _rightGrip = rightGripAction.action.ReadValue<float>();
     }
 
     private void handMotion()
     {
-        if (_grip !=0)
+        if (_rightGrip != 0)
         {
-            openHand.SetActive(false); 
-            closedHand.SetActive(true);
+            rightOpenHand.SetActive(false); 
+            rightClosedHand.SetActive(true);
         }
-        else
+        else if (_rightGrip == 0)
         {
-            openHand.SetActive(true); 
-            closedHand.SetActive(false); 
+            rightOpenHand.SetActive(true); 
+            rightClosedHand.SetActive(false); 
         }
-    }
+        if (_leftGrip != 0)
+        {
+            leftOpenHand.SetActive(false); 
+            leftClosedHand.SetActive(true);
+        }
+        else if (_leftGrip == 0)
+        {
+            leftOpenHand.SetActive(true); 
+            leftClosedHand.SetActive(false); 
+        }
+    } 
 }
