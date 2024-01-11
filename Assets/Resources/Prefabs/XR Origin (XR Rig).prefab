@@ -132,10 +132,10 @@ MonoBehaviour:
     type: 3}
   _leftGrip: 0
   _rightGrip: 0
-  leftOpenHand: {fileID: 8177036750549605822}
-  leftClosedHand: {fileID: 5029026800916818781}
-  rightOpenHand: {fileID: 4220376180466953979}
-  rightClosedHand: {fileID: 4897473096757052186}
+  leftOpenHand: {fileID: 0}
+  leftClosedHand: {fileID: 0}
+  rightOpenHand: {fileID: 0}
+  rightClosedHand: {fileID: 0}
 --- !u!1 &4220376180466953979
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 3346427758793850776}
   m_Layer: 0
   m_Name: Right Open Hand Hitbox
-  m_TagString: Untagged
+  m_TagString: RightFist
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 4554584401787410696}
   m_Layer: 0
   m_Name: Left Controller
-  m_TagString: Untagged
+  m_TagString: RightFist
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -310,7 +310,7 @@ GameObject:
   - component: {fileID: 6256722444940556663}
   m_Layer: 0
   m_Name: Right Controller
-  m_TagString: Untagged
+  m_TagString: RightFist
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 1087512789609413547}
   m_Layer: 0
   m_Name: Right Closed Hand Hitbox
-  m_TagString: Untagged
+  m_TagString: RightFist
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -469,7 +469,7 @@ GameObject:
   - component: {fileID: 7945479647905930347}
   m_Layer: 0
   m_Name: Left Closed Hand Hitbox
-  m_TagString: Untagged
+  m_TagString: LeftFist
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -797,7 +797,7 @@ GameObject:
   - component: {fileID: 8351143538944869532}
   m_Layer: 0
   m_Name: Left Open Hand Hitbox
-  m_TagString: Untagged
+  m_TagString: LeftFist
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -928,6 +928,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hand_R
       objectReference: {fileID: 0}
+    - target: {fileID: 1735684076401816578, guid: ccdb5560f8bebc64e8f5c55126275196,
+        type: 3}
+      propertyPath: m_TagString
+      value: RightFist
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -975,6 +980,10 @@ PrefabInstance:
     - target: {fileID: 4995100462143588, guid: edf9551de02cdfa4fac449c142b65d93, type: 3}
       propertyPath: m_Name
       value: Hand_L
+      objectReference: {fileID: 0}
+    - target: {fileID: 4995100462143588, guid: edf9551de02cdfa4fac449c142b65d93, type: 3}
+      propertyPath: m_TagString
+      value: LeftFist
       objectReference: {fileID: 0}
     - target: {fileID: 818089053661004510, guid: edf9551de02cdfa4fac449c142b65d93,
         type: 3}
