@@ -47,7 +47,7 @@ public class Boid : MonoBehaviour {
 
     public void SetColour (Color color) {
         if (material != null) {
-            material.color = Color.red;
+            material.color = new Color(1f, 0.552f, 0.696f, 1f);
         }
     }
 
