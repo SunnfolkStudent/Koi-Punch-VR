@@ -111,7 +111,7 @@ namespace InDevelopment.Fish
             var rigidities = fish.Children.Where(child => child.Rigidbody != null).Select(child => child.Rigidbody).ToArray();
             
             fish.ParentGameObject.transform.position = spawnPos;
-            fish.ParentGameObject.transform.localScale = Vector3.one * Random.Range(0.2f, 0.4f);
+            fish.ParentGameObject.transform.localScale = Vector3.one * Random.Range(0.05f, 0.1f);
             
             var targetPos = player.position;
             RotateObjTowardsPos(fish.ParentGameObject.transform, targetPos);
