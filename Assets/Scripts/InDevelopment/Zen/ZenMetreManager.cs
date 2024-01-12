@@ -217,7 +217,7 @@ public class ZenMetreManager : MonoBehaviour
 
     private IEnumerator TimeStop()
     {
-        _particleSystems = FindObjectsOfType<ParticleSystem>().ToList();
+        _particleSystems = FindObjectsByType<ParticleSystem>(FindObjectsSortMode.None).ToList();
         
         float currentTimeScale = Time.timeScale;
         float timePassed = 0f;
