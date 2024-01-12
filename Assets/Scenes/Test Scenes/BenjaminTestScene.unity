@@ -696,7 +696,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 189411009}
-  - component: {fileID: 189411008}
+  - component: {fileID: 189411010}
   m_Layer: 0
   m_Name: ForceManager
   m_TagString: Untagged
@@ -704,29 +704,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &189411008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 189411007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17f53b2fe86b05a4fa376dde204eeed7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mModeSwitching: 0
-  _mStartPos: {x: 0, y: 0, z: 0}
-  _mStartForce: {x: 0, y: 0, z: 0}
-  _mNewForce: {x: 0, y: 0, z: 0}
-  testObject: {fileID: 494596387}
-  mRigidbody: {fileID: 494596390}
-  _mForceXString: 
-  _mForceYString: 
-  _mForceX: 0
-  _mForceY: 0
-  _mResult: 0
 --- !u!4 &189411009
 Transform:
   m_ObjectHideFlags: 0
@@ -742,6 +719,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &189411010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189411007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a26df83fe4e9474ead0651ee63f2b96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testObject: {fileID: 494596387}
+  mRigidbody: {fileID: 494596390}
 --- !u!4 &205384033 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6779502542172426941, guid: 4e23f5bcf4bf6154eae9abbac475bc6e,
