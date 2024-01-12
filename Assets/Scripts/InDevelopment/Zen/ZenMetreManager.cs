@@ -159,6 +159,7 @@ public class ZenMetreManager : MonoBehaviour
         //Start of level 4
         zenAttackActive = true;
         _zenLevelCheckpoint = 4;
+        ZenMetreVisualManager.Instance.ShowPromptText("Hold side button to charge punch!");
         //ControllerRumble.Instance.RightControllerRumbling(0.4f,5f);
         //ControllerRumble.Instance.LeftControllerRumbling(0.4f,5f);
         
