@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 namespace InDevelopment.Fish
@@ -19,6 +21,7 @@ namespace InDevelopment.Fish
 
         Vector3 _mStartPos, _mStartForce;
         Vector3 _mNewForce;
+        [SerializeField] private GameObject testObject;
         [SerializeField] private Rigidbody mRigidbody;
 
         string _mForceXString = string.Empty;
@@ -31,7 +34,8 @@ namespace InDevelopment.Fish
         void Start()
         {
             //You get the Rigidbody component you attach to the GameObject
-            mRigidbody = GetComponent<Rigidbody>();
+            
+            mRigidbody = testObject.GetComponent<Rigidbody>();
 
             //This starts at first mode (nothing happening yet)
             _mModeSwitching = ModeSwitching.Start;
@@ -60,7 +64,7 @@ namespace InDevelopment.Fish
                 //The force changes depending what you input into the text fields
                 _mNewForce = new Vector3(_mForceX, _mForceY, 0);
             }
-
+            
             //Here, switching modes depend on button presses in the Game mode
             switch (_mModeSwitching)
             {
@@ -113,6 +117,9 @@ namespace InDevelopment.Fish
                     break;
             }
         }
+        
+        
+        
 
         //The function outputs buttons, text fields, and other interactable UI elements to the Scene in Game view
         private void OnGUI()
@@ -120,7 +127,7 @@ namespace InDevelopment.Fish
             //Getting the inputs from each text field and storing them as strings
             _mForceXString = GUI.TextField(new Rect(300, 10, 100, 30), _mForceXString, 25);
             _mForceYString = GUI.TextField(new Rect(300, 100, 100, 30), _mForceYString, 25);
-
+            
             //Press the button to reset the GameObject and Rigidbody
             if (GUI.Button(new Rect(100, 0, 150, 30), "Reset"))
             {
