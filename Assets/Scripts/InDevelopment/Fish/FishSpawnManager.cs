@@ -16,6 +16,10 @@ namespace InDevelopment.Fish
         private static List<SpawnArea> _spawnAreas;
         [SerializeField] private float height = 10;
         
+        [Header("Fish size")]
+        [SerializeField] private float minSize = 0.1f;
+        [SerializeField] private float maxSize = 0.2f;
+        
         public delegate void Delegate();
         public static Delegate SpawnFish; 
         
@@ -111,7 +115,7 @@ namespace InDevelopment.Fish
             var rigidities = fish.Children.Where(child => child.Rigidbody != null).Select(child => child.Rigidbody).ToArray();
             
             fish.ParentGameObject.transform.position = spawnPos;
-            fish.ParentGameObject.transform.localScale = Vector3.one * Random.Range(0.05f, 0.1f);
+            fish.ParentGameObject.transform.localScale = Vector3.one * Random.Range(minSize, maxSize);
             
             var targetPos = player.position;
             RotateObjTowardsPos(fish.ParentGameObject.transform, targetPos);
