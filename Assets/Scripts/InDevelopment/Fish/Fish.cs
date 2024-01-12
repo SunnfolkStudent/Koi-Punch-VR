@@ -6,39 +6,27 @@ namespace InDevelopment.Fish
     {
         // TODO: Fish collision
         public FishObjectPool.Fish fish { get; set; }
-        private bool _canCollide;
-        
-        private void OnEnable()
-        {
-            _canCollide = false;
-            Invoke(nameof(CanCollide), 1);
-            Invoke(nameof(Despawn), 5);
-        }
-        
-        private void CanCollide()
-        {
-            _canCollide = true;
-        }
+        private float _startTime;
         
         private void OnCollisionEnter(Collision other)
         {
-            if (_canCollide)
-            {
-                if (other.gameObject.CompareTag("Ground"))
-                {
-                    Despawn();
-                }
-            }
-        }
-        
-        private void Update()
-        {
-            if (transform.position.y < -25)
+            if (other.gameObject.CompareTag("Ground"))
             {
                 Despawn();
             }
         }
+        private void OnEnable()
+        {
+            _startTime = Time.time;
+        }
         
+        private void Update()
+        {
+            if (transform.position.y < -25 || _startTime < Time.time - 3.5f)
+            {
+                Despawn();
+            }
+        }
         
         private void Despawn()
         {

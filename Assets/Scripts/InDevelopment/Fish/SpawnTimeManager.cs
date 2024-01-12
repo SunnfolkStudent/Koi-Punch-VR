@@ -25,10 +25,6 @@ namespace InDevelopment.Fish
             while (startTime <= timeTillEnd)
             {
                 var nextSpawnTime = Mathf.Lerp(maxSpawnTime, minSpawnTime, Time.time / timeToMaxSpawnRate);
-                //Debug.Log("nextSpawnTime: " + nextSpawnTime);
-
-                //nextSpawnTime = 1.5f;
-                
                 yield return new WaitForSeconds(nextSpawnTime);
                 EventManager.SpawnFish.Invoke();
             }

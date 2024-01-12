@@ -93,28 +93,26 @@ namespace InDevelopment.Fish
         private void SpawnFishAtPosFromPool(Vector3 spawnPos, FishObjectPool.FishPool fishPool)
         {
             var fish = FishObjectPool.GetPooledObject(fishPool);
-            FishObjectPool.ResetPropertiesOfFishInPool(fish, fishPool);
-            
             var rigidities = fish.Children.Where(child => child.Rigidbody != null).Select(child => child.Rigidbody).ToArray();
             var fishTransform = fish.ParentGameObject.transform;
             var targetPos = player.position;
+            var height = Random.Range(minHeight, maxHeight);
             
             fishTransform.position = spawnPos;
             fishTransform.localScale = Vector3.one * Random.Range(minSize, maxSize);
             fishTransform.LookAt(targetPos, Vector3.up);
             
-            // ---Speed Known--- \\
-            // var speed = Random.Range(27f, 40f);
-            // var tallArc = Random.Range(0, 2) == 1;
-            // FishTrajectory.LaunchObjectAtTargetWithInitialSpeed(rigidities, fishTransform.position, player.position, speed, tallArc);
+            // ---Launch Fish With Max Height--- \\
+            FishTrajectory.LaunchObjectAtTargetWithPeakHeight(rigidities, fishTransform.position, targetPos, height);
             
-            // ---Angle Known--- \\
+            // ---Launch Fish At Angle--- \\
             // var angle =  Random.Range(20f, 60f);
             // FishTrajectory.LaunchObjectAtTargetWithInitialAngle(rigidities, fishTransform.position, player.position, angle);
             
-            // ---Max Height Known--- \\
-            var height = Random.Range(minHeight, maxHeight);
-            FishTrajectory.LaunchObjectAtTargetWithPeakHeight(rigidities, fishTransform.position, targetPos, height);
+            // ---Launch Fish With Speed--- \\
+            // var speed = Random.Range(27f, 40f);
+            // var tallArc = Random.Range(0, 2) == 1;
+            // FishTrajectory.LaunchObjectAtTargetWithInitialSpeed(rigidities, fishTransform.position, player.position, speed, tallArc);
             
             fish.ParentGameObject.SetActive(true);
         }
