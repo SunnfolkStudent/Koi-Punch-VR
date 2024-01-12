@@ -193,7 +193,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 89018229}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d113d1adf3e51b545bd6407b6443fbc5, type: 3}
   m_Name: 
@@ -412,6 +412,16 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 882771504}
+    - target: {fileID: 202575621013093645, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: maxSize
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 202575621013093645, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: minSize
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 226389944599812216, guid: b0869e6e2e592a646852ba90d715ff4c,
         type: 3}
       propertyPath: m_Name
@@ -472,6 +482,12 @@ PrefabInstance:
       propertyPath: fishPrefab.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5264716505511531945, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: fishPrefab.Array.data[0].prefabGameObject
+      value: 
+      objectReference: {fileID: 3186142855119285005, guid: f48f7339ab6428b4f922a0b20e52134a,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4448,16 +4464,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Origin (XR Rig)
       objectReference: {fileID: 0}
-    - target: {fileID: 3861852705838198514, guid: 62d65635dd823a74c9166df236601c19,
-        type: 3}
-      propertyPath: needsTesting
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3861852705838198514, guid: 62d65635dd823a74c9166df236601c19,
-        type: 3}
-      propertyPath: objectToTestOn
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4936548526502338436, guid: 62d65635dd823a74c9166df236601c19,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4506,11 +4512,6 @@ PrefabInstance:
     - target: {fileID: 4936548526502338436, guid: 62d65635dd823a74c9166df236601c19,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6102629444566815224, guid: 62d65635dd823a74c9166df236601c19,
-        type: 3}
-      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
