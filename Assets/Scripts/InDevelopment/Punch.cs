@@ -9,6 +9,12 @@ public class Punch : MonoBehaviour
     private ControllerManager controllerManager;
     private new Rigidbody rigidbody;
 
+    public bool punchCollidingWithObject;
+
+    public float punchCollisionTimer;
+    public float punchCollisionTimerStart;
+    public float punchCollisionTimerEnd;
+    
     //If either are true then you cannot punch the object
     [Header("Punched & Hit Ground")]
     [Tooltip("If set to true then the object cannot be punched. It is automatically set to true after being punched")]
@@ -46,7 +52,7 @@ public class Punch : MonoBehaviour
         //No gravity at start (testing)
        // rigidbody.useGravity = false;
     }
-
+    
     private void OnEnable()
     {
         punched = false;
@@ -101,8 +107,23 @@ public class Punch : MonoBehaviour
         
         return;
     }
-    
-    
+
+    private void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.CompareTag("LeftFist"))
+        {
+            punchCollisionTimerEnd = Time.time; 
+            Debug.Log("CollisionL Time = " + (punchCollisionTimerEnd - punchCollisionTimerStart));
+        }
+
+        else if (other.gameObject.CompareTag("RightFist"))
+        {
+            punchCollisionTimerEnd = Time.time;
+            Debug.Log("CollisionR Time = " + (punchCollisionTimerEnd - punchCollisionTimerStart));
+        }
+    }
+
+
     //////////////////////////////////////////////////////////////////////////////////////////
     /// Checks which fist was used for the punch and then applies a force to the object
     /// The force corresponds to the var direction that is passed in from the OnCollisionEnter
@@ -116,6 +137,10 @@ public class Punch : MonoBehaviour
         if (punched || hitGround) { Debug.Log("Punch does not qualify as it has already been punched or hit the ground"); return; }
 
         punched = true;
+
+        punchCollisionTimerStart = Time.time;
+        
+        // when punched = true, punch has just now collided with fish, so punchCollidingWithObject is also true now.
         //Set all the other parts of the fish to be unpunchable
         foreach (Punch punchScript in GetComponentsInParent<Punch>())
         {
@@ -151,7 +176,7 @@ public class Punch : MonoBehaviour
             punchForceMultiplier = controllerManager.rightVelMagnitude * punchVelMultiplier;
             var cubeLaunchDir = direction * -punchForceMultiplier;
             
-            Debug.Log("Punched with Right Fist with Force of " + punchForceMultiplier + "\nand a Direction of " + cubeLaunchDir);
+            Debug.Log("Punched with Right Fist with Force of " + (punchForceMultiplier) + "\nand a Direction of " + cubeLaunchDir);
             rigidbody.AddForce(cubeLaunchDir, ForceMode.VelocityChange);
         }
         
