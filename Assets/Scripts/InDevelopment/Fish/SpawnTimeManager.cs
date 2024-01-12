@@ -17,9 +17,10 @@ namespace InDevelopment.Fish
         
         private IEnumerator SpawnFish()
         {
+            var startTime = Time.time;
             var minSpawnTime = 1 / maxSpawnRate;
             var maxSpawnTime = 1 / minSpawnRate;
-            while (true)// Time.time <= timeTillEnd)
+            while (true)// _startTime <= timeTillEnd)
             {
                 var nextSpawnTime = Mathf.Lerp(maxSpawnTime, minSpawnTime, Time.time / timeToMaxSpawnRate);
                 Debug.Log("nextSpawnTime: " + nextSpawnTime);

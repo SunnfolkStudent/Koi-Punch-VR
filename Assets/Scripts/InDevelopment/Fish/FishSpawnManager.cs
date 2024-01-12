@@ -139,7 +139,6 @@ namespace InDevelopment.Fish
         private static void RotateObjTowardsPos(Transform objTransform, Vector3 target)
         {
             objTransform.LookAt(target, Vector3.up);
-            objTransform.Rotate(new Vector3(0,-90,0));
         }
         #endregion
     }
