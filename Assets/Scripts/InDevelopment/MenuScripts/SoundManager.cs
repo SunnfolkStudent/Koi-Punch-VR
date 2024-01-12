@@ -5,37 +5,42 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] private GameObject musicSlider;
-    private float sliderPos;
+    //[SerializeField] private GameObject musicSlider;
+    //private float sliderPos;
 
     private void Awake()
     {
-        PlayerPrefs.SetFloat("MusicVolume", 1);
+        //PlayerPrefs.SetFloat("MusicVolume", 1);
     }
 
-    /*private void Start()
+    private void Start()
     {
         if (PlayerPrefs.HasKey("MusicVolume"))
         {
             PlayerPrefs.GetFloat("MusicVolume");
-            SetVolume();
+            //SetVolume();
         }
         else
         {
             PlayerPrefs.SetFloat("MusicVolume", 1);
-            SetVolume();
+            //SetVolume();
         }
-    }*/
-
-    public void SetVolume()
-    {
-        sliderPos = PlayerPrefs.GetFloat("MusicVolume") - 0.5f;
-        //musicSlider.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + sliderPos);
-        //musicSlider.transform.= sliderPos;
+        if (PlayerPrefs.HasKey("SFXVolume"))
+        {
+            PlayerPrefs.GetFloat("SFXVolume");
+            //SetVolume();
+        }
+        else
+        {
+            PlayerPrefs.SetFloat("SFXVolume", 1);
+            //SetVolume();
+        }
     }
 
-    private void Update()
+    public void SetMusicVolume()
     {
-        Debug.Log(PlayerPrefs.GetFloat("MusicVolume"));
+        //sliderPos = PlayerPrefs.GetFloat("MusicVolume") - 0.5f;
+        //musicSlider.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + sliderPos);
+        //musicSlider.transform.= sliderPos;
     }
 }
