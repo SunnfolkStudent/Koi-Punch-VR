@@ -61,13 +61,13 @@ namespace InDevelopment.Fish
             int linePoints = 30;
             for (int i = 1; i <= linePoints; i++)
             {
-                var fishSpeed = 2f;
+                /* var fishSpeed = 2f;
                 var fishAngle = 2f;
-                var fishAltitude = 2f;
+                var fishAltitude = 2f; */
                 // float simulationTime = i / (float)linePoints * launchData.TimeToTarget;
                 
                 // The below function will give the total distance the fish is being launched at
-                FishTrajectory.RangeFromSpeedAngleAltitude(fishSpeed, fishAngle, fishAltitude);
+                // FishTrajectory.RangeFromSpeedAngleAltitude(fishSpeed, fishAngle, fishAltitude);
                 Debug.DrawLine(startPos, endPos, Color.green);
             }
             yield return new WaitWhile(() => _fishTravels);
