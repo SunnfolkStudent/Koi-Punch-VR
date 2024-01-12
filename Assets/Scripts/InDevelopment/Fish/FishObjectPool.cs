@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InDevelopment.Fish
@@ -115,12 +116,15 @@ namespace InDevelopment.Fish
         
         public static Fish GetPooledObject(FishPool fishPool)
         {
-            return fishPool.Fishes.FirstOrDefault(t => !t.ParentGameObject.activeInHierarchy);
+            var availableFishInPool = fishPool.Fishes.Where(fish => !fish.ParentGameObject.activeInHierarchy).ToArray();
+            if (availableFishInPool.Length < 2) AddFishToPool(fishPool);
+            return availableFishInPool[0];
         }
         
-        public static void DespawnFish(GameObject fish)
+        public static void DespawnFish(Fish fish)
         {
-            fish.SetActive(false);
+            ResetPropertiesOfFishInPool(fish, FishPools.Find(fish => FishPools.Contains(fish)));
+            fish.ParentGameObject.SetActive(false);
         }
         
         public static void ResetPropertiesOfFishInPool(Fish fish, FishPool fishPool)
@@ -131,6 +135,11 @@ namespace InDevelopment.Fish
                 fish.Children[i].Transform.rotation = fishPool.Prefab.Children[i].InitialTransform.rotation;
                 fish.Children[i].Transform.localScale = fishPool.Prefab.Children[i].InitialTransform.localScale;
             }
+        }
+
+        private static FishPool FindPoolOfFish(Fish fish)
+        {
+            return FishPools.Find(fish => FishPools.Contains(fish));
         }
         #endregion
     }

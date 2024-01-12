@@ -9,8 +9,7 @@ namespace InDevelopment.Fish
 {
     public class FishSpawnManager : MonoBehaviour
     {
-        // TODO: Spawn Rotation
-        // TODO: Spawn frequency increased over time
+        // TODO: Fix why spawned fish have torque on spawning
         // TODO: Spawn fish with properties; Size, Colour, type, flight trajectory type and area spawned in decided by random weighted tables
         [SerializeField] private Transform player;
         private static List<SpawnArea> _spawnAreas;
@@ -23,16 +22,13 @@ namespace InDevelopment.Fish
         [SerializeField] private float minSize = 1f;
         [SerializeField] private float maxSize = 2f;
         
-        public delegate void Delegate();
-        public static Delegate SpawnFish; 
-        
         #region ---Initialization---
         private void Start()
         {
             _spawnAreas = new List<SpawnArea>();
             AddSpawnAreasToSpawnAreaList();
             
-            SpawnFish += SpawnRandomFish; //TODO: Remove temporary spawning
+            EventManager.SpawnFish += SpawnRandomFish; //TODO: Remove temporary spawning
         }
         #endregion
         
@@ -78,17 +74,17 @@ namespace InDevelopment.Fish
         {
             if (Keyboard.current.kKey.isPressed)
             {
-                SpawnFish.Invoke();
+                EventManager.SpawnFish.Invoke();
             }
             
             if (Keyboard.current.jKey.isPressed)
             {
-                SpawnFish.Invoke();
+                EventManager.SpawnFish.Invoke();
             }
             
             if (Keyboard.current.hKey.isPressed)
             {
-                SpawnFish.Invoke();
+                EventManager.SpawnFish.Invoke();
             }
         }
         #endregion
@@ -97,17 +93,9 @@ namespace InDevelopment.Fish
         private void SpawnFishAtPosFromPool(Vector3 spawnPos, FishObjectPool.FishPool fishPool)
         {
             var fish = FishObjectPool.GetPooledObject(fishPool);
-            if (fish == null)
-            {
-                FishObjectPool.AddFishToPool(fishPool);
-                SpawnFishAtPosFromPool(spawnPos, fishPool);
-                return;
-            }
-            
             FishObjectPool.ResetPropertiesOfFishInPool(fish, fishPool);
             
             var rigidities = fish.Children.Where(child => child.Rigidbody != null).Select(child => child.Rigidbody).ToArray();
-
             var fishTransform = fish.ParentGameObject.transform;
             var targetPos = player.position;
             

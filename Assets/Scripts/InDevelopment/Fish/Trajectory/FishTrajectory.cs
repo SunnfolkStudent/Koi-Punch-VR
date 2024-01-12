@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace InDevelopment.Fish.Trajectory
@@ -64,7 +63,7 @@ namespace InDevelopment.Fish.Trajectory
             var velocityForward = Mathf.Cos(angleInRadians) * speed;
             var velocityUpwards = Mathf.Sin(angleInRadians) * speed;
             
-            Debug.Log($"speed: {speed}, dist: {dist}, alt: {alt} | velocityForward: {velocityForward}, velocityUpwards: {velocityUpwards}");
+            // Debug.Log($"speed: {speed}, dist: {dist}, alt: {alt} | velocityForward: {velocityForward}, velocityUpwards: {velocityUpwards}");
             
             return (velocityForward, velocityUpwards);
         }
@@ -72,12 +71,12 @@ namespace InDevelopment.Fish.Trajectory
         private static (float velocityForward, float velocityUpwards) TrajectoryVelocityFromAngleDistanceAltitude(float angle, float dist, float alt)
         {
             var velocityTotal = Math.Sqrt((Math.Pow(dist, 2) * -Physics.gravity.y) / 
-                                           (dist * math.abs(Mathf.Sin(2 * angle)) - 2 * alt * Math.Pow(math.abs(Mathf.Cos(angle)), 2)));
+                                           (dist * Math.Abs(Mathf.Sin(2 * angle)) - 2 * alt * Math.Pow(Math.Abs(Mathf.Cos(angle)), 2)));
             
-            var velocityForward = (float)math.abs(velocityTotal * Mathf.Cos(angle));
-            var velocityUpwards = (float)math.abs(velocityTotal * Mathf.Sin(angle));
+            var velocityForward = (float)Math.Abs(velocityTotal * Mathf.Cos(angle));
+            var velocityUpwards = (float)Math.Abs(velocityTotal * Mathf.Sin(angle));
             
-            Debug.Log($"angle: {angle}, dist: {dist}, alt: {alt} | velocityForward: {velocityForward}, velocityUpwards: {velocityUpwards}");
+            // Debug.Log($"angle: {angle}, dist: {dist}, alt: {alt} | velocityForward: {velocityForward}, velocityUpwards: {velocityUpwards}");
             
             return (velocityForward, velocityUpwards);
         }
@@ -92,7 +91,7 @@ namespace InDevelopment.Fish.Trajectory
             var velocityForward = Mathf.Sqrt(-2 * Physics.gravity.y * height);
             var velocityUpwards = dist / (Mathf.Sqrt(-((2 * height) / Physics.gravity.y)) + Mathf.Sqrt((2 * (alt - height)) / Physics.gravity.y));
             
-            Debug.Log($"height: {height}, dist: {dist}, alt: {alt} | velocityForward: {velocityForward}, velocityUpwards: {velocityUpwards}");
+            // Debug.Log($"height: {height}, dist: {dist}, alt: {alt} | velocityForward: {velocityForward}, velocityUpwards: {velocityUpwards}");
             
             return (velocityUpwards, velocityForward);
         }
@@ -106,7 +105,7 @@ namespace InDevelopment.Fish.Trajectory
         #region ---Math Formulas---
         private static float Hypotenuse(float a, float b)
         {
-            return math.sqrt(a * a + b * b);
+            return (float)Math.Sqrt(a * a + b * b);
         }
         #endregion
     }

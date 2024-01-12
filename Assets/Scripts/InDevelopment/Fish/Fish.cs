@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 
 namespace InDevelopment.Fish
@@ -13,6 +12,7 @@ namespace InDevelopment.Fish
         {
             _canCollide = false;
             Invoke(nameof(CanCollide), 1);
+            Invoke(nameof(Despawn), 5);
         }
         
         private void CanCollide()
@@ -26,7 +26,7 @@ namespace InDevelopment.Fish
             {
                 if (other.gameObject.CompareTag("Ground"))
                 {
-                    FishObjectPool.DespawnFish(gameObject);
+                    Despawn();
                 }
             }
         }
@@ -35,8 +35,14 @@ namespace InDevelopment.Fish
         {
             if (transform.position.y < -25)
             {
-                FishObjectPool.DespawnFish(gameObject);
+                Despawn();
             }
+        }
+        
+        
+        private void Despawn()
+        {
+            FishObjectPool.DespawnFish(fish);
         }
     }
 }

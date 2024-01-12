@@ -19,7 +19,7 @@ namespace InDevelopment.Fish
             
             if (leftTrigger.action.WasPressedThisFrame())
             {
-                FishSpawnManager.SpawnFish.Invoke();
+                EventManager.SpawnFish.Invoke();
                 // SpawnFishForTesting();
                 // print("fish has spawned");
             }
