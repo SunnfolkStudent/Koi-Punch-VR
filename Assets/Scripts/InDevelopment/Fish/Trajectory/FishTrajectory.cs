@@ -9,7 +9,6 @@ namespace InDevelopment.Fish.Trajectory
     {
         // TODO: When using speed for trajectory stop too low speeds from creating an error
         // TODO: When using angle for trajectory fix why 3% chance of error
-        //private static readonly float Physics.gravity.y =  Physics.Physics.gravity.y.y;
         
         #region ---LaunchOptions---
         public static void LaunchObjectAtTargetWithInitialSpeed(IEnumerable<Rigidbody> objRigidbody, Vector3 objPos, Vector3 targetPos, float speed, bool tall = false)
