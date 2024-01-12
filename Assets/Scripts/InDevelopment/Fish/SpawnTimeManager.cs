@@ -20,17 +20,17 @@ namespace InDevelopment.Fish
             var startTime = Time.time;
             var minSpawnTime = 1 / maxSpawnRate;
             var maxSpawnTime = 1 / minSpawnRate;
-            while (true)// _startTime <= timeTillEnd)
+            while (true)//startTime <= timeTillEnd)
             {
                 var nextSpawnTime = Mathf.Lerp(maxSpawnTime, minSpawnTime, Time.time / timeToMaxSpawnRate);
                 Debug.Log("nextSpawnTime: " + nextSpawnTime);
 
-                nextSpawnTime = 1.5f;
+                nextSpawnTime = 1.5f;//
                 
                 yield return new WaitForSeconds(nextSpawnTime);
                 FishSpawnManager.SpawnFish.Invoke();
             }
-            // Debug.Log("Level Ended");
+            Debug.Log("Level Ended");
         }
     }
 }
