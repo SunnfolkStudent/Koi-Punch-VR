@@ -1,5 +1,4 @@
-using Newtonsoft.json;
-using System.Collections;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +11,7 @@ public class VoiceLinesLoader : MonoBehaviour
     private Dictionary<string, string> voiceLinesDictionary;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // Check if the jsonFile is assigned
         if (jsonFile != null)
@@ -20,8 +19,24 @@ public class VoiceLinesLoader : MonoBehaviour
             // Load the JSON data from the TextAsset
             string jsonContent = jsonFile.text;
 
-            // Deserialize the JSON data into a Dictionary
-            voiceLinesDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonContent);
+            // Deserialize the JSON data into a dynamic object
+            var jsonObject = JsonConvert.DeserializeObject<dynamic>(jsonContent);
+
+            // Extract the "VoiceLines" array from the dynamic object
+            var voiceLinesArray = jsonObject["VoiceLines"];
+
+            // Initialize the dictionary
+            voiceLinesDictionary = new Dictionary<string, string>();
+
+            // Iterate through the key-value pairs inside the "VoiceLines" array
+            foreach (var item in voiceLinesArray)
+            {
+                foreach (var kvp in item)
+                {
+                    // Add each key-value pair to the dictionary
+                    voiceLinesDictionary.Add(kvp.Name, kvp.Value.ToString()); // Convert values to string
+                }
+            }
 
             // Check if deserialization was successful
             if (voiceLinesDictionary != null)
@@ -41,9 +56,6 @@ public class VoiceLinesLoader : MonoBehaviour
         {
             Debug.LogError("JSON file not assigned in the inspector.");
         }
-        
-        // Add the dictionary to the VoiceLinesContainer
-        VoiceLinesContainer.voiceLinesDict = voiceLinesDictionary;
     }
 
     // Update is called once per frame
