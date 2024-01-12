@@ -11,7 +11,7 @@ namespace InDevelopment.Fish.For_Reference
         //If either are true then you cannot punch the object
         [Header("Punched & Hit Ground")]
         [Tooltip("If set to true then the object cannot be punched. It is automatically set to true after being punched")]
-        public bool punched;
+        public static bool punched;
         [Tooltip("If set to true then the object cannot be punched. It is automatically set to true after hitting the ground")]
         public bool hitGround;
     
@@ -117,12 +117,12 @@ namespace InDevelopment.Fish.For_Reference
             foreach (PunchForReference punchScript in GetComponentsInParent<PunchForReference>())
             {
                 if (punchScript != null)
-                    punchScript.punched = true;
+                    PunchForReference.punched = true;
             }
             foreach (PunchForReference punchScript in GetComponentsInChildren<PunchForReference>())
             {
                 if (punchScript != null)
-                    punchScript.punched = true;
+                    PunchForReference.punched = true;
             }
         
             //Apply force to the object depending on the velocity, the specified multiplier, and the direction
@@ -168,7 +168,7 @@ namespace InDevelopment.Fish.For_Reference
                 testbox.GetComponent<Rigidbody>().useGravity = false;
                 testbox.GetComponent<Transform>().rotation = new Quaternion(0, 0, 0, 0);
                 punched = false;
-                testbox.GetComponent<PunchForReference>().punched = false;
+                PunchForReference.punched = false;
                 testbox.GetComponent<PunchForReference>().hitGround = false;
                 testbox.GetComponent<PunchForReference>().lastPunchWasGood = false;
                 testbox.GetComponent<BoxCollider>().enabled = true;
