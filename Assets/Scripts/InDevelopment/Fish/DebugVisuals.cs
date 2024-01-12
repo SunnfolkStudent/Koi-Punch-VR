@@ -11,9 +11,11 @@ namespace InDevelopment.Fish
     public class DebugInitialLaunchWhenPunched : MonoBehaviour
     {
         public PunchForReference punchScript;
+        public GameObject punchLeft;
+        public GameObject punchRight;
         public Rigidbody fish;
         public Transform endPosition;
-        
+
         public bool enableDebug;
         
         private bool _punchCollidingWithFish;
@@ -23,9 +25,26 @@ namespace InDevelopment.Fish
         // This is supposed to create a drawn line from the last frame the fish is punched, towards its landing destination. :)
         // TODO: Find startPosition, endPosition.
 
+        // TODO: Use initial punch direction (angle), the force applied to punched object (speed), and estimated collision time when it collides with fish, to calculate where it will go.
+        
+        // Maybe do the below, depends whether the above To-do works:
+        
+        // Ask for public bool "punchConnectedToObject" that is enabled when bool "punched", until punch no longer collides with the given object.
+        // "punchConnectedToObject" is initially disabled on each object, but is called upon to be active by the punchScript.
+        // "punchConnectedToObject" needs coyoteTime of some sort, to keep checking for any collision for e.g. 0.02 sec before "punchConnectedToObject" = false.
+        
+        // There will be a FixedUpdate Debug.Line drawn from "punched" & "punchConnectedToObject", until "punchConnectedToObject" = false.
+        // There will be the "collision release" Debug.Line drawn once, in the moment "punchConnectedToObject" = false.
+        
         private void FixedUpdate()
         {
-            if (_punchCollidingWithFish)
+            if (PunchForReference.punched)
+            {
+                _punchCollidingWithFish = true;
+            }
+            
+            
+            if (_punchCollidingWithFish && enableDebug)
             {
                 StartCoroutine(CalculateDebugTrajectory());
             }
