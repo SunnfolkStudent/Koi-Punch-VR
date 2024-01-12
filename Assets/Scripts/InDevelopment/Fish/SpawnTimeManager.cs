@@ -5,10 +5,10 @@ namespace InDevelopment.Fish
 {
     public class SpawnTimeManager : MonoBehaviour
     {
-        [SerializeField] private float maxSpawnRate;
-        [SerializeField] private float minSpawnRate;
-        [SerializeField] private float timeToMaxSpawnRate;
-        [SerializeField] private float timeTillEnd;
+        [SerializeField] private float maxSpawnRate = 5;
+        [SerializeField] private float minSpawnRate = 1;
+        [SerializeField] private float timeToMaxSpawnRate = 30f;
+        [SerializeField] private float timeTillEnd = 60f;
         
         private void Start()
         {

@@ -84,7 +84,7 @@ namespace InDevelopment.Fish.Trajectory
         
         private static (float velocityForward, float velocityUpwards) TrajectoryVelocityFromPeakHeightDistanceAltitude(float height, float dist, float alt)
         {
-            if (height < alt)
+            if (height < alt - 1)
             {
                 Debug.LogWarning("Peak trajectory height set lower than target altitude");
                 height = alt + 1;
