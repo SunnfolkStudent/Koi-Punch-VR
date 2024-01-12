@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3218944948043325081}
   - component: {fileID: 202575621013093645}
   - component: {fileID: 5264716505511531945}
+  - component: {fileID: 2074864738684994615}
   m_Layer: 0
   m_Name: FishSpawnManager
   m_TagString: Untagged
@@ -64,9 +65,22 @@ MonoBehaviour:
   - prefabGameObject: {fileID: 1583399338037491617, guid: 35aa8376d0adbdc49936a5233dcb1642,
       type: 3}
     initialAmountInPool: 10
-  - prefabGameObject: {fileID: 1583399338037491617, guid: 65f9ea49c7c0ca5449838ec259f36720,
-      type: 3}
-    initialAmountInPool: 10
+--- !u!114 &2074864738684994615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226389944599812216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98665773052170a4a8ba2b3616495ff0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpawnRate: 5
+  minSpawnRate: 1
+  timeToMaxSpawnRate: 5
+  timeTillEnd: 10
 --- !u!1 &1704413226205134399
 GameObject:
   m_ObjectHideFlags: 0
