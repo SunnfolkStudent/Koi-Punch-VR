@@ -51,8 +51,8 @@ public class Punch : MonoBehaviour
     {
         punched = false;
         hitGround = false;
-        punchVelMultiplier = 40f;
-        punchVelThreshold = 3f;
+        //punchVelMultiplier = 40f;
+        //punchVelThreshold = 3f;
     }
 
     /////////////////////////////////////////////////////////////////////////////
