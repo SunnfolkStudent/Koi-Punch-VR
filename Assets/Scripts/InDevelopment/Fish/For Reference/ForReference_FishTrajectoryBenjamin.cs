@@ -68,11 +68,12 @@ namespace InDevelopment.Fish.For_Reference
         {
             LaunchData launchData = CalculateLaunchData();
             Vector3 previousDrawPoint = ball.position;
-
-            int resolution = 30;
-            for (int i = 1; i <= resolution; i++)
+            
+            // linePoints are the points the line will be connected through, DrawLine is a series of points to targetPos.
+            int linePoints = 30;
+            for (int i = 1; i <= linePoints; i++)
             {
-                float simulationTime = i / (float)resolution * launchData.TimeToTarget;
+                float simulationTime = i / (float)linePoints * launchData.TimeToTarget;
                 Vector3 displacement = launchData.InitialVelocity * simulationTime +
                                        Vector3.up * (gravity * simulationTime * simulationTime) / 2f;
                 Vector3 drawPoint = ball.position + displacement;

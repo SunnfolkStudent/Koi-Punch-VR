@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace InDevelopment
+namespace InDevelopment.Fish.For_Reference
 {
     public class PunchForReference : MonoBehaviour
     { 
@@ -69,11 +69,14 @@ namespace InDevelopment
         
             //check the impact angle/location
             Vector3 avgPoint = Vector3.zero;
-            foreach (ContactPoint p in other.contacts)
-                avgPoint += p.point;
-        
+            
+            // Below foreach loop finds all contact points on the punched object, and summarizes them.
+            foreach (ContactPoint p in other.contacts) avgPoint += p.point;
+            
+            // avgPoint is divided by the number of contacts. avgPoint is where the force will be applied.
             avgPoint /= other.contacts.Length; 
-
+            
+            // Direction is calculated by subtracting the punchPosition Vector from the avgPoint Vector.
             Vector3 dir = (avgPoint - transform.position).normalized;
             
             // TODO: Use the above code to calculate where the fish is going to go / where to add velocity.
@@ -102,7 +105,7 @@ namespace InDevelopment
         /// The force corresponds to the var direction that is passed in from the OnCollisionEnter
         /// and by the velocity of the punch                               
         //////////////////////////////////////////////////////////////////////////////////////////
-        private void PunchObject(String fistUsed, Vector3 direction)
+        public void PunchObject(String fistUsed, Vector3 direction)
         {
             rigidbody.useGravity = true;
         
