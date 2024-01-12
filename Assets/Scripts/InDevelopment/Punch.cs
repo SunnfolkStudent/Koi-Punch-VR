@@ -40,8 +40,9 @@ public class Punch : MonoBehaviour
     public bool lastPunchWasGood;
 
     //Add some variables here if you need to test things
-    [Header("Testing Shit")]
+    [Header("Testing and Debug")]
     public Transform testbox;
+    public bool showDebugLines;
     
     //Gather necessary components
     private void Start()
@@ -53,29 +54,31 @@ public class Punch : MonoBehaviour
        // rigidbody.useGravity = false;
     }
     
+    /// <summary>
+    /// Run whenever the fish becomes enabled
+    /// </summary>
     private void OnEnable()
     {
         punched = false;
         hitGround = false;
-        //punchVelMultiplier = 40f;
-        //punchVelThreshold = 3f;
+        showDebugLines = true;
     }
 
-    /////////////////////////////////////////////////////////////////////////////
+    /// <summary>
     /// I think you can safely ignore this method for now
-    /////////////////////////////////////////////////////////////////////////////
+    /// </summary>
     private void OnTriggerEnter(Collider other)
     {
         Reset();
     }
     
     
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
     /// When the fist collides with the object it checks which fist it was that collided
     /// it then calculates where the punch was on the object
     /// It then calls the PunchObject method specifying the fist used for the punch and the direction to send the object
     /// Checks if the object hits the ground. If true then sets the hitGround var to true
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// </summary>
     private void OnCollisionEnter(Collision other)
     {
         // reset testbox
@@ -124,22 +127,20 @@ public class Punch : MonoBehaviour
     }
 
 
-    //////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
     /// Checks which fist was used for the punch and then applies a force to the object
     /// The force corresponds to the var direction that is passed in from the OnCollisionEnter
     /// and by the velocity of the punch                               
-    //////////////////////////////////////////////////////////////////////////////////////////
+    /// </summary>
     private void PunchObject(String fistUsed, Vector3 direction)
     {
         rigidbody.useGravity = true;
         
         // Do not allow punches if the object has already been punched/has hit the ground
         if (punched || hitGround) { Debug.Log("Punch does not qualify as it has already been punched or hit the ground"); return; }
-
-        punched = true;
-
-        punchCollisionTimerStart = Time.time;
         
+        punchCollisionTimerStart = Time.time;
+        punched = true;
         // when punched = true, punch has just now collided with fish, so punchCollidingWithObject is also true now.
         //Set all the other parts of the fish to be unpunchable
         foreach (Punch punchScript in GetComponentsInParent<Punch>())
@@ -152,6 +153,8 @@ public class Punch : MonoBehaviour
             if (punchScript != null)
                 punchScript.punched = true;
         }
+
+        var cubeLaunchDir = Vector3.zero;
         
         //Apply force to the object depending on the velocity, the specified multiplier, and the direction
         if (fistUsed.Equals("LeftFist"))
@@ -161,10 +164,8 @@ public class Punch : MonoBehaviour
             { Debug.Log("Punch Velocity was too weak"); return; }
             
             punchForceMultiplier = controllerManager.leftVelMagnitude * punchVelMultiplier;
-            var cubeLaunchDir = direction * -punchForceMultiplier;
-            
+            cubeLaunchDir = direction * -punchForceMultiplier;
             Debug.Log("Punched with Left Fist with Force of " + punchForceMultiplier + "\nand a Direction of " + cubeLaunchDir);
-            rigidbody.AddForce(cubeLaunchDir, ForceMode.VelocityChange);
         }
 
         if (fistUsed.Equals("RightFist"))
@@ -174,15 +175,17 @@ public class Punch : MonoBehaviour
             { Debug.Log("Punch Velocity was too weak"); return; }
             
             punchForceMultiplier = controllerManager.rightVelMagnitude * punchVelMultiplier;
-            var cubeLaunchDir = direction * -punchForceMultiplier;
-            
+            cubeLaunchDir = direction * -punchForceMultiplier;
             Debug.Log("Punched with Right Fist with Force of " + (punchForceMultiplier) + "\nand a Direction of " + cubeLaunchDir);
-            rigidbody.AddForce(cubeLaunchDir, ForceMode.VelocityChange);
         }
+        
+        rigidbody.AddForce(cubeLaunchDir, ForceMode.VelocityChange);
         
         //Add a slight upwards force
         //rigidbody.AddForce(transform.up * (punchForceMultiplier / 3), ForceMode.VelocityChange);
-
+        if (showDebugLines)
+            Debug.DrawLine(transform.position, transform.position + cubeLaunchDir, Color.red, 2.5f);
+        
         lastPunchWasGood = true;
     }
 
