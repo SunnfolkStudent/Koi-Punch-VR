@@ -24,7 +24,7 @@ namespace InDevelopment.Fish.Trajectory
         {
             var targetDir = objTransform.position - target;
             var angle = Vector3.Angle(targetDir, objTransform.forward);
-            objTransform.rotation = new quaternion(0, angle, 0, (float)Space.World);
+            objTransform.rotation = new Quaternion(0, angle, 0, (float)Space.World);
         }
     }
 }
