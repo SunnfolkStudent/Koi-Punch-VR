@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public class BoidManager : MonoBehaviour {
@@ -10,6 +9,7 @@ public class BoidManager : MonoBehaviour {
     public ComputeShader compute;
     Boid[] boids;
 
+    [Obsolete("Obsolete")]
     void Start () {
         boids = FindObjectsOfType<Boid> ();
         foreach (Boid b in boids) {
