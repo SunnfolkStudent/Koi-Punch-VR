@@ -21,7 +21,6 @@ namespace InDevelopment.Fish
         private bool _punchCollidingWithFish;
         private bool _fishTravels;
         
-        
         // This is supposed to create a drawn line from the last frame the fish is punched, towards its landing destination. :)
         // TODO: Find startPosition, endPosition.
 
@@ -42,7 +41,6 @@ namespace InDevelopment.Fish
             {
                 _punchCollidingWithFish = true;
             }
-            
             
             if (_punchCollidingWithFish && enableDebug)
             {
