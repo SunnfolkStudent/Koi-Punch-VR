@@ -6,7 +6,7 @@ LightingSettings:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Lighting Settings
+  m_Name: BaselineLighting
   serializedVersion: 8
   m_EnableBakedLightmaps: 1
   m_EnableRealtimeLightmaps: 0
@@ -21,10 +21,10 @@ LightingSettings:
   m_UseMipmapLimits: 1
   m_BakeResolution: 40
   m_Padding: 2
-  m_LightmapCompression: 0
+  m_LightmapCompression: 3
   m_AO: 1
-  m_AOMaxDistance: 1.09
-  m_CompAOExponent: 0.88
+  m_AOMaxDistance: 1
+  m_CompAOExponent: 1
   m_CompAOExponentDirect: 0
   m_ExtractAO: 0
   m_MixedBakeMode: 2
