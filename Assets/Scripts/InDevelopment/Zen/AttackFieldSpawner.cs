@@ -7,6 +7,7 @@ public class AttackFieldSpawner : MonoBehaviour
     public GameObject objectToSpawn; // Prefab of the object to spawn
     private GameObject _targetObject; // The game object onto which to spawn objects
     public float spawnInterval = 2f; // Interval between spawns
+    private float _distanceBetweenSpawns = 1.5f; // Distance between spawned objects
 
     private bool _isSpawning;
     private float _timeSinceLastSpawn;
@@ -22,11 +23,11 @@ public class AttackFieldSpawner : MonoBehaviour
         else if (!ZenMetreManager.Instance.attackFieldsActive && _isSpawning)
         {
             _isSpawning = false;
-            StopCoroutine(Spawning());
+            StopAllCoroutines();
         }
     }
 
-    private void SpawnObjectOnSurface()
+    private IEnumerator SpawnObjectOnSurface()
     {
         bool isReady = false;
         Vector3 randomPoint = Vector3.zero;
@@ -46,12 +47,17 @@ public class AttackFieldSpawner : MonoBehaviour
                 {
                     if (attackField != null)
                     {
-                        if (Vector3.Distance(randomPoint, attackField.transform.position) < 1f)
+                        if (Vector3.Distance(randomPoint, attackField.transform.position) < _distanceBetweenSpawns)
                         {
                             isReady = false;
                         }
                     }
                 }
+            }
+
+            if (!isReady)
+            {
+                yield return new WaitForSecondsRealtime(0.5f);
             }
         }
         float randomScaleMultiplier = Random.Range(0.8f, 1.8f);
@@ -59,6 +65,7 @@ public class AttackFieldSpawner : MonoBehaviour
         // Spawn the object at the random point on the surface
         GameObject spawnedObject = Instantiate(objectToSpawn, randomPoint, Quaternion.identity);
         spawnedObject.transform.localScale *= randomScaleMultiplier;
+        yield return null;
     }
 
     private Vector3 GetRandomPointOnVisibleSide(GameObject target)
@@ -111,7 +118,8 @@ public class AttackFieldSpawner : MonoBehaviour
             if (_timeSinceLastSpawn >= spawnInterval)
             {
                 _timeSinceLastSpawn = 0f;
-                SpawnObjectOnSurface();
+                StopCoroutine(SpawnObjectOnSurface());
+                StartCoroutine(SpawnObjectOnSurface());
             }
 
             yield return null;

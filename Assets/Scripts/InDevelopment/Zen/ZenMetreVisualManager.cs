@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,7 +20,10 @@ public class ZenMetreVisualManager : MonoBehaviour
     private float _maxZenMetreValue = 100f;
     
     [Header("Sparkle List")]
-    public List<GameObject> sparkleList = new List<GameObject>();
+    private List<GameObject> _sparkleList = new List<GameObject>();
+    
+    [Header("Prompt Text")]
+    public TextMeshProUGUI promptText;
     
     [Header("Testing, please ignore")]
     private float _oldZenMetreValue;
@@ -47,8 +51,10 @@ public class ZenMetreVisualManager : MonoBehaviour
         _zenMetreBarLevel2Material.SetFloat("_FillAmount", 0);
         _zenMetreBarLevel3Material.SetFloat("_FillAmount", 0);
         
-        sparkleList = GameObject.FindGameObjectsWithTag("Sparkle").ToList();
+        _sparkleList = GameObject.FindGameObjectsWithTag("Sparkle").ToList();
         HideSparkles();
+        
+        HidePromptText();
     }
     
     //Update is for testing purposes only
@@ -91,7 +97,7 @@ public class ZenMetreVisualManager : MonoBehaviour
     
     public void ShowSparkles()
     {
-        foreach (GameObject sparkle in sparkleList)
+        foreach (GameObject sparkle in _sparkleList)
         {
             sparkle.SetActive(true);
         }
@@ -99,9 +105,20 @@ public class ZenMetreVisualManager : MonoBehaviour
     
     public void HideSparkles()
     {
-        foreach (GameObject sparkle in sparkleList)
+        foreach (GameObject sparkle in _sparkleList)
         {
             sparkle.SetActive(false);
         }
+    }
+    
+    public void ShowPromptText(string textToBePrompted)
+    {
+        promptText.gameObject.SetActive(true);
+        promptText.text = textToBePrompted;
+    }
+    
+    public void HidePromptText()
+    {
+        promptText.gameObject.SetActive(false);
     }
 }

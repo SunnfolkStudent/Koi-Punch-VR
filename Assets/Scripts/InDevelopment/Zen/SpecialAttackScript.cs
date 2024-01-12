@@ -23,6 +23,15 @@ public class SpecialAttackScript : MonoBehaviour
     
     void Update()
     {
+        //IF BUTTON WAS PRESSED
+        //SET PROMPT TO OFF
+        //SET CHARGING PUNCH TO TRUE
+        
+        //IF BUTTON WAS RELEASED
+        //SET CHARGING PUNCH TO FALSE
+        //SET PUNCH CHARGED TO TRUE
+        //CALCULATE PUNCH FORCE
+        
         if (chargingPunch)
         {
             ZenMetreManager.Instance.zenMetreValue -= _zenLostPerSecond * Time.unscaledDeltaTime;
