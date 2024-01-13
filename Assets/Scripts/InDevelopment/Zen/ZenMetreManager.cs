@@ -50,7 +50,7 @@ public class ZenMetreManager : MonoBehaviour
     {
         if (zenMetreValue >= 100 && zenLevel == 0 && !_zenPhase0Invoked)
         {
-            EventManager.BossPhase0.Invoke();
+            EventManager.ZenBar1Full.Invoke();
             _zenPhase0Invoked = true;
         }
     }
@@ -107,6 +107,8 @@ public class ZenMetreManager : MonoBehaviour
     //Level one of zen is the start level. It is the level before anything happens with the zen.
     private void LevelZero()
     {
+        EventManager.BossPhase0.Invoke();
+        
         if (_zenLevelCheckpoint <= 1)
             ZenMetreVisualManager.Instance.UpdateZenBar(1, 0f);
         
@@ -144,7 +146,7 @@ public class ZenMetreManager : MonoBehaviour
     {
         zenMetreValue = 0;
         
-        //Start of level 3
+        //Start of level 2
         tripleScoreActive = true;
         _zenLevelCheckpoint = 1;
         StartCoroutine(TripleScoreTimer());
@@ -157,7 +159,7 @@ public class ZenMetreManager : MonoBehaviour
     {
         zenMetreValue = 0;
         
-        //Start of level 4
+        //Start of level 3
         EventManager.BossPhase3.Invoke();
         zenAttackActive = true;
         _zenLevelCheckpoint = 2;
@@ -193,6 +195,7 @@ public class ZenMetreManager : MonoBehaviour
     
     private IEnumerator AttackFieldSpawnTimer()
     {
+        EventManager.BossPhase1.Invoke();
         yield return new WaitForSecondsRealtime(_attackFieldsActiveTime);
         
         attackFieldsActive = false;
