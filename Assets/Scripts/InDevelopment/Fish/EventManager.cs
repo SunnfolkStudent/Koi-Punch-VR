@@ -6,8 +6,9 @@ namespace InDevelopment.Fish
     {
         #region ---Events---
         public delegate void Event();
-        public static Event SpawnFish = SpawnFishDebug;
-        public static Event StartLevel;
+        public static Event SpawnFish;
+        public static Event FishSpawning = SpawnFishDebug;
+        public static Event FishSpawningAtMaxRate = SpawnFishDebug;
         public static Event LevelOver = LevelOverDebug;
         public static Event BossPhase0;
         public static Event BossPhase1;
@@ -20,7 +21,7 @@ namespace InDevelopment.Fish
         #region ---EventDebugs---
         private static void SpawnFishDebug()
         {
-            Debug.Log("Fish Spawn; Event Invoked");
+            Debug.Log("Fish Spawning; Event Invoked");
         }
         
         private static void LevelOverDebug()

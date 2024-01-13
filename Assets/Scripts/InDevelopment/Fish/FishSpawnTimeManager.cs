@@ -15,18 +15,23 @@ namespace InDevelopment.Fish
         #region ---Initialization---
         private void Start()
         {
-            EventManager.StartLevel += StartSpawning;
+            EventManager.FishSpawning += StartSpawning;
             EventManager.LevelOver += StopSpawning;
+            EventManager.FishSpawningAtMaxRate += StartSpawningAtMaxRate;
             
-            EventManager.StartLevel.Invoke();
+            EventManager.FishSpawning.Invoke();
         }
         #endregion
         
         #region ---FishSpawnFrequencyControls---
         private void StartSpawning()
         {
-            isSpawningFish = true;
             StartCoroutine(SpawnFish());
+        }
+        
+        private void StartSpawningAtMaxRate()
+        {
+            StartCoroutine(SpawnFishMaxRate());
         }
 
         private static void StopSpawning()
@@ -38,12 +43,23 @@ namespace InDevelopment.Fish
         #region ---FishFrequencyTimer---
         private IEnumerator SpawnFish()
         {
+            isSpawningFish = true;
             var minSpawnTime = 1 / maxSpawnRate;
             var maxSpawnTime = 1 / minSpawnRate;
             while (isSpawningFish)
             {
                 var nextSpawnTime = Mathf.Lerp(maxSpawnTime, minSpawnTime, Time.time / timeToMaxSpawnRate);
                 yield return new WaitForSeconds(nextSpawnTime);
+                EventManager.SpawnFish.Invoke();
+            }
+        }
+        
+        private IEnumerator SpawnFishMaxRate()
+        {
+            var spawnTime = 1 / maxSpawnRate;
+            while (isSpawningFish)
+            {
+                yield return new WaitForSeconds(spawnTime);
                 EventManager.SpawnFish.Invoke();
             }
         }

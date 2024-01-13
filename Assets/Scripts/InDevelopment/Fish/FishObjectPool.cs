@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace InDevelopment.Fish
 {
     public class FishObjectPool : MonoBehaviour
     {
-        // TODO: Other properties on fish
+        // TODO: Other properties on fish?
         public static List<FishPool> FishPools;
         private static Transform _fishContainer;
         [SerializeField] private InspectorPrefab[] fishPrefab;
@@ -16,6 +17,7 @@ namespace InDevelopment.Fish
         {
             public GameObject prefabGameObject;
             public int initialAmountInPool;
+            public float zenFromFish;
         }
         
         #region ---Initialization---
@@ -25,7 +27,7 @@ namespace InDevelopment.Fish
             FishPools = new List<FishPool>();
             foreach (var prefab in fishPrefab)
             {
-                FishPools.Add(new FishPool(prefab.prefabGameObject, prefab.initialAmountInPool));
+                FishPools.Add(new FishPool(prefab.prefabGameObject, prefab.initialAmountInPool, prefab.zenFromFish));
             }
         }
         #endregion
@@ -36,9 +38,9 @@ namespace InDevelopment.Fish
             public readonly Prefab Prefab;
             public readonly List<Fish> Fishes;
 
-            public FishPool(GameObject prefab, int initialAmount)
+            public FishPool(GameObject prefab, int initialAmount, float zenFromFish)
             {
-                Prefab = new Prefab(prefab);
+                Prefab = new Prefab(prefab, zenFromFish);
                 Fishes = new List<Fish>();
                 AddMultipleFishToPool(initialAmount, this);
             }
@@ -49,11 +51,13 @@ namespace InDevelopment.Fish
         {
             public readonly GameObject GameObject;
             public readonly PrefabChild[] Children;
+            public readonly float ZenAmount;
             
-            public Prefab(GameObject gameObject)
+            public Prefab(GameObject gameObject, float zenFromFish)
             {
                 GameObject = gameObject;
                 Children = gameObject.GetComponentsInChildren<Transform>().Select(transform1 => new PrefabChild(transform1)).ToArray();
+                ZenAmount = zenFromFish;
             }
         }
         

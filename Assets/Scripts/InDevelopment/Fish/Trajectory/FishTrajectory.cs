@@ -9,6 +9,11 @@ namespace InDevelopment.Fish.Trajectory
         // TODO: When using speed for trajectory stop too low speeds from creating an error
         // TODO: When using angle for trajectory fix why 3% chance of error
         
+        #region ---Debugging---
+        private static bool _isDebugging;
+        private static void Log(string message) => Debug.Log(message);
+        #endregion
+        
         #region ---LaunchOptions---
         public static void LaunchObjectAtTargetWithInitialSpeed(IEnumerable<Rigidbody> objRigidbody, Vector3 objPos, Vector3 targetPos, float speed, bool tall = false)
         {
@@ -63,7 +68,7 @@ namespace InDevelopment.Fish.Trajectory
             var velocityForward = Mathf.Cos(angleInRadians) * speed;
             var velocityUpwards = Mathf.Sin(angleInRadians) * speed;
             
-            // Debug.Log($"speed: {speed}, dist: {dist}, alt: {alt} | velocityForward: {velocityForward}, velocityUpwards: {velocityUpwards}");
+            if (_isDebugging) Log($"speed: {speed}, dist: {dist}, alt: {alt} | velocityForward: {velocityForward}, velocityUpwards: {velocityUpwards}");
             
             return (velocityForward, velocityUpwards);
         }
@@ -76,7 +81,7 @@ namespace InDevelopment.Fish.Trajectory
             var velocityForward = (float)Math.Abs(velocityTotal * Mathf.Cos(angle));
             var velocityUpwards = (float)Math.Abs(velocityTotal * Mathf.Sin(angle));
             
-            // Debug.Log($"angle: {angle}, dist: {dist}, alt: {alt} | velocityForward: {velocityForward}, velocityUpwards: {velocityUpwards}");
+            if (_isDebugging) Log($"angle: {angle}, dist: {dist}, alt: {alt} | velocityForward: {velocityForward}, velocityUpwards: {velocityUpwards}");
             
             return (velocityForward, velocityUpwards);
         }
@@ -90,8 +95,8 @@ namespace InDevelopment.Fish.Trajectory
             }
             var velocityForward = Mathf.Sqrt(-2 * Physics.gravity.y * height);
             var velocityUpwards = dist / (Mathf.Sqrt(-((2 * height) / Physics.gravity.y)) + Mathf.Sqrt((2 * (alt - height)) / Physics.gravity.y));
-            
-            // Debug.Log($"height: {height}, dist: {dist}, alt: {alt} | velocityForward: {velocityForward}, velocityUpwards: {velocityUpwards}");
+
+            if (_isDebugging) Log($"height: {height}, dist: {dist}, alt: {alt} | velocityForward: {velocityForward}, velocityUpwards: {velocityUpwards}");
             
             return (velocityUpwards, velocityForward);
         }

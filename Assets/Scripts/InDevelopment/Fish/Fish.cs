@@ -15,6 +15,7 @@ namespace InDevelopment.Fish
                 Despawn();
             }
         }
+        
         private void OnEnable()
         {
             _startTime = Time.time;
@@ -26,6 +27,12 @@ namespace InDevelopment.Fish
             {
                 Despawn();
             }
+        }
+        
+        // TODO: Punch script needs to make the fish call this function
+        private void AddZen()
+        {
+            ZenMetreManager.Instance.AddHitZen(fish.FishPool.Prefab.ZenAmount);
         }
         
         private void Despawn()
