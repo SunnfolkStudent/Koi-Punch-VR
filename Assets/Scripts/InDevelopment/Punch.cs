@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Punch : MonoBehaviour
 { 
@@ -61,6 +59,7 @@ public class Punch : MonoBehaviour
     {
         punched = false;
         hitGround = false;
+        lastPunchWasGood = false;
         showDebugLines = true;
     }
 
@@ -84,26 +83,20 @@ public class Punch : MonoBehaviour
         // reset testbox
         Reset();
         
-        //check the impact angle/location
-        Vector3 avgPoint = Vector3.zero;
-        foreach (ContactPoint p in other.contacts)
-            avgPoint += p.point;
-        
-        avgPoint /= other.contacts.Length; 
-
-        Vector3 dir = (avgPoint - transform.position).normalized;
+        //check the impact location and direction to object center
+        Vector3 dir = FindDirectionToCenter(other);
         
         //make unpunchable if object has hit the ground
         if (other.transform.CompareTag("Ground")) {hitGround = true;}
 
-        //Calls punchObject method with fist and direction as parameters
+        //Calls punchObject method with fistVelMagnitude and direction as parameters
         if (other.gameObject.CompareTag("LeftFist"))
         {
             if (controllerManager._leftGrip != 1f)
             { Debug.Log("Punch does not qualify as the player did not make a fist"); return; }
             
             Debug.Log("Registered Left Fist Hit");
-            PunchObject("LeftFist", dir);
+            PunchObject(controllerManager.leftVelMagnitude, dir);
             //HapticManager.leftFishPunch = true;
         }
         else if (other.gameObject.CompareTag("RightFist"))
@@ -112,7 +105,7 @@ public class Punch : MonoBehaviour
             { Debug.Log("Punch does not qualify as the player did not make a fist"); return; }
             
             Debug.Log("Registered Right Fist Hit");
-            PunchObject("RightFist", dir);
+            PunchObject(controllerManager.rightVelMagnitude, dir);
             //HapticManager.rightFishPunch = true;
         }
         
@@ -136,13 +129,27 @@ public class Punch : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Finds the direction from a the average location of a collision to the object center 
+    /// </summary>
+    /// <param name="other"></param>
+    /// <returns>The direction to the center of the object</returns>
+    private Vector3 FindDirectionToCenter(Collision other)
+    {
+        Vector3 avgPoint = Vector3.zero;
+        foreach (ContactPoint p in other.contacts)
+            avgPoint += p.point;
+        
+        avgPoint /= other.contacts.Length; 
+        return (avgPoint - transform.position).normalized;
+    }
+    
     /// <summary>
     /// Checks which fist was used for the punch and then applies a force to the object
     /// The force corresponds to the var direction that is passed in from the OnCollisionEnter
     /// and by the velocity of the punch                               
     /// </summary>
-    private void PunchObject(String fistUsed, Vector3 direction)
+    private void PunchObject(float velMagnitude, Vector3 direction)
     {
         rigidbody.useGravity = true;
         
@@ -163,42 +170,28 @@ public class Punch : MonoBehaviour
             if (punchScript != null)
                 punchScript.punched = true;
         }
-
-        var cubeLaunchDir = Vector3.zero;
         
         //Apply force to the object depending on the velocity, the specified multiplier, and the direction
-        if (fistUsed.Equals("LeftFist"))
-        {
-            //Do not register punch if punch force was too weak
-            if (controllerManager.leftVelMagnitude < punchVelThreshold)
-            { Debug.Log("Punch Velocity was too weak"); return; }
-            
-            punchForceMultiplier = controllerManager.leftVelMagnitude * punchVelMultiplier;
-            cubeLaunchDir = direction * -punchForceMultiplier;
-            Debug.Log("Punched with Left Fist with Force of " + punchForceMultiplier + "\nand a Direction of " + cubeLaunchDir);
-        }
 
-        if (fistUsed.Equals("RightFist"))
-        {
-            //Do not register punch if punch force was too weak
-            if (controllerManager.rightVelMagnitude < punchVelThreshold) 
-            { Debug.Log("Punch Velocity was too weak"); return; }
+        //Do not register punch if punch force was too weak
+        if (velMagnitude < punchVelThreshold) 
+        { Debug.Log("Punch Velocity was too weak"); return; }
             
-            punchForceMultiplier = controllerManager.rightVelMagnitude * punchVelMultiplier;
-            cubeLaunchDir = direction * -punchForceMultiplier;
-            Debug.Log("Punched with Right Fist with Force of " + (punchForceMultiplier) + "\nand a Direction of " + cubeLaunchDir);
-        }
+        punchForceMultiplier = velMagnitude * punchVelMultiplier;
+        var cubeLaunchDir = direction * -punchForceMultiplier;
+        Debug.Log("Punched with Fist with Force of " + punchForceMultiplier + "\nand a Direction of " + cubeLaunchDir);
         
         rigidbody.AddForce(cubeLaunchDir, ForceMode.VelocityChange);
         
         //Add a slight upwards force
         //rigidbody.AddForce(transform.up * (punchForceMultiplier / 3), ForceMode.VelocityChange);
+        
         if (showDebugLines)
             Debug.DrawLine(transform.position, transform.position + cubeLaunchDir, Color.red, 2.5f);
         
         lastPunchWasGood = true;
     }
-
+    
     private void Reset()
     {
         if (name.Equals("Reset"))
