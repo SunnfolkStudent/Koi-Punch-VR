@@ -15,15 +15,12 @@ public class ZenMetreManager : MonoBehaviour
     public bool attackFieldsActive;
     private float _attackFieldsActiveTime = 11f;
     public bool timeStopActive;
-
-    [Header("Multipliers for adding zen")]
-    private float _attackFieldScoreMultiplier = 10f;
-    private float _hitZenScoreMultiplier = 0.1f;
     
     [Header("Zen Metre Values")]
     public float zenMetreValue;
     public int zenLevel;
     private int _zenLevelCheckpoint;
+    private bool _zenPhase0Invoked;
     
     [Header("Time Stop Values")]
     private float _slowdownFactor = 0.001f;
@@ -51,17 +48,19 @@ public class ZenMetreManager : MonoBehaviour
     //Update is for testing purposes only
     private void Update()
     {
-        if (zenMetreValue >= 100 && zenLevel == 0)
+        if (zenMetreValue >= 100 && zenLevel == 0 && !_zenPhase0Invoked)
         {
             EventManager.BossPhase0.Invoke();
+            _zenPhase0Invoked = true;
         }
     }
 
     #region -- Zen Score Methods --
     //Method that adds zen to the zen metre based on score
-    public void AddHitZen(float score)
+    public void AddHitZen(float zen)
     {
-        zenMetreValue += score * _hitZenScoreMultiplier;
+        zenMetreValue += zen;
+        ;
         
         if (zenMetreValue > 100)
         {
@@ -72,9 +71,9 @@ public class ZenMetreManager : MonoBehaviour
         CheckForMaxZen();
     }
     
-    public void AddAttackFieldZen(float attackFieldSize)
+    public void AddAttackFieldZen()
     {
-        zenMetreValue += attackFieldSize * _attackFieldScoreMultiplier;
+        zenMetreValue += 20f;
         
         if (zenMetreValue > 100)
         {
@@ -121,6 +120,8 @@ public class ZenMetreManager : MonoBehaviour
             var mainModule = _particleSystems[i].main;
             mainModule.simulationSpeed = _originalSimulationSpeeds[i];
         }
+        
+        _zenPhase0Invoked = false;
         
         //Reset music back to normal after zen mode is over
     }

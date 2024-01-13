@@ -27,11 +27,24 @@ public class SpecialAttackScript : MonoBehaviour
         //IF BUTTON WAS PRESSED
         //SET PROMPT TO OFF
         //SET CHARGING PUNCH TO TRUE
+        if (HapticManager.zenChargeing && !chargingPunch && ZenMetreManager.Instance.zenAttackActive)
+        {
+            ZenMetreManager.Instance.zenAttackActive = true;
+            ZenMetreVisualManager.Instance.HidePromptText();
+            chargingPunch = true;
+        }
         
         //IF BUTTON WAS RELEASED
         //SET CHARGING PUNCH TO FALSE
         //SET PUNCH CHARGED TO TRUE
         //CALCULATE PUNCH FORCE
+        if (!HapticManager.zenChargeing && chargingPunch)
+        {
+            chargingPunch = false;
+            punchCharged = true;
+            ZenMetreManager.Instance.zenAttackActive = false;
+            CalculatePunchForce();
+        }
         
         if (chargingPunch && !punchCharged)
         {
@@ -58,7 +71,7 @@ public class SpecialAttackScript : MonoBehaviour
     
     private void CalculatePunchForce()
     {
-        punchForce = (((4 - ZenMetreManager.Instance.zenLevel) * 100) - ZenMetreManager.Instance.zenMetreValue);
+        punchForce = (((3 - ZenMetreManager.Instance.zenLevel) * 100) - ZenMetreManager.Instance.zenMetreValue);
         ZenMetreVisualManager.Instance.UpdateZenBar(1, 0f);
         ZenMetreVisualManager.Instance.UpdateZenBar(2, 0f);
         ZenMetreVisualManager.Instance.UpdateZenBar(3, 0f);

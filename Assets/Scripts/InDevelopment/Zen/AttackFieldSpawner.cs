@@ -60,11 +60,9 @@ public class AttackFieldSpawner : MonoBehaviour
                 yield return new WaitForSecondsRealtime(0.5f);
             }
         }
-        float randomScaleMultiplier = Random.Range(0.8f, 1.8f);
         
         // Spawn the object at the random point on the surface
-        GameObject spawnedObject = Instantiate(objectToSpawn, randomPoint, Quaternion.identity);
-        spawnedObject.transform.localScale *= randomScaleMultiplier;
+        Instantiate(objectToSpawn, randomPoint, Quaternion.identity);
         yield return null;
     }
 
