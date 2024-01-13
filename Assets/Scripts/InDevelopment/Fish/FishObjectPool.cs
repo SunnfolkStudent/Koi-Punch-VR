@@ -57,13 +57,15 @@ namespace InDevelopment.Fish
             }
         }
         
-        public struct PrefabChild
+        public record PrefabChild
         {
             public readonly Transform InitialTransform;
+            public readonly Rigidbody Rigidbody;
 
             public PrefabChild(Transform transform)
             {
                 InitialTransform = transform;
+                Rigidbody = transform.gameObject.GetComponent<Rigidbody>();
             }
         }
         #endregion
@@ -71,12 +73,14 @@ namespace InDevelopment.Fish
         #region >>>---Fish---
         public class Fish
         {
+            public readonly FishPool FishPool;
             public readonly GameObject ParentGameObject;
             public readonly Child[] Children;
             
-            public Fish(GameObject fishPrefab)
+            public Fish(FishPool fishPool)
             {
-                ParentGameObject = Instantiate(fishPrefab, _fishContainer);
+                FishPool = fishPool;
+                ParentGameObject = Instantiate(fishPool.Prefab.GameObject, _fishContainer);
                 ParentGameObject.SetActive(false);
                 
                 Children = ParentGameObject.GetComponentsInChildren<Transform>().Select(transform1 => new Child(transform1)).ToArray();
@@ -104,32 +108,35 @@ namespace InDevelopment.Fish
         {
             for(var i = 0; i < amount; i++)
             {
-                AddFishToPool(fishPool);
+                AddFishInPool(fishPool);
             }
         }
 
-        public static void AddFishToPool(FishPool fishPool)
+        private static void AddFishInPool(FishPool fishPool)
         {
-            fishPool.Fishes.Add(new Fish(fishPool.Prefab.GameObject));
+            fishPool.Fishes.Add(new Fish(fishPool));
         }
         
         public static Fish GetPooledObject(FishPool fishPool)
         {
-            return fishPool.Fishes.FirstOrDefault(t => !t.ParentGameObject.activeInHierarchy);
+            var availableFishInPool = fishPool.Fishes.Where(fish => !fish.ParentGameObject.activeInHierarchy).ToArray();
+            if (availableFishInPool.Length < 2) AddFishInPool(fishPool);
+            return availableFishInPool[0];
         }
         
-        public static void DespawnFish(GameObject fish)
+        public static void DespawnFish(Fish fish)
         {
-            fish.SetActive(false);
+            ResetPropertiesOfFishInPool(fish);
+            fish.ParentGameObject.SetActive(false);
         }
-        
-        public static void ResetPropertiesOfFishInPool(Fish fish, FishPool fishPool)
+
+        private static void ResetPropertiesOfFishInPool(Fish fish)
         {
             for (var i = 0; i < fish.Children.Length; i++)
             {
-                fish.Children[i].Transform.position = fishPool.Prefab.Children[i].InitialTransform.position;
-                fish.Children[i].Transform.rotation = fishPool.Prefab.Children[i].InitialTransform.rotation;
-                fish.Children[i].Transform.localScale = fishPool.Prefab.Children[i].InitialTransform.localScale;
+                fish.Children[i].Transform.position = fish.FishPool.Prefab.Children[i].InitialTransform.position;
+                fish.Children[i].Transform.rotation = fish.FishPool.Prefab.Children[i].InitialTransform.rotation;
+                fish.Children[i].Transform.localScale = fish.FishPool.Prefab.Children[i].InitialTransform.localScale;
             }
         }
         #endregion

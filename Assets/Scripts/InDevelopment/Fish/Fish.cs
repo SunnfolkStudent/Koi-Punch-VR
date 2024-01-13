@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 
 namespace InDevelopment.Fish
@@ -7,46 +6,31 @@ namespace InDevelopment.Fish
     {
         // TODO: Fish collision
         public FishObjectPool.Fish fish { get; set; }
-        private bool _canCollide;
-        
-        private void OnEnable()
-        {
-            _canCollide = false;
-            Invoke(nameof(CanCollide), 1);
-        }
-        
-        private void CanCollide()
-        {
-            _canCollide = true;
-        }
+        private float _startTime;
         
         private void OnCollisionEnter(Collision other)
         {
-            if (_canCollide)
+            if (other.gameObject.CompareTag("Ground"))
             {
-                if (other.gameObject.CompareTag("Ground"))
-                {
-                    FishObjectPool.DespawnFish(gameObject);
-                }
-                
-                // if (other.gameObject.CompareTag("LeftFist") || other.gameObject.CompareTag("RightFist"))
-                // {
-                //     Debug.Log("Hit Player Fist", this);
-                //     var rigidities = fish.Children.Where(child => child.Rigidbody != null).Select(child => child.Rigidbody).ToArray();
-                //     foreach (var rigidbody1 in rigidities)
-                //     {
-                //         rigidbody1.velocity = Vector3.zero;
-                //     }
-                // }
+                Despawn();
             }
+        }
+        private void OnEnable()
+        {
+            _startTime = Time.time;
         }
         
         private void Update()
         {
-            if (transform.position.y < -25)
+            if (transform.position.y < -25 || _startTime < Time.time - 3.5f)
             {
-                FishObjectPool.DespawnFish(gameObject);
+                Despawn();
             }
+        }
+        
+        private void Despawn()
+        {
+            FishObjectPool.DespawnFish(fish);
         }
     }
 }

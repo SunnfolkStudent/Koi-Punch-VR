@@ -2036,11 +2036,11 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &58790960
@@ -4133,10 +4133,40 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 60125175}
+    - target: {fileID: 202575621013093645, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: maxSize
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 202575621013093645, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: minSize
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 226389944599812216, guid: b0869e6e2e592a646852ba90d715ff4c,
         type: 3}
       propertyPath: m_Name
       value: FishSpawnManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2074864738684994615, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: timeTillEnd
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2074864738684994615, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: maxSpawnRate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2074864738684994615, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: minSpawnRate
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2074864738684994615, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: timeToMaxSpawnRate
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3218944948043325081, guid: b0869e6e2e592a646852ba90d715ff4c,
         type: 3}
@@ -4192,7 +4222,7 @@ PrefabInstance:
         type: 3}
       propertyPath: fishPrefab.Array.data[0].prefabGameObject
       value: 
-      objectReference: {fileID: 3186142855119285005, guid: f48f7339ab6428b4f922a0b20e52134a,
+      objectReference: {fileID: 471582657252072425, guid: f48f7339ab6428b4f922a0b20e52134a,
         type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6113,7 +6143,7 @@ GameObject:
   - component: {fileID: 542946707}
   m_Layer: 0
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

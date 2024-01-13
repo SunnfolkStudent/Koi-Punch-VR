@@ -12,19 +12,19 @@ namespace InDevelopment.Fish.Trajectory
         
         private void Start()
         {
-            var fishPosition = transform.position;
+            var fishTransform = transform;
             var targetPosition = playerTransform.position;
 
-            RotateObjTowards(transform, targetPosition);
+            RotateObjTowards(fishTransform, targetPosition);
             
-            FishTrajectory.LaunchObjectAtTargetWithInitialSpeed(_rigidbody, fishPosition, targetPosition, fishSpeed);
+            FishTrajectory.LaunchObjectAtTargetWithInitialSpeed(_rigidbody, fishTransform.position, targetPosition, fishSpeed);
         }
 
         private static void RotateObjTowards(Transform objTransform, Vector3 target)
         {
             var targetDir = objTransform.position - target;
             var angle = Vector3.Angle(targetDir, objTransform.forward);
-            objTransform.rotation = new quaternion(0, angle, 0, (float)Space.World);
+            objTransform.rotation = new Quaternion(0, angle, 0, (float)Space.World);
         }
     }
 }

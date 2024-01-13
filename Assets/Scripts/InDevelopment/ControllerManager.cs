@@ -34,8 +34,8 @@ public class ControllerManager : MonoBehaviour
     [SerializeField] private InputActionReference leftGripAction;
     
     [Header("Input Values")]
-    [SerializeField] private float _leftGrip;
-    [SerializeField] private float _rightGrip;
+    public float _leftGrip;
+    public float _rightGrip;
     
     [Header("Hand Game Objects")]
     [SerializeField] private GameObject leftOpenHand;

@@ -99,12 +99,18 @@ public class Punch : MonoBehaviour
         //Calls punchObject method with fist and direction as parameters
         if (other.gameObject.CompareTag("LeftFist"))
         {
+            if (controllerManager._leftGrip != 1f)
+            { Debug.Log("Punch does not qualify as the player did not make a fist"); return; }
+            
             Debug.Log("Registered Left Fist Hit");
             PunchObject("LeftFist", dir);
             HapticManager.leftFishPunch = true;
         }
         else if (other.gameObject.CompareTag("RightFist"))
         {
+            if (controllerManager._rightGrip != 1f)
+            { Debug.Log("Punch does not qualify as the player did not make a fist"); return; }
+            
             Debug.Log("Registered Right Fist Hit");
             PunchObject("RightFist", dir);
             HapticManager.rightFishPunch = true;
