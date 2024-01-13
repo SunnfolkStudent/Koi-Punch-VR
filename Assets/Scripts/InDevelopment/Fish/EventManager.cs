@@ -9,7 +9,8 @@ namespace InDevelopment.Fish
         public static Event SpawnFish;
         public static Event FishSpawning = SpawnFishDebug;
         public static Event FishSpawningAtMaxRate = SpawnFishDebug;
-        public static Event LevelOver = LevelOverDebug;
+        public static Event StopFishSpawning = LevelOverDebug;
+        public static Event ZenBar1Full;
         public static Event BossPhase0;
         public static Event BossPhase1;
         public static Event BossPhase2;
