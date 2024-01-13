@@ -1,18 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChangeMenus : MonoBehaviour
+public class ChangeMenus : BreakOnHit
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private GameObject newMenuParent;
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision other)
     {
-        
+        if(other.gameObject.tag == "Player")
+        {
+            Debug.Log("collision detected");
+
+            HittingSign();
+            // make all other signs break
+
+            // make new signs appear, instantiate
+            Instantiate(newMenuParent);
+        }
     }
 }

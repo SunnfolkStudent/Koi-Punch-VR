@@ -6,7 +6,6 @@ using UnityEngine;
 public class TransitionAnimation : MonoBehaviour
 {
     private Animator _animator;
-    [SerializeField] private string _explodingAnimClip;
 
     private void Start()
     {
@@ -17,7 +16,7 @@ public class TransitionAnimation : MonoBehaviour
     {
         if (_animator != null)
         {
-            _animator.SetTrigger("TransitionAnimation");
+            _animator.SetTrigger("MenuTransition");
         }
         Destroy(gameObject,5f);
     }
