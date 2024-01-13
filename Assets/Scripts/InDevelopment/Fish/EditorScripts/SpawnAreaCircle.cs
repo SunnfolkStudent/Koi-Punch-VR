@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace InDevelopment.Fish
+namespace InDevelopment.Fish.EditorScripts
 {
     [ExecuteInEditMode]
     [RequireComponent(typeof(LineRenderer))]

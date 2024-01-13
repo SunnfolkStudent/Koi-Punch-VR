@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
-namespace InDevelopment.Fish
+namespace InDevelopment.Fish.EditorScripts
 {
     public class TestForceSettings : MonoBehaviour
     {

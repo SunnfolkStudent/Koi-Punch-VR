@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using InDevelopment.Fish.EditorScripts;
 using InDevelopment.Fish.Trajectory;
 using UnityEngine;
 using UnityEngine.InputSystem;

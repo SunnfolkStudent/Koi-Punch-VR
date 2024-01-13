@@ -1,11 +1,7 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using InDevelopment.Fish.Trajectory;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-namespace InDevelopment.Fish
+namespace InDevelopment.Fish.EditorScripts
 {
     public class DebugInitialLaunchWhenPunched : MonoBehaviour
     {
