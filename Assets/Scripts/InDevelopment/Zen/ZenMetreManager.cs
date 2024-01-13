@@ -35,7 +35,7 @@ public class ZenMetreManager : MonoBehaviour
     private void Awake()
     {
         zenMetreValue = 0;
-        zenLevel = 1;
+        zenLevel = 0;
 
         if (Instance == null)
         {
@@ -50,9 +50,9 @@ public class ZenMetreManager : MonoBehaviour
     //Update is for testing purposes only
     private void Update()
     {
-        if (zenMetreValue >= 101 && zenLevel == 1 && zenAttackActive == false)
+        if (zenMetreValue >= 100 && zenLevel == 0)
         {
-            zenLevel = 2;
+            zenLevel = 1;
             SetZenLevel();
         }
     }
@@ -90,6 +90,9 @@ public class ZenMetreManager : MonoBehaviour
     {
         switch (zenLevel)
         {
+            case 0:
+                LevelZero();
+                break;
             case 1:
                 LevelOne();
                 break;
@@ -99,19 +102,16 @@ public class ZenMetreManager : MonoBehaviour
             case 3:
                 LevelThree();
                 break;
-            case 4:
-                LevelFour();
-                break;
         }
     }
     
     //Level one of zen is the start level. It is the level before anything happens with the zen.
-    private void LevelOne()
+    private void LevelZero()
     {
-        if (_zenLevelCheckpoint <= 2)
-            ZenMetreVisualManager.Instance.UpdateZenBar(2, 0f);
+        if (_zenLevelCheckpoint <= 1)
+            ZenMetreVisualManager.Instance.UpdateZenBar(1, 0f);
         
-        ZenMetreVisualManager.Instance.UpdateZenBar(3, 0f);
+        ZenMetreVisualManager.Instance.UpdateZenBar(2, 0f);
         
         timeStopActive = false;
         
@@ -126,9 +126,9 @@ public class ZenMetreManager : MonoBehaviour
     }
     
     //Method that moves on to the second level of zen
-    private void LevelTwo()
+    private void LevelOne()
     {
-        _zenLevelCheckpoint = 2;
+        _zenLevelCheckpoint = 1;
         timeStopActive = true;
         zenMetreValue = 0;
         StartCoroutine(TimeStop());
@@ -139,26 +139,26 @@ public class ZenMetreManager : MonoBehaviour
     }
     
     //Method that moves on to the third level of zen
-    private void LevelThree()
+    private void LevelTwo()
     {
         zenMetreValue = 0;
         
         //Start of level 3
         tripleScoreActive = true;
-        _zenLevelCheckpoint = 3;
+        _zenLevelCheckpoint = 1;
         StartCoroutine(TripleScoreTimer());
         
         //Add music for the third level of zen
     }
     
     //Level four is the last level of zen and is the level where you unlock your ultimate move.
-    private void LevelFour()
+    private void LevelThree()
     {
         zenMetreValue = 0;
         
         //Start of level 4
         zenAttackActive = true;
-        _zenLevelCheckpoint = 4;
+        _zenLevelCheckpoint = 2;
         ZenMetreVisualManager.Instance.ShowPromptText("Hold side button to charge punch!");
         //ControllerRumble.Instance.RightControllerRumbling(0.4f,5f);
         //ControllerRumble.Instance.LeftControllerRumbling(0.4f,5f);
@@ -176,12 +176,12 @@ public class ZenMetreManager : MonoBehaviour
         
         if (zenMetreValue >= 100)
         {
-            zenLevel = 4;
+            zenLevel = 3;
             SetZenLevel();
         }
         else
         {
-            zenLevel = 1;
+            zenLevel = 0;
             zenMetreValue = 100;
             SetZenLevel();
         }
@@ -196,7 +196,7 @@ public class ZenMetreManager : MonoBehaviour
         
         if (zenMetreValue >= 100)
         {
-            zenLevel = 3;
+            zenLevel = 2;
             SetZenLevel();
         }
         else
@@ -245,7 +245,7 @@ public class ZenMetreManager : MonoBehaviour
 
     public void CheckForMaxZen()
     {
-        if (zenMetreValue >= 100 && zenLevel >= 3)
+        if (zenMetreValue >= 100 && zenLevel >= 2)
         {
             ZenMetreVisualManager.Instance.ShowSparkles();
         }
