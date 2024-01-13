@@ -1,66 +1,49 @@
-using Newtonsoft.Json;
-using System.Collections.Generic;
 using UnityEngine;
+using Newtonsoft.Json.Linq;
+using System.IO;
+using System.Collections.Generic;
 
-public class VoiceLinesLoader : MonoBehaviour
+public static class VoiceLinesLoader
 {
-    // Reference to the JSON document in the Unity Inspector
-    public TextAsset jsonFile;
+    public static Dictionary<string, string> voiceLinesDict = new Dictionary<string, string>();
 
-    // Dictionary to store the key-value pairs from the JSON
-    private Dictionary<string, string> voiceLinesDictionary;
-
-    // Start is called before the first frame update
-    void Awake()
+    public static void LoadCategoryKeysAndValues(string category)
     {
-        // Check if the jsonFile is assigned
-        if (jsonFile != null)
+        string filePath = Path.Combine(Application.streamingAssetsPath, "SubtitlesTXTFiles/VoiceLines.json");
+
+        if (!File.Exists(filePath))
         {
-            // Load the JSON data from the TextAsset
-            string jsonContent = jsonFile.text;
+            Debug.LogError("File does not exist at the specified path: " + filePath);
+            return;
+        }
 
-            // Deserialize the JSON data into a dynamic object
-            var jsonObject = JsonConvert.DeserializeObject<dynamic>(jsonContent);
+        string json = File.ReadAllText(filePath);
+        JObject jsonObject = JObject.Parse(json);
 
-            // Extract the "VoiceLines" array from the dynamic object
-            var voiceLinesArray = jsonObject["VoiceLines"];
+        JArray voiceLinesArray = (JArray)jsonObject["VoiceLines"];
 
-            // Initialize the dictionary
-            voiceLinesDictionary = new Dictionary<string, string>();
+        if (voiceLinesArray == null)
+        {
+            Debug.LogError("VoiceLines array not found.");
+            return;
+        }
 
-            // Iterate through the key-value pairs inside the "VoiceLines" array
-            foreach (var item in voiceLinesArray)
+        // Clear the existing dictionary before populating with new data.
+        voiceLinesDict.Clear();
+
+        // Iterate through each object in the "VoiceLines" array.
+        foreach (JObject voiceLineObj in voiceLinesArray)
+        {
+            // Check if the current object belongs to the specified category.
+            if (voiceLineObj["Category"].ToString() == category)
             {
-                foreach (var kvp in item)
+                // Iterate through each property (key-value pair) in the current JObject.
+                foreach (var property in voiceLineObj.Properties())
                 {
-                    // Add each key-value pair to the dictionary
-                    voiceLinesDictionary.Add(kvp.Name, kvp.Value.ToString()); // Convert values to string
+                    // Add the property name (key) and its string representation (value) to the dictionary.
+                    voiceLinesDict[property.Name] = property.Value.ToString();
                 }
             }
-
-            // Check if deserialization was successful
-            if (voiceLinesDictionary != null)
-            {
-                // Print the contents of the dictionary for testing
-                foreach (var kvp in voiceLinesDictionary)
-                {
-                    Debug.Log($"Key: {kvp.Key}, Value: {kvp.Value}");
-                }
-            }
-            else
-            {
-                Debug.LogError("Failed to deserialize JSON data.");
-            }
         }
-        else
-        {
-            Debug.LogError("JSON file not assigned in the inspector.");
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // Your update logic here
     }
 }
