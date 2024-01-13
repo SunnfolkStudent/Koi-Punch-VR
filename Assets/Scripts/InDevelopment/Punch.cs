@@ -101,11 +101,13 @@ public class Punch : MonoBehaviour
         {
             Debug.Log("Registered Left Fist Hit");
             PunchObject("LeftFist", dir);
+            HapticManager.leftFishPunch = true;
         }
         else if (other.gameObject.CompareTag("RightFist"))
         {
             Debug.Log("Registered Right Fist Hit");
             PunchObject("RightFist", dir);
+            HapticManager.rightFishPunch = true;
         }
         
         return;
@@ -117,12 +119,14 @@ public class Punch : MonoBehaviour
         {
             punchCollisionTimerEnd = Time.time; 
             Debug.Log("CollisionL Time = " + (punchCollisionTimerEnd - punchCollisionTimerStart));
+            HapticManager.leftFishPunch = false;
         }
 
         else if (other.gameObject.CompareTag("RightFist"))
         {
             punchCollisionTimerEnd = Time.time;
             Debug.Log("CollisionR Time = " + (punchCollisionTimerEnd - punchCollisionTimerStart));
+            HapticManager.rightFishPunch = false;
         }
     }
 
