@@ -9,10 +9,10 @@ using Random = System.Random;
 namespace InDevelopment.Fish
 {
     // Using the Alias method for our WeightedTable.
-    public class WeightedTableScript : MonoBehaviour
+    public class WeightedTableWithDictionary : MonoBehaviour
     {
-        [SerializeField] private int minPickRate;
-        [SerializeField] private int maxPickRate;
+        /* [SerializeField] private int minPickRate;
+        [SerializeField] private int maxPickRate; */
         
         // We create our own Dictionary with all spawn areas, and attach the probability. 
         private Dictionary<string, int> CreateSpawnAreas (int numSpawnAreas)
@@ -78,12 +78,11 @@ namespace InDevelopment.Fish
             return updatedSpawnAreas;
         }
 
-        private int[] UpdateRemainingPicks(int[] remainingPicks, int chosenIndex)
+        /*private int[] UpdateRemainingPicks(int[] remainingPicks, int chosenIndex)
         {
-            // TODO: Add the methods to help update remainingPicks according to max- and minPickRate.
             
             return remainingPicks;
-        }
+        }*/
         
     }
 }

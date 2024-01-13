@@ -114,6 +114,7 @@ namespace InDevelopment.Fish.EditorScripts
 
                     //Make a Velocity change on the Rigidbody
                     mRigidbody.AddForce(_mNewForce, ForceMode.VelocityChange);
+                    Debug.Log("VectorNormalised:" + _mNewForce.normalized);
                     break;
             }
         }
