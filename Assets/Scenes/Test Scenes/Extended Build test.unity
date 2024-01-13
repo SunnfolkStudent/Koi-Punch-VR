@@ -193,7 +193,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 89018229}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d113d1adf3e51b545bd6407b6443fbc5, type: 3}
   m_Name: 
@@ -412,6 +412,16 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 882771504}
+    - target: {fileID: 202575621013093645, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: maxSize
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 202575621013093645, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: minSize
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 226389944599812216, guid: b0869e6e2e592a646852ba90d715ff4c,
         type: 3}
       propertyPath: m_Name
@@ -472,6 +482,12 @@ PrefabInstance:
       propertyPath: fishPrefab.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5264716505511531945, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: fishPrefab.Array.data[0].prefabGameObject
+      value: 
+      objectReference: {fileID: 471582657252072425, guid: f48f7339ab6428b4f922a0b20e52134a,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4415,14 +4431,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftController: {fileID: 1204975105}
   rightController: {fileID: 216308692}
-  leftTopButtonAction: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
-  rightTopButtonAction: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
-  _leftTopButton: 0
-  _rightTopButton: 0
-  zenCharge: 0
-  zenAmplifier: 0.1
 --- !u!114 &1204975105 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4554584401787410696, guid: 62d65635dd823a74c9166df236601c19,
@@ -4448,15 +4456,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Origin (XR Rig)
       objectReference: {fileID: 0}
-    - target: {fileID: 3861852705838198514, guid: 62d65635dd823a74c9166df236601c19,
+    - target: {fileID: 2756967106704940942, guid: 62d65635dd823a74c9166df236601c19,
         type: 3}
-      propertyPath: needsTesting
+      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3861852705838198514, guid: 62d65635dd823a74c9166df236601c19,
+    - target: {fileID: 2756967106704940942, guid: 62d65635dd823a74c9166df236601c19,
         type: 3}
-      propertyPath: objectToTestOn
-      value: 
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2890772965759757048, guid: 62d65635dd823a74c9166df236601c19,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 2890772965759757048, guid: 62d65635dd823a74c9166df236601c19,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4847906926303540691, guid: 62d65635dd823a74c9166df236601c19,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4847906926303540691, guid: 62d65635dd823a74c9166df236601c19,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4936548526502338436, guid: 62d65635dd823a74c9166df236601c19,
         type: 3}
@@ -4508,7 +4536,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6102629444566815224, guid: 62d65635dd823a74c9166df236601c19,
+    - target: {fileID: 8072660698296121535, guid: 62d65635dd823a74c9166df236601c19,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
