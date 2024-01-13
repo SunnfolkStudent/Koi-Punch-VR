@@ -7,42 +7,63 @@ public class HapticManager : MonoBehaviour
 {
     [Header("Controller")]
     public XRBaseController leftController, rightController;
+    
+    [Header("Right Button Inputs")]
+    [SerializeField] private InputActionReference aButton;
+    [SerializeField] private InputActionReference bButton;
+    
+    [Header("Left Button Inputs")]
+    [SerializeField] private InputActionReference xButton;
+    [SerializeField] private InputActionReference yButton;
+    
+    [Header("Button Input Bools")]
+    public static bool leftCharge;
+    public static bool rightCharge;
 
     [Header("Test Bools")] 
     public bool leftFistTest;
     public bool rightFistTest;
     
     [Header("Fish Punch")]
-    static bool leftFishPunch;
-    static bool rightFishPunch;
+    public static bool leftFishPunch;
+
+    public static bool rightFishPunch;
     
     [Header("Wood Punch")]
-    static bool leftWoodPunch; 
-    static bool rightWoodPunch;
+    public static bool leftWoodPunch; 
+    public static bool rightWoodPunch;
     
     [Header("Zen Punch 1")]
-    static bool leftZenPunch1;
-    static bool rightZenPunch1;
+    public static bool leftZenPunch1;
+    public static bool rightZenPunch1;
     
     [Header("Zen Punch 2")]
-    static bool leftZenPunch2;
-    static bool rightZenPunch2;
+    public static bool leftZenPunch2;
+    public static bool rightZenPunch2;
     
     [Header("Zen Punch 3")]
-    static bool leftZenPunch3;
-    static bool rightZenPunch3;
+    public static bool leftZenPunch3;
+    public static bool rightZenPunch3;
     
     [Header("Zen Charge")]
-    static bool leftZenCharge;
-    static bool rightZenCharge;
+    public static bool leftZenCharge;
+    public static bool rightZenCharge;
 
     [Range(0,0.8f)]
-    static float zenCharge = 0 ;
-    static float zenAmplifier = 0.1f;
+    [SerializeField] private float zenCharge = 0 ;
+    [SerializeField] private float zenAmplifier = 0.1f;
     
 
     private void Update()
     {
+        if (aButton || bButton)
+        {rightCharge = true;}
+        else {rightCharge = false;}
+        
+        if (xButton || yButton)
+        {leftCharge = true;}
+        else {leftCharge = false;}
+        
         leftFistTest = leftFishPunch;
         rightFistTest = rightFishPunch;
         
