@@ -36,13 +36,13 @@ public class SpecialAttackScript : MonoBehaviour
         {
             ZenMetreManager.Instance.zenMetreValue -= _zenLostPerSecond * Time.unscaledDeltaTime;
             
-            if (ZenMetreManager.Instance.zenMetreValue <= 0 && ZenMetreManager.Instance.zenLevel != 1)
+            if (ZenMetreManager.Instance.zenMetreValue <= 0 && ZenMetreManager.Instance.zenLevel != 0)
             {
                 ZenMetreManager.Instance.zenLevel--;
                 ZenMetreManager.Instance.zenMetreValue = 100f;
             }
             
-            else if (ZenMetreManager.Instance.zenMetreValue <= 0 && ZenMetreManager.Instance.zenLevel == 1)
+            else if (ZenMetreManager.Instance.zenMetreValue <= 0 && ZenMetreManager.Instance.zenLevel == 0)
             {
                 chargingPunch = false;
                 punchCharged = true;
