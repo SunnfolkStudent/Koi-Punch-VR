@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace InDevelopment.Fish
 {
-    public class SpawnTimeManager : MonoBehaviour
+    public class FishSpawnTimeManager : MonoBehaviour
     {
         [Header("FishSpawnFrequencyTimer")]
-        [SerializeField] private float maxSpawnRate = 5;
-        [SerializeField] private float minSpawnRate = 1;
+        [SerializeField] private float maxSpawnRate = 1.5f;
+        [SerializeField] private float minSpawnRate = 0.5f;
         [SerializeField] private float timeToMaxSpawnRate = 30f;
-        [SerializeField] private float timeTillEnd = 60f;
+        [SerializeField] private float timeTillEnd = 360f;
         
         private void Start()
         {
