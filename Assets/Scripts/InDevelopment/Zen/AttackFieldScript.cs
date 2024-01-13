@@ -7,23 +7,15 @@ public class AttackFieldScript : MonoBehaviour
 {
     private float _timeUntilDeath = 5f;
     
-    // Start is called before the first frame update
+    
     void Start()
-    {
+    { 
         StartCoroutine(DeathTimer());
     }
     
     private IEnumerator DeathTimer()
     {
-        yield return new WaitForSeconds(_timeUntilDeath);
+        yield return new WaitForSecondsRealtime(_timeUntilDeath);
         Destroy(gameObject);
-    }
-
-    private void OnDestroy()
-    {
-        if (ZenMetreManager.Instance.attackFieldsActive == true)
-        {
-            ZenMetreManager.Instance.AddAttackFieldZen(transform.localScale.magnitude);
-        }
     }
 }
