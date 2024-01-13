@@ -6,12 +6,12 @@ using UnityEngine;
 public class TransitionAnimation : MonoBehaviour
 {
     private Animator _animator;
-    //[SerializeField] private string _explodingAnimClip;
+    [SerializeField] private string _explodingAnimClip;
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
-        //EventManager.ExplodeEvent += ExplodeTransition;
+        MenuEventManager.ExplodeEvent += ExplodeTransition;
     }
     private void ExplodeTransition()
     {
@@ -24,7 +24,7 @@ public class TransitionAnimation : MonoBehaviour
     
     private void OnDisable()
     {
-        //EventManager.ExplodeEvent -= ExplodeTransition;
+        MenuEventManager.ExplodeEvent -= ExplodeTransition;
     }
 
 
