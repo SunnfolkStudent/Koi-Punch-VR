@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using InDevelopment.Fish;
 using UnityEngine;
 
 public class ZenMetreManager : MonoBehaviour
@@ -52,8 +53,7 @@ public class ZenMetreManager : MonoBehaviour
     {
         if (zenMetreValue >= 100 && zenLevel == 0)
         {
-            zenLevel = 1;
-            SetZenLevel();
+            EventManager.BossPhase0.Invoke();
         }
     }
 
@@ -157,6 +157,7 @@ public class ZenMetreManager : MonoBehaviour
         zenMetreValue = 0;
         
         //Start of level 4
+        EventManager.BossPhase3.Invoke();
         zenAttackActive = true;
         _zenLevelCheckpoint = 2;
         ZenMetreVisualManager.Instance.ShowPromptText("Hold side button to charge punch!");
@@ -170,6 +171,8 @@ public class ZenMetreManager : MonoBehaviour
     #region -- Zen Event Methods --
     private IEnumerator TripleScoreTimer()
     {
+        EventManager.BossPhase2.Invoke();
+        
         yield return new WaitForSecondsRealtime(_tripleScoreTimer);
         
         tripleScoreActive = false;
