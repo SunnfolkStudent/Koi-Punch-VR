@@ -26,14 +26,14 @@ public class ScoreManager : MonoBehaviour
         {
             if (multiplierOn)
                 fishPunchPoints += 10;
-            if (!multiplierOn)
+            else
                 fishPunchPoints += 5;
         }
-        if (!successful)
+        else
         {
             if (multiplierOn)
                 fishPunchPoints += 2;
-            if (!multiplierOn)
+            else
                 fishPunchPoints += 1;
         }
     }
@@ -54,7 +54,7 @@ public class ScoreManager : MonoBehaviour
         if (multiplierOn)
             distance *= 2;
         
-        FloatingText(distance +"Distance!",distancePointsLocation, Color.blue );
+        FloatingText(distance +" Distance!",distancePointsLocation, Color.blue );
 
         distance += distancePoints;
     }
@@ -87,7 +87,7 @@ public class ScoreManager : MonoBehaviour
 
     //Zen mode phase 4
     //Zen and Velocity are calculated into points
-    //points for phase for as well as all previous rounds are added into zenModePoints int;
+    //points for phase four as well as all previous rounds are added into zenModePoints int;
 
     //Floating text
     //takes number/text, location and color and creates a floating text object
@@ -98,7 +98,7 @@ public class ScoreManager : MonoBehaviour
     
     //multiplier
     //turn multiplier bool true
-    //WaitforSeconds(multiplier
+    //wait for multiplier timer to go down
     //turn multiplier bool false
 
     private IEnumerator Multiplier()
@@ -115,4 +115,5 @@ public class ScoreManager : MonoBehaviour
         multiplierOn = false;
     }
         
+    //multiplier visuals
 }
