@@ -45,12 +45,17 @@ public class ZenMetreManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        EventManager.BossDefeated += ResetTime;
+    }
+
     //Update is for testing purposes only
     private void Update()
     {
         if (zenMetreValue >= 100 && zenLevel == 0 && !_zenPhase0Invoked)
         {
-            EventManager.ZenBar1Full.Invoke();
+            EventManager.BossPhase0.Invoke();
             _zenPhase0Invoked = true;
         }
     }
@@ -107,22 +112,13 @@ public class ZenMetreManager : MonoBehaviour
     //Level one of zen is the start level. It is the level before anything happens with the zen.
     private void LevelZero()
     {
-        EventManager.BossPhase0.Invoke();
-        
         if (_zenLevelCheckpoint <= 1)
             ZenMetreVisualManager.Instance.UpdateZenBar(1, 0f);
         
         ZenMetreVisualManager.Instance.UpdateZenBar(2, 0f);
         
         timeStopActive = false;
-        
-        Time.timeScale = 1f;
-        for (int i = 0; i < _particleSystems.Count; i++)
-        {
-            var mainModule = _particleSystems[i].main;
-            mainModule.simulationSpeed = _originalSimulationSpeeds[i];
-        }
-        
+        ResetTime();
         _zenPhase0Invoked = false;
         
         //Reset music back to normal after zen mode is over
@@ -164,8 +160,6 @@ public class ZenMetreManager : MonoBehaviour
         zenAttackActive = true;
         _zenLevelCheckpoint = 2;
         ZenMetreVisualManager.Instance.ShowPromptText("Hold side button to charge punch!");
-        //ControllerRumble.Instance.RightControllerRumbling(0.4f,5f);
-        //ControllerRumble.Instance.LeftControllerRumbling(0.4f,5f);
         
         //Add music for the fourth level of zen
     }
@@ -244,6 +238,16 @@ public class ZenMetreManager : MonoBehaviour
             var mainModule = ps.main;
             _originalSimulationSpeeds.Add(mainModule.simulationSpeed);
             mainModule.simulationSpeed = 100.0f; // Change the speed value as needed
+        }
+    }
+    
+    public void ResetTime()
+    {
+        Time.timeScale = 1f;
+        for (int i = 0; i < _particleSystems.Count; i++)
+        {
+            var mainModule = _particleSystems[i].main;
+            mainModule.simulationSpeed = _originalSimulationSpeeds[i];
         }
     }
     #endregion
