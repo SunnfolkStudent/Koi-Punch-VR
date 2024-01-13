@@ -8,27 +8,44 @@ namespace InDevelopment.Fish
         [Header("FishSpawnFrequencyTimer")]
         [SerializeField] private float maxSpawnRate = 1.5f;
         [SerializeField] private float minSpawnRate = 0.5f;
-        [SerializeField] private float timeToMaxSpawnRate = 30f;
-        [SerializeField] private float timeTillEnd = 360f;
+        [SerializeField] private float timeToMaxSpawnRate = 20f;
         
+        public static bool isSpawningFish{ get; private set; }
+        
+        #region ---Initialization---
         private void Start()
         {
+            EventManager.StartLevel += StartSpawning;
+            EventManager.LevelOver += StopSpawning;
+            
+            EventManager.StartLevel.Invoke();
+        }
+        #endregion
+        
+        #region ---FishSpawnFrequencyControls---
+        private void StartSpawning()
+        {
+            isSpawningFish = true;
             StartCoroutine(SpawnFish());
         }
+
+        private static void StopSpawning()
+        {
+            isSpawningFish = false;
+        }
+        #endregion
         
         #region ---FishFrequencyTimer---
         private IEnumerator SpawnFish()
         {
-            var startTime = Time.time;
             var minSpawnTime = 1 / maxSpawnRate;
             var maxSpawnTime = 1 / minSpawnRate;
-            while (startTime <= timeTillEnd)
+            while (isSpawningFish)
             {
                 var nextSpawnTime = Mathf.Lerp(maxSpawnTime, minSpawnTime, Time.time / timeToMaxSpawnRate);
                 yield return new WaitForSeconds(nextSpawnTime);
                 EventManager.SpawnFish.Invoke();
             }
-            EventManager.LevelOver.Invoke();
         }
         #endregion
     }
