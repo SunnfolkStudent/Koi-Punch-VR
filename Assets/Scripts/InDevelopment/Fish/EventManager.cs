@@ -13,6 +13,7 @@ namespace InDevelopment.Fish
         public static Event BossPhase1;
         public static Event BossPhase2;
         public static Event BossPhase3;
+        public static Event ZenPunchReady;
         public static Event BossDefeated = BossDefeatedDebug;
         #endregion
         
