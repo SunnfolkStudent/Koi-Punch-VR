@@ -38,8 +38,9 @@ namespace InDevelopment.Fish
 
     class Program
     {
-        public static Random RandomInstance = new Random(); // Create Random instance locally; make sure to use System.Random!
-                                                            // (not UnityEngine.Random, unless you want to adapt the code)
+        public static Random
+            RandomInstance = new Random(); // Create Random instance locally; make sure to use System.Random!
+        // (not UnityEngine.Random, unless you want to adapt the code)
 
         public static TypesOfFish GetFish(List<TypesOfFish> fishies, int totalWeightFishies)
         {
@@ -99,6 +100,7 @@ namespace InDevelopment.Fish
                         }
                     }
                 }
+
                 Console.WriteLine("A\t\t" + result["A"]);
                 Console.WriteLine("B\t\t" + result["B"]);
                 Console.WriteLine("C\t\t" + result["C"]);
@@ -115,8 +117,8 @@ namespace InDevelopment.Fish
             static List<int> WeightedSelectionWithoutReplacement(List<double> weights, int m)
             {
                 Random random = new Random(); // Create Random instance locally; make sure to use System.Random!
-                                              // (not UnityEngine.Random, unless you want to adapt the code)
-                
+                // (not UnityEngine.Random, unless you want to adapt the code)
+
                 List<Tuple<double, int>> elt = weights
                     .Select((weight, index) => Tuple.Create(Math.Log(random.NextDouble()) / weight, index))
                     .ToList();
@@ -135,9 +137,59 @@ namespace InDevelopment.Fish
                 Console.WriteLine("Selected indices: " + string.Join(", ", result));
             }
         }
+    }
 
+    public static class RandomExtensions
+        {
+            public static int GetAlias(this Random rnd, IEnumerable<int> probs)
+            {
+                int random = rnd.Next(probs.Sum());
+                int sum = 0;
+                int idx = 0;
+                foreach (var p in probs)
+                {
+                    sum += p;
+                    if (sum >= random)
+                        break;
+                    idx++;
+                }
+
+                return idx;
+            } // GetAlias
+        }
         
-        
-        
+    class ProgramTest
+    {               
+        class Animal 
+        {
+            public Animal(string name) {
+                Name = name;
+            }
+            public string Name { get; set; }
+            public int Count { get; set; }
+        } 
+
+        static void Main(string[] args)
+        {
+            List<Animal> values = new List<Animal>
+            {
+                new Animal("Cat"),
+                new Animal("Dog"),
+                new Animal("Sheep"),
+                new Animal("Cow"),
+                new Animal("Turtle"),
+            };
+
+            int[] probs = new int[] { 10, 50, 10, 10, 20 };
+            Random rnd = new Random();
+            for (int i=0; i < 100; i++) {
+                int number = rnd.GetAlias(probs);
+                values[number].Count++;
+            }
+
+            foreach (var a in values) {
+                Console.WriteLine($"{string.Format("{0,-10}", a.Name)}: {string.Format("{0,2}", a.Count)}");
+            }
+        }
     }
 }
