@@ -4,12 +4,19 @@ namespace InDevelopment.Fish
 {
     public static class EventManager
     {
+        #region ---Events---
         public delegate void Event();
         public static Event SpawnFish = SpawnFishDebug;
+        public static Event StartLevel;
         public static Event LevelOver = LevelOverDebug;
-        public static Event SpawnBoss = SpawnBossDebug;
+        public static Event BossPhase0;
+        public static Event BossPhase1;
+        public static Event BossPhase2;
+        public static Event BossPhase3;
+        public static Event ZenPunchReady;
         public static Event BossDefeated = BossDefeatedDebug;
-
+        #endregion
+        
         #region ---EventDebugs---
         private static void SpawnFishDebug()
         {
@@ -19,11 +26,6 @@ namespace InDevelopment.Fish
         private static void LevelOverDebug()
         {
             Debug.Log("Level End; Event Invoked");
-        }
-        
-        private static void SpawnBossDebug()
-        {
-            Debug.Log("Spawn Boss; Event Invoked");
         }
         
         private static void BossDefeatedDebug()

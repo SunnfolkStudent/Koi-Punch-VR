@@ -1,3 +1,4 @@
+using InDevelopment.Fish;
 using UnityEngine;
 
 
@@ -32,17 +33,17 @@ public class SpecialAttackScript : MonoBehaviour
         //SET PUNCH CHARGED TO TRUE
         //CALCULATE PUNCH FORCE
         
-        if (chargingPunch)
+        if (chargingPunch && !punchCharged)
         {
             ZenMetreManager.Instance.zenMetreValue -= _zenLostPerSecond * Time.unscaledDeltaTime;
             
-            if (ZenMetreManager.Instance.zenMetreValue <= 0 && ZenMetreManager.Instance.zenLevel != 1)
+            if (ZenMetreManager.Instance.zenMetreValue <= 0 && ZenMetreManager.Instance.zenLevel != 0)
             {
                 ZenMetreManager.Instance.zenLevel--;
                 ZenMetreManager.Instance.zenMetreValue = 100f;
             }
             
-            else if (ZenMetreManager.Instance.zenMetreValue <= 0 && ZenMetreManager.Instance.zenLevel == 1)
+            else if (ZenMetreManager.Instance.zenMetreValue <= 0 && ZenMetreManager.Instance.zenLevel == 0)
             {
                 chargingPunch = false;
                 punchCharged = true;
@@ -62,5 +63,6 @@ public class SpecialAttackScript : MonoBehaviour
         ZenMetreVisualManager.Instance.UpdateZenBar(2, 0f);
         ZenMetreVisualManager.Instance.UpdateZenBar(3, 0f);
         ZenMetreVisualManager.Instance.HideSparkles();
+        EventManager.ZenPunchReady.Invoke();
     }
 }
