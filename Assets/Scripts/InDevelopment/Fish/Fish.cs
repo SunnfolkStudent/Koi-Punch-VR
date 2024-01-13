@@ -7,6 +7,8 @@ namespace InDevelopment.Fish
         // TODO: Fish collision
         public FishObjectPool.Fish fish { get; set; }
         private float _startTime;
+        [SerializeField] private float despawnTime = 5f;
+        [SerializeField] private float despawnAltitude = -5f;
         
         private void OnCollisionEnter(Collision other)
         {
@@ -23,7 +25,7 @@ namespace InDevelopment.Fish
         
         private void Update()
         {
-            if (transform.position.y < -25 || _startTime < Time.time - 3.5f)
+            if (transform.position.y < despawnAltitude || _startTime < Time.time - despawnTime)
             {
                 Despawn();
             }

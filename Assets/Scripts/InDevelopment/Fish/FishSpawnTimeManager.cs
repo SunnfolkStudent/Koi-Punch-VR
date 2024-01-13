@@ -16,7 +16,7 @@ namespace InDevelopment.Fish
         private void Start()
         {
             EventManager.FishSpawning += StartSpawning;
-            EventManager.LevelOver += StopSpawning;
+            EventManager.StopFishSpawning += StopSpawning;
             EventManager.FishSpawningAtMaxRate += StartSpawningAtMaxRate;
             
             EventManager.FishSpawning.Invoke();
