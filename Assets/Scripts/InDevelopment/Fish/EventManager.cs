@@ -11,21 +11,12 @@ namespace InDevelopment.Fish
         public static Event FishSpawningAtMaxRate = SpawnFishDebug;
         public static Event StopFishSpawning = LevelOverDebug;
         
-        //This event is invoked when the first zen bar is full and the boss should spawn when hit time will stop
-        public static Event ZenBar1Full; 
-        
-        //This event is invoked only if you fail one of the boss phases and go back to phase zero or when you hit the boss with your final move
+        //This event is invoked only if you fail one of the boss phases and go back to phase zero and if you reach full first zen bar
         public static Event BossPhase0; 
         
-        //This event is invoked when the boss is hit with the first move and time is stopped.
-        //This is the phase where weak points will spawn
+        //These events are invoked when this boss phase is reached
         public static Event BossPhase1;
-        
-        //This event is invoked when you clear phase one.
-        //Weak points will stop spawning and it is time for the triple score punch out where you punch the boss as much as possible
         public static Event BossPhase2;
-        
-        //This event is invoked when you clear all both stages and the special attack is ready.
         public static Event BossPhase3;
         
         //This event is invoked after you charge your punch.

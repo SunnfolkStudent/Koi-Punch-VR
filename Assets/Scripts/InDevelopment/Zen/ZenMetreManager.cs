@@ -50,7 +50,7 @@ public class ZenMetreManager : MonoBehaviour
     {
         if (zenMetreValue >= 100 && zenLevel == 0 && !_zenPhase0Invoked)
         {
-            EventManager.ZenBar1Full.Invoke();
+            EventManager.BossPhase0.Invoke();
             _zenPhase0Invoked = true;
         }
     }
@@ -107,8 +107,6 @@ public class ZenMetreManager : MonoBehaviour
     //Level one of zen is the start level. It is the level before anything happens with the zen.
     private void LevelZero()
     {
-        EventManager.BossPhase0.Invoke();
-        
         if (_zenLevelCheckpoint <= 1)
             ZenMetreVisualManager.Instance.UpdateZenBar(1, 0f);
         
@@ -164,8 +162,6 @@ public class ZenMetreManager : MonoBehaviour
         zenAttackActive = true;
         _zenLevelCheckpoint = 2;
         ZenMetreVisualManager.Instance.ShowPromptText("Hold side button to charge punch!");
-        //ControllerRumble.Instance.RightControllerRumbling(0.4f,5f);
-        //ControllerRumble.Instance.LeftControllerRumbling(0.4f,5f);
         
         //Add music for the fourth level of zen
     }
