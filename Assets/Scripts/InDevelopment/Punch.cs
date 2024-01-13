@@ -179,9 +179,12 @@ public class Punch : MonoBehaviour
             
         punchForceMultiplier = velMagnitude * punchVelMultiplier;
         var cubeLaunchDir = direction * -punchForceMultiplier;
-        Debug.Log("Punched with Fist with Force of " + punchForceMultiplier + "\nand a Direction of " + cubeLaunchDir);
+        Debug.Log("Punched with Force of " + punchForceMultiplier + "\nand a Direction of " + cubeLaunchDir);
         
         rigidbody.AddForce(cubeLaunchDir, ForceMode.VelocityChange);
+        
+        Debug.Log("cubeLaunch VectorMagnitude:" + cubeLaunchDir.magnitude);
+        Debug.Log("direction VectorMagnitude:" + direction.magnitude);
         
         //Add a slight upwards force
         //rigidbody.AddForce(transform.up * (punchForceMultiplier / 3), ForceMode.VelocityChange);
