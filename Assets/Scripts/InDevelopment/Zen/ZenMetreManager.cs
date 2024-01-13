@@ -45,6 +45,11 @@ public class ZenMetreManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        EventManager.BossDefeated += ResetTime;
+    }
+
     //Update is for testing purposes only
     private void Update()
     {
@@ -113,14 +118,7 @@ public class ZenMetreManager : MonoBehaviour
         ZenMetreVisualManager.Instance.UpdateZenBar(2, 0f);
         
         timeStopActive = false;
-        
-        Time.timeScale = 1f;
-        for (int i = 0; i < _particleSystems.Count; i++)
-        {
-            var mainModule = _particleSystems[i].main;
-            mainModule.simulationSpeed = _originalSimulationSpeeds[i];
-        }
-        
+        ResetTime();
         _zenPhase0Invoked = false;
         
         //Reset music back to normal after zen mode is over
@@ -240,6 +238,16 @@ public class ZenMetreManager : MonoBehaviour
             var mainModule = ps.main;
             _originalSimulationSpeeds.Add(mainModule.simulationSpeed);
             mainModule.simulationSpeed = 100.0f; // Change the speed value as needed
+        }
+    }
+    
+    public void ResetTime()
+    {
+        Time.timeScale = 1f;
+        for (int i = 0; i < _particleSystems.Count; i++)
+        {
+            var mainModule = _particleSystems[i].main;
+            mainModule.simulationSpeed = _originalSimulationSpeeds[i];
         }
     }
     #endregion
