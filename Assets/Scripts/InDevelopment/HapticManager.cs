@@ -17,8 +17,7 @@ public class HapticManager : MonoBehaviour
     [SerializeField] private InputActionReference yButton;
     
     [Header("Button Input Bools")]
-    public static bool leftCharge;
-    public static bool rightCharge;
+    public static bool zenChargeing;
 
     [Header("Test Bools")] 
     public bool leftFistTest;
@@ -56,13 +55,10 @@ public class HapticManager : MonoBehaviour
 
     private void Update()
     {
-        if (aButton || bButton)
-        {rightCharge = true;}
-        else {rightCharge = false;}
+        if (aButton || bButton || xButton || yButton)
+        {zenChargeing = true;}
+        else {zenChargeing = false;}
         
-        if (xButton || yButton)
-        {leftCharge = true;}
-        else {leftCharge = false;}
         
         leftFistTest = leftFishPunch;
         rightFistTest = rightFishPunch;
