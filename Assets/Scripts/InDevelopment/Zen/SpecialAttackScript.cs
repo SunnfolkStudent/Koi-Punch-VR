@@ -33,7 +33,7 @@ public class SpecialAttackScript : MonoBehaviour
         //SET PUNCH CHARGED TO TRUE
         //CALCULATE PUNCH FORCE
         
-        if (chargingPunch)
+        if (chargingPunch && !punchCharged)
         {
             ZenMetreManager.Instance.zenMetreValue -= _zenLostPerSecond * Time.unscaledDeltaTime;
             
