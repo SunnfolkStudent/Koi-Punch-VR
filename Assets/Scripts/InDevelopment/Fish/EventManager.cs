@@ -6,41 +6,37 @@ namespace InDevelopment.Fish
     {
         #region ---Events---
         public delegate void Event();
-        public static Event SpawnFish;
-        public static Event FishSpawning = SpawnFishDebug;
-        public static Event FishSpawningAtMaxRate = SpawnFishDebug;
-        public static Event StopFishSpawning = LevelOverDebug;
         
-        //This event is invoked only if you fail one of the boss phases and go back to phase zero and if you reach full first zen bar
-        public static Event BossPhase0; 
+        #region >>>---FishSpawning---
+        public static Event SpawnFish; // Spawns 1 fish and launches it to hit the player.
+        public static Event FishSpawning = SpawnFishDebug; // Starts fish spawning with frequency gradually increasing.
+        public static Event FishSpawningAtMaxRate = SpawnFishDebug; // Starts fish spawning at max rate.
+        public static Event StopFishSpawning = StopFishSpawningDebug; // Stops fish spawning.
+        #endregion
         
-        //These events are invoked when this boss phase is reached
-        public static Event BossPhase1;
-        public static Event BossPhase2;
-        public static Event BossPhase3;
-        
-        //This event is invoked after you charge your punch.
-        //There will be a variable in SpecialAttackScript called punchForce that is a float between 0-300 and where 300 is the max.
-        //This variable tells you how much the special attack was charged before the buttons were let go
-        public static Event ZenPunchReady;
-        
+        #region >>>---StartBossPhases---
+        public static Event StartBossPhase0;
+        public static Event StartBossPhase1;
+        public static Event StartBossPhase2;
+        public static Event StartBossPhase3;
         public static Event BossDefeated = BossDefeatedDebug;
+        #endregion
         #endregion
         
         #region ---EventDebugs---
         private static void SpawnFishDebug()
         {
-            Debug.Log("Fish Spawning; Event Invoked");
+            Debug.Log("---Fish Spawning started---");
         }
         
-        private static void LevelOverDebug()
+        private static void StopFishSpawningDebug()
         {
-            Debug.Log("Level End; Event Invoked");
+            Debug.Log("---Fish Spawning stopped---");
         }
         
         private static void BossDefeatedDebug()
         {
-            Debug.Log("Boss Defeated; Event Invoked");
+            Debug.Log("---Boss Defeated---");
         }
         #endregion
     }

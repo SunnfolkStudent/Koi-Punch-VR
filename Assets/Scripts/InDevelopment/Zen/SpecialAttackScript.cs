@@ -76,6 +76,6 @@ public class SpecialAttackScript : MonoBehaviour
         ZenMetreVisualManager.Instance.UpdateZenBar(2, 0f);
         ZenMetreVisualManager.Instance.UpdateZenBar(3, 0f);
         ZenMetreVisualManager.Instance.HideSparkles();
-        EventManager.ZenPunchReady.Invoke();
+        // EventManager.ZenPunchReady.Invoke();
     }
 }

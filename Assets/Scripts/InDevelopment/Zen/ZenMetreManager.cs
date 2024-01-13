@@ -55,7 +55,7 @@ public class ZenMetreManager : MonoBehaviour
     {
         if (zenMetreValue >= 100 && zenLevel == 0 && !_zenPhase0Invoked)
         {
-            EventManager.BossPhase0.Invoke();
+            EventManager.StartBossPhase0.Invoke();
             _zenPhase0Invoked = true;
         }
     }
@@ -156,7 +156,7 @@ public class ZenMetreManager : MonoBehaviour
         zenMetreValue = 0;
         
         //Start of level 3
-        EventManager.BossPhase3.Invoke();
+        EventManager.StartBossPhase3.Invoke();
         zenAttackActive = true;
         _zenLevelCheckpoint = 2;
         ZenMetreVisualManager.Instance.ShowPromptText("Hold side button to charge punch!");
@@ -168,7 +168,7 @@ public class ZenMetreManager : MonoBehaviour
     #region -- Zen Event Methods --
     private IEnumerator TripleScoreTimer()
     {
-        EventManager.BossPhase2.Invoke();
+        EventManager.StartBossPhase2.Invoke();
         
         yield return new WaitForSecondsRealtime(_tripleScoreTimer);
         
@@ -189,7 +189,7 @@ public class ZenMetreManager : MonoBehaviour
     
     private IEnumerator AttackFieldSpawnTimer()
     {
-        EventManager.BossPhase1.Invoke();
+        EventManager.StartBossPhase1.Invoke();
         yield return new WaitForSecondsRealtime(_attackFieldsActiveTime);
         
         attackFieldsActive = false;
