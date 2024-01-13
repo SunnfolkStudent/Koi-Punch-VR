@@ -6,6 +6,9 @@ using Random = System.Random;
 
 namespace InDevelopment.Fish
 {
+    // This is an old script, only use for reference until the other new WeightedTable Script is ready.
+    // TODO: Remove this script when new WeightedTableScript is ready.
+    
     public class RandomWeightedTable : MonoBehaviour
     {
         // TODO: Make a weighted table with a Fish List:
