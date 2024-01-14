@@ -46,16 +46,15 @@ namespace InDevelopment.Fish
         #region ---Initialization---
         private void Awake()
         {
-            FishSpawnAreas.InitializeSpawnAreas();
             EventManager.SpawnFish += SpawnFish;
+            FishSpawnAreas.InitializeSpawnAreas();
         }
         #endregion
         
         #region ---FishSpawning---
         private void SpawnFish()
         {
-            var spawnArea = FishSpawnAreas.PickSpawnArea();
-            var spawnPos = spawnArea.GameObject.transform.position + FishSpawnAreas.RandomOffset(spawnArea.SpawnAreaCircle.spawnAreaRadius);
+            var spawnPos = FishSpawnAreas.GetSpawnPosition();
             var fishPool = FishObjectPool.FishPools[0];
             SpawnFishAtPosFromPool(spawnPos, fishPool);
         }

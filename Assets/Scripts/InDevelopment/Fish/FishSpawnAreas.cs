@@ -10,25 +10,25 @@ namespace InDevelopment.Fish
         private const int MaxPickRate = 5;
         private static List<SpawnArea> _availableSpawnAreas;
         private static float _weightedTableTotalWeight;
-        
-        // TODO: Remove function after testing of random weighted tables
-        // private static SpawnArea RandomSpawnArea()
-        // {
-        //     return _availableSpawnAreas[Random.Range(0, _availableSpawnAreas.Count)];
-        // }
+
+        private class SpawnArea
+        {
+            public GameObject GameObject;
+            public SpawnAreaCircle SpawnAreaCircle;
+            public float Weight;
+            public int TimesSpawned;
+        }
         
         public static void InitializeSpawnAreas()
         {
             _availableSpawnAreas = new List<SpawnArea>();
             AddSpawnAreasToSpawnAreaList();
         }
-        
-        public class SpawnArea
+
+        public static Vector3 GetSpawnPosition()
         {
-            public GameObject GameObject;
-            public SpawnAreaCircle SpawnAreaCircle;
-            public float Weight;
-            public int TimesSpawned;
+            var spawnArea = PickSpawnArea();
+            return spawnArea.GameObject.transform.position + FishSpawnAreas.RandomOffset(spawnArea.SpawnAreaCircle.spawnAreaRadius);
         }
         
         private static void AddSpawnAreasToSpawnAreaList()
@@ -42,8 +42,15 @@ namespace InDevelopment.Fish
                 _availableSpawnAreas.Add(f);
             }
         }
-        
-        public static SpawnArea PickSpawnArea()
+
+        private static Vector3 RandomOffset(float offsetMax)
+        {
+            return new Vector3(Random.Range(-offsetMax, offsetMax), 0, Random.Range(-offsetMax, offsetMax));
+        }
+
+        #region ---RandomWeightedTables---
+
+        private static SpawnArea PickSpawnArea()
         {
             _weightedTableTotalWeight = _availableSpawnAreas.Sum(area => area.Weight);
             var rnd = Random.Range(0, _weightedTableTotalWeight);
@@ -70,10 +77,12 @@ namespace InDevelopment.Fish
                 _availableSpawnAreas.Remove(spawnArea);
             }
         }
+        #endregion
         
-        public static Vector3 RandomOffset(float offsetMax)
-        {
-            return new Vector3(Random.Range(-offsetMax, offsetMax), 0, Random.Range(-offsetMax, offsetMax));
-        }
+        // TODO: Remove function after testing of random weighted tables
+        // private static SpawnArea RandomSpawnArea()
+        // {
+        //     return _availableSpawnAreas[Random.Range(0, _availableSpawnAreas.Count)];
+        // }
     }
 }
