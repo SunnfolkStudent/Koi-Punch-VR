@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using InDevelopment.Fish.EditorScripts;
 using InDevelopment.Fish.Trajectory;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -12,8 +11,8 @@ namespace InDevelopment.Fish
     {
         // TODO: Fix why spawned fish have torque
         // TODO: Spawn fish with properties: type and flight trajectory type, decided by random weighted tables
-
-        #region ---FishLaunchSettings---
+        
+        #region ---FishLaunchInspectorSettings---
         [Header("Fish Target")] [Tooltip("Transform that the fish trajectories will aim to")]
         [SerializeField] private Transform target;
         
@@ -36,11 +35,6 @@ namespace InDevelopment.Fish
         [SerializeField] private float minSize = 1f;
         [SerializeField] private float maxSize = 2f;
         
-        [Header("Weighted Tables")]
-        [SerializeField] private int maxPickRate = 5;
-        private static List<SpawnArea> _availableSpawnAreas;
-        private static float _totalWeight;
-
         private enum LaunchType
         {
             Height,
@@ -50,82 +44,18 @@ namespace InDevelopment.Fish
         #endregion
         
         #region ---Initialization---
-        private void Start()
+        private void Awake()
         {
-            _availableSpawnAreas = new List<SpawnArea>();
-            AddSpawnAreasToSpawnAreaList();
-            
-            EventManager.SpawnFish += SpawnFish; //TODO: Remove temporary spawning
-        }
-        #endregion
-        
-        #region ---SpawnAreas---
-        private class SpawnArea
-        {
-            public GameObject GameObject;
-            public SpawnAreaCircle SpawnAreaCircle;
-            public float Weight;
-            public int TimesSpawned;
-        }
-        
-        private static void AddSpawnAreasToSpawnAreaList()
-        {
-            var spawnArea = GameObject.FindGameObjectsWithTag("SpawnArea");
-            
-            foreach (var obj in spawnArea)
-            {
-                var f = new SpawnArea { GameObject = obj };
-                f.SpawnAreaCircle = f.GameObject.GetComponent<SpawnAreaCircle>();
-                _availableSpawnAreas.Add(f);
-            }
-        }
-
-        #region >>>---Weighted Tables---
-        private SpawnArea PickSpawnArea()
-        {
-            _totalWeight = _availableSpawnAreas.Sum(area => area.Weight);
-            var rnd = Random.Range(0, _totalWeight);
-            
-            float sum = 0;
-            foreach (var area in _availableSpawnAreas)
-            {
-                sum += area.Weight;
-                if (sum < rnd) continue;
-                NewProbabilitiesFor(area);
-                return area;
-            }
-            
-            return null;
-        }
-        
-        private void NewProbabilitiesFor(SpawnArea spawnArea)
-        {
-            spawnArea.TimesSpawned++;
-            spawnArea.Weight /= 2;
-
-            if (spawnArea.TimesSpawned >= maxPickRate)
-            {
-                _availableSpawnAreas.Remove(spawnArea);
-            }
-        }
-        #endregion
-        
-        // private static SpawnArea RandomSpawnArea()
-        // {
-        //     return _availableSpawnAreas[Random.Range(0, _availableSpawnAreas.Count)];
-        // }
-        
-        private static Vector3 RandomOffset(float offsetMax)
-        {
-            return new Vector3(Random.Range(-offsetMax, offsetMax), 0, Random.Range(-offsetMax, offsetMax));
+            FishSpawnAreas.InitializeSpawnAreas();
+            EventManager.SpawnFish += SpawnFish;
         }
         #endregion
         
         #region ---FishSpawning---
         private void SpawnFish()
         {
-            var spawnArea = PickSpawnArea();
-            var spawnPos = spawnArea.GameObject.transform.position + RandomOffset(spawnArea.SpawnAreaCircle.spawnAreaRadius);
+            var spawnArea = FishSpawnAreas.PickSpawnArea();
+            var spawnPos = spawnArea.GameObject.transform.position + FishSpawnAreas.RandomOffset(spawnArea.SpawnAreaCircle.spawnAreaRadius);
             var fishPool = FishObjectPool.FishPools[0];
             SpawnFishAtPosFromPool(spawnPos, fishPool);
         }

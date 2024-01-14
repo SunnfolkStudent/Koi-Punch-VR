@@ -13,13 +13,13 @@ namespace InDevelopment.Fish
         public static bool isSpawningFish{ get; private set; }
         
         #region ---Initialization---
-        private void Start()
+        private void Awake()
         {
             EventManager.FishSpawning += StartSpawning;
-            EventManager.StopFishSpawning += StopSpawning;
             EventManager.FishSpawningAtMaxRate += StartSpawningAtMaxRate;
+            EventManager.StopFishSpawning += StopSpawning;
             
-            EventManager.FishSpawning.Invoke();
+            EventManager.FishSpawning.Invoke(); // TODO: remove this after setting event to invoke from start level
         }
         #endregion
         
