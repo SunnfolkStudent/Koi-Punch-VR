@@ -188,6 +188,11 @@ public class Punch : MonoBehaviour
         //Add a slight upwards force
         //rigidbody.AddForce(transform.up * (punchForceMultiplier / 3), ForceMode.VelocityChange);
         
+        // Use the following variables for calculating trajectory:
+        // Velocity (v) = punchForceMultiplier,
+        // Direction (d) = direction.normalized,
+        // Time = (2*v*sin(o))/gravity.
+        
         if (showDebugLines)
             Debug.DrawLine(transform.position, transform.position + cubeLaunchDir, Color.red, 2.5f);
         
