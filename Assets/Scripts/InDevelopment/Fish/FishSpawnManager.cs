@@ -119,16 +119,15 @@ namespace InDevelopment.Fish
             fishTransform.LookAt(targetPos, Vector3.up);
             
             /* Launch Fish With Max Height */
-            // var fishVelocity = FishTrajectory.TrajectoryVelocityFromPeakHeight(spawnPos, targetPos, height);
+            var fishVelocity = FishTrajectory.TrajectoryVelocityFromPeakHeight(spawnPos, targetPos, height);
             
             /* Launch Fish At Angle */
             // var angle =  Random.Range(20f, 60f);
             // var fishVelocity = FishTrajectory.TrajectoryVelocityFromInitialAngle(spawnPos, targetPos, angle);
             
             /* Launch Fish With Speed */
-            var speed = Random.Range(27f, 40f);
-            var tallArc = Random.Range(0, 2) == 1;
-            var fishVelocity = FishTrajectory.TrajectoryVelocityFromInitialSpeed(spawnPos, targetPos, speed, tallArc);
+            // var speed = Random.Range(5f, 40f);
+            // var fishVelocity = FishTrajectory.TrajectoryVelocityFromInitialSpeed(spawnPos, targetPos, speed); // Optional fifth parameter for tall arcs (bool)
             
             LaunchRigidities(rigidities, spawnPos, targetPos, fishVelocity);
             fish.ParentGameObject.SetActive(true);

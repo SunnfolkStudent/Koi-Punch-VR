@@ -61,7 +61,7 @@ namespace InDevelopment.Fish.Trajectory
             return new Vector2(velocityForward, velocityUpwards);
         }
         
-        public static Vector2 TrajectoryVelocityFromInitialSpeed(Vector3 objPos, Vector3 targetPos, float speed, bool tall)
+        public static Vector2 TrajectoryVelocityFromInitialSpeed(Vector3 objPos, Vector3 targetPos, float speed, bool tall = false)
         {
             var displacement = SpacialDifference(objPos, targetPos);
 
