@@ -28,7 +28,7 @@ namespace InDevelopment.Fish.Trajectory
         #endregion
         
         #region ---TrajectoryCalculations---
-        public static Vector2 TrajectoryVelocityFromPeakHeight(Vector3 objPos, Vector3 targetPos,float height)
+        public static Vector2 TrajectoryVelocity2DFromPeakHeight(Vector3 objPos, Vector3 targetPos,float height)
         {
             var displacement = SpacialDifference(objPos, targetPos);
             if (height < displacement.y - 1)
@@ -45,7 +45,7 @@ namespace InDevelopment.Fish.Trajectory
             return new Vector2(velocityUpwards, velocityForward);
         }
         
-        public static Vector2 TrajectoryVelocityFromInitialAngle(Vector3 objPos, Vector3 targetPos, float angle)
+        public static Vector2 TrajectoryVelocity2DFromInitialAngle(Vector3 objPos, Vector3 targetPos, float angle)
         {
             var displacement = SpacialDifference(objPos, targetPos);
             var velocityTotal = Math.Sqrt((Math.Pow(displacement.x, 2) * -Physics.gravity.y) / 
@@ -61,7 +61,7 @@ namespace InDevelopment.Fish.Trajectory
             return new Vector2(velocityForward, velocityUpwards);
         }
         
-        public static Vector2 TrajectoryVelocityFromInitialSpeed(Vector3 objPos, Vector3 targetPos, float speed, bool tall = false)
+        public static Vector2 TrajectoryVelocity2DFromInitialSpeed(Vector3 objPos, Vector3 targetPos, float speed, bool tall = false)
         {
             var displacement = SpacialDifference(objPos, targetPos);
 

@@ -136,37 +136,37 @@ namespace InDevelopment.Fish
             var rigidities = fish.Children.Where(child => child.Rigidbody != null).Select(child => child.Rigidbody).ToArray();
             var fishTransform = fish.ParentGameObject.transform;
             var targetPos = target.position;
-            var height = Random.Range(minHeight, maxHeight);
+            var targetDirection = (targetPos - spawnPos).normalized;
             
             fishTransform.position = spawnPos;
             fishTransform.localScale = Vector3.one * Random.Range(minSize, maxSize);
             fishTransform.LookAt(targetPos, Vector3.up);
             
-            Vector2 fishVelocity;
+            Vector2 fishVelocity2D;
             switch (launchType)
             {
                 case LaunchType.Height:
-                    fishVelocity = FishTrajectory.TrajectoryVelocityFromPeakHeight(fishTransform.position, targetPos, height);
+                    var height = Random.Range(minHeight, maxHeight);
+                    fishVelocity2D = FishTrajectory.TrajectoryVelocity2DFromPeakHeight(fishTransform.position, targetPos, height);
                     break;
                 case LaunchType.Angle:
                     var angle = Random.Range(minAngle, maxAngle);
-                    fishVelocity = FishTrajectory.TrajectoryVelocityFromInitialAngle(fishTransform.position, targetPos, angle);
+                    fishVelocity2D = FishTrajectory.TrajectoryVelocity2DFromInitialAngle(fishTransform.position, targetPos, angle);
                     break;
                 case LaunchType.Speed:
                     var speed = Random.Range(minSpeed, maxSpeed);
-                    fishVelocity = FishTrajectory.TrajectoryVelocityFromInitialSpeed(fishTransform.position, targetPos, speed);
+                    fishVelocity2D = FishTrajectory.TrajectoryVelocity2DFromInitialSpeed(fishTransform.position, targetPos, speed);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
-            LaunchRigidities(rigidities, spawnPos, targetPos, fishVelocity);
+            LaunchRigiditiesDirectionWithVelocity(rigidities, targetDirection, fishVelocity2D);
             fish.ParentGameObject.SetActive(true);
         }
         
-        private static void LaunchRigidities(IEnumerable<Rigidbody> objRigidbody, Vector3 objPos, Vector3 targetPos, Vector2 fishVelocity)
+        private static void LaunchRigiditiesDirectionWithVelocity(IEnumerable<Rigidbody> objRigidbody, Vector3 targetDirection, Vector2 fishVelocity)
         {
-            var targetDirection = (targetPos - objPos).normalized;
             var velocity = new Vector3(targetDirection.x * fishVelocity.x, fishVelocity.y, targetDirection.z * fishVelocity.x);
             foreach (var rigidbody in objRigidbody)
             {
