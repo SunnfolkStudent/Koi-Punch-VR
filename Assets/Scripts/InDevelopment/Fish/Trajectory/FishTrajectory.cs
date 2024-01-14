@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace InDevelopment.Fish.Trajectory
@@ -14,91 +13,65 @@ namespace InDevelopment.Fish.Trajectory
         private static void Log(string message) => Debug.Log(message);
         #endregion
         
-        #region ---LaunchOptions---
-        public static void LaunchObjectAtTargetWithInitialSpeed(IEnumerable<Rigidbody> objRigidbody, Vector3 objPos, Vector3 targetPos, float speed, bool tall = false)
-        {
-            var spacialDifference = SpacialDifference(objPos, targetPos);
-            var fishVelocity = TrajectoryVelocityFromSpeedDistanceAltitude(speed, spacialDifference.distance, spacialDifference.altitude, tall);
-            LaunchObjectAt(objRigidbody, objPos, targetPos, fishVelocity);
-        }
-        
-        public static void LaunchObjectAtTargetWithInitialAngle(IEnumerable<Rigidbody> objRigidbody, Vector3 objPos, Vector3 targetPos, float angle)
-        {
-            var spacialDifference = SpacialDifference(objPos, targetPos);
-            var fishVelocity = TrajectoryVelocityFromAngleDistanceAltitude(angle, spacialDifference.distance, spacialDifference.altitude);
-            LaunchObjectAt(objRigidbody, objPos, targetPos, fishVelocity);
-        }
-        
-        public static void LaunchObjectAtTargetWithPeakHeight(IEnumerable<Rigidbody> objRigidbody, Vector3 objPos, Vector3 targetPos, float height)
-        {
-            var spacialDifference = SpacialDifference(objPos, targetPos);
-            var fishVelocity = TrajectoryVelocityFromPeakHeightDistanceAltitude(height, spacialDifference.distance, spacialDifference.altitude);
-            LaunchObjectAt(objRigidbody, objPos, targetPos, fishVelocity);
-        }
-        #endregion
-        
         #region ---LaunchRequirements---
-        private static (float distance, float altitude) SpacialDifference(Vector3 objPos, Vector3 targetPos)
+        private static Vector2 SpacialDifference(Vector3 objPos, Vector3 targetPos)
         {
             var objectTargetDifference = new Vector2(targetPos.x - objPos.x, targetPos.z - objPos.z);
             var directDistance = Hypotenuse(objectTargetDifference.x, objectTargetDifference.y);
             var altitudeDifference = objPos.y - targetPos.y;
-            return (directDistance, -altitudeDifference);
-        }
-
-        private static void LaunchObjectAt(IEnumerable<Rigidbody> objRigidbody, Vector3 objPos, Vector3 targetPos, (float velocityForward, float velocityUpwards) fishVelocity)
-        {
-            var targetDirection = (targetPos - objPos).normalized;
-            targetDirection *= fishVelocity.velocityForward;
-            foreach (var rigidbody in objRigidbody)
-            {
-                rigidbody.velocity = new Vector3(targetDirection.x, fishVelocity.velocityUpwards, targetDirection.z);
-            }
+            return new Vector2(directDistance, -altitudeDifference);
         }
         #endregion
         
         #region ---TrajectoryCalculations---
-        private static (float velocityForward, float velocityUpwards) TrajectoryVelocityFromSpeedDistanceAltitude(float speed, float dist, float alt, bool tall)
+        public static Vector2 TrajectoryVelocityFromInitialSpeed(Vector3 objPos, Vector3 targetPos, float speed, bool tall)
         {
+            var displacement = SpacialDifference(objPos, targetPos);
             var angleInRadians = tall ? (float)Math.Atan((Math.Pow(speed, 2) + Math.Sqrt(Math.Pow(speed, 4) - -Physics.gravity.y * 
-                    ((-Physics.gravity.y * Math.Pow(dist, 2)) + (2 * alt * Math.Pow(speed, 2))))) / (-Physics.gravity.y * dist))
+                    ((-Physics.gravity.y * Math.Pow(displacement.x, 2)) + (2 * displacement.y * Math.Pow(speed, 2))))) / (-Physics.gravity.y * displacement.x))
                     : (float)Math.Atan((Math.Pow(speed, 2) - Math.Sqrt(Math.Pow(speed, 4) - -Physics.gravity.y * 
-                    ((-Physics.gravity.y * Math.Pow(dist, 2)) + (2 * alt * Math.Pow(speed, 2))))) / (-Physics.gravity.y * dist));
+                    ((-Physics.gravity.y * Math.Pow(displacement.x, 2)) + (2 * displacement.y * Math.Pow(speed, 2))))) / (-Physics.gravity.y * displacement.x));
             
             var velocityForward = Mathf.Cos(angleInRadians) * speed;
             var velocityUpwards = Mathf.Sin(angleInRadians) * speed;
             
-            if (_isDebugging) Log($"speed: {speed}, dist: {dist}, alt: {alt} | velocityForward: {velocityForward}, velocityUpwards: {velocityUpwards}");
+            if (_isDebugging) Log($"Speed: {speed}, Dist: {displacement.x}, Alt: {displacement.y} | " +
+                                  $"VelocityForward: {velocityForward}, VelocityUpwards: {velocityUpwards}");
             
-            return (velocityForward, velocityUpwards);
+            return new Vector2(velocityForward, velocityUpwards);
         }
         
-        private static (float velocityForward, float velocityUpwards) TrajectoryVelocityFromAngleDistanceAltitude(float angle, float dist, float alt)
+        public static Vector2 TrajectoryVelocityFromInitialAngle(Vector3 objPos, Vector3 targetPos, float angle)
         {
-            var velocityTotal = Math.Sqrt((Math.Pow(dist, 2) * -Physics.gravity.y) / 
-                                           (dist * Math.Abs(Mathf.Sin(2 * angle)) - 2 * alt * Math.Pow(Math.Abs(Mathf.Cos(angle)), 2)));
+            var displacement = SpacialDifference(objPos, targetPos);
+            var vTotal = Math.Sqrt((Math.Pow(displacement.x, 2) * -Physics.gravity.y) / 
+                                           (displacement.x * Math.Abs(Mathf.Sin(2 * angle)) - 2 * 
+                                               displacement.y * Math.Pow(Math.Abs(Mathf.Cos(angle)), 2)));
             
-            var velocityForward = (float)Math.Abs(velocityTotal * Mathf.Cos(angle));
-            var velocityUpwards = (float)Math.Abs(velocityTotal * Mathf.Sin(angle));
+            var vForward = (float)Math.Abs(vTotal * Mathf.Cos(angle));
+            var vUpwards = (float)Math.Abs(vTotal * Mathf.Sin(angle));
             
-            if (_isDebugging) Log($"angle: {angle}, dist: {dist}, alt: {alt} | velocityForward: {velocityForward}, velocityUpwards: {velocityUpwards}");
+            if (_isDebugging) Log($"Angle: {angle}, Dist: {displacement.x}, Alt: {displacement.y} | " +
+                                  $"VelocityForward: {vForward}, VelocityUpwards: {vUpwards}");
             
-            return (velocityForward, velocityUpwards);
+            return new Vector2(vForward, vUpwards);
         }
         
-        private static (float velocityForward, float velocityUpwards) TrajectoryVelocityFromPeakHeightDistanceAltitude(float height, float dist, float alt)
+        public static Vector2 TrajectoryVelocityFromPeakHeight(Vector3 objPos, Vector3 targetPos,float height)
         {
-            if (height < alt - 1)
+            var displacement = SpacialDifference(objPos, targetPos);
+            if (height < displacement.y - 1)
             {
                 Debug.LogWarning("Peak trajectory height set lower than target altitude");
-                height = alt + 1;
+                height = displacement.y + 1;
             }
             var velocityForward = Mathf.Sqrt(-2 * Physics.gravity.y * height);
-            var velocityUpwards = dist / (Mathf.Sqrt(-((2 * height) / Physics.gravity.y)) + Mathf.Sqrt((2 * (alt - height)) / Physics.gravity.y));
+            var velocityUpwards = displacement.x / (Mathf.Sqrt(-((2 * height) / Physics.gravity.y)) + Mathf.Sqrt((2 * (displacement.y - height)) / Physics.gravity.y));
 
-            if (_isDebugging) Log($"height: {height}, dist: {dist}, alt: {alt} | velocityForward: {velocityForward}, velocityUpwards: {velocityUpwards}");
+            if (_isDebugging) Log($"Height: {height}, Dist: {displacement.x}, Alt: {displacement.y} | " +
+                                  $"VelocityForward: {velocityForward}, VelocityUpwards: {velocityUpwards}");
             
-            return (velocityUpwards, velocityForward);
+            return new Vector2(velocityUpwards, velocityForward);
         }
         
         public static float RangeFromSpeedAngleAltitude(float speed, float angle, float alt)
@@ -108,10 +81,7 @@ namespace InDevelopment.Fish.Trajectory
         #endregion
         
         #region ---Math Formulas---
-        private static float Hypotenuse(float a, float b)
-        {
-            return (float)Math.Sqrt(a * a + b * b);
-        }
+        private static float Hypotenuse(float a, float b) => (float)Math.Sqrt(a * a + b * b);
         #endregion
     }
 }

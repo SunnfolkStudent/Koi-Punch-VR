@@ -3,17 +3,14 @@ using System.Linq;
 using InDevelopment.Fish.EditorScripts;
 using InDevelopment.Fish.Trajectory;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using Random = UnityEngine.Random;
 
 namespace InDevelopment.Fish
 {
     public class FishSpawnManager : MonoBehaviour
     {
         // TODO: Fix why spawned fish have torque on spawning
-        // TODO: Spawn fish with properties; Size, Colour, type, flight trajectory type and area spawned in decided by random weighted tables
+        // TODO: Spawn fish with properties; Size, Colour, type, flight trajectory type decided by random weighted tables
         [SerializeField] private Transform player;
-        private static List<SpawnArea> _spawnAreas;
         
         [Header("Trajectory Height")]
         [SerializeField] private float minHeight = 5f;
@@ -23,13 +20,18 @@ namespace InDevelopment.Fish
         [SerializeField] private float minSize = 1f;
         [SerializeField] private float maxSize = 2f;
         
+        [Header("Weighted Tables")]
+        [SerializeField] private int maxPickRate = 5;
+        private static List<SpawnArea> _availableSpawnAreas;
+        private static float _totalWeight;
+        
         #region ---Initialization---
         private void Start()
         {
-            _spawnAreas = new List<SpawnArea>();
+            _availableSpawnAreas = new List<SpawnArea>();
             AddSpawnAreasToSpawnAreaList();
             
-            EventManager.SpawnFish += SpawnRandomFish; //TODO: Remove temporary spawning
+            EventManager.SpawnFish += SpawnFish; //TODO: Remove temporary spawning
         }
         #endregion
         
@@ -38,6 +40,8 @@ namespace InDevelopment.Fish
         {
             public GameObject GameObject;
             public SpawnAreaCircle SpawnAreaCircle;
+            public float Weight;
+            public int TimesSpawned;
         }
         
         private static void AddSpawnAreasToSpawnAreaList()
@@ -48,14 +52,44 @@ namespace InDevelopment.Fish
             {
                 var f = new SpawnArea { GameObject = obj };
                 f.SpawnAreaCircle = f.GameObject.GetComponent<SpawnAreaCircle>();
-                _spawnAreas.Add(f);
+                _availableSpawnAreas.Add(f);
             }
         }
-        
-        private static SpawnArea RandomSpawnArea()
+
+        #region >>>---Weighted Tables---
+        private SpawnArea PickSpawnArea()
         {
-            return _spawnAreas[Random.Range(0, _spawnAreas.Count)];
+            _totalWeight = _availableSpawnAreas.Sum(area => area.Weight);
+            var rnd = Random.Range(0, _totalWeight);
+            
+            float sum = 0;
+            foreach (var area in _availableSpawnAreas)
+            {
+                sum += area.Weight;
+                if (sum < rnd) continue;
+                NewProbabilitiesFor(area);
+                return area;
+            }
+            
+            return null;
         }
+        
+        private void NewProbabilitiesFor(SpawnArea spawnArea)
+        {
+            spawnArea.TimesSpawned++;
+            spawnArea.Weight /= 2;
+
+            if (spawnArea.TimesSpawned >= maxPickRate)
+            {
+                _availableSpawnAreas.Remove(spawnArea);
+            }
+        }
+        #endregion
+        
+        // private static SpawnArea RandomSpawnArea()
+        // {
+        //     return _availableSpawnAreas[Random.Range(0, _availableSpawnAreas.Count)];
+        // }
         
         private static Vector3 RandomOffset(float offsetMax)
         {
@@ -63,34 +97,15 @@ namespace InDevelopment.Fish
         }
         #endregion
         
-        #region ---TemporarySpawning---
-        private void SpawnRandomFish()
-        {
-            var spawnArea = RandomSpawnArea();
-            var offset = spawnArea.SpawnAreaCircle.spawnAreaRadius;
-            SpawnFishAtPosFromPool(spawnArea.GameObject.transform.position + RandomOffset(offset), FishObjectPool.FishPools[0]);
-        }
-        
-        private void FixedUpdate()
-        {
-            if (Keyboard.current.kKey.isPressed)
-            {
-                EventManager.SpawnFish.Invoke();
-            }
-            
-            if (Keyboard.current.jKey.isPressed)
-            {
-                EventManager.SpawnFish.Invoke();
-            }
-            
-            if (Keyboard.current.hKey.isPressed)
-            {
-                EventManager.SpawnFish.Invoke();
-            }
-        }
-        #endregion
-        
         #region ---FishSpawning---
+        private void SpawnFish()
+        {
+            var spawnArea = PickSpawnArea();
+            var spawnPos = spawnArea.GameObject.transform.position + RandomOffset(spawnArea.SpawnAreaCircle.spawnAreaRadius);
+            var fishPool = FishObjectPool.FishPools[0];
+            SpawnFishAtPosFromPool(spawnPos, fishPool);
+        }
+        
         private void SpawnFishAtPosFromPool(Vector3 spawnPos, FishObjectPool.FishPool fishPool)
         {
             var fish = FishObjectPool.GetPooledObject(fishPool);
@@ -103,19 +118,30 @@ namespace InDevelopment.Fish
             fishTransform.localScale = Vector3.one * Random.Range(minSize, maxSize);
             fishTransform.LookAt(targetPos, Vector3.up);
             
-            // ---Launch Fish With Max Height--- \\
-            FishTrajectory.LaunchObjectAtTargetWithPeakHeight(rigidities, fishTransform.position, targetPos, height);
+            /* Launch Fish With Max Height */
+            var fishVelocity = FishTrajectory.TrajectoryVelocityFromPeakHeight(spawnPos, targetPos, height);
             
-            // ---Launch Fish At Angle--- \\
+            /* Launch Fish At Angle */
             // var angle =  Random.Range(20f, 60f);
-            // FishTrajectory.LaunchObjectAtTargetWithInitialAngle(rigidities, fishTransform.position, player.position, angle);
+            // var fishVelocity = FishTrajectory.TrajectoryVelocityFromAngleDistanceAltitude(spawnPos, targetPos, angle);
             
-            // ---Launch Fish With Speed--- \\
+            /* Launch Fish With Speed */
             // var speed = Random.Range(27f, 40f);
             // var tallArc = Random.Range(0, 2) == 1;
-            // FishTrajectory.LaunchObjectAtTargetWithInitialSpeed(rigidities, fishTransform.position, player.position, speed, tallArc);
+            // var fishVelocity = FishTrajectory.TrajectoryVelocityFromSpeedDistanceAltitude(spawnPos, targetPos, speed, tallArc);
             
+            LaunchRigidities(rigidities, spawnPos, targetPos, fishVelocity);
             fish.ParentGameObject.SetActive(true);
+        }
+        
+        private static void LaunchRigidities(IEnumerable<Rigidbody> objRigidbody, Vector3 objPos, Vector3 targetPos, Vector2 fishVelocity)
+        {
+            var targetDirection = (targetPos - objPos).normalized;
+            var velocity = new Vector3(targetDirection.x * fishVelocity.x, fishVelocity.y, targetDirection.z * fishVelocity.x);
+            foreach (var rigidbody in objRigidbody)
+            {
+                rigidbody.velocity = velocity;
+            }
         }
         #endregion
     }
