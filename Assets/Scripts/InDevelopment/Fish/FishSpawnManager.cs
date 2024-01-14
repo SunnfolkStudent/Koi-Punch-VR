@@ -1,22 +1,38 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using InDevelopment.Fish.EditorScripts;
 using InDevelopment.Fish.Trajectory;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace InDevelopment.Fish
 {
     public class FishSpawnManager : MonoBehaviour
     {
-        // TODO: Fix why spawned fish have torque on spawning
-        // TODO: Spawn fish with properties; Size, Colour, type, flight trajectory type decided by random weighted tables
-        [SerializeField] private Transform player;
+        // TODO: Fix why spawned fish have torque
+        // TODO: Spawn fish with properties: type and flight trajectory type, decided by random weighted tables
+
+        #region ---FishLaunchSettings---
+        [Header("Fish Target")] [Tooltip("Transform that the fish trajectories will aim to")]
+        [SerializeField] private Transform target;
         
-        [Header("Trajectory Height")]
+        [Header("Launch Type")] [Tooltip("Type chosen to calculate trajectory velocity")]
+        [SerializeField] private LaunchType launchType;
+        
+        [Header("Trajectory Height")] [Tooltip("Chosen when launch type is set to Height")]
         [SerializeField] private float minHeight = 5f;
         [SerializeField] private float maxHeight = 10f;
         
-        [Header("Fish size")]
+        [Header("Trajectory Speed")] [Tooltip("Chosen when launch type is set to Speed")]
+        [SerializeField] private float minSpeed = 20f;
+        [SerializeField] private float maxSpeed = 40f;
+        
+        [Header("Trajectory Angle")] [Tooltip("Chosen when launch type is set to Angle")]
+        [SerializeField] private float minAngle = 15f;
+        [SerializeField] private float maxAngle = 65f;
+        
+        [Header("Fish size")] [Tooltip("Fish localScale for spawned fish")]
         [SerializeField] private float minSize = 1f;
         [SerializeField] private float maxSize = 2f;
         
@@ -24,6 +40,14 @@ namespace InDevelopment.Fish
         [SerializeField] private int maxPickRate = 5;
         private static List<SpawnArea> _availableSpawnAreas;
         private static float _totalWeight;
+
+        private enum LaunchType
+        {
+            Height,
+            Angle,
+            Speed
+        }
+        #endregion
         
         #region ---Initialization---
         private void Start()
@@ -111,24 +135,31 @@ namespace InDevelopment.Fish
             var fish = FishObjectPool.GetPooledObject(fishPool);
             var rigidities = fish.Children.Where(child => child.Rigidbody != null).Select(child => child.Rigidbody).ToArray();
             var fishTransform = fish.ParentGameObject.transform;
-            var targetPos = player.position;
+            var targetPos = target.position;
             var height = Random.Range(minHeight, maxHeight);
             
             fishTransform.position = spawnPos;
             fishTransform.localScale = Vector3.one * Random.Range(minSize, maxSize);
             fishTransform.LookAt(targetPos, Vector3.up);
             
-            /* Launch Fish With Max Height */
-            var fishVelocity = FishTrajectory.TrajectoryVelocityFromPeakHeight(spawnPos, targetPos, height);
-            
-            /* Launch Fish At Angle */
-            // var angle =  Random.Range(20f, 60f);
-            // var fishVelocity = FishTrajectory.TrajectoryVelocityFromInitialAngle(spawnPos, targetPos, angle);
-            
-            /* Launch Fish With Speed */
-            // var speed = Random.Range(5f, 40f);
-            // var fishVelocity = FishTrajectory.TrajectoryVelocityFromInitialSpeed(spawnPos, targetPos, speed); // Optional fifth parameter for tall arcs (bool)
-            
+            Vector2 fishVelocity;
+            switch (launchType)
+            {
+                case LaunchType.Height:
+                    fishVelocity = FishTrajectory.TrajectoryVelocityFromPeakHeight(fishTransform.position, targetPos, height);
+                    break;
+                case LaunchType.Angle:
+                    var angle = Random.Range(minAngle, maxAngle);
+                    fishVelocity = FishTrajectory.TrajectoryVelocityFromInitialAngle(fishTransform.position, targetPos, angle);
+                    break;
+                case LaunchType.Speed:
+                    var speed = Random.Range(minSpeed, maxSpeed);
+                    fishVelocity = FishTrajectory.TrajectoryVelocityFromInitialSpeed(fishTransform.position, targetPos, speed);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
             LaunchRigidities(rigidities, spawnPos, targetPos, fishVelocity);
             fish.ParentGameObject.SetActive(true);
         }
