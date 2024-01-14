@@ -1,5 +1,9 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.AffordanceSystem.Receiver.Primitives;
+using VHierarchy.Libs;
 using Random = System.Random;
 
 namespace InDevelopment.Fish.WeightedTables
@@ -24,104 +28,159 @@ namespace InDevelopment.Fish.WeightedTables
         **
         Otherwise proceed
         Check for neighbors
-        If there are neighbors, distribute weight
-        Otherwise find the closest SA and give more weight to it and self*/
-    
+        If there are neighbors, equally redistribute all weights so that neighbours in total have a 90% chance of being picked.
+        As neighbours keep getting picked, decrease pick rate (1st pick 90% neighbour chance, 2nd pick 70% neighbour chance, 3rd pick 50% neighbour chance).
+        if no neighbours are present, find the closest SA and give more weight to it and current SA*/
+
     public class WeightedTableForMovingSpawn : MonoBehaviour
     {
-        
-        // if Vector3 variables can be float, then you don't need a struct.
-        struct Vector3
-        {
-            public int x;
-            public int y;
-            public int z;
-        }
-
         struct SpawnArea
         {
-            public int Weight;
-            public Vector3 Position;
-            public int Picked;
+            public int weight;
+            public Vector3 position;
+            public int picked;
         }
 
         private int _maxPickRate;
+        private int _totalWeight;
 
-        private SpawnArea[] _spawnAreas;
+        private SpawnArea[] SpawnAreas;
 
-        // Generally for testing : UpdateSpawnAreaPosition receives the spawnAreas array with positions, and returns a new position value.
         public void UpdateSpawnAreaPosition()
         {
             int placeholderCountOfSA = 10;
-            _spawnAreas = new SpawnArea[10];
+            SpawnAreas = new SpawnArea[10];
 
             var rnd = new Random();
             int randomNumber = 0;
-            
+
             for (int i = 0; i < placeholderCountOfSA; i++)
             {
                 randomNumber = rnd.Next(50);
-                _spawnAreas[i].Position.x = randomNumber;
-                _spawnAreas[i].Position.y = randomNumber;
-                _spawnAreas[i].Position.z = randomNumber;
+                SpawnAreas[i].position.x = randomNumber;
+                SpawnAreas[i].position.y = randomNumber;
+                SpawnAreas[i].position.z = randomNumber;
             }
         }
 
         public void EvenlyDistributeWeights()
         {
             int totalWeight = 0;
-            int weightToBeDistributed;
+            int weightToBeDistributed = 0;
 
-            foreach (SpawnArea s in _spawnAreas)
+            foreach (SpawnArea s in SpawnAreas)
             {
-                totalWeight += s.Weight;
+                totalWeight += s.weight;
             }
 
             // dummy total weight
             totalWeight = 1000;
-            int placeholderCountOfSA = 10; // this line was added in to avoid compile errors.
 
-            weightToBeDistributed = (int)Math.Ceiling((float)totalWeight / _spawnAreas.Length);
+            weightToBeDistributed = (int)Math.Ceiling((float)totalWeight / SpawnAreas.Length);
 
-            for(int i = 0; i < placeholderCountOfSA; i++)
+            for (int i = 0; i < SpawnAreas.Length; i++)
             {
-                _spawnAreas[i].Weight = weightToBeDistributed;
+                SpawnAreas[i].weight = weightToBeDistributed;
             }
         }
 
-        // This will return the index of the neighbors of the selected SpawnArea
-        public int FindIndexOfNeighbors(int x)
+        private float _neighborThreshold;
+        private List<int> _indicesOfPreviousNeighbors;
+
+        private List<int> _indicesOfCurrentNeighbors;
+
+        private void UpdateIndicesOfCurrentNeighbors(int indexOfCurrentChosen)
         {
-            return new int(); // Line to be removed when function is updated.
+            _indicesOfPreviousNeighbors = _indicesOfCurrentNeighbors;
+            _indicesOfCurrentNeighbors = new List<int>();
+
+            for (int i = 0; i < SpawnAreas.Length; i++)
+            {
+                if ((SpawnAreas[i].position - SpawnAreas[indexOfCurrentChosen].position).magnitude <= _neighborThreshold)
+                {
+                    _indicesOfCurrentNeighbors.Add(i);
+                }
+            }
+
+        }
+
+        public void UpdateWeightOfCurrentNeighbors()
+        {
+
+
+        }
+
+        /*IEnumerator NeighbourChain()
+        {
+            // Grant 90% weight to neighbours
+            
+            yield return new WaitUntil (bool neighbourIsChosen);
+            
+            // Grant 70% weight to neighbours
+            
+            yield return new WaitUntil (bool neighbourIsChosen);
+            
+            // Grant 50% weight to neighbours
+            
+            yield return new WaitUntil (bool neighbourIsChosen);
+            
+            // Grant 30% weight to neighbours
+
+            yield return new WaitUntil(bool neighbourIsChosen);
+        }*/
+
+        private void UpdateTotalWeight()
+        {
+            _totalWeight = 0;
+
+            for (int i = 0; i < SpawnAreas.Length; i++)
+            {
+                _totalWeight += SpawnAreas[i].weight;
+            }
         }
 
         public int PickSpawnArea()
         {
+            UpdateSpawnAreaPosition();
+            
+            //Remove the weight if the SA reached maxPickedRate
+            for (int x = 0; x < SpawnAreas.Length; x++)
+            {
+                if (SpawnAreas[x].picked >= _maxPickRate)
+                {
+                    SpawnAreas[x].weight = 0;
+                }
+            }
+            
+            UpdateTotalWeight();
+
             int pickedSpawnArea = 0;
-            int totalWeight = 0; // this line was added in to remove compile errors.
             var rnd = new Random();
-            var pick = rnd.Next(totalWeight);
+
+            // Picks a random number between 1 and total weight of all SA
+            var pick = rnd.Next(_totalWeight);
             int sum = 0;
 
-            for (int x = 0; x < _spawnAreas.Length; x++)
+            // Let's say SpawnArea[0] has 100 weight, SpawnArea[1] has 200 weight, totalWeight is 300 and pick is 129
+            // First iteration where x=0 and sum = 100; sum isn't >= 129 therefore SpawnArea[0] isn't the picked SA
+            for (int x = 0; x < SpawnAreas.Length; x++)
             {
-                sum += _spawnAreas[x].Weight;
+                sum += SpawnAreas[x].weight;
                 if (sum >= pick)
                 {
                     pickedSpawnArea = x;
                     break;
                 }
-
             }
 
-            if (_spawnAreas[pickedSpawnArea].Picked >= _maxPickRate)
-            {
-                
-            }
+            // This also updates indicesOfPreviousNeighbors
+            UpdateIndicesOfCurrentNeighbors(pickedSpawnArea);
 
-            // TODO: Check for neighbors
+            // This is working under the assumption that indicesOfCurrentNeighbors and indicesOfPreviousNeighbors are already updated
+            UpdateWeightOfCurrentNeighbors();
 
-            return new int(); // Line to be removed when function is updated.
+            return pickedSpawnArea;
+
         }
     }
 }
