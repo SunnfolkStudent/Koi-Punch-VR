@@ -10,7 +10,7 @@ namespace InDevelopment.Fish
         private const int MaxPickRate = 5;
         private static List<SpawnArea> _availableSpawnAreas;
         private static float _weightedTableTotalWeight;
-
+        
         private class SpawnArea
         {
             public GameObject GameObject;
@@ -19,16 +19,11 @@ namespace InDevelopment.Fish
             public int TimesSpawned;
         }
         
+        #region ---Initialization---
         public static void InitializeSpawnAreas()
         {
             _availableSpawnAreas = new List<SpawnArea>();
             AddSpawnAreasToSpawnAreaList();
-        }
-
-        public static Vector3 GetSpawnPosition()
-        {
-            var spawnArea = PickSpawnArea();
-            return spawnArea.GameObject.transform.position + FishSpawnAreas.RandomOffset(spawnArea.SpawnAreaCircle.spawnAreaRadius);
         }
         
         private static void AddSpawnAreasToSpawnAreaList()
@@ -42,12 +37,21 @@ namespace InDevelopment.Fish
                 _availableSpawnAreas.Add(f);
             }
         }
+        #endregion
+        
+        #region ---GetSpawnPosition---
+        public static Vector3 GetSpawnPosition()
+        {
+            var spawnArea = PickSpawnArea();
+            return spawnArea.GameObject.transform.position + FishSpawnAreas.RandomOffset(spawnArea.SpawnAreaCircle.spawnAreaRadius);
+        }
 
         private static Vector3 RandomOffset(float offsetMax)
         {
             return new Vector3(Random.Range(-offsetMax, offsetMax), 0, Random.Range(-offsetMax, offsetMax));
         }
-
+        #endregion
+        
         #region ---RandomWeightedTables---
 
         private static SpawnArea PickSpawnArea()
