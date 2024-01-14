@@ -15,10 +15,10 @@ namespace InDevelopment.Fish
         #endregion
         
         #region >>>---StartBossPhases---
-        public static Event StartBossPhase0;
-        public static Event StartBossPhase1;
-        public static Event StartBossPhase2;
-        public static Event StartBossPhase3;
+        public static Event StartBossPhase0 = StartBossPhase0Debug; // Starts phase 0.
+        public static Event StartBossPhase1 = StartBossPhase1Debug; // Starts phase 1.
+        public static Event StartBossPhase2 = StartBossPhase2Debug; // Starts phase 2.
+        public static Event StartBossPhase3 = StartBossPhase3Debug; // Starts phase 3.
         public static Event BossDefeated = BossDefeatedDebug;
         #endregion
         #endregion
@@ -32,6 +32,26 @@ namespace InDevelopment.Fish
         private static void StopFishSpawningDebug()
         {
             Debug.Log("---Fish Spawning stopped---");
+        }
+        
+        private static void StartBossPhase0Debug()
+        {
+            Debug.Log("---BossPhase0 started---");
+        }
+        
+        private static void StartBossPhase1Debug()
+        {
+            Debug.Log("---BossPhase1 started---");
+        }
+        
+        private static void StartBossPhase2Debug()
+        {
+            Debug.Log("---BossPhase2 started---");
+        }
+        
+        private static void StartBossPhase3Debug()
+        {
+            Debug.Log("---BossPhase3 started---");
         }
         
         private static void BossDefeatedDebug()
