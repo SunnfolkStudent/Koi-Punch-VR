@@ -7,6 +7,8 @@ namespace InDevelopment.Fish
 {
     public static class FishSpawnAreas
     {
+        // TODO: Change RandomWeightedTables to get desired effect
+        // TODO: Remove depreciated function at the bottom after testing of random weighted tables
         private const int MaxPickRate = 5;
         private static List<SpawnArea> _availableSpawnAreas;
         private static float _weightedTableTotalWeight;
@@ -40,7 +42,7 @@ namespace InDevelopment.Fish
         #endregion
         
         #region ---GetSpawnPosition---
-        public static Vector3 GetSpawnPosition()
+        public static Vector3 GetNextFishSpawnPosition()
         {
             var spawnArea = PickSpawnArea();
             return spawnArea.GameObject.transform.position + FishSpawnAreas.RandomOffset(spawnArea.SpawnAreaCircle.spawnAreaRadius);
@@ -53,7 +55,6 @@ namespace InDevelopment.Fish
         #endregion
         
         #region ---RandomWeightedTables---
-
         private static SpawnArea PickSpawnArea()
         {
             _weightedTableTotalWeight = _availableSpawnAreas.Sum(area => area.Weight);
@@ -83,7 +84,6 @@ namespace InDevelopment.Fish
         }
         #endregion
         
-        // TODO: Remove function after testing of random weighted tables
         // private static SpawnArea RandomSpawnArea()
         // {
         //     return _availableSpawnAreas[Random.Range(0, _availableSpawnAreas.Count)];

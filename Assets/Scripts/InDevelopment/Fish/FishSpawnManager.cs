@@ -10,7 +10,7 @@ namespace InDevelopment.Fish
     public class FishSpawnManager : MonoBehaviour
     {
         // TODO: Fix why spawned fish have torque
-        // TODO: Spawn fish with properties: type and flight trajectory type, decided by random weighted tables
+        // TODO: Spawn fish with properties: prefab type and flight trajectory type, decided by random weighted tables
         
         #region ---FishLaunchInspectorSettings---
         [Header("Fish Target")] [Tooltip("Transform that the fish trajectories will aim to")]
@@ -54,7 +54,7 @@ namespace InDevelopment.Fish
         #region ---FishSpawning---
         private void SpawnFish()
         {
-            var spawnPos = FishSpawnAreas.GetSpawnPosition();
+            var spawnPos = FishSpawnAreas.GetNextFishSpawnPosition();
             var fishPool = FishObjectPool.FishPools[0];
             SpawnFishAtPosFromPool(spawnPos, fishPool);
         }

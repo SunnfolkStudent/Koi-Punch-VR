@@ -5,12 +5,12 @@ namespace InDevelopment.Fish
 {
     public class FishSpawnTimeManager : MonoBehaviour
     {
+        public static bool isSpawningFish{ get; private set; }
+        
         [Header("FishSpawnFrequencyTimer")]
         [SerializeField] private float maxSpawnRate = 1.5f;
         [SerializeField] private float minSpawnRate = 0.5f;
         [SerializeField] private float timeToMaxSpawnRate = 20f;
-        
-        public static bool isSpawningFish{ get; private set; }
         
         #region ---Initialization---
         private void Awake()
