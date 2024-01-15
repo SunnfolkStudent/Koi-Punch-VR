@@ -19,24 +19,14 @@ namespace InDevelopment.Fish
 
         private void OnTriggerEnter(Collider other)
         {
-            var initialPunchPosition = Vector3.zero;
             if (other.gameObject.CompareTag("LeftFist") || other.gameObject.CompareTag("RightFist"))
             {
-                Debug.Log("InitialPunchPosition:" + initialPunchPosition);
+                GainZen();
             }
-
+            
             if (other.gameObject.CompareTag("Ground"))
             {
-                Debug.Log("Distance Travelled:" + (transform.position - initialPunchPosition));
-                if (other.gameObject.CompareTag("LeftFist") || other.gameObject.CompareTag("RightFist"))
-                {
-                    GainZen();
-                }
-
-                if (other.gameObject.CompareTag("Ground"))
-                {
-                    Despawn();
-                }
+                Despawn();
             }
         }
 
