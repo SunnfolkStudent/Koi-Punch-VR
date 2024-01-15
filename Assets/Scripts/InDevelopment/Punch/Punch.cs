@@ -203,7 +203,7 @@ public class Punch : MonoBehaviour
         // Angle = arcsin(direction.y)
         
         // You can find the horizontal velocity through adding x & z together?
-        // Time = (2*v*sin(arcsin of cubeLaunchDir.normalized))/gravity (18?).
+        // Time = (2*v*cubeLaunchDir.normalized.y)/gravity (18?).
         
         if (showDebugLines)
             Debug.DrawLine(transform.position, transform.position + cubeLaunchDir, Color.red, 2.5f);
