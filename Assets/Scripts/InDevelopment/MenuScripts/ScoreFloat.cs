@@ -8,3 +8,4 @@ public class ScoreFloat : MonoBehaviour
         Destroy(gameObject, destroyAfterTime);
     }
 }
+
