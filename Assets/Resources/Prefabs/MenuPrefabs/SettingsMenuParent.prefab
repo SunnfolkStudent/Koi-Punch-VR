@@ -353,14 +353,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 853872734862768486}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.70681936, y: 0.0005344899, z: -0.00016252052, w: -0.70739394}
+  m_LocalRotation: {x: 0.9473175, y: 0.0005511035, z: 0.00009152834, w: -0.3202957}
   m_LocalPosition: {x: -0.08420366, y: -0.42307293, z: 0.01364382}
   m_LocalScale: {x: 99.99998, y: 99.999985, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6289270739388109091}
   m_Father: {fileID: 1515660384768554937}
-  m_LocalEulerAnglesHint: {x: -89.931, y: 0, z: 0.026}
+  m_LocalEulerAnglesHint: {x: -142.638, y: 0.013000488, z: -0.07098389}
 --- !u!33 &6911889796728167540
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3527,6 +3527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   breakPrefab: {fileID: 5418832669615464414, guid: bb17817de87f09a4a96e9e153702f598,
     type: 3}
+  LevelToGoTo: 0
   newMenuParent: {fileID: 2380400597701980781, guid: 1770d73fefe4c594fa449c170babedc8,
     type: 3}
 --- !u!1 &5439038251076016693
@@ -6052,7 +6053,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8652660538646530690}
   - component: {fileID: 2158372687174391116}
-  - component: {fileID: 2650092848430599783}
   - component: {fileID: 1868772079490258186}
   m_Layer: 0
   m_Name: SFX_Text
@@ -6124,27 +6124,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2650092848430599783
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7822523830636890972}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1868772079490258186
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,7 +15,12 @@ public class ScoreManager : MonoBehaviour
 
     public float multiplierTime;
     public bool multiplierOn;
-    
+
+    private void Start()
+    {
+        fishPunchPoints = distancePoints = bonusPoints = hitByFish = zenPhaseOne = zenPhaseTwo = zenPoints = 0;
+    }
+
     /*Added to the beginning of each script that adds to ScoreManager
      *
      * private GameObject _scoreManagerObj;
@@ -127,13 +132,35 @@ public class ScoreManager : MonoBehaviour
     //Successful punches are given points
     //points are added to zenPhaseOnePoints;
 
+    public void ZenPhaseOne(int phaseOnePoints)
+    {
+        zenPhaseOne = 0;
+        zenPhaseOne += phaseOnePoints;
+    }
+
     //Zen mode phase 3
     //Successful punches are given points
     //points are added to zenPhaseTwoPoints;
 
+    public void ZenPhaseTwo(int phaseTwoPoints)
+    {
+        zenPhaseTwo = 0;
+        zenPhaseTwo += phaseTwoPoints;
+    }
+
     //Zen mode phase 4
     //Zen and Velocity are calculated into points
     //points for phase four as well as all previous rounds are added into zenModePoints int;
+
+    public void ZenEnd(int phaseThreePoints)
+    {
+        zenPoints += phaseThreePoints;
+        zenPoints += zenPhaseTwo;
+        zenPoints += zenPhaseOne;
+
+        zenPhaseOne = 0;
+        zenPhaseTwo = 0;
+    }
 
     /*****************************************/
     
