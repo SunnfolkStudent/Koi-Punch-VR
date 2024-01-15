@@ -12,7 +12,16 @@
         },
         {
             "Category": "Punch Comment",
-            "OnPunch": ["Well done!", "Nice Punch!", "Good Punch!", "Great Punch!", "Amazing Punch!", "Excellent Punch!", "Fantastic Punch!", "Incredible Punch!", "Unbelievable Punch!", "Unstop"]
+            "OnPunch": ["Well done!", "Great Punch!", "Fantastic!", "You are doing great!"],
+            "OnMiss/BadHit": "This is quite strong koi",
+            "OnGotHitByFish": "Are you ok?",
+            "OnCriticalHit": "We will turn you into wind sock"
+        },
+        {
+            "Category": "Special Attack",
+            "OnButtonPressed": "KOOOOOOOOOOOOOOOO",
+            "OnButtonRelease": "I",
+            "OnSpecialAttackHit": "PUNCH!"
         }
     ]
 }
