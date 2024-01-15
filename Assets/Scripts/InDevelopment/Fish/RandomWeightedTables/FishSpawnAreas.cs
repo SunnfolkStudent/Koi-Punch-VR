@@ -3,16 +3,17 @@ using System.Linq;
 using InDevelopment.Fish.EditorScripts;
 using UnityEngine;
 
-namespace InDevelopment.Fish
+namespace InDevelopment.Fish.RandomWeightedTables
 {
     public static class FishSpawnAreas
     {
-        // TODO: Change RandomWeightedTables to get desired effect
-        // TODO: Remove depreciated function at the bottom after testing of random weighted tables
-        private const int MaxPickRate = 5;
         private static List<SpawnArea> _availableSpawnAreas;
         private static float _weightedTableTotalWeight;
-        
+        private const int MaxPickRate = 5;
+        private const float WeightLostFromPicked = 0.5f;
+        private const float NeighborDistanceThreshold = 5f;
+        private const float WeightDistributedToNeighbors = 0.75f;
+
         private class SpawnArea
         {
             public GameObject GameObject;
@@ -44,7 +45,7 @@ namespace InDevelopment.Fish
         #region ---GetSpawnPosition---
         public static Vector3 GetNextFishSpawnPosition()
         {
-            var spawnArea = PickSpawnArea();
+            var spawnArea = PickSpawnArea(_availableSpawnAreas);
             return spawnArea.GameObject.transform.position + FishSpawnAreas.RandomOffset(spawnArea.SpawnAreaCircle.spawnAreaRadius);
         }
 
@@ -54,39 +55,58 @@ namespace InDevelopment.Fish
         }
         #endregion
         
-        #region ---RandomWeightedTables---
-        private static SpawnArea PickSpawnArea()
+        #region ---RandomWeightedChoice---
+        private static SpawnArea PickSpawnArea(List<SpawnArea> availableSpawnAreas)
         {
-            _weightedTableTotalWeight = _availableSpawnAreas.Sum(area => area.Weight);
+            _weightedTableTotalWeight = availableSpawnAreas.Sum(area => area.Weight);
             var rnd = Random.Range(0, _weightedTableTotalWeight);
             
             float sum = 0;
-            foreach (var area in _availableSpawnAreas)
+            foreach (var area in availableSpawnAreas)
             {
                 sum += area.Weight;
                 if (sum < rnd) continue;
-                NewProbabilitiesFor(area);
+                NewProbabilities(availableSpawnAreas, area);
                 return area;
             }
             
             return null;
         }
+
+        private static void NewProbabilities(IReadOnlyCollection<SpawnArea> availableSpawnAreas, SpawnArea area)
+        {
+            NeighborsNewProbabilities(availableSpawnAreas, area);
+            NewProbabilitiesForPickedArea(area);
+        }
         
-        private static void NewProbabilitiesFor(SpawnArea spawnArea)
+        private static void NewProbabilitiesForPickedArea(SpawnArea spawnArea)
         {
             spawnArea.TimesSpawned++;
-            spawnArea.Weight /= 2;
+            spawnArea.Weight *= WeightLostFromPicked;
 
             if (spawnArea.TimesSpawned >= MaxPickRate)
             {
-                _availableSpawnAreas.Remove(spawnArea);
+                spawnArea.Weight = 0;
+            }
+        }
+
+        private static void NeighborsNewProbabilities(IReadOnlyCollection<SpawnArea> availableSpawnAreas, SpawnArea area)
+        {
+            var currentNeighbors = availableSpawnAreas.Where(spawnArea =>
+                (Vector3.Distance(spawnArea.GameObject.transform.position, area.GameObject.transform.position))
+                <= NeighborDistanceThreshold).ToArray();
+            
+            if (currentNeighbors.Length !> 0) return;
+            
+            var weightToDistribute = area.Weight * (1 - WeightLostFromPicked);
+            var weightToNeighbours = weightToDistribute * WeightDistributedToNeighbors / currentNeighbors.Length;
+            var weightForTheRest = weightToDistribute * (1 - WeightDistributedToNeighbors) / (availableSpawnAreas.Count - currentNeighbors.Length);
+            
+            foreach (var spawnArea in _availableSpawnAreas)
+            {
+                spawnArea.Weight += currentNeighbors.Contains(spawnArea) ? weightToNeighbours : weightForTheRest;
             }
         }
         #endregion
-        
-        // private static SpawnArea RandomSpawnArea()
-        // {
-        //     return _availableSpawnAreas[Random.Range(0, _availableSpawnAreas.Count)];
-        // }
     }
 }

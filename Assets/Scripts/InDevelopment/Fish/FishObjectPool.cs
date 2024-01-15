@@ -1,18 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using InDevelopment.Fish.RandomWeightedTables;
 using UnityEngine;
 
 namespace InDevelopment.Fish
 {
     public class FishObjectPool : MonoBehaviour
     {
-        // TODO: Other properties on fish?
-        public static List<FishPool> FishPools;
+        private static List<FishPool> _fishPools;
         private static Transform _fishContainer;
         [SerializeField] private InspectorPrefab[] fishPrefab;
         
-        [Serializable] private class InspectorPrefab
+        [Serializable]
+        public class InspectorPrefab
         {
             public GameObject prefabGameObject;
             public int initialAmountInPool;
@@ -23,11 +24,12 @@ namespace InDevelopment.Fish
         private void Awake()
         {
             _fishContainer = transform.GetChild(0);
-            FishPools = new List<FishPool>();
+            _fishPools = new List<FishPool>();
             foreach (var prefab in fishPrefab)
             {
-                FishPools.Add(new FishPool(prefab.prefabGameObject, prefab.initialAmountInPool, prefab.zenFromFish));
+                _fishPools.Add(new FishPool(prefab.prefabGameObject, prefab.initialAmountInPool, prefab.zenFromFish, fishPrefab.Length));
             }
+            FishSpawnType.InitializeFishSpawnTypes(_fishPools);
         }
         #endregion
         
@@ -36,12 +38,16 @@ namespace InDevelopment.Fish
         {
             public readonly Prefab Prefab;
             public readonly List<Fish> Fishes;
+            public float Weight;
+            public int TimesSpawned;
 
-            public FishPool(GameObject prefab, int initialAmount, float zenFromFish)
+            public FishPool(GameObject prefab, int initialAmount, float zenFromFish, float amountOfFishPools)
             {
                 Prefab = new Prefab(prefab, zenFromFish);
                 Fishes = new List<Fish>();
                 AddMultipleFishToPool(initialAmount, this);
+                Weight = 100 / amountOfFishPools;
+                TimesSpawned = 0;
             }
         }
         

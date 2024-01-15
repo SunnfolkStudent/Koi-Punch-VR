@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using InDevelopment.Fish.RandomWeightedTables;
 using InDevelopment.Fish.Trajectory;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -55,13 +56,12 @@ namespace InDevelopment.Fish
         private void SpawnFish()
         {
             var spawnPos = FishSpawnAreas.GetNextFishSpawnPosition();
-            var fishPool = FishObjectPool.FishPools[0];
-            SpawnFishAtPosFromPool(spawnPos, fishPool);
+            var fish = FishSpawnType.GetNextFishSpawnType();
+            SpawnFishAtPosFromPool(spawnPos, fish);
         }
         
-        private void SpawnFishAtPosFromPool(Vector3 spawnPos, FishObjectPool.FishPool fishPool)
+        private void SpawnFishAtPosFromPool(Vector3 spawnPos, FishObjectPool.Fish fish)
         {
-            var fish = FishObjectPool.GetPooledObject(fishPool);
             var rigidities = fish.Children.Where(child => child.Rigidbody != null).Select(child => child.Rigidbody).ToArray();
             var fishTransform = fish.ParentGameObject.transform;
             var targetPos = target.position;
