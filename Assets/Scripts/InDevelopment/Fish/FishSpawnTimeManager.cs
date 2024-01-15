@@ -13,7 +13,7 @@ namespace InDevelopment.Fish
         [SerializeField] private float timeToMaxSpawnRate = 20f;
         
         #region ---Initialization---
-        private void Awake()
+        private void Start()
         {
             EventManager.FishSpawning += StartSpawning;
             EventManager.FishSpawningAtMaxRate += StartSpawningAtMaxRate;

@@ -9,7 +9,6 @@ namespace InDevelopment.Fish.RandomWeightedTables
     {
         // TODO: make not static
         private static List<SpawnArea> _availableSpawnAreas;
-        private static float _weightedTableTotalWeight;
         private const int MaxPickRate = 5;
         private const float WeightLostFromPicked = 0.5f;
         private const float NeighborDistanceThreshold = 5f;
@@ -59,14 +58,14 @@ namespace InDevelopment.Fish.RandomWeightedTables
         #region ---RandomWeightedChoice---
         private static SpawnArea PickSpawnArea(List<SpawnArea> availableSpawnAreas)
         {
-            _weightedTableTotalWeight = availableSpawnAreas.Sum(area => area.Weight);
-            var rnd = Random.Range(0, _weightedTableTotalWeight);
+            var totalWeight = availableSpawnAreas.Sum(area => area.Weight);
+            var rnd = Random.Range(0, totalWeight);
             
             float sum = 0;
             foreach (var area in availableSpawnAreas)
             {
                 sum += area.Weight;
-                if (sum < rnd) continue;
+                if (sum > rnd) continue;
                 NewProbabilities(availableSpawnAreas, area);
                 return area;
             }

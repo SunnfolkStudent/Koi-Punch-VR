@@ -29,8 +29,8 @@ namespace InDevelopment.Fish.RandomWeightedTables
         private static FishObjectPool.FishPool PickFishType(IEnumerable<FishObjectPool.FishPool> fishTypes)
         {
             var fishPools = fishTypes.ToArray();
-            var weightedTableTotalWeight = fishPools.Sum(prefab => prefab.Weight);
-            var rnd = Random.Range(0, weightedTableTotalWeight);
+            var totalWeight = fishPools.Sum(fishPool => fishPool.Weight);
+            var rnd = Random.Range(0, totalWeight);
             
             float sum = 0;
             foreach (var fishPool in fishPools)

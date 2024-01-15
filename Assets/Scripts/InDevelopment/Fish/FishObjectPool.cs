@@ -16,8 +16,9 @@ namespace InDevelopment.Fish
         public class InspectorPrefab
         {
             public GameObject prefabGameObject;
-            public int initialAmountInPool;
-            public float zenFromFish;
+            public int initialAmountInPool = 5;
+            public float zenFromFish = 10f;
+            public float weightInRandomTable = 100f;
         }
         
         #region ---Initialization---
@@ -27,7 +28,7 @@ namespace InDevelopment.Fish
             _fishPools = new List<FishPool>();
             foreach (var prefab in fishPrefab)
             {
-                _fishPools.Add(new FishPool(prefab.prefabGameObject, prefab.initialAmountInPool, prefab.zenFromFish, fishPrefab.Length));
+                _fishPools.Add(new FishPool(prefab.prefabGameObject, prefab.initialAmountInPool, prefab.zenFromFish, prefab.weightInRandomTable));
             }
             FishSpawnType.InitializeFishSpawnTypes(_fishPools);
         }
@@ -41,12 +42,12 @@ namespace InDevelopment.Fish
             public float Weight;
             public int TimesSpawned;
 
-            public FishPool(GameObject prefab, int initialAmount, float zenFromFish, float amountOfFishPools)
+            public FishPool(GameObject prefab, int initialAmount, float zenFromFish, float weight)
             {
                 Prefab = new Prefab(prefab, zenFromFish);
                 Fishes = new List<Fish>();
                 AddMultipleFishToPool(initialAmount, this);
-                Weight = 100 / amountOfFishPools;
+                Weight = weight;
                 TimesSpawned = 0;
             }
         }
