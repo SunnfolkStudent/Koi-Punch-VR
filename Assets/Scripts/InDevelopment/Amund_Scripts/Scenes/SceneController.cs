@@ -12,18 +12,22 @@ public class SceneController : MonoBehaviour
     [SerializeField] private Transform Goal;
     [SerializeField] private GameObject Title;
     [SerializeField] private GameObject IntroTrigger;
-    [SerializeField] private float fadeTime;
     [SerializeField] private AudioClip musicLength;
     [SerializeField] private AnimationCurve titleSpeed;
     private float speed;
     private float time;
-    public static int LevelSelected;
-    
+    public static int LevelSelected = 5;
+    private GameObject _fadeScreenObj;
+    private FadeScreenScript _fadeScreen;
     #endregion
     
-    private void Start()
+    
+
+    private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        _fadeScreenObj = GameObject.FindGameObjectWithTag("FadeScreen");
+        _fadeScreen = _fadeScreenObj.GetComponent<FadeScreenScript>();
         SceneManager.LoadScene(IntroScene, LoadSceneMode.Additive);
     }
 
@@ -44,7 +48,10 @@ public class SceneController : MonoBehaviour
         
 
         #endregion
-        
+
+        if (LevelSelected == 5) return;
+        StartCoroutine(ChangeLevel());
+        LevelSelected = 5;
     }
     
     private IEnumerator PlayIntro()
@@ -57,8 +64,13 @@ public class SceneController : MonoBehaviour
 
     private IEnumerator ChangeLevel()
     {
-        yield return new WaitForSeconds(fadeTime);
+        _fadeScreenObj = GameObject.FindGameObjectWithTag("FadeScreen");
+        _fadeScreen.FadeOut();
+        yield return new WaitForSeconds(_fadeScreen._fadeDuration);
         SceneManager.LoadScene(Levels[LevelSelected]);
-        SceneManager.LoadScene(LightingForLevels[LevelSelected], LoadSceneMode.Additive);
+        if (LevelSelected is 1 or 2 or 3)
+        {
+            SceneManager.LoadScene(LightingForLevels[LevelSelected], LoadSceneMode.Additive);
+        }
     }
 }
