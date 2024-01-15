@@ -12,7 +12,7 @@ namespace InDevelopment.Fish
         [SerializeField] private float zenPerHitPhase2 = 5f;
         private static BossPhase _currentBossState;
         private float _score;
-
+        
         #region ---Initialization---
         private void Start()
         {
@@ -87,15 +87,14 @@ namespace InDevelopment.Fish
         {
             Phase.FirstOrDefault(keyValuePair => keyValuePair.Value.score == 0).Value.Event.Invoke();
         }
-
+        
         private static void PhaseSuccessful()
         {
             Phase[_currentBossState].score = ZenMetreManager.Instance.zenMetreValue;
-            // _currentBossState++;
             Phase[_currentBossState++].Event.Invoke();
         }
         #endregion
-
+        
         #region ---PunchBoss--
         public void PunchObject(ControllerManager controllerManager, string fistUsed)
         {

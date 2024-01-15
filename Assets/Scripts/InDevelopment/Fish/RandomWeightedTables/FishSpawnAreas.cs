@@ -13,7 +13,7 @@ namespace InDevelopment.Fish.RandomWeightedTables
         private const float WeightLostFromPicked = 0.5f;
         private const float NeighborDistanceThreshold = 5f;
         private const float WeightDistributedToNeighbors = 0.75f;
-
+        
         private class SpawnArea
         {
             public GameObject GameObject;
@@ -46,7 +46,7 @@ namespace InDevelopment.Fish.RandomWeightedTables
         public static Vector3 GetNextFishSpawnPosition()
         {
             var spawnArea = PickSpawnArea(_availableSpawnAreas);
-            return spawnArea.GameObject.transform.position + FishSpawnAreas.RandomOffset(spawnArea.SpawnAreaCircle.spawnAreaRadius);
+            return spawnArea.GameObject.transform.position + RandomOffset(spawnArea.SpawnAreaCircle.spawnAreaRadius);
         }
 
         private static Vector3 RandomOffset(float offsetMax)
