@@ -7,6 +7,7 @@ namespace InDevelopment.Fish.RandomWeightedTables
 {
     public static class FishSpawnAreas
     {
+        // TODO: make not static
         private static List<SpawnArea> _availableSpawnAreas;
         private static float _weightedTableTotalWeight;
         private const int MaxPickRate = 5;
