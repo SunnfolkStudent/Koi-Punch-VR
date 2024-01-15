@@ -17,6 +17,7 @@ public class FistScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        
         if (other.gameObject.TryGetComponent(out IPunchable punchableObject))
         {
                 punchableObject.PunchObject(controllerManager, whichFistUsed);
