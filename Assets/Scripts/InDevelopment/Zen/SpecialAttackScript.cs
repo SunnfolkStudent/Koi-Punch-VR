@@ -5,8 +5,7 @@ using UnityEngine;
 public class SpecialAttackScript : MonoBehaviour
 {
     [Header("Timers for charging punch")]
-    private float _chargeTimer;
-    public static float timeToCharge = 10f;
+    public static readonly float timeToCharge = 10f;
     private float _zenLostPerSecond;
     
     [Header("Static variables for special attack")]
@@ -17,8 +16,6 @@ public class SpecialAttackScript : MonoBehaviour
 
     void Start()
     {
-        _chargeTimer = timeToCharge;
-        
         _zenLostPerSecond = 300f / timeToCharge;
     }
     
