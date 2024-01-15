@@ -5,6 +5,7 @@ using UnityEngine;
 public class BreakOnHit : TransitionAnimation
 {
     [SerializeField] private GameObject breakPrefab;
+    [SerializeField] private int LevelToGoTo;
     
     protected void HittingSign()
     {
@@ -13,6 +14,7 @@ public class BreakOnHit : TransitionAnimation
         if (gameObject.CompareTag("SceneChanger"))
         {
             gameObject.transform.localScale = new Vector3(0, 0, 0);
+            SceneController.LevelSelected = LevelToGoTo;
         }
         else
         {
