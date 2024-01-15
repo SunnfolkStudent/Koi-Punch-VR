@@ -12,8 +12,16 @@ namespace InDevelopment.Fish
         
         private void OnCollisionEnter(Collision other)
         {
+            Vector3 initialPunchPosition = new Vector3(0, 0, 0);
+            
+            if (other.gameObject.CompareTag("LeftFist") || other.gameObject.CompareTag("RightFist"))
+            {
+                Debug.Log(initialPunchPosition);
+            }
+            
             if (other.gameObject.CompareTag("Ground"))
             {
+                Debug.Log(transform.position-initialPunchPosition);
                 Despawn();
             }
         }
