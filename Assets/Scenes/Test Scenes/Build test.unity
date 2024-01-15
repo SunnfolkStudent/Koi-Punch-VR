@@ -414,6 +414,11 @@ PrefabInstance:
       objectReference: {fileID: 882771504}
     - target: {fileID: 202575621013093645, guid: b0869e6e2e592a646852ba90d715ff4c,
         type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1409302454}
+    - target: {fileID: 202575621013093645, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
       propertyPath: maxSize
       value: 1.5
       objectReference: {fileID: 0}
@@ -4466,9 +4471,14 @@ MonoBehaviour:
   bButton: {fileID: 0}
   xButton: {fileID: 0}
   yButton: {fileID: 0}
+  _Abutton: 0
+  _Bbutton: 0
+  _Xbutton: 0
+  _Ybutton: 0
   leftFistTest: 0
   rightFistTest: 0
-  zenCharge: 0
+  hapticCancelButton: {fileID: 0}
+  zenChargeIntensity: 0
   zenAmplifier: 0.1
 --- !u!114 &1204975105 stripped
 MonoBehaviour:
@@ -4482,6 +4492,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ae26e19cd956134bbdf3c6f65bf393a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1409302454 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6102629444566815224, guid: 62d65635dd823a74c9166df236601c19,
+    type: 3}
+  m_PrefabInstance: {fileID: 1459566277}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1459566277
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 8154389346661918249}
   - component: {fileID: 317580834281690902}
   - component: {fileID: 3346427758793850776}
+  - component: {fileID: 3640885647221072598}
   m_Layer: 0
   m_Name: Right Open Hand Hitbox
   m_TagString: RightFist
@@ -215,6 +216,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &3640885647221072598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4220376180466953979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 970d916cd84b00546b6ec55c7cb264d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4406914458469338164
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,6 +399,7 @@ GameObject:
   - component: {fileID: 5537074047865065663}
   - component: {fileID: 9153707334431533306}
   - component: {fileID: 1087512789609413547}
+  - component: {fileID: 3255912558646393729}
   m_Layer: 0
   m_Name: Right Closed Hand Hitbox
   m_TagString: RightFist
@@ -456,6 +470,18 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.05
   m_Center: {x: -0.015, y: 0.015, z: 0.015}
+--- !u!114 &3255912558646393729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4897473096757052186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 970d916cd84b00546b6ec55c7cb264d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5029026800916818781
 GameObject:
   m_ObjectHideFlags: 0
@@ -467,6 +493,7 @@ GameObject:
   - component: {fileID: 6406819701760051319}
   - component: {fileID: 9165669432460913009}
   - component: {fileID: 7945479647905930347}
+  - component: {fileID: 951048003176901455}
   m_Layer: 0
   m_Name: Left Closed Hand Hitbox
   m_TagString: LeftFist
@@ -537,6 +564,18 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.05
   m_Center: {x: -0.015, y: -0.015, z: -0.015}
+--- !u!114 &951048003176901455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5029026800916818781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 970d916cd84b00546b6ec55c7cb264d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6564072810355661753
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,6 +834,7 @@ GameObject:
   - component: {fileID: 4971912627292052601}
   - component: {fileID: 1155137034652864400}
   - component: {fileID: 8351143538944869532}
+  - component: {fileID: 8966379675397040125}
   m_Layer: 0
   m_Name: Left Open Hand Hitbox
   m_TagString: LeftFist
@@ -865,6 +905,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &8966379675397040125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8177036750549605822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 970d916cd84b00546b6ec55c7cb264d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4270438731009393728
 PrefabInstance:
   m_ObjectHideFlags: 0
