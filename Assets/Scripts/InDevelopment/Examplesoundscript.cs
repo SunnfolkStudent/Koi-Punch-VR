@@ -5,6 +5,6 @@ using FMODUnity;
 using FMOD.Studio;
 public class Examplesoundscript : MonoBehaviour
 {
-    [SerializeField] private EventReference() exampleVariable;
-    FMODManager.instance.PlayOneShot(exampleVariable, this.transform.position);
+    /*[SerializeField] private EventReference() exampleVariable;
+    FMODManager.instance.PlayOneShot(exampleVariable, this.transform.position); */
 }
