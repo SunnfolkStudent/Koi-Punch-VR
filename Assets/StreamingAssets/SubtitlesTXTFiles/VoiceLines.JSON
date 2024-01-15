@@ -2,11 +2,17 @@
     "VoiceLines": [
         {
             "Category": "Announcer",
-            "Game Start!": "Yoshi, Ikuze!"
+            "OnGameStart": "Game Start!",
+            "OnBossPhase_0": "Fight the Dragon!",
+            "OnBossPhase_1": "Punch the Weakpoints!",
+            "OnBossPhase_2": "Punch Out!",
+            "OnBossPhase_3": "Charge your Fists!",
+            "OnBossDefeated": "Dragon defeated, we will get three, part zen",
+            "OnPhaseFailed": "Dont Give Up!"  
         },
         {
-            "Category": "Punch Comments",
-            "Well Done!": "YokuYatta!"
+            "Category": "Punch Comment",
+            "OnPunch": ["Well done!", "Nice Punch!", "Good Punch!", "Great Punch!", "Amazing Punch!", "Excellent Punch!", "Fantastic Punch!", "Incredible Punch!", "Unbelievable Punch!", "Unstop"]
         }
     ]
 }

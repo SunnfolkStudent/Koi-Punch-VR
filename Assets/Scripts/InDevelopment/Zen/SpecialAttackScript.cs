@@ -6,7 +6,7 @@ public class SpecialAttackScript : MonoBehaviour
 {
     [Header("Timers for charging punch")]
     private float _chargeTimer;
-    private float _timeToCharge = 10f;
+    private static float _timeToCharge = 10f;
     private float _zenLostPerSecond;
     
     [Header("Static variables for special attack")]
