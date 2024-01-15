@@ -1,18 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class FistScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    private ControllerManager controllerManager;
+
+    private String whichFistUsed;
+    
+    // Update is called once per frame
+    private void Start()
     {
-        
+        controllerManager = GetComponentInParent<ControllerManager>();
+        whichFistUsed = gameObject.tag;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision other)
     {
-        
+        if (other.gameObject.TryGetComponent(out IPunchable punchableObject))
+        {
+                punchableObject.PunchObject(controllerManager, whichFistUsed);
+        }
     }
 }

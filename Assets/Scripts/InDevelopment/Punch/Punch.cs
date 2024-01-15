@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Punch : MonoBehaviour, IPunchable
+public class Punch : MonoBehaviour
 { 
     
     private ControllerManager controllerManager;
