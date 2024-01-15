@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Punch : MonoBehaviour
+public class Punch : MonoBehaviour, IPunchable
 { 
     
     private ControllerManager controllerManager;
@@ -92,7 +92,7 @@ public class Punch : MonoBehaviour
         //Calls punchObject method with fistVelMagnitude and direction as parameters
         if (other.gameObject.CompareTag("LeftFist"))
         {
-            if (controllerManager._leftGrip != 1f)
+            if (controllerManager._leftGrip < 1f)
             { Debug.Log("Punch does not qualify as the player did not make a fist"); return; }
             
             Debug.Log("Registered Left Fist Hit");
@@ -101,14 +101,13 @@ public class Punch : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("RightFist"))
         {
-            if (controllerManager._rightGrip != 1f)
+            if (controllerManager._rightGrip < 1f)
             { Debug.Log("Punch does not qualify as the player did not make a fist"); return; }
             
             Debug.Log("Registered Right Fist Hit");
             PunchObject(controllerManager.rightVelMagnitude, dir);
             //HapticManager.rightFishPunch = true;
         }
-        
         return;
     }
 
@@ -127,6 +126,7 @@ public class Punch : MonoBehaviour
             Debug.Log("CollisionR Time = " + (punchCollisionTimerEnd - punchCollisionTimerStart));
             //HapticManager.rightFishPunch = false;
         }
+        return;
     }
 
     /// <summary>
@@ -149,7 +149,7 @@ public class Punch : MonoBehaviour
     /// The force corresponds to the var direction that is passed in from the OnCollisionEnter
     /// and by the velocity of the punch                               
     /// </summary>
-    private void PunchObject(float velMagnitude, Vector3 direction)
+    public void PunchObject(float fistVelMagnitude, Vector3 direction)
     {
         rigidbody.useGravity = true;
         
@@ -174,10 +174,10 @@ public class Punch : MonoBehaviour
         //Apply force to the object depending on the velocity, the specified multiplier, and the direction
 
         //Do not register punch if punch force was too weak
-        if (velMagnitude < punchVelThreshold) 
+        if (fistVelMagnitude < punchVelThreshold) 
         { Debug.Log("Punch Velocity was too weak"); return; }
             
-        punchForceMultiplier = velMagnitude * punchVelMultiplier;
+        punchForceMultiplier = fistVelMagnitude * punchVelMultiplier;
         var cubeLaunchDir = direction * -punchForceMultiplier;
         Debug.Log("Punched with Force of " + punchForceMultiplier + "\nand a Direction of " + cubeLaunchDir);
         
