@@ -422,10 +422,30 @@ PrefabInstance:
       propertyPath: minSize
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 202575621013093645, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: maxHeight
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 202575621013093645, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: minHeight
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 226389944599812216, guid: b0869e6e2e592a646852ba90d715ff4c,
         type: 3}
       propertyPath: m_Name
       value: FishSpawnManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2074864738684994615, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: maxSpawnRate
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2074864738684994615, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: minSpawnRate
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3218944948043325081, guid: b0869e6e2e592a646852ba90d715ff4c,
         type: 3}
@@ -4442,12 +4462,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftController: {fileID: 1204975105}
   rightController: {fileID: 216308692}
-  leftTopButtonAction: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
-  rightTopButtonAction: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
-  _leftTopButton: 0
-  _rightTopButton: 0
+  aButton: {fileID: 0}
+  bButton: {fileID: 0}
+  xButton: {fileID: 0}
+  yButton: {fileID: 0}
+  leftFistTest: 0
+  rightFistTest: 0
   zenCharge: 0
   zenAmplifier: 0.1
 --- !u!114 &1204975105 stripped
