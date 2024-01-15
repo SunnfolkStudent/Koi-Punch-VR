@@ -24,9 +24,6 @@ public class ZenMetreVisualManager : MonoBehaviour
     
     [Header("Prompt Text")]
     public TextMeshProUGUI promptText;
-    
-    [Header("Testing, please ignore")]
-    private float _oldZenMetreValue;
 
     private void Awake()
     {
@@ -55,17 +52,6 @@ public class ZenMetreVisualManager : MonoBehaviour
         HideSparkles();
         
         HidePromptText();
-    }
-    
-    //Update is for testing purposes only
-    void Update()
-    {
-        if (ZenMetreManager.Instance.zenMetreValue - _oldZenMetreValue > 0 || ZenMetreManager.Instance.zenMetreValue - _oldZenMetreValue < 0)
-        {
-            _oldZenMetreValue = ZenMetreManager.Instance.zenMetreValue;
-            UpdateZenBar(ZenMetreManager.Instance.zenLevel, ZenMetreManager.Instance.zenMetreValue);
-            ZenMetreManager.Instance.CheckForMaxZen();
-        }
     }
     
     public void UpdateZenBar(int workingZenLevel, float zenMetreValue)

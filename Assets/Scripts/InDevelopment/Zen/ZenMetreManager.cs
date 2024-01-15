@@ -14,7 +14,6 @@ public class ZenMetreManager : MonoBehaviour
     private float _tripleScoreTimer = 10f;
     public bool attackFieldsActive;
     private float _attackFieldsActiveTime = 11f;
-    public bool timeStopActive;
     
     [Header("Zen Metre Values")]
     public float zenMetreValue;
@@ -48,6 +47,12 @@ public class ZenMetreManager : MonoBehaviour
     private void Start()
     {
         EventManager.BossDefeated += ResetTime;
+        EventManager.StartBossPhase0 += ResetTime;
+        EventManager.StartBossPhase0 += LevelZero;  
+        EventManager.BossPhase0Completed += StopTime;
+        EventManager.StartBossPhase1 += LevelOne;
+        EventManager.StartBossPhase2 += LevelTwo;
+        EventManager.StartBossPhase3 += LevelThree;
     }
 
     //Update is for testing purposes only
@@ -89,30 +94,6 @@ public class ZenMetreManager : MonoBehaviour
     #endregion
     
     #region -- Zen Level Methods --
-    private void SetZenLevel()
-    {
-        switch (zenLevel)
-        {
-            case 0:
-                LevelZero();
-                break;
-            case 1:
-                LevelOne();
-                break;
-            case 2:
-                LevelTwo();
-                break;
-            case 3:
-                LevelThree();
-                break;
-        }
-    }
-    
-    public void Phase0Over()
-    {
-        zenLevel = _zenLevelCheckpoint;
-        SetZenLevel();
-    }
     
     //Level one of zen is the start level. It is the level before anything happens with the zen.
     private void LevelZero()
@@ -122,7 +103,6 @@ public class ZenMetreManager : MonoBehaviour
         
         ZenMetreVisualManager.Instance.UpdateZenBar(2, 0f);
         
-        timeStopActive = false;
         ResetTime();
         _zenPhase0Invoked = false;
         
@@ -133,7 +113,6 @@ public class ZenMetreManager : MonoBehaviour
     private void LevelOne()
     {
         _zenLevelCheckpoint = 1;
-        timeStopActive = true;
         zenMetreValue = 0;
         attackFieldsActive = true;
         StartCoroutine(AttackFieldSpawnTimer());
@@ -147,8 +126,7 @@ public class ZenMetreManager : MonoBehaviour
         zenMetreValue = 0;
         
         //Start of level 2
-        tripleScoreActive = true;
-        _zenLevelCheckpoint = 1;
+        _zenLevelCheckpoint = 2;
         StartCoroutine(TripleScoreTimer());
         
         //Add music for the third level of zen
@@ -160,9 +138,8 @@ public class ZenMetreManager : MonoBehaviour
         zenMetreValue = 0;
         
         //Start of level 3
-        EventManager.StartBossPhase3.Invoke();
         zenAttackActive = true;
-        _zenLevelCheckpoint = 2;
+        _zenLevelCheckpoint = 3;
         ZenMetreVisualManager.Instance.ShowPromptText("Hold side button to charge punch!");
         
         //Add music for the fourth level of zen
@@ -172,8 +149,7 @@ public class ZenMetreManager : MonoBehaviour
     #region -- Zen Event Methods --
     private IEnumerator TripleScoreTimer()
     {
-        EventManager.StartBossPhase2.Invoke();
-        
+        tripleScoreActive = true;
         yield return new WaitForSecondsRealtime(_tripleScoreTimer);
         
         tripleScoreActive = false;
@@ -181,19 +157,18 @@ public class ZenMetreManager : MonoBehaviour
         if (zenMetreValue >= 100)
         {
             zenLevel = 3;
-            SetZenLevel();
+            EventManager.BossPhaseSuccessful.Invoke();
         }
         else
         {
             zenLevel = 0;
             zenMetreValue = 100;
-            SetZenLevel();
+            EventManager.StartBossPhase0.Invoke();
         }
     }
     
     private IEnumerator AttackFieldSpawnTimer()
     {
-        EventManager.StartBossPhase1.Invoke();
         yield return new WaitForSecondsRealtime(_attackFieldsActiveTime);
         
         attackFieldsActive = false;
@@ -202,13 +177,13 @@ public class ZenMetreManager : MonoBehaviour
         if (zenMetreValue >= 100)
         {
             zenLevel = 2;
-            SetZenLevel();
+            EventManager.BossPhaseSuccessful.Invoke();
         }
         else
         {
             zenLevel = 1;
             zenMetreValue = 100;
-            SetZenLevel();
+            EventManager.StartBossPhase0.Invoke();
         }
     }
     
@@ -221,6 +196,11 @@ public class ZenMetreManager : MonoBehaviour
         }
     }
 
+    
+    private void StopTime()
+    {
+        StartCoroutine(TimeStop());
+    }
     public IEnumerator TimeStop()
     {
         _particleSystems = FindObjectsByType<ParticleSystem>(FindObjectsSortMode.None).ToList();
