@@ -1,12 +1,11 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AttackFieldScript : MonoBehaviour, IPunchable
 {
-    private float _timeUntilDeath = 5f;
-    private bool _dead = false;
+    private float _timeUntilDeath = 6f;
+    private bool _dead;
     private float _minVelocityToDestroy = 0.5f;
     
     

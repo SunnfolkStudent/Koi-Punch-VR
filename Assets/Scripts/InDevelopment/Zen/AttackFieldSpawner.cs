@@ -7,7 +7,7 @@ public class AttackFieldSpawner : MonoBehaviour
     public GameObject objectToSpawn; // Prefab of the object to spawn
     private GameObject _targetObject; // The game object onto which to spawn objects
     public float spawnInterval = 2f; // Interval between spawns
-    private float _distanceBetweenSpawns = 1.5f; // Distance between spawned objects
+    private float _distanceBetweenSpawns = 1f; // Distance between spawned objects
 
     private bool _isSpawning;
     private float _timeSinceLastSpawn;
@@ -57,7 +57,7 @@ public class AttackFieldSpawner : MonoBehaviour
 
             if (!isReady)
             {
-                yield return new WaitForSecondsRealtime(0.5f);
+                yield return new WaitForSecondsRealtime(0.1f);
             }
         }
         
