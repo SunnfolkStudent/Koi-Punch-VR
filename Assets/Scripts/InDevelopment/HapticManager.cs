@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class HapticManager : MonoBehaviour
@@ -15,6 +16,12 @@ public class HapticManager : MonoBehaviour
     [Header("Left Button Inputs")]
     [SerializeField] private InputActionReference xButton;
     [SerializeField] private InputActionReference yButton;
+
+    [Header("Button input bools")] 
+    [SerializeField] private bool _Abutton;
+    [SerializeField] private bool _Bbutton;
+    [SerializeField] private bool _Xbutton;
+    [SerializeField] private bool _Ybutton;
     
     [Header("Button Input Bools")]
     public static bool zenChargeing;
@@ -45,23 +52,31 @@ public class HapticManager : MonoBehaviour
     public static bool rightZenPunch3;
     
     [Header("Zen Charge")]
-    public static bool leftZenCharge;
-    public static bool rightZenCharge;
+    public static bool zenCharge;
 
+    [Header("HapticCancel")] 
+    public static bool cancelHaptics;
+    [SerializeField] private InputActionReference hapticCancelButton;
+
+    [Header("zenChargeIntensity")]
     [Range(0,0.8f)]
-    [SerializeField] private float zenCharge = 0 ;
-    [SerializeField] private float zenAmplifier = 0.1f;
+    [SerializeField] private float zenChargeIntensity = 0;
+    [SerializeField] private float zenAmplifier;
+    
     
 
     private void Update()
     {
-        if (aButton || bButton || xButton || yButton)
+        _Abutton = aButton.action.IsPressed();
+        _Bbutton = bButton.action.IsPressed();
+        _Xbutton = xButton.action.IsPressed();
+        _Ybutton = yButton.action.IsPressed();
+        
+        if (_Abutton || _Bbutton || _Xbutton || _Ybutton)
         {zenChargeing = true;}
         else {zenChargeing = false;}
-        
-        
-        leftFistTest = leftFishPunch;
-        rightFistTest = rightFishPunch;
+
+        zenAmplifier = 0.8f / SpecialAttackScript.timeToCharge;
         
         if (leftFishPunch) {LeftFishPunch();} 
         if (rightFishPunch) {RightFishPunch();}
@@ -73,10 +88,22 @@ public class HapticManager : MonoBehaviour
         if (rightZenPunch2) {RightZenPunch2();}
         if (leftZenPunch3) {LeftZenPunch3();} 
         if (rightZenPunch3) {RightZenPunch3();}
-        if (leftZenCharge) {zenCharge += zenAmplifier * Time.deltaTime; LeftZenCharge();}
-        if (rightZenCharge) { zenCharge += zenAmplifier * Time.deltaTime; RightZenCharge();}
-    }
+        if (_Abutton || _Bbutton || _Xbutton || _Ybutton) 
+        {
+            zenChargeIntensity += zenAmplifier * Time.deltaTime; 
+            ZenCharge();
+        }
+        else
+        {
+            zenChargeIntensity = 0;
+        }
 
+        if (_Bbutton)
+        {
+            StopRumble();
+        }
+    }
+    
     [ContextMenu("Test Left Fish Punch")]
     private void LeftFishPunch()
     {leftController.SendHapticImpulse(0.2f, 0.1f);} 
@@ -110,18 +137,21 @@ public class HapticManager : MonoBehaviour
 
     [ContextMenu("Test Left ZenPunch 3")]
     private void LeftZenPunch3()
-    {
-        leftController.SendHapticImpulse(1, 0.1f);}
+    {leftController.SendHapticImpulse(1, 0.1f);}
     
     [ContextMenu("Test Right ZenPunch 3")]
     private void RightZenPunch3()
     {rightController.SendHapticImpulse(1, 0.1f);}
-    
+
     [ContextMenu("Test Left Zen Charge")]
-    private void LeftZenCharge() 
-    {leftController.SendHapticImpulse(zenCharge, 0.1f);}
-    
-    [ContextMenu("Test Right Zen Charge")]
-    private void RightZenCharge() 
-    {rightController.SendHapticImpulse(zenCharge, 0.1f);}
+    private void ZenCharge()
+    {
+        leftController.SendHapticImpulse(zenChargeIntensity, 2);
+        rightController.SendHapticImpulse(zenChargeIntensity, 2);
+    }
+    private void StopRumble() 
+    {
+        leftController.SendHapticImpulse(0, 0);
+        rightController.SendHapticImpulse(0, 0);
+    }
 }
