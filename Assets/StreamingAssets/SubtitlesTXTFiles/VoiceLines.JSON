@@ -1,0 +1,31 @@
+{
+    "VoiceLines": [
+        {
+            "Category": "Announcer",
+            "OnGameStart": "Game Start!",
+            "OnBossPhase_0": "Fight the Dragon!",
+            "OnBossPhase_1": "Punch the Weakpoints!",
+            "OnBossPhase_2": "Punch Out!",
+            "OnBossPhase_3": "Charge your Fists!",
+            "OnBossDefeated": "Dragon defeated, we will get three, part zen",
+            "OnPhaseFailed": "Dont Give Up!"  
+        },
+        {
+            "Category": "Punch Comment",
+            "OnPunch": ["Well done!", "Great Punch!", "Fantastic!", "You are doing great!"],
+            "OnPunch1": "Well done!",
+            "OnPunch2": "Great Punch!",
+            "OnPunch3": "Fantastic!",
+            "OnPunch4": "You are doing great!",
+            "OnMiss/BadHit": "This is quite strong koi",
+            "OnGotHitByFish": "Are you ok?",
+            "OnCriticalHit": "We will turn you into wind sock"
+        },
+        {
+            "Category": "Special Attack",
+            "OnButtonPressed": "KOOOOOOOOOOOOOOOO",
+            "OnButtonRelease": "I",
+            "OnSpecialAttackHit": "PUNCH!"
+        }
+    ]
+}
