@@ -65,7 +65,6 @@ public class ZenMetreManager : MonoBehaviour
     public void AddHitZen(float zen)
     {
         zenMetreValue += zen;
-        ;
         
         if (zenMetreValue > 100)
         {
@@ -107,6 +106,12 @@ public class ZenMetreManager : MonoBehaviour
                 LevelThree();
                 break;
         }
+    }
+    
+    public void Phase0Over()
+    {
+        zenLevel = _zenLevelCheckpoint;
+        SetZenLevel();
     }
     
     //Level one of zen is the start level. It is the level before anything happens with the zen.
