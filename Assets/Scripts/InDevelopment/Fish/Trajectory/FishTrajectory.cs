@@ -9,7 +9,10 @@ namespace InDevelopment.Fish.Trajectory
         
         #region ---Debugging---
         private static bool _isDebugging;
-        private static void Log(string message) => Debug.Log(message);
+        private static void Log(string message)
+        {
+            if(_isDebugging) Debug.Log(message);
+        }
         #endregion
         
         #region ---LaunchRequirements---
@@ -39,8 +42,8 @@ namespace InDevelopment.Fish.Trajectory
             var velocityForward = Mathf.Sqrt(-2 * Physics.gravity.y * height);
             var velocityUpwards = displacement.x / (Mathf.Sqrt(-((2 * height) / Physics.gravity.y)) + Mathf.Sqrt((2 * (displacement.y - height)) / Physics.gravity.y));
 
-            if (_isDebugging) Log($"Fish Launched With: Height: {height}, Dist: {displacement.x}, Alt: {displacement.y} | " +
-                                  $"VelocityForward: {velocityForward}, VelocityUpwards: {velocityUpwards}");
+            Log($"Fish Launched With: Height: {height}, Dist: {displacement.x}, Alt: {displacement.y} | " + 
+                $"VelocityForward: {velocityForward}, VelocityUpwards: {velocityUpwards}");
             
             return new Vector2(velocityUpwards, velocityForward);
         }
@@ -55,8 +58,8 @@ namespace InDevelopment.Fish.Trajectory
             var velocityForward = (float)Math.Abs(velocityTotal * Mathf.Cos(angle));
             var velocityUpwards = (float)Math.Abs(velocityTotal * Mathf.Sin(angle));
             
-            if (_isDebugging) Log($"Fish Launched With: Angle: {angle}, Dist: {displacement.x}, Alt: {displacement.y} | " +
-                                  $"VelocityForward: {velocityForward}, VelocityUpwards: {velocityUpwards}");
+            Log($"Fish Launched With: Angle: {angle}, Dist: {displacement.x}, Alt: {displacement.y} | " +
+                $"VelocityForward: {velocityForward}, VelocityUpwards: {velocityUpwards}");
             
             return new Vector2(velocityForward, velocityUpwards);
         }
@@ -79,8 +82,8 @@ namespace InDevelopment.Fish.Trajectory
             var velocityForward = Mathf.Cos(angleInRadians) * speed;
             var velocityUpwards = Mathf.Sin(angleInRadians) * speed;
             
-            if (_isDebugging) Log($"Fish Launched With: Speed: {speed}, Dist: {displacement.x}, Alt: {displacement.y} | " +
-                                  $"VelocityForward: {velocityForward}, VelocityUpwards: {velocityUpwards}");
+            Log($"Fish Launched With: Speed: {speed}, Dist: {displacement.x}, Alt: {displacement.y} | " +
+                $"VelocityForward: {velocityForward}, VelocityUpwards: {velocityUpwards}");
             
             return new Vector2(velocityForward, velocityUpwards);
         }

@@ -1,18 +1,25 @@
-using System;
 using UnityEngine;
 
 namespace InDevelopment.Fish
 {
     public class Fish : MonoBehaviour
     {
-        // TODO: Fish collision?
         public FishObjectPool.Fish fish { get; set; }
-        private float _startTime;
         [SerializeField] private float despawnTime = 5f;
         [SerializeField] private float despawnAltitude = -5f;
+        private float _startTime;
+        
+        #region ---Debugging---
+        private static bool _isDebugging;
+        private static void Log(string message)
+        {
+            if(_isDebugging) Debug.Log(message);
+        }
+        #endregion
         
         private void OnTriggerEnter(Collider other)
         {
+<<<<<<< Updated upstream
             var initialPunchPosition = Vector3.zero;
             if (other.gameObject.CompareTag("LeftFist") || other.gameObject.CompareTag("RightFist"))
             {
@@ -21,6 +28,14 @@ namespace InDevelopment.Fish
             if (other.gameObject.CompareTag("Ground"))
             {
                 Debug.Log("Distance Travelled:" + (transform.position-initialPunchPosition));
+=======
+            if (other.gameObject.CompareTag("LeftFist") || other.gameObject.CompareTag("RightFist"))
+            {
+                GainZen();
+            }
+            if (other.gameObject.CompareTag("Ground"))
+            {
+>>>>>>> Stashed changes
                 Despawn();
             }
         }
@@ -34,19 +49,22 @@ namespace InDevelopment.Fish
         {
             if (transform.position.y < despawnAltitude || _startTime < Time.time - despawnTime)
             {
+                Log("De-spawned either to time or y altitude to low");
                 Despawn();
             }
         }
         
         // TODO: Punch script needs to make the fish call this function
-        private void AddZen()
+        private void GainZen()
         {
             ZenMetreManager.Instance.AddHitZen(fish.FishPool.Prefab.ZenAmount);
+            Log("Zen gained: " + fish.FishPool.Prefab.ZenAmount);
         }
         
         private void Despawn()
         {
             FishObjectPool.DespawnFish(fish);
+            Log("DespawnFish");
         }
     }
 }
