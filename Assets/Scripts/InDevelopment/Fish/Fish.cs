@@ -16,27 +16,27 @@ namespace InDevelopment.Fish
             if(_isDebugging) Debug.Log(message);
         }
         #endregion
-        
+
         private void OnTriggerEnter(Collider other)
         {
-<<<<<<< Updated upstream
             var initialPunchPosition = Vector3.zero;
             if (other.gameObject.CompareTag("LeftFist") || other.gameObject.CompareTag("RightFist"))
             {
                 Debug.Log("InitialPunchPosition:" + initialPunchPosition);
             }
+
             if (other.gameObject.CompareTag("Ground"))
             {
-                Debug.Log("Distance Travelled:" + (transform.position-initialPunchPosition));
-=======
-            if (other.gameObject.CompareTag("LeftFist") || other.gameObject.CompareTag("RightFist"))
-            {
-                GainZen();
-            }
-            if (other.gameObject.CompareTag("Ground"))
-            {
->>>>>>> Stashed changes
-                Despawn();
+                Debug.Log("Distance Travelled:" + (transform.position - initialPunchPosition));
+                if (other.gameObject.CompareTag("LeftFist") || other.gameObject.CompareTag("RightFist"))
+                {
+                    GainZen();
+                }
+
+                if (other.gameObject.CompareTag("Ground"))
+                {
+                    Despawn();
+                }
             }
         }
 
