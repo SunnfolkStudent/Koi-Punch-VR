@@ -8,9 +8,11 @@ public class SpecialAttackScript : MonoBehaviour
     public static readonly float timeToCharge = 10f;
     private float _zenLostPerSecond;
     
-    [Header("Static variables for special attack")]
+    [Header("Tracking charge state")]
     public static bool chargingPunch;
     public static bool punchCharged;
+    
+    [Header("Static variables for special attack")]
     public static float punchForce;
 
 
