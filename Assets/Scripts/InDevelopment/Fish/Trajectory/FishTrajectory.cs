@@ -34,7 +34,7 @@ namespace InDevelopment.Fish.Trajectory
         public static Vector2 TrajectoryVelocity2DFromPeakHeight(Vector3 objPos, Vector3 targetPos,float height)
         {
             var displacement = SpacialDifference(objPos, targetPos);
-            if (height < displacement.y - 1)
+            if (height - 1 < displacement.y)
             {
                 Debug.LogWarning("Peak trajectory height set lower than target altitude");
                 height = displacement.y + 1;
