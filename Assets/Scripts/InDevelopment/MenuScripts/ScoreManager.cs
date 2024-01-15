@@ -12,6 +12,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private GameObject textPrefab;
     [SerializeField] private GameObject textSpawner;
     [SerializeField] private GameObject multiplierVisual;
+    //[SerializeField] public float moveSpeed { get; private set; } = 5f;
 
     public float multiplierTime;
     public bool multiplierOn;
