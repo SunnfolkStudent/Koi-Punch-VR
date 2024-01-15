@@ -130,7 +130,6 @@ public class ZenMetreManager : MonoBehaviour
         _zenLevelCheckpoint = 1;
         timeStopActive = true;
         zenMetreValue = 0;
-        StartCoroutine(TimeStop());
         attackFieldsActive = true;
         StartCoroutine(AttackFieldSpawnTimer());
         
@@ -217,7 +216,7 @@ public class ZenMetreManager : MonoBehaviour
         }
     }
 
-    private IEnumerator TimeStop()
+    public IEnumerator TimeStop()
     {
         _particleSystems = FindObjectsByType<ParticleSystem>(FindObjectsSortMode.None).ToList();
         
