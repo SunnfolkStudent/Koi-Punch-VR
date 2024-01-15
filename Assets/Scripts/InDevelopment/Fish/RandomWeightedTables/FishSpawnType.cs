@@ -6,23 +6,29 @@ namespace InDevelopment.Fish.RandomWeightedTables
 {
     public static class FishSpawnType
     {
+        // TODO: make not static
         private static FishObjectPool.FishPool[] _fishPoolTypes;
         private const float WeightLostFromPicked = 0.5f;
         private const int MaxPickAmount = 5;
 
+        #region ---Initialization---
         public static void InitializeFishSpawnTypes(List<FishObjectPool.FishPool> fishPools)
         {
             _fishPoolTypes = fishPools.ToArray();
         }
-        
-        public static FishObjectPool.Fish GetNextFishSpawnType()
+        #endregion
+
+        #region ---GetFish---
+        public static FishObjectPool.Fish GetNextFish()
         {
             return FishObjectPool.GetPooledObject(PickFishType(_fishPoolTypes));
         }
-        
+        #endregion
+
+        #region ---RandomWeightedChoice---
         private static FishObjectPool.FishPool PickFishType(IEnumerable<FishObjectPool.FishPool> fishTypes)
         {
-            var fishPools = fishTypes as FishObjectPool.FishPool[] ?? fishTypes.ToArray();
+            var fishPools = fishTypes.ToArray();
             var weightedTableTotalWeight = fishPools.Sum(prefab => prefab.Weight);
             var rnd = Random.Range(0, weightedTableTotalWeight);
             
@@ -57,5 +63,6 @@ namespace InDevelopment.Fish.RandomWeightedTables
                 pool.Weight += weightForOthers;
             }
         }
+        #endregion
     }
 }
