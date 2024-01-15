@@ -94,7 +94,7 @@ namespace InDevelopment.Fish
             fish.ParentGameObject.SetActive(true);
         }
         
-        private static void LaunchRigiditiesDirectionWithVelocity(IEnumerable<Rigidbody> objRigidbody, Vector3 targetDirection, Vector2 fishVelocity)
+        public static void LaunchRigiditiesDirectionWithVelocity(IEnumerable<Rigidbody> objRigidbody, Vector3 targetDirection, Vector2 fishVelocity)
         {
             var velocity = new Vector3(targetDirection.x * fishVelocity.x, fishVelocity.y, targetDirection.z * fishVelocity.x);
             foreach (var rigidbody in objRigidbody)

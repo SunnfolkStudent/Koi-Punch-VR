@@ -16,6 +16,7 @@ namespace InDevelopment.Fish
         
         #region >>>---StartBossPhases---
         public static Event StartBossPhase0 = StartBossPhase0Debug; // Starts phase 0.
+        public static Event BossPhase0Completed; // Stops time and starts next uncompleted phase 
         public static Event StartBossPhase1 = StartBossPhase1Debug; // Starts phase 1.
         public static Event StartBossPhase2 = StartBossPhase2Debug; // Starts phase 2.
         public static Event StartBossPhase3 = StartBossPhase3Debug; // Starts phase 3.
