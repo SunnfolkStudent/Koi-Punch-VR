@@ -13,7 +13,7 @@ public class ZenMetreManager : MonoBehaviour
     public bool zenAttackActive;
     private float _tripleScoreTimer = 10f;
     public bool attackFieldsActive;
-    private float _attackFieldsActiveTime = 11f;
+    private float _attackFieldsActiveTime = 15f;
     
     [Header("Zen Metre Values")]
     public float zenMetreValue;
@@ -104,7 +104,9 @@ public class ZenMetreManager : MonoBehaviour
         ZenMetreVisualManager.Instance.UpdateZenBar(2, 0f);
         
         ResetTime();
-        _zenPhase0Invoked = false;
+        //_zenPhase0Invoked = false;
+        
+        EventManager.StartBossPhase1.Invoke();
         
         //Reset music back to normal after zen mode is over
     }
@@ -112,6 +114,7 @@ public class ZenMetreManager : MonoBehaviour
     //Method that moves on to the second level of zen
     private void LevelOne()
     {
+        zenLevel = 1;
         _zenLevelCheckpoint = 1;
         zenMetreValue = 0;
         attackFieldsActive = true;
