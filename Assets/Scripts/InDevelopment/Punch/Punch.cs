@@ -178,14 +178,15 @@ public class Punch : MonoBehaviour
         { Debug.Log("Punch Velocity was too weak"); return; }
             
         punchForceMultiplier = fistVelMagnitude * punchVelMultiplier;
-        var cubeLaunchDir = direction * -punchForceMultiplier;
         
         //Apply a slight debuff if the punch is just slightly over the threshold
         var forceDebuff = (fistVelMagnitude - punchVelThreshold) + 0.70f;
-        forceDebuff = forceDebuff > 1f ?  1f : forceDebuff;
-        cubeLaunchDir *= forceDebuff;
-        Debug.Log("Force Debuff: " + forceDebuff);
+        forceDebuff = forceDebuff >= 1f ?  1f : forceDebuff;
+        punchForceMultiplier *= forceDebuff;
         
+        var cubeLaunchDir = direction * -punchForceMultiplier;
+        
+        Debug.Log("Force Debuff: " + forceDebuff);
         Debug.Log("Punched with Force of " + punchForceMultiplier + "\nand a Direction of " + cubeLaunchDir.normalized);
         
         rigidbody.AddForce(cubeLaunchDir, ForceMode.VelocityChange);
