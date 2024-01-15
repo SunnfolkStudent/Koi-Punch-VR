@@ -1,31 +1,30 @@
+using System;
 using UnityEngine;
 
 namespace InDevelopment.Fish
 {
     public class Fish : MonoBehaviour
     {
-        // TODO: Fish collision
+        // TODO: Fish collision?
         public FishObjectPool.Fish fish { get; set; }
         private float _startTime;
         [SerializeField] private float despawnTime = 5f;
         [SerializeField] private float despawnAltitude = -5f;
         
-        private void OnCollisionEnter(Collision other)
+        private void OnTriggerEnter(Collider other)
         {
             Vector3 initialPunchPosition = new Vector3(0, 0, 0);
-            
             if (other.gameObject.CompareTag("LeftFist") || other.gameObject.CompareTag("RightFist"))
             {
                 Debug.Log(initialPunchPosition);
             }
-            
             if (other.gameObject.CompareTag("Ground"))
             {
                 Debug.Log(transform.position-initialPunchPosition);
                 Despawn();
             }
         }
-        
+
         private void OnEnable()
         {
             _startTime = Time.time;
