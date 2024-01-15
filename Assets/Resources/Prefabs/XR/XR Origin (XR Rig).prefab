@@ -386,6 +386,7 @@ GameObject:
   - component: {fileID: 5537074047865065663}
   - component: {fileID: 9153707334431533306}
   - component: {fileID: 1087512789609413547}
+  - component: {fileID: 3255912558646393729}
   m_Layer: 0
   m_Name: Right Closed Hand Hitbox
   m_TagString: RightFist
@@ -456,6 +457,18 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.05
   m_Center: {x: -0.015, y: 0.015, z: 0.015}
+--- !u!114 &3255912558646393729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4897473096757052186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 970d916cd84b00546b6ec55c7cb264d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5029026800916818781
 GameObject:
   m_ObjectHideFlags: 0
@@ -467,6 +480,7 @@ GameObject:
   - component: {fileID: 6406819701760051319}
   - component: {fileID: 9165669432460913009}
   - component: {fileID: 7945479647905930347}
+  - component: {fileID: 951048003176901455}
   m_Layer: 0
   m_Name: Left Closed Hand Hitbox
   m_TagString: LeftFist
@@ -537,6 +551,18 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.05
   m_Center: {x: -0.015, y: -0.015, z: -0.015}
+--- !u!114 &951048003176901455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5029026800916818781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 970d916cd84b00546b6ec55c7cb264d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6564072810355661753
 GameObject:
   m_ObjectHideFlags: 0
