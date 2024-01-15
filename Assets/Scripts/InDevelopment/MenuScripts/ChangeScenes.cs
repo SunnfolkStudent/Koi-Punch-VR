@@ -7,13 +7,13 @@ using UnityEngine.SceneManagement;
 public class ChangeScenes : BreakOnHit
 {
     [SerializeField] private string _newSceneName;
-    //private GameObject _fadeScreenObj;
-    //private FadeScreen _fadeScreen;
+    private GameObject _fadeScreenObj;
+    private FadeScreenScript _fadeScreen;
 
     private void Awake()
     {
-        //_fadeScreenObj = GameObject.FindGameObjectWithTag("FadeScreen");
-        //_fadeScreen = _fadeScreenObj.GetComponent<FadeScreen>();
+        _fadeScreenObj = GameObject.FindGameObjectWithTag("FadeScreen");
+        _fadeScreen = _fadeScreenObj.GetComponent<FadeScreenScript>();
     }
 
     private void OnCollisionEnter(Collision other)
@@ -30,9 +30,9 @@ public class ChangeScenes : BreakOnHit
 
     IEnumerator GoToSceneRoutine()
     {
-        //_fadeScreen.FadeOut();
+        _fadeScreen.FadeOut();
         //yield return new WaitForSeconds(_fadeScreen.fadeDuration);
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(4);
         SceneManager.LoadScene(_newSceneName);
     }
 }
