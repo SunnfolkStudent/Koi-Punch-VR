@@ -9,18 +9,18 @@ public class SubtitleHandler : MonoBehaviour
     public TextMeshProUGUI subtitleText;
     
     [Header("Fade")]
-    public float fadeDuration = 1.0f;
-    private CanvasGroup canvasGroup;
+    private const float _fadeDuration = 1.0f;
+    private CanvasGroup _canvasGroup;
 
     void Start()
     {
         SubtitleEventManager.PlaySubtitle += ShowSubtitle;
 
         // Get the CanvasGroup component or add one if not present
-        canvasGroup = subtitleText.GetComponent<CanvasGroup>();
-        if (canvasGroup == null)
+        _canvasGroup = subtitleText.GetComponent<CanvasGroup>();
+        if (_canvasGroup == null)
         {
-            canvasGroup = subtitleText.gameObject.AddComponent<CanvasGroup>();
+            _canvasGroup = subtitleText.gameObject.AddComponent<CanvasGroup>();
         }
 
         SubtitleEventManager.PlaySubtitle.Invoke(VoiceLinesLoader.GetValueForKey("OnGameStart"));
@@ -31,25 +31,28 @@ public class SubtitleHandler : MonoBehaviour
         subtitleText.gameObject.SetActive(true);
         subtitleText.text = subtitle;
         
-        // Start fading in
+        
+        StopAllCoroutines();
+        
+        // Fade in
         StartCoroutine(FadeInSubtitle());
 
-        // Schedule to hide after a certain duration
+        // Make subtitles hide after a certain duration
         StartCoroutine(HideSubtitleAfterSeconds(5f));
     }
 
     private IEnumerator FadeInSubtitle()
     {
         float elapsedTime = 0f;
-        while (elapsedTime < fadeDuration)
+        while (elapsedTime < _fadeDuration)
         {
-            canvasGroup.alpha = Mathf.Lerp(0f, 1f, elapsedTime / fadeDuration);
+            _canvasGroup.alpha = Mathf.Lerp(0f, 1f, elapsedTime / _fadeDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         // Ensure that alpha is set to 1 at the end of the fading in
-        canvasGroup.alpha = 1f;
+        _canvasGroup.alpha = 1f;
     }
 
     private IEnumerator HideSubtitleAfterSeconds(float seconds)
@@ -63,15 +66,15 @@ public class SubtitleHandler : MonoBehaviour
     private IEnumerator FadeOutSubtitle()
     {
         float elapsedTime = 0f;
-        while (elapsedTime < fadeDuration)
+        while (elapsedTime < _fadeDuration)
         {
-            canvasGroup.alpha = Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration);
+            _canvasGroup.alpha = Mathf.Lerp(1f, 0f, elapsedTime / _fadeDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         // Ensure that alpha is set to 0 at the end of the fading out
-        canvasGroup.alpha = 0f;
+        _canvasGroup.alpha = 0f;
 
         // Hide the subtitle
         HideSubtitle();
