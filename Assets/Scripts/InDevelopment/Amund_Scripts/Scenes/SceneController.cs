@@ -73,7 +73,7 @@ public class SceneController : MonoBehaviour
     {
         _fadeScreenObj = GameObject.FindGameObjectWithTag("FadeScreen");
         _fadeScreen.FadeOut();
-        yield return new WaitForSeconds(_fadeScreen._fadeDuration);
+        yield return new WaitForSeconds(2);
         SceneManager.UnloadSceneAsync(IntroScene);
         var scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
@@ -83,7 +83,7 @@ public class SceneController : MonoBehaviour
     {
         _fadeScreenObj = GameObject.FindGameObjectWithTag("FadeScreen");
         _fadeScreen.FadeOut();
-        yield return new WaitForSeconds(_fadeScreen._fadeDuration);
+        yield return new WaitForSeconds(2);
         SceneManager.LoadScene(Levels[LevelSelected]);
         if (LevelSelected is 1 or 2 or 3)
         {
