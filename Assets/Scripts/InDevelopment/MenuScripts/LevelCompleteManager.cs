@@ -20,7 +20,9 @@ public class NewBehaviourScript : MonoBehaviour
    [SerializeField] private GameObject _newHighScorePrefab;
    private TMP_Text _newHighScoreText;
    private bool scoringOver;
-   private Animator _animator;
+
+   [SerializeField] private GameObject _oldHighScorePanel;
+   private Animator _oldHighScoreAnimator;
 
    //public float numberSpeed = 0.01f;
 
@@ -39,7 +41,7 @@ public class NewBehaviourScript : MonoBehaviour
       
       highScoreText.text = PlayerPrefs.GetInt("HighScore").ToString("0");
 
-      _animator = GetComponent<Animator>();
+      _oldHighScoreAnimator = _oldHighScorePanel.GetComponent<Animator>();
       
       _scoreManagerObj = GameObject.FindGameObjectWithTag("ScoreManager");
       _scoreManager = _scoreManagerObj.GetComponent<ScoreManager>();
@@ -124,7 +126,7 @@ public class NewBehaviourScript : MonoBehaviour
    private IEnumerator NewHighScore()
    {
       PlayerPrefs.SetInt("HighScore", totalPoints);
-      _animator.SetTrigger("NewHighScore");
+      _oldHighScoreAnimator.SetTrigger("NewHighScore");
       yield return new WaitForSeconds(3);
       Instantiate(_newHighScorePrefab);
    }
