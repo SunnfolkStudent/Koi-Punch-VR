@@ -19,10 +19,10 @@ public class HapticManager : MonoBehaviour
     [SerializeField] private InputActionReference yButton;
 
     [Header("Button input bools")] 
-    [SerializeField] private bool _Abutton;
-    [SerializeField] private bool _Bbutton;
-    [SerializeField] private bool _Xbutton;
-    [SerializeField] private bool _Ybutton;
+    private bool _Abutton;
+    private bool _Bbutton;
+    private bool _Xbutton;
+    private bool _Ybutton;
     
     [Header("Button Input Bools")]
     public static bool zenChargeing;
@@ -89,7 +89,7 @@ public class HapticManager : MonoBehaviour
         if (rightZenPunch2) {RightZenPunch2();}
         if (leftZenPunch3) {LeftZenPunch3();} 
         if (rightZenPunch3) {RightZenPunch3();}
-        if (zenChargeing) 
+        if (zenCharge) 
         {
             zenChargeIntensity += zenAmplifier * Time.deltaTime; 
             ZenCharge();
@@ -99,10 +99,10 @@ public class HapticManager : MonoBehaviour
             zenChargeIntensity = 0;
         }
 
-        if (_Bbutton)
+        /*if ()
         {
             StopRumble();
-        }
+        }*/
     }
     
     [ContextMenu("Test Left Fish Punch")]
