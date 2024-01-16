@@ -96,6 +96,10 @@ namespace FinalScripts.Fish.Spawning.RandomWeightedTables
         private SpawnArea PickSpawnArea(List<SpawnArea> availableSpawnAreas)
         {
             var totalWeight = availableSpawnAreas.Sum(area => area.Weight);
+            if (totalWeight == 0)
+            {
+                ResetSpawnAreaWeights(availableSpawnAreas);
+            }
             var rnd = Random.Range(0, totalWeight);
             
             float sum = 0;
@@ -108,6 +112,15 @@ namespace FinalScripts.Fish.Spawning.RandomWeightedTables
             }
             
             return null;
+        }
+
+        private static void ResetSpawnAreaWeights(List<SpawnArea> availableSpawnAreas)
+        {
+            foreach (var spawnArea in availableSpawnAreas)
+            {
+                spawnArea.Weight = 100;
+                spawnArea.TimesSpawned = 0;
+            }
         }
 
         private void NewProbabilities(IReadOnlyCollection<SpawnArea> availableSpawnAreas, SpawnArea area)

@@ -30,6 +30,12 @@ namespace FinalScripts.Fish.Spawning.RandomWeightedTables
         {
             var fishPools = fishTypes.ToArray();
             var totalWeight = fishPools.Sum(fishPool => fishPool.Weight);
+
+            if (totalWeight == 0)
+            {
+                ResetFishTypeWeights(fishPools);   
+            }
+            
             var rnd = Random.Range(0, totalWeight);
             
             float sum = 0;
@@ -42,6 +48,15 @@ namespace FinalScripts.Fish.Spawning.RandomWeightedTables
             }
             
             return null;
+        }
+        
+        private static void ResetFishTypeWeights(FishObjectPool.FishPool[] fishTypes)
+        {
+            foreach (var differentFish in fishTypes)
+            {
+                differentFish.Weight = 100;
+                differentFish.TimesSpawned = 0;
+            }
         }
         
         private static void NewProbabilities(IReadOnlyCollection<FishObjectPool.FishPool> fishPools, FishObjectPool.FishPool fishPool)
