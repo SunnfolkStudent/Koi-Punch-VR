@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class ScoreFloat : MonoBehaviour
 {
-    [SerializeField] private float destroyAfterTime;
+    //[SerializeField] private float destroyAfterTime;
     private void Start()
     {
-        Destroy(gameObject, destroyAfterTime);
+        Destroy(gameObject, 4f);
     }
 }
 
