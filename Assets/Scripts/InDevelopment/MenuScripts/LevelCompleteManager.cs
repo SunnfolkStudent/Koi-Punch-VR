@@ -6,6 +6,9 @@ using TMPro;
 
 public class NewBehaviourScript : MonoBehaviour
 {
+   private GameObject _scoreManagerObj;
+   private ScoreManager _scoreManager;
+   
    public int punchPoints, distancePoints, bonusPoints, zenPoints, penaltyPoints;
    private int punchPointsEnd, distancePointsEnd, bonusPointsEnd, zenPointsEnd, penaltyPointsEnd, totalPoints;
    [SerializeField] private TMP_Text punchScore, distanceScore, bonusScore, zenScore, penaltyScore, totalScore;
@@ -16,7 +19,17 @@ public class NewBehaviourScript : MonoBehaviour
 
    private void Start()
    {
-      InvokeRepeating("CalculateScore", 0f, 0.025f);
+      _scoreManagerObj = GameObject.FindGameObjectWithTag("ScoreManager");
+      _scoreManager = _scoreManagerObj.GetComponent<ScoreManager>();
+
+      punchPoints = _scoreManager.fishPunchPoints;
+      distancePoints = _scoreManager.distancePoints;
+      bonusPoints = _scoreManager.bonusPoints;
+      zenPoints = _scoreManager.zenPoints;
+      penaltyPoints = _scoreManager.hitByFish;
+      totalPoints = 0;
+      
+      InvokeRepeating("CalculateScore", 5f, 0.025f);
    }
 
    private void Update()
