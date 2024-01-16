@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class DoubleCheckSigns : TransitionAnimation
 {
-    [SerializeField] private GameObject _breakPrefab;
-    [SerializeField] private GameObject _brokenPrefab;
-
-    private bool isBreaking = false;
-    
-    [SerializeField] private int LevelToGoTo;
-
+    [SerializeField] private GameObject _nextPrefab;
+    [SerializeField] private bool isBreaking = false;
 
     private void OnCollisionEnter(Collision other)
     {
@@ -28,9 +23,8 @@ public class DoubleCheckSigns : TransitionAnimation
     private void HitSign()
     {
         Debug.Log("hit once");
-        gameObject.transform.localScale = new Vector3(0, 0, 0);
-        Instantiate(_breakPrefab, gameObject.transform.position, Quaternion.identity);
-        isBreaking = true;
+        Instantiate(_nextPrefab, gameObject.transform.position, Quaternion.identity);
+        Destroy(gameObject);
         Debug.Log("hit once after");
     }
 
@@ -38,20 +32,11 @@ public class DoubleCheckSigns : TransitionAnimation
     {
         Debug.Log("hit twice");
         
-        _breakPrefab.gameObject.transform.localScale = new Vector3(0, 0, 0);
-        Instantiate(_brokenPrefab,gameObject.transform.position,Quaternion.identity);
+        Instantiate(_nextPrefab,gameObject.transform.position,Quaternion.identity);
         
         //TODO play break audio
         
         MenuEventManager.ExplodeTransition();
-        if (gameObject.CompareTag("SceneChanger"))
-        {
-            gameObject.transform.localScale = new Vector3(0, 0, 0);
-            SceneController.LevelSelected = LevelToGoTo;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 }
