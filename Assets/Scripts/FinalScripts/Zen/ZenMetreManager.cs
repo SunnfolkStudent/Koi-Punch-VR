@@ -55,7 +55,7 @@ public class ZenMetreManager : MonoBehaviour
         EventManager.StartBossPhase3 += LevelThree;
     }
 
-    //Update is for testing purposes only
+    
     private void Update()
     {
         if (zenMetreValue >= 100 && zenLevel == 0 && !_zenPhase0Invoked)
@@ -66,7 +66,7 @@ public class ZenMetreManager : MonoBehaviour
     }
 
     #region -- Zen Score Methods --
-    //Method that adds zen to the zen metre based on score
+    //Method that adds zen to the zen metre
     public void AddHitZen(float zen)
     {
         zenMetreValue += zen;
@@ -95,7 +95,7 @@ public class ZenMetreManager : MonoBehaviour
     
     #region -- Zen Level Methods --
     
-    //Level one of zen is the start level. It is the level before anything happens with the zen.
+    //Level zero of zen is the start level. It is the level before anything happens with the zen.
     private void LevelZero()
     {
         if (_zenLevelCheckpoint <= 1)
@@ -116,7 +116,6 @@ public class ZenMetreManager : MonoBehaviour
         zenLevel = 1;
         _zenLevelCheckpoint = 1;
         zenMetreValue = 0;
-        attackFieldsActive = true;
         StartCoroutine(AttackFieldSpawnTimer());
         
         //Add music for the second level of zen
@@ -149,6 +148,10 @@ public class ZenMetreManager : MonoBehaviour
     #endregion
     
     #region -- Zen Event Methods --
+    
+    //This event is called in phase two when triple score is supposed to be activated.
+    //tripleScoreActive is set to true and the timer starts.
+    //Then wait for a certain amount of time and then set tripleScoreActive to false.
     private IEnumerator TripleScoreTimer()
     {
         tripleScoreActive = true;
@@ -169,8 +172,12 @@ public class ZenMetreManager : MonoBehaviour
         }
     }
     
+    //This event is called in phase one when attack field weak points are supposed to spawn.
+    //attackFieldsActive is set to true and the attack fields are spawned.
+    //Then wait for a certain amount of time and then set attackFieldsActive to false and destroy all attack fields.
     private IEnumerator AttackFieldSpawnTimer()
     {
+        attackFieldsActive = true;
         yield return new WaitForSecondsRealtime(_attackFieldsActiveTime);
         
         attackFieldsActive = false;
@@ -189,6 +196,7 @@ public class ZenMetreManager : MonoBehaviour
         }
     }
     
+    //Destroys all weak points. Called after phase 1 is over either because you failed or because you succeeded.
     private void DestroyAllAttackFields()
     {
         GameObject[] attackFields = GameObject.FindGameObjectsWithTag("AttackField");
@@ -198,12 +206,14 @@ public class ZenMetreManager : MonoBehaviour
         }
     }
 
-    
+    //Method that starts time stop coroutine. Workaround because you cant add coroutines to events.
     private void StopTime()
     {
         _zenPhase0Invoked = false;
         StartCoroutine(TimeStop());
     }
+    
+    //Timestop coroutine. Slows down time for everything, but lets particles move at 1/10 their regular speed.
     public IEnumerator TimeStop()
     {
         _particleSystems = FindObjectsByType<ParticleSystem>(FindObjectsSortMode.None).ToList();
@@ -228,6 +238,7 @@ public class ZenMetreManager : MonoBehaviour
         }
     }
     
+    //Method that resets time back to normal. Called when you fail a phase or when you do your final move.
     public void ResetTime()
     {
         Time.timeScale = 1f;
