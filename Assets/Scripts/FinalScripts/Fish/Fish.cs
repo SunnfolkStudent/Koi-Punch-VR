@@ -23,9 +23,9 @@ namespace FinalScripts.Fish
             var punchPosition = new Vector3();
             if (other.gameObject.CompareTag("LeftFist") || other.gameObject.CompareTag("RightFist"))
             {
-                
                 Debug.Log("Calculating distance from punch...");
                 GainZen();
+                CalculateFishLaunch();
             }
             
             if (other.gameObject.CompareTag("Ground"))
@@ -46,6 +46,32 @@ namespace FinalScripts.Fish
             {
                 Log("De-spawned either to time or y altitude to low");
                 Despawn();
+            }
+        }
+        
+        FishLaunchData CalculateFishLaunch()
+        {
+            /* var gravity = 9.81f;
+            var time = (2*punchForceMultipliercubeLaunchDir.normalized)/gravity;
+            var startPos = transform.position;
+            var landingPos = new Vector3((startPos.x + time.x punchForceMultiplier), 
+            (startPos.y + time.y * punchForceMultiplier), 
+            (startPos.z + time.z * punchForceMultiplier));
+            //var landingPos = startPos + time * punchForceMultiplier;
+            Debug.DrawLine(startPos, landingPos, Color.red, time.y);*/
+
+            return new FishLaunchData();
+        }
+
+        struct FishLaunchData
+        {
+            public readonly Vector3 InitialVelocity;
+            public readonly float TimeToTarget;
+
+            public FishLaunchData(Vector3 initialVelocity, float timeToTarget)
+            {
+                this.InitialVelocity = initialVelocity;
+                this.TimeToTarget = timeToTarget;
             }
         }
         
