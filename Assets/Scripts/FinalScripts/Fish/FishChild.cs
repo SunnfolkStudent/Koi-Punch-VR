@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace FinalScripts.Fish
@@ -18,8 +19,29 @@ namespace FinalScripts.Fish
             {
                 fish.FishHitGround();
             }
+
+            if (other.transform.CompareTag("LeftFist"))
+            {
+                HapticManager.leftFishPunch = true;
+            }
+            if (other.transform.CompareTag("RightFist"))
+            {
+                HapticManager.rightFishPunch = true;
+            }
         }
-        
+
+        private void OnCollisionExit(Collision other)
+        {
+            if (other.transform.CompareTag("LeftFist"))
+            {
+                HapticManager.leftFishPunch = false;
+            }
+            if (other.transform.CompareTag("RightFist"))
+            {
+                HapticManager.rightFishPunch = false;
+            }
+        }
+
         public void PunchObject(ControllerManager controllerManager, string fistUsed)
         {
             var v = fistUsed == "LeftFist"
