@@ -7059,6 +7059,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51b8c66abce2e1f488d701badac160d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _minPickRate: 0
+  _maxPickRate: 0
   pickedIndex: 0
   totalWeight: 0
 --- !u!114 &479356856
@@ -7073,6 +7075,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd9345024d4b2304bbd249c67a88e3a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxPickRate: 0
+  _totalWeight: 0
+  _neighborThreshold: 0
+  _indicesOfPreviousNeighbors: 
+  _indicesOfCurrentNeighbors: 
 --- !u!1 &494596387
 GameObject:
   m_ObjectHideFlags: 0
@@ -11726,7 +11733,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1205598061}
-  - component: {fileID: 1205598062}
   m_Layer: 0
   m_Name: SpawnAreaManager
   m_TagString: Untagged
@@ -11753,20 +11759,6 @@ Transform:
   - {fileID: 1269023741}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1205598062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1205598060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51b8c66abce2e1f488d701badac160d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickedIndex: 0
-  totalWeight: 0
 --- !u!1001 &1260474623
 PrefabInstance:
   m_ObjectHideFlags: 0

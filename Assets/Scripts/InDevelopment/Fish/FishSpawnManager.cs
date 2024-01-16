@@ -8,8 +8,12 @@ using Random = UnityEngine.Random;
 
 namespace InDevelopment.Fish
 {
+    [RequireComponent(typeof(FishSpawnAreas))]
     public class FishSpawnManager : MonoBehaviour
     {
+        // TODO: Add the FishSpawnAreas script to the FishSpawnManager as a component, after making FishSpawnAreas not static.
+                                                            // (...I made it not-static - blame me if needed! -Benjamin)
+        private FishSpawnAreas _fishSpawnAreas;
         // TODO: Fix why spawned fish have torque
         // TODO: Flight trajectory type decided by random weighted tables
         
@@ -47,15 +51,16 @@ namespace InDevelopment.Fish
         #region ---Initialization---
         private void Awake()
         {
+            _fishSpawnAreas = GetComponent<FishSpawnAreas>();
             EventManager.SpawnFish += SpawnFish;
-            FishSpawnAreas.InitializeSpawnAreas();
+            _fishSpawnAreas.InitializeSpawnAreas();
         }
         #endregion
         
         #region ---FishSpawning---
         private void SpawnFish()
         {
-            var spawnPos = FishSpawnAreas.GetNextFishSpawnPosition();
+            var spawnPos = _fishSpawnAreas.GetNextFishSpawnPosition();
             var fish = FishSpawnType.GetNextFish();
             SpawnFishAtPosFromPool(spawnPos, fish);
         }
