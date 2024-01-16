@@ -31,6 +31,9 @@ public class GongScript : MonoBehaviour
                     {
                         PlayerPrefs.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicVolume") + .1f);
                         Debug.Log(PlayerPrefs.GetFloat("MusicVolume"));
+                        
+                        //TODO play gong audio
+                        
                         //_soundManager.SetVolume();
 
                         //_audioSource.volume = PlayerPrefs.GetFloat("MusicVolume");
@@ -48,6 +51,9 @@ public class GongScript : MonoBehaviour
                     {
                         PlayerPrefs.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicVolume") - .1f);
                         Debug.Log(PlayerPrefs.GetFloat("MusicVolume"));
+                        
+                        //TODO play gong audio
+                        
                         //_soundManager.SetVolume();
 
                         //_audioSource.volume = PlayerPrefs.GetFloat("MusicVolume");
@@ -68,6 +74,8 @@ public class GongScript : MonoBehaviour
                     {
                         PlayerPrefs.SetFloat("SFXVolume", PlayerPrefs.GetFloat("SFXVolume") + .1f);
                         Debug.Log(PlayerPrefs.GetFloat("SFXVolume"));
+                        
+                        //TODO play gong audio
 
                         //_soundManager.SetVolume();
 
@@ -86,6 +94,8 @@ public class GongScript : MonoBehaviour
                     {
                         PlayerPrefs.SetFloat("SFXVolume", PlayerPrefs.GetFloat("SFXVolume") - .1f);
                         Debug.Log(PlayerPrefs.GetFloat("SFXVolume"));
+                        
+                        //TODO play gong audio
 
                         //_soundManager.SetVolume();
 

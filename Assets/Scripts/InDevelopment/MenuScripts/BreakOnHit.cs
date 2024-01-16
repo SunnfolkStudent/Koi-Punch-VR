@@ -19,6 +19,9 @@ public class BreakOnHit : TransitionAnimation
     protected void HittingSign()
     {
         Instantiate(breakPrefab,gameObject.transform.position,Quaternion.identity);
+        
+        //TODO play break audio
+        
         MenuEventManager.ExplodeTransition();
         if (gameObject.CompareTag("SceneChanger"))
         {

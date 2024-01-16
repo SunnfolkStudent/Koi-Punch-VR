@@ -17,6 +17,8 @@ public class TransitionAnimation : MonoBehaviour
         if (_animator != null)
         {
             _animator.SetTrigger("MenuTransition");
+            
+            //TODO play explosion audio
         }
         Destroy(gameObject,5f);
     }
