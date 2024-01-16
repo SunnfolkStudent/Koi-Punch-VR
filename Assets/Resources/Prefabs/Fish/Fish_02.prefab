@@ -1806,6 +1806,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7714220118983619332}
   - component: {fileID: 4462581826712332670}
+  - component: {fileID: -1574696139633453201}
   m_Layer: 0
   m_Name: Fish_02
   m_TagString: Untagged
@@ -1822,7 +1823,7 @@ Transform:
   m_GameObject: {fileID: 6937156405640096190}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.8, y: 2.053, z: -6.527}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1852,6 +1853,25 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-1574696139633453201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6937156405640096190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb67997a41c5e6844912684d67db798f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  despawnTime: 10
+  despawnAltitude: -5
+  punchVelMultiplier: 30
+  velocityNeededForSuccessfulHit: 3
+  hasBeenPunched: 0
+  hasHitGround: 0
+  isDebugging: 1
 --- !u!1 &7424378199511918219
 GameObject:
   m_ObjectHideFlags: 0

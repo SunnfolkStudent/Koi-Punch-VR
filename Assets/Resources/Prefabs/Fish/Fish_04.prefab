@@ -11,17 +11,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 97692a0b96f7c464995523c96dd7d79c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.010045
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 97692a0b96f7c464995523c96dd7d79c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.473
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 97692a0b96f7c464995523c96dd7d79c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.981
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 97692a0b96f7c464995523c96dd7d79c,
         type: 3}
@@ -80,6 +80,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8879528566716807029, guid: 97692a0b96f7c464995523c96dd7d79c,
         type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: 97692a0b96f7c464995523c96dd7d79c,
+        type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
@@ -88,6 +93,10 @@ PrefabInstance:
     - {fileID: 2792011153695590467, guid: 97692a0b96f7c464995523c96dd7d79c, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 97692a0b96f7c464995523c96dd7d79c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2426103300838451586}
     - targetCorrespondingSourceObject: {fileID: 7036213049465896255, guid: 97692a0b96f7c464995523c96dd7d79c,
         type: 3}
       insertIndex: -1
@@ -157,6 +166,31 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4690138927993467318}
   m_SourcePrefab: {fileID: 100100000, guid: 97692a0b96f7c464995523c96dd7d79c, type: 3}
+--- !u!1 &2485417856301522908 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 97692a0b96f7c464995523c96dd7d79c,
+    type: 3}
+  m_PrefabInstance: {fileID: 3367728863207416461}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-2426103300838451586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2485417856301522908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb67997a41c5e6844912684d67db798f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  despawnTime: 10
+  despawnAltitude: -5
+  punchVelMultiplier: 30
+  velocityNeededForSuccessfulHit: 3
+  hasBeenPunched: 0
+  hasHitGround: 0
+  isDebugging: 1
 --- !u!1 &3129811226712708742 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 419891622335181835, guid: 97692a0b96f7c464995523c96dd7d79c,
