@@ -16,16 +16,17 @@ public class SceneController : MonoBehaviour
     [SerializeField] private AnimationCurve titleSpeed;
     private float speed;
     private float time;
+    private bool ReadyToStart;
     public static int LevelSelected = 5;
     private GameObject _fadeScreenObj;
     private FadeScreenScript _fadeScreen;
     #endregion
     
     
-
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        //Play intro music
         _fadeScreenObj = GameObject.FindGameObjectWithTag("FadeScreen");
         _fadeScreen = _fadeScreenObj.GetComponent<FadeScreenScript>();
         SceneManager.LoadScene(IntroScene, LoadSceneMode.Additive);
@@ -43,23 +44,39 @@ public class SceneController : MonoBehaviour
 
         if (Title.transform.position == Goal.transform.position)
         {
-            StartCoroutine(PlayIntro());
+            StartCoroutine(TitleCard());
+        }
+
+        if (ReadyToStart)
+        {
+            StartCoroutine(GoToMainMenuFirstTime());
         }
         
-
         #endregion
 
         if (LevelSelected == 5) return;
         StartCoroutine(ChangeLevel());
         LevelSelected = 5;
     }
-    
-    private IEnumerator PlayIntro()
+
+    private IEnumerator TitleCard()
     {
         print("Play Music"); //Play music here
+        
         yield return new WaitForSeconds(musicLength.length);
+        
+        ReadyToStart = true;
+        
+    }
+
+    private IEnumerator GoToMainMenuFirstTime()
+    {
+        _fadeScreenObj = GameObject.FindGameObjectWithTag("FadeScreen");
+        _fadeScreen.FadeOut();
+        yield return new WaitForSeconds(_fadeScreen._fadeDuration);
         SceneManager.UnloadSceneAsync(IntroScene);
-        //Start Main Menu Stuff here
+        var scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 
     private IEnumerator ChangeLevel()
