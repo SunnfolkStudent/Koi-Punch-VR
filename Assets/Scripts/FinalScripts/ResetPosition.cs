@@ -39,8 +39,8 @@ public class ResetPosition : MonoBehaviour
 
     private void Update()
     {
-        _resetPosLeft = leftResetButton.action.IsPressed();
-        _resetPosRight = rightResetButton.action.IsPressed();
+        _resetPosLeft = leftResetButton.action.WasPressedThisFrame();
+        _resetPosRight = rightResetButton.action.WasPressedThisFrame();
 
         if (_resetPosLeft || _resetPosRight)
         {
