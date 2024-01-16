@@ -2125,7 +2125,7 @@ GameObject:
   - component: {fileID: 60125176}
   m_Layer: 0
   m_Name: PlayerHead
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4153,6 +4153,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: FishSpawnManager
       objectReference: {fileID: 0}
+    - target: {fileID: 226389944599812216, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: m_TagString
+      value: FishSpawnManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2074864738684994615, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: bossPrefab
+      value: 
+      objectReference: {fileID: 471582657252072425, guid: e3792d775295884418e0ab41c2a97d11,
+        type: 3}
     - target: {fileID: 2074864738684994615, guid: b0869e6e2e592a646852ba90d715ff4c,
         type: 3}
       propertyPath: timeTillEnd
@@ -4171,7 +4182,22 @@ PrefabInstance:
     - target: {fileID: 2074864738684994615, guid: b0869e6e2e592a646852ba90d715ff4c,
         type: 3}
       propertyPath: timeToMaxSpawnRate
-      value: 30
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2966538303576735511, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: chainMaxNumber
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2966538303576735511, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: fourthPercentage
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2966538303576735511, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: secondPercentage
+      value: 0.66
       objectReference: {fileID: 0}
     - target: {fileID: 3218944948043325081, guid: b0869e6e2e592a646852ba90d715ff4c,
         type: 3}

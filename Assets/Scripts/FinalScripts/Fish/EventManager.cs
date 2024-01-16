@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace InDevelopment.Fish
+namespace FinalScripts.Fish
 {
     public static class EventManager
     {
@@ -15,6 +15,7 @@ namespace InDevelopment.Fish
         #endregion
         
         #region >>>---StartBossPhases---
+        public static Event SpawnBoss;
         public static Event StartBossPhase0 = StartBossPhase0Debug; // Starts phase 0.
         public static Event BossPhase0Completed; // Stops time and starts next uncompleted phase 
         public static Event BossPhaseSuccessful;

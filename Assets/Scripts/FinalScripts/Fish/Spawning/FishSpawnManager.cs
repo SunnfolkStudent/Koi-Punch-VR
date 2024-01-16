@@ -1,21 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using InDevelopment.Fish.RandomWeightedTables;
-using InDevelopment.Fish.Trajectory;
+using FinalScripts.Fish.Spawning.RandomWeightedTables;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace InDevelopment.Fish
+namespace FinalScripts.Fish.Spawning
 {
     [RequireComponent(typeof(FishSpawnAreas))]
     public class FishSpawnManager : MonoBehaviour
     {
-        // TODO: Add the FishSpawnAreas script to the FishSpawnManager as a component, after making FishSpawnAreas not static.
-                                                            // (...I made it not-static - blame me if needed! -Benjamin)
-        private FishSpawnAreas _fishSpawnAreas;
         // TODO: Fix why spawned fish have torque
         // TODO: Flight trajectory type decided by random weighted tables
+        private FishSpawnAreas _fishSpawnAreas;
         
         #region ---FishLaunchInspectorSettings---
         [Header("Fish Target")] [Tooltip("Transform that the fish trajectories will aim to")]
@@ -53,7 +50,6 @@ namespace InDevelopment.Fish
         {
             _fishSpawnAreas = GetComponent<FishSpawnAreas>();
             EventManager.SpawnFish += SpawnFish;
-            _fishSpawnAreas.InitializeSpawnAreas();
         }
         #endregion
         
@@ -95,11 +91,11 @@ namespace InDevelopment.Fish
                     throw new ArgumentOutOfRangeException();
             }
 
-            LaunchRigiditiesDirectionWithVelocity(rigidities, targetDirection, fishVelocity2D);
+            LaunchRigiditiesDirectionWithVelocityTowards(rigidities, targetDirection, fishVelocity2D);
             fish.ParentGameObject.SetActive(true);
         }
         
-        public static void LaunchRigiditiesDirectionWithVelocity(IEnumerable<Rigidbody> objRigidbody, Vector3 targetDirection, Vector2 fishVelocity)
+        public static void LaunchRigiditiesDirectionWithVelocityTowards(IEnumerable<Rigidbody> objRigidbody, Vector3 targetDirection, Vector2 fishVelocity)
         {
             var velocity = new Vector3(targetDirection.x * fishVelocity.x, fishVelocity.y, targetDirection.z * fishVelocity.x);
             foreach (var rigidbody in objRigidbody)

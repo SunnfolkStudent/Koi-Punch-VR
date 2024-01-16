@@ -1,25 +1,25 @@
 using System.Collections.Generic;
 using System.Linq;
-using InDevelopment.Fish.RandomWeightedTables;
-using InDevelopment.Fish.Trajectory;
+using FinalScripts.Fish.Spawning;
+using FinalScripts.Fish.Spawning.RandomWeightedTables;
 using UnityEngine;
 
-namespace InDevelopment.Fish
+namespace FinalScripts.Fish
 {
     public class Boss : MonoBehaviour, IPunchable
     {
-        // TODO: Add the FishSpawnAreas / FishSpawnManager script to the boss as a component, after making FishSpawnAreas not static.
-                                                                // (I did it - blame me if needed! -Benjamin)
         private FishSpawnAreas _fishSpawnAreas;
-        [SerializeField] private Transform player;
+        private Transform _player;
+        private Rigidbody[] _rigidities;
+        [SerializeField] private float bossInitialLaunchSpeed = 35f;
         [SerializeField] private float zenPerHitPhase2 = 5f;
         private static BossPhase _currentBossState;
         private float _score;
-        
+
         #region ---Initialization---
-        private void Start()
+        private void Awake()
         {
-            _fishSpawnAreas = GetComponent<FishSpawnAreas>();
+            _fishSpawnAreas = GameObject.FindGameObjectWithTag("FishSpawnManager").GetComponent<FishSpawnAreas>();
             EventManager.StartBossPhase0 += Phase0;
             EventManager.BossPhase0Completed += Phase0Completed;
             EventManager.BossPhaseSuccessful += PhaseSuccessful;
@@ -27,15 +27,24 @@ namespace InDevelopment.Fish
             EventManager.StartBossPhase2 += Phase2;
             EventManager.StartBossPhase3 += Phase3;
         }
+
+        private void Start()
+        {
+            _player = GameObject.FindGameObjectWithTag("Player").transform;
+            _rigidities = GetComponentsInChildren<Rigidbody>().ToArray();
+            EventManager.StartBossPhase0.Invoke();
+        }
+
         #endregion
         
         #region ---PhaseProperties---
         private enum BossPhase
         {
-            Phase0,
             Phase1,
             Phase2,
-            Phase3
+            Phase3,
+            BossDefeated,
+            Phase0
         }
         
         private static readonly Dictionary<BossPhase, PhaseInfo> Phase = new()
@@ -64,10 +73,11 @@ namespace InDevelopment.Fish
             _currentBossState = BossPhase.Phase0;
             
             var spawnPos = _fishSpawnAreas.GetNextFishSpawnPosition();
-            var playerPosition = player.position;
-            var rigidities = GetComponentsInChildren<Rigidbody>();
-            var velocity2D = FishTrajectory.TrajectoryVelocity2DFromInitialSpeed(spawnPos, playerPosition, 35f);
-            FishSpawnManager.LaunchRigiditiesDirectionWithVelocity(rigidities, playerPosition, velocity2D);
+            transform.position = spawnPos;
+            var playerPosition = _player.position;
+            transform.LookAt(playerPosition, Vector3.up);
+            var velocity2D = FishTrajectory.TrajectoryVelocity2DFromInitialSpeed(spawnPos, playerPosition, bossInitialLaunchSpeed);
+            FishSpawnManager.LaunchRigiditiesDirectionWithVelocityTowards(_rigidities, (playerPosition - spawnPos).normalized, velocity2D);
         }
         
         private static void Phase1()

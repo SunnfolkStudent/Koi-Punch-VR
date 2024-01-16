@@ -1,3 +1,4 @@
+using FinalScripts.Fish;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

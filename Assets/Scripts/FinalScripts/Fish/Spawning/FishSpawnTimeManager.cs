@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace InDevelopment.Fish
+namespace FinalScripts.Fish.Spawning
 {
     public class FishSpawnTimeManager : MonoBehaviour
     {
@@ -11,6 +11,9 @@ namespace InDevelopment.Fish
         [SerializeField] private float maxSpawnRate = 1.5f;
         [SerializeField] private float minSpawnRate = 0.5f;
         [SerializeField] private float timeToMaxSpawnRate = 20f;
+
+        [Header("SpawnBoss")] 
+        [SerializeField] private GameObject bossPrefab;
         
         #region ---Initialization---
         private void Start()
@@ -27,6 +30,7 @@ namespace InDevelopment.Fish
         private void StartSpawning()
         {
             StartCoroutine(SpawnFish());
+            Invoke(nameof(StopSpawning), 5f);
         }
         
         private void StartSpawningAtMaxRate()
@@ -34,9 +38,10 @@ namespace InDevelopment.Fish
             StartCoroutine(SpawnFishMaxRate());
         }
 
-        private static void StopSpawning()
+        private void StopSpawning()
         {
             isSpawningFish = false;
+            Instantiate(bossPrefab);
         }
         #endregion
         

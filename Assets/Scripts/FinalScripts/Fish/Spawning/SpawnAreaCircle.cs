@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace InDevelopment.Fish.EditorScripts
+namespace FinalScripts.Fish.Spawning
 {
     [ExecuteInEditMode]
     [RequireComponent(typeof(LineRenderer))]

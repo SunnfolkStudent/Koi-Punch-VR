@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using InDevelopment.Fish.RandomWeightedTables;
+using FinalScripts.Fish.Spawning.RandomWeightedTables;
 using UnityEngine;
 
-namespace InDevelopment.Fish
+namespace FinalScripts.Fish.Spawning
 {
     public class FishObjectPool : MonoBehaviour
     {
@@ -95,7 +95,7 @@ namespace InDevelopment.Fish
                 
                 Children = ParentGameObject.GetComponentsInChildren<Transform>().Select(transform1 => new Child(transform1)).ToArray();
                 
-                ParentGameObject.GetComponent<InDevelopment.Fish.Fish>().fish = this;
+                ParentGameObject.GetComponent<FinalScripts.Fish.Fish>().fish = this;
             }
         }
         
@@ -114,19 +114,6 @@ namespace InDevelopment.Fish
         #endregion
         
         #region ---PoolInteraction---
-        private static void AddMultipleFishToPool(int amount, FishPool fishPool)
-        {
-            for(var i = 0; i < amount; i++)
-            {
-                AddFishInPool(fishPool);
-            }
-        }
-
-        private static void AddFishInPool(FishPool fishPool)
-        {
-            fishPool.Fishes.Add(new Fish(fishPool));
-        }
-        
         public static Fish GetPooledObject(FishPool fishPool)
         {
             var availableFishInPool = fishPool.Fishes.Where(fish => !fish.ParentGameObject.activeInHierarchy).ToArray();
@@ -148,6 +135,19 @@ namespace InDevelopment.Fish
                 fish.Children[i].Transform.rotation = fish.FishPool.Prefab.Children[i].InitialTransform.rotation;
                 fish.Children[i].Transform.localScale = fish.FishPool.Prefab.Children[i].InitialTransform.localScale;
             }
+        }
+        
+        private static void AddMultipleFishToPool(int amount, FishPool fishPool)
+        {
+            for(var i = 0; i < amount; i++)
+            {
+                AddFishInPool(fishPool);
+            }
+        }
+
+        private static void AddFishInPool(FishPool fishPool)
+        {
+            fishPool.Fishes.Add(new Fish(fishPool));
         }
         #endregion
     }

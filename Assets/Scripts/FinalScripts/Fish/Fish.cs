@@ -1,11 +1,10 @@
-using System;
+using FinalScripts.Fish.Spawning;
 using UnityEngine;
 
-namespace InDevelopment.Fish
+namespace FinalScripts.Fish
 {
     public class Fish : MonoBehaviour
     {
-        // private GameObject
         public FishObjectPool.Fish fish { get; set; }
         [SerializeField] private float despawnTime = 5f;
         [SerializeField] private float despawnAltitude = -5f;
@@ -35,7 +34,7 @@ namespace InDevelopment.Fish
                 Despawn();
             }
         }
-
+        
         private void OnEnable()
         {
             _startTime = Time.time;
@@ -49,7 +48,7 @@ namespace InDevelopment.Fish
                 Despawn();
             }
         }
-
+        
         // TODO: Punch script needs to make the fish call this function
         private void GainZen()
         {

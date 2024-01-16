@@ -1,14 +1,14 @@
 using System;
 using UnityEngine;
 
-namespace InDevelopment.Fish.Trajectory
+namespace FinalScripts.Fish.Spawning
 {
     public static class FishTrajectory
     {
         // TODO: When using angle for trajectory fix why 3% chance of error
         
         #region ---Debugging---
-        private static bool _isDebugging;
+        private static bool _isDebugging = true;
         private static void Log(string message)
         {
             if(_isDebugging) Debug.Log(message);

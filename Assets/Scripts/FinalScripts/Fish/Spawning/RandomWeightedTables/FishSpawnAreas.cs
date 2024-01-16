@@ -1,24 +1,32 @@
 using System.Collections.Generic;
 using System.Linq;
-using InDevelopment.Fish.EditorScripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace InDevelopment.Fish.RandomWeightedTables
+namespace FinalScripts.Fish.Spawning.RandomWeightedTables
 {
     public class FishSpawnAreas : MonoBehaviour
     {
-        private List<SpawnArea> _availableSpawnAreas;
+        private static List<SpawnArea> _availableSpawnAreas;
         private List<SpawnArea> _previousNeighbours;
+        private SpawnArea[] _previousNeighbouringAreas;
         private List<float> _weightDistributedToNeighbours;
 
-        [Header("How often a spawnArea can be picked, before it's disabled:")]
-        [Range(1f, 10f)] [SerializeField] private int maxPickRate = 5;
-        [Header("SpawnArea Vector-based search area for a neighbour spawnArea")]
-        [Range(0f, 8f)] [SerializeField] private float neighborDistanceThreshold = 5f;
+        #region ---InspectorSettings---
+        [Header("Spawn Area Settings")]
+        [Tooltip("How often a spawnArea can be picked, before it's disabled")]
+        [SerializeField] private int maxPickRate = 5;
+        [Tooltip("SpawnArea search distance for a neighbouring spawnArea")]
+        [SerializeField] private float neighborDistanceThreshold = 5f;
         
-        private int _chainCurrentNumber;
-        [Header("How long the NeighbourChain can count neighbours in a row (Max 6):")]
-        [Range(1f, 6f)][SerializeField] private int chainMaxNumber;
+        [FormerlySerializedAs("weightLostFromPickedArea")]
+        [Header("Percentage of weight lost and distributed to close neighbours")]
+        [Range(0f, 1f)] [SerializeField] private float weightLossOfPickedArea = 0.5f;
+        // [Range(0f, 1f)] [SerializeField]  private float weightDistributedToNeighbors = 0.75f;
+        
+        [Header("How long the NeighbourChain can count neighbours in a row:")]
+        [SerializeField] private int chainMaxNumber = 2;
+        private int _chainCurrentNumber = 0;
         
         [Header("Percentage after picking a neighbour for the n-th time in a row.")]
         [Range(0f, 1f)] [SerializeField] private float firstPercentage;
@@ -27,21 +35,18 @@ namespace InDevelopment.Fish.RandomWeightedTables
         [Range(0f, 1f)] [SerializeField] private float fourthPercentage;
         [Range(0f, 1f)] [SerializeField] private float fifthPercentage;
         [Range(0f, 1f)] [SerializeField] private float sixthPercentage;
-        
-        // The below can be used if you want to use a constant percentage decrease in the NeighbourChain.
-        private float _weightLostFromPicked = 0.5f;
-        [Range(0f, 1f)] private float _weightDistributedToNeighbors = 0.75f;
+        #endregion
         
         private class SpawnArea
         {
             public GameObject GameObject;
             public SpawnAreaCircle SpawnAreaCircle;
-            public float Weight;
+            public float Weight = 100;
             public int TimesSpawned;
         }
         
         #region ---Initialization---
-        public void InitializeSpawnAreas()
+        public void Awake()
         {
             _availableSpawnAreas = new List<SpawnArea>();
             AddSpawnAreasToSpawnAreaList();
@@ -97,14 +102,8 @@ namespace InDevelopment.Fish.RandomWeightedTables
             foreach (var area in availableSpawnAreas)
             {
                 sum += area.Weight;
-                if (sum > rnd)
-                {
-                    if (_previousNeighbours.Contains(area))
-                    {
-                        _chainCurrentNumber++; 
-                    } 
-                    NewProbabilities(availableSpawnAreas, area);
-                }
+                if (sum < rnd) continue;
+                NewProbabilities(availableSpawnAreas, area);
                 return area;
             }
             
@@ -113,8 +112,16 @@ namespace InDevelopment.Fish.RandomWeightedTables
 
         private void NewProbabilities(IReadOnlyCollection<SpawnArea> availableSpawnAreas, SpawnArea area)
         {
+            if (_previousNeighbouringAreas != null)
+            {
+                if (_previousNeighbouringAreas.Contains(area)) _chainCurrentNumber++;
+                else _chainCurrentNumber = 0;
+            }
+            if (_chainCurrentNumber > chainMaxNumber) _chainCurrentNumber = chainMaxNumber;
+            NeighborsNewProbability(availableSpawnAreas, area, _chainCurrentNumber);
+            
             // Function for individually adjustable percentage changes in chain:
-            NeighborsNewProbabilities(availableSpawnAreas, area, _chainCurrentNumber);
+            // NeighborsNewProbabilities(availableSpawnAreas, area, _chainCurrentNumber);
             
             // Function for constant percentage change in chain:
             // NeighborsNewProbabilities(availableSpawnAreas, area);
@@ -125,7 +132,7 @@ namespace InDevelopment.Fish.RandomWeightedTables
         private void NewProbabilitiesForPickedArea(SpawnArea spawnArea)
         {
             spawnArea.TimesSpawned++;
-            spawnArea.Weight *= _weightLostFromPicked;
+            spawnArea.Weight *= weightLossOfPickedArea;
 
             if (spawnArea.TimesSpawned >= maxPickRate)
             {
@@ -135,37 +142,37 @@ namespace InDevelopment.Fish.RandomWeightedTables
 
         // Go to NewProbabilities and uncomment if you want the below function called upon:
         // (When doing so, just remember to remove the other one, by commenting it out)
-        private void NeighborsNewProbabilities(IReadOnlyCollection<SpawnArea> availableSpawnAreas, SpawnArea area)
-        {
-            var currentNeighbors = availableSpawnAreas.Where(spawnArea =>
-                (Vector3.Distance(spawnArea.GameObject.transform.position, area.GameObject.transform.position))
-                <= neighborDistanceThreshold).ToArray();
-            
-            if (currentNeighbors.Length !> 0) return;
-            
-            var weightToDistribute = area.Weight * (1 - _weightLostFromPicked);
-            var weightToNeighbours = weightToDistribute * _weightDistributedToNeighbors / currentNeighbors.Length;
-            var weightForTheRest = weightToDistribute * (1 - _weightDistributedToNeighbors) / (availableSpawnAreas.Count - currentNeighbors.Length);
-            
-            foreach (var spawnArea in _availableSpawnAreas)
-            {
-                spawnArea.Weight += currentNeighbors.Contains(spawnArea) ? weightToNeighbours : weightForTheRest;
-            }
-        }
+        // private void NeighborsNewProbabilities(IReadOnlyCollection<SpawnArea> availableSpawnAreas, SpawnArea area)
+        // {
+        //     var currentNeighbors = availableSpawnAreas.Where(spawnArea =>
+        //         (Vector3.Distance(spawnArea.GameObject.transform.position, area.GameObject.transform.position))
+        //         <= neighborDistanceThreshold).ToArray();
+        //     
+        //     if (currentNeighbors.Length !> 0) return;
+        //     
+        //     var weightToDistribute = area.Weight * (1 - weightLostFromPickedArea);
+        //     var weightToNeighbours = weightToDistribute * weightDistributedToNeighbors / currentNeighbors.Length;
+        //     var weightForTheRest = weightToDistribute * (1 - weightDistributedToNeighbors) / (availableSpawnAreas.Count - currentNeighbors.Length);
+        //     
+        //     foreach (var spawnArea in _availableSpawnAreas)
+        //     {
+        //         spawnArea.Weight += currentNeighbors.Contains(spawnArea) ? weightToNeighbours : weightForTheRest;
+        //     }
+        // }
         #endregion
         
         private void NeighborsNewProbabilities(IReadOnlyCollection<SpawnArea> availableSpawnAreas, SpawnArea area, int neighbourChainNumber)
         {
             if (_chainCurrentNumber > chainMaxNumber) { _chainCurrentNumber = chainMaxNumber; }
             _previousNeighbours = new List<SpawnArea>();
-
+            
             var currentNeighbors = availableSpawnAreas.Where(spawnArea =>
                 (Vector3.Distance(spawnArea.GameObject.transform.position, area.GameObject.transform.position))
                 <= neighborDistanceThreshold).ToArray();
             
             if (currentNeighbors.Length !> 0) return;
             
-            var weightToDistribute = area.Weight * (1 - _weightLostFromPicked);
+            var weightToDistribute = area.Weight * (1 - weightLossOfPickedArea);
             var weightToNeighbours = weightToDistribute * _weightDistributedToNeighbours[neighbourChainNumber-1] / currentNeighbors.Length;
             var weightForTheRest = weightToDistribute * (1 - _weightDistributedToNeighbours[neighbourChainNumber-1]) / (availableSpawnAreas.Count - currentNeighbors.Length);
             
@@ -175,6 +182,27 @@ namespace InDevelopment.Fish.RandomWeightedTables
                 {
                     _previousNeighbours.Add(spawnArea);
                 }
+                spawnArea.Weight += currentNeighbors.Contains(spawnArea) ? weightToNeighbours : weightForTheRest;
+            }
+        }
+        
+        private void NeighborsNewProbability(IReadOnlyCollection<SpawnArea> availableSpawnAreas, SpawnArea area, int neighbourChainNumber)
+        {
+            _previousNeighbouringAreas = null;
+            
+            var currentNeighbors = availableSpawnAreas.Where(spawnArea =>
+                (Vector3.Distance(spawnArea.GameObject.transform.position, area.GameObject.transform.position))
+                <= neighborDistanceThreshold).ToArray();
+            
+            if (currentNeighbors.Length !> 0) return;
+            
+            var weightToDistribute = area.Weight * (1 - weightLossOfPickedArea);
+            var weightToNeighbours = weightToDistribute * _weightDistributedToNeighbours[neighbourChainNumber-1] / currentNeighbors.Length;
+            var weightForTheRest = weightToDistribute * (1 - _weightDistributedToNeighbours[neighbourChainNumber-1]) / (availableSpawnAreas.Count - currentNeighbors.Length);
+            
+            _previousNeighbouringAreas = currentNeighbors;
+            foreach (var spawnArea in _availableSpawnAreas)
+            {
                 spawnArea.Weight += currentNeighbors.Contains(spawnArea) ? weightToNeighbours : weightForTheRest;
             }
         }
