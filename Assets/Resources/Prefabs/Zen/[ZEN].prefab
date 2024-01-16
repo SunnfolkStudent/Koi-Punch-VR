@@ -288,7 +288,7 @@ Canvas:
   m_GameObject: {fileID: 1728837495344586260}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 1
   m_PixelPerfect: 0
@@ -708,6 +708,8 @@ MonoBehaviour:
   attackFieldsActive: 0
   zenMetreValue: 0
   zenLevel: 0
+  zenLevelCheckpoint: 0
+  bossPrefab: {fileID: 0}
 --- !u!114 &6941716316594716263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,9 +722,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eae65cd0ba15444cb269bf4fa5ece88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zenMetreBarLevel1: {fileID: 7650367393956184077}
-  zenMetreBarLevel2: {fileID: 3386504405079747995}
-  zenMetreBarLevel3: {fileID: 740604425968677016}
+  zenMetreBars:
+  - {fileID: 1270338550801801397}
+  - {fileID: 6859384666946741704}
+  - {fileID: 8098091233943297156}
   promptText: {fileID: 612140979862620173}
 --- !u!114 &744706442515538400
 MonoBehaviour:
