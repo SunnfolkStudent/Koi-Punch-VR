@@ -11,9 +11,6 @@ namespace FinalScripts.Fish.Spawning
         [SerializeField] private float maxSpawnRate = 1.5f;
         [SerializeField] private float minSpawnRate = 0.5f;
         [SerializeField] private float timeToMaxSpawnRate = 20f;
-
-        [Header("SpawnBoss")] 
-        [SerializeField] private GameObject bossPrefab;
         
         #region ---Initialization---
         private void Start()
