@@ -51,6 +51,9 @@ public class ZenMetreVisualManager : MonoBehaviour
             _zenMetreBarLevel1Material.SetFloat("_FillAmount", 0);
             _zenMetreBarLevel2Material.SetFloat("_FillAmount", 0);
             _zenMetreBarLevel3Material.SetFloat("_FillAmount", 0);
+            
+            zenMetreBarLevel2.gameObject.SetActive(false);
+            zenMetreBarLevel3.gameObject.SetActive(false);
         }
         catch (Exception e)
         {
