@@ -7,7 +7,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class HapticManager : MonoBehaviour
 {
     [Header("Controller")]
-    public XRBaseController leftController, rightController;
+    public XRBaseController leftController;
+    public XRBaseController rightController;
     
     [Header("Right Button Inputs")]
     [SerializeField] private InputActionReference aButton;
@@ -88,7 +89,7 @@ public class HapticManager : MonoBehaviour
         if (rightZenPunch2) {RightZenPunch2();}
         if (leftZenPunch3) {LeftZenPunch3();} 
         if (rightZenPunch3) {RightZenPunch3();}
-        if (_Abutton || _Bbutton || _Xbutton || _Ybutton) 
+        if (zenChargeing) 
         {
             zenChargeIntensity += zenAmplifier * Time.deltaTime; 
             ZenCharge();
