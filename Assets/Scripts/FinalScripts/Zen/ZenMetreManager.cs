@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using FinalScripts.Fish;
-using InDevelopment.Fish;
 using UnityEngine;
 
 public class ZenMetreManager : MonoBehaviour
