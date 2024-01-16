@@ -535,6 +535,7 @@ GameObject:
   - component: {fileID: 7477406720230292817}
   - component: {fileID: 2428315117574304299}
   - component: {fileID: 2206216924612981613}
+  - component: {fileID: 2908833941354124796}
   m_Layer: 0
   m_Name: SFXGongStand
   m_TagString: Untagged
@@ -665,6 +666,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &2908833941354124796
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126102670783592037}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.02326726, y: 0.00059573917, z: 0.006946337}
+  m_Center: {x: 0.00001776576, y: -0.000050009516, z: 0.019139038}
 --- !u!1 &1732712114980728107
 GameObject:
   m_ObjectHideFlags: 0
@@ -1955,6 +1977,7 @@ GameObject:
   - component: {fileID: 2852593070027257498}
   - component: {fileID: 1561960832099246585}
   - component: {fileID: 8235196169863606397}
+  - component: {fileID: 6716823791447867068}
   m_Layer: 0
   m_Name: MusicGongStand
   m_TagString: Untagged
@@ -2085,6 +2108,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &6716823791447867068
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2832524030164434867}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.019927029, y: 0.0008979774, z: 0.0065651294}
+  m_Center: {x: -0.0016523463, y: -0.00007358041, z: 0.01852454}
 --- !u!1 &2900627984863137012
 GameObject:
   m_ObjectHideFlags: 0
@@ -3887,7 +3931,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bc5e873506012444895cbbd46d87923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakPrefab: {fileID: 5418832669615464414, guid: bb17817de87f09a4a96e9e153702f598,
+  _brokenPrefab: {fileID: 5418832669615464414, guid: bb17817de87f09a4a96e9e153702f598,
     type: 3}
   LevelToGoTo: 0
   newMenuParent: {fileID: 2380400597701980781, guid: 1770d73fefe4c594fa449c170babedc8,

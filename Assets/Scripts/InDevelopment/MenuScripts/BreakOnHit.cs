@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class BreakOnHit : TransitionAnimation
 {
-    [SerializeField] private GameObject breakPrefab;
+    [SerializeField] private GameObject _brokenPrefab;
     [SerializeField] private int LevelToGoTo;
 
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag != "Player") return;
-        Debug.Log("collision detected");
-
-        HittingSign();
+        if (other.gameObject.CompareTag("Player"))
+        {
+            HittingSign();
+        }
     }
 
     protected void HittingSign()
     {
-        Instantiate(breakPrefab,gameObject.transform.position,Quaternion.identity);
+        Instantiate(_brokenPrefab,gameObject.transform.position,Quaternion.identity);
         
         //TODO play break audio
         

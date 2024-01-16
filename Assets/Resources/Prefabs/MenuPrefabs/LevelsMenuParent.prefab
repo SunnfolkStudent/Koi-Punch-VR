@@ -173,7 +173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d58a826730e4646a092853dccb31dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakPrefab: {fileID: 0}
+  _brokenPrefab: {fileID: 5418832669615464414, guid: bb17817de87f09a4a96e9e153702f598,
+    type: 3}
   LevelToGoTo: 0
 --- !u!1 &435875883718895133
 GameObject:
@@ -2444,7 +2445,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d58a826730e4646a092853dccb31dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakPrefab: {fileID: 0}
+  _brokenPrefab: {fileID: 5418832669615464414, guid: bb17817de87f09a4a96e9e153702f598,
+    type: 3}
   LevelToGoTo: 0
 --- !u!1 &4055928936558119260
 GameObject:
@@ -2619,7 +2621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bc5e873506012444895cbbd46d87923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakPrefab: {fileID: 5418832669615464414, guid: bb17817de87f09a4a96e9e153702f598,
+  _brokenPrefab: {fileID: 5418832669615464414, guid: bb17817de87f09a4a96e9e153702f598,
     type: 3}
   LevelToGoTo: 0
   newMenuParent: {fileID: 2380400597701980781, guid: 1770d73fefe4c594fa449c170babedc8,
@@ -2746,7 +2748,7 @@ GameObject:
   - component: {fileID: 8596146915956717420}
   - component: {fileID: 4979830050485392929}
   - component: {fileID: 806579671616408399}
-  - component: {fileID: 3595369789787278808}
+  - component: {fileID: 8970581618120538318}
   m_Layer: 0
   m_Name: sign_resetscores01
   m_TagString: Untagged
@@ -2893,7 +2895,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0063208174, y: 0.0009516091, z: 0.004580035}
   m_Center: {x: -0.00002093345, y: -0.000015629012, z: 0.009617025}
---- !u!114 &3595369789787278808
+--- !u!114 &8970581618120538318
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2902,9 +2904,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6595480895840480014}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba81770eff73ed842801dc1f9dea014e, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a12623e3d8f2554a90e3b2e61382fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _breakPrefab: {fileID: 7729019200151175257, guid: 54cd3802925125c418ce535bec4f96e1,
+    type: 3}
+  _brokenPrefab: {fileID: 5418832669615464414, guid: bb17817de87f09a4a96e9e153702f598,
+    type: 3}
+  LevelToGoTo: 0
 --- !u!1 &7535611880547574159
 GameObject:
   m_ObjectHideFlags: 0
@@ -4000,7 +4007,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d58a826730e4646a092853dccb31dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakPrefab: {fileID: 0}
+  _brokenPrefab: {fileID: 5418832669615464414, guid: bb17817de87f09a4a96e9e153702f598,
+    type: 3}
   LevelToGoTo: 0
 --- !u!1 &8682750733970950379
 GameObject:
