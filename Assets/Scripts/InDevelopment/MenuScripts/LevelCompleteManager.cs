@@ -29,7 +29,7 @@ public class NewBehaviourScript : MonoBehaviour
       penaltyPoints = _scoreManager.hitByFish;
       totalPoints = 0;
       
-      InvokeRepeating("CalculateScore", 5f, 0.025f);
+      InvokeRepeating("CalculateScore", 1f, 0.01f);
    }
 
    private void Update()
@@ -41,6 +41,17 @@ public class NewBehaviourScript : MonoBehaviour
       penaltyScore.text = penaltyPointsEnd.ToString("0");
       totalScore.text = totalPoints.ToString("0");
       highScoreText.text = highScore.ToString("0");
+      
+      if(totalPoints < 1000)
+         totalScore.color = Color.red;
+      else if (totalPoints < 3000)
+         totalScore.color = Color.cyan;
+      else if (totalPoints < 5000)
+         totalScore.color = Color.green;
+      else if(totalPoints < 7000)
+         totalScore.color = Color.yellow;
+      else if (totalPoints >= 9000)
+         totalScore.color = Color.magenta;
 
    }
 
