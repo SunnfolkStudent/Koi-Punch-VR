@@ -104,7 +104,6 @@ public class ZenMetreManager : MonoBehaviour
         ZenMetreVisualManager.Instance.UpdateZenBar(2, 0f);
         
         ResetTime();
-        //_zenPhase0Invoked = false;
         
         EventManager.StartBossPhase1.Invoke();
         
@@ -202,6 +201,7 @@ public class ZenMetreManager : MonoBehaviour
     
     private void StopTime()
     {
+        _zenPhase0Invoked = false;
         StartCoroutine(TimeStop());
     }
     public IEnumerator TimeStop()
