@@ -30,7 +30,7 @@ namespace FinalScripts.Fish
 
         private void Start()
         {
-            _player = GameObject.FindGameObjectWithTag("Player").transform;
+            _player = GameObject.FindGameObjectWithTag("MainCamera").transform;
             _rigidities = GetComponentsInChildren<Rigidbody>().ToArray();
             EventManager.StartBossPhase0.Invoke();
         }
