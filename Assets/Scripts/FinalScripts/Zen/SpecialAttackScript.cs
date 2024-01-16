@@ -28,7 +28,7 @@ public class SpecialAttackScript : MonoBehaviour
         if (HapticManager.zenChargeing && !chargingPunch && ZenMetreManager.Instance.zenAttackActive)
         {
             ZenMetreManager.Instance.zenAttackActive = true;
-            ZenMetreVisualManager.Instance.HidePromptText();
+            InternalZenEventManager.hidePromptText.Invoke();
             chargingPunch = true;
         }
         
@@ -63,17 +63,17 @@ public class SpecialAttackScript : MonoBehaviour
                 CalculatePunchForce();
             }
             
-            ZenMetreVisualManager.Instance.UpdateZenBar(ZenMetreManager.Instance.zenLevel, ZenMetreManager.Instance.zenMetreValue);
+            InternalZenEventManager.updateVisualZenBar.Invoke();
         }
     }
     
     private void CalculatePunchForce()
     {
         punchForce = (((3 - ZenMetreManager.Instance.zenLevel) * 100) - ZenMetreManager.Instance.zenMetreValue);
-        ZenMetreVisualManager.Instance.UpdateZenBar(1, 0f);
-        ZenMetreVisualManager.Instance.UpdateZenBar(2, 0f);
-        ZenMetreVisualManager.Instance.UpdateZenBar(3, 0f);
-        ZenMetreVisualManager.Instance.HideSparkles();
+        ZenMetreManager.Instance.zenLevel = 0;
+        ZenMetreManager.Instance.zenMetreValue = 0f;
+        InternalZenEventManager.updateVisualZenBar.Invoke();
+       InternalZenEventManager.hideSparkles.Invoke();
         // EventManager.ZenPunchReady.Invoke();
     }
 }

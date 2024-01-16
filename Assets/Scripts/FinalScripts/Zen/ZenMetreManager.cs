@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FinalScripts.Fish;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ZenMetreManager : MonoBehaviour
 {
@@ -18,19 +19,19 @@ public class ZenMetreManager : MonoBehaviour
     [Header("Zen Metre Values")]
     public float zenMetreValue;
     public int zenLevel;
-    private int _zenLevelCheckpoint;
+    public int zenLevelCheckpoint;
     private bool _zenPhase0Invoked;
     
     [Header("Time Stop Values")]
     private float _slowdownFactor = 0.001f;
     private float _slowdownTime = 0.5f;
     
-    [Header("Particle systems and originl simulation speeds for time stop")]
+    [Header("Particle systems and original simulation speeds for time stop")]
     private List<ParticleSystem> _particleSystems = new List<ParticleSystem>();
     private List<float> _originalSimulationSpeeds = new List<float>();
-
+    
     [Header("Prefab")] 
-    [SerializeField] private GameObject BossPrefab;
+    [SerializeField] private GameObject bossPrefab;
     
     private void Awake()
     {
@@ -53,6 +54,7 @@ public class ZenMetreManager : MonoBehaviour
         EventManager.StartBossPhase0 += ResetTime;
         EventManager.StartBossPhase0 += LevelZero;  
         EventManager.BossPhase0Completed += StopTime;
+        EventManager.BossPhase0Completed += Phase0Over;
         EventManager.StartBossPhase1 += LevelOne;
         EventManager.StartBossPhase2 += LevelTwo;
         EventManager.StartBossPhase3 += LevelThree;
@@ -68,6 +70,11 @@ public class ZenMetreManager : MonoBehaviour
         }
     }
 
+    private void Phase0Over()
+    {
+        _zenPhase0Invoked = false;
+    }
+
     #region -- Zen Score Methods --
     //Method that adds zen to the zen metre
     public void AddHitZen(float zen)
@@ -79,7 +86,7 @@ public class ZenMetreManager : MonoBehaviour
             zenMetreValue = 100;
         }
 
-        ZenMetreVisualManager.Instance.UpdateZenBar(zenLevel, zenMetreValue);
+        InternalZenEventManager.updateVisualZenBar.Invoke();
         CheckForMaxZen();
     }
     
@@ -92,7 +99,7 @@ public class ZenMetreManager : MonoBehaviour
             zenMetreValue = 100;
         }
         
-        ZenMetreVisualManager.Instance.UpdateZenBar(zenLevel, zenMetreValue);
+        InternalZenEventManager.updateVisualZenBar.Invoke();
     }
     #endregion
     
@@ -101,14 +108,11 @@ public class ZenMetreManager : MonoBehaviour
     //Level zero of zen is the start level. It is the level before anything happens with the zen.
     private void LevelZero()
     {
-        if (_zenLevelCheckpoint <= 1)
-            ZenMetreVisualManager.Instance.UpdateZenBar(1, 0f);
-        
-        ZenMetreVisualManager.Instance.UpdateZenBar(2, 0f);
+        InternalZenEventManager.updateVisualZenBar.Invoke();
         
         ResetTime();
 
-        Instantiate(BossPrefab);
+        Instantiate(bossPrefab);
 
         //Reset music back to normal after zen mode is over
     }
@@ -117,7 +121,7 @@ public class ZenMetreManager : MonoBehaviour
     private void LevelOne()
     {
         zenLevel = 1;
-        _zenLevelCheckpoint = 1;
+        zenLevelCheckpoint = 1;
         zenMetreValue = 0;
         StartCoroutine(AttackFieldSpawnTimer());
         
@@ -130,7 +134,7 @@ public class ZenMetreManager : MonoBehaviour
         zenMetreValue = 0;
         
         //Start of level 2
-        _zenLevelCheckpoint = 2;
+        zenLevelCheckpoint = 2;
         StartCoroutine(TripleScoreTimer());
         
         //Add music for the third level of zen
@@ -143,8 +147,8 @@ public class ZenMetreManager : MonoBehaviour
         
         //Start of level 3
         zenAttackActive = true;
-        _zenLevelCheckpoint = 3;
-        ZenMetreVisualManager.Instance.ShowPromptText("Hold side button to charge punch!");
+        zenLevelCheckpoint = 3;
+        InternalZenEventManager.showPromptText.Invoke();
         
         //Add music for the fourth level of zen
     }
@@ -212,12 +216,11 @@ public class ZenMetreManager : MonoBehaviour
     //Method that starts time stop coroutine. Workaround because you cant add coroutines to events.
     private void StopTime()
     {
-        _zenPhase0Invoked = false;
         StartCoroutine(TimeStop());
     }
     
-    //Timestop coroutine. Slows down time for everything, but lets particles move at 1/10 their regular speed.
-    public IEnumerator TimeStop()
+    //Time-stop coroutine. Slows down time for everything, but lets particles move at 1/10 their regular speed.
+    private IEnumerator TimeStop()
     {
         _particleSystems = FindObjectsByType<ParticleSystem>(FindObjectsSortMode.None).ToList();
         
@@ -242,7 +245,7 @@ public class ZenMetreManager : MonoBehaviour
     }
     
     //Method that resets time back to normal. Called when you fail a phase or when you do your final move.
-    public void ResetTime()
+    private void ResetTime()
     {
         Time.timeScale = 1f;
         for (int i = 0; i < _particleSystems.Count; i++)
@@ -255,11 +258,11 @@ public class ZenMetreManager : MonoBehaviour
     
     #region -- Visual --
 
-    public void CheckForMaxZen()
+    private void CheckForMaxZen()
     {
         if (zenMetreValue >= 100 && zenLevel >= 2)
         {
-            ZenMetreVisualManager.Instance.ShowSparkles();
+            InternalZenEventManager.showSparkles.Invoke();
         }
     }
     

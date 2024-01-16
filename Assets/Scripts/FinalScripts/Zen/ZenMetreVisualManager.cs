@@ -7,15 +7,11 @@ using UnityEngine.UI;
 
 public class ZenMetreVisualManager : MonoBehaviour
 {
-    public static ZenMetreVisualManager Instance;
-    
     [Header("Zen Metre Bar Images and materials")]
-    public Image zenMetreBarLevel1;
-    public Image zenMetreBarLevel2;
-    public Image zenMetreBarLevel3;
-    private Material _zenMetreBarLevel1Material;
-    private Material _zenMetreBarLevel2Material;
-    private Material _zenMetreBarLevel3Material;
+    public GameObject[] zenMetreBars;
+    private List<Image> _zenMetreBarImages = new List<Image>();
+    private List<Material> _zenMetreBarMaterials = new List<Material>();
+    private int _fillAmountPropertyID;
     
     [Header("Zen Metre Values")]
     private float _maxZenMetreValue = 100f;
@@ -26,34 +22,29 @@ public class ZenMetreVisualManager : MonoBehaviour
     
     [Header("Prompt Text")]
     public TextMeshProUGUI promptText;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    public static string promptTextToBeShown;
 
     // Start is called before the first frame update
     void Start()
     {
+        #region ---Initialization---
         try
         {
-            _zenMetreBarLevel1Material = zenMetreBarLevel1.material;
-            _zenMetreBarLevel2Material = zenMetreBarLevel2.material;
-            _zenMetreBarLevel3Material = zenMetreBarLevel3.material;
-        
-            _zenMetreBarLevel1Material.SetFloat("_FillAmount", 0);
-            _zenMetreBarLevel2Material.SetFloat("_FillAmount", 0);
-            _zenMetreBarLevel3Material.SetFloat("_FillAmount", 0);
+            foreach (GameObject zenMeterbar in zenMetreBars)
+            {
+                _zenMetreBarImages.Add(zenMeterbar.GetComponent<Image>());
+            }
+
+            _fillAmountPropertyID = Shader.PropertyToID("_FillAmount");
             
-            zenMetreBarLevel2.gameObject.SetActive(false);
-            zenMetreBarLevel3.gameObject.SetActive(false);
+            foreach (Image zenMetreBarImage in _zenMetreBarImages)
+            {
+                zenMetreBarImage.material.SetFloat(_fillAmountPropertyID, 0f);
+                _zenMetreBarMaterials.Add(zenMetreBarImage.material);
+            }
+            
+            zenMetreBars[1].gameObject.SetActive(false);
+            zenMetreBars[2].gameObject.SetActive(false);
         }
         catch (Exception e)
         {
@@ -63,12 +54,25 @@ public class ZenMetreVisualManager : MonoBehaviour
         
         _sparkleList = GameObject.FindGameObjectsWithTag("Sparkle").ToList();
         HideSparkles();
-        
+
+        promptTextToBeShown = "Hold all buttons to charge!";
         HidePromptText();
+        #endregion
+        
+        #region ---Event Subscriptions---
+        InternalZenEventManager.updateVisualZenBar += UpdateZenBar;
+        InternalZenEventManager.showSparkles += ShowSparkles;
+        InternalZenEventManager.hideSparkles += HideSparkles;
+        InternalZenEventManager.showPromptText += ShowPromptText;
+        InternalZenEventManager.hidePromptText += HidePromptText;
+        #endregion
     }
     
-    public void UpdateZenBar(int workingZenLevel, float zenMetreValue)
+    private void UpdateZenBar()
     {
+        float zenMetreValue = ZenMetreManager.Instance.zenMetreValue;
+        int workingZenLevel = ZenMetreManager.Instance.zenLevel;
+        
         try
         {
             // Calculate fill amount based on the current Zen value
@@ -80,25 +84,35 @@ public class ZenMetreVisualManager : MonoBehaviour
             // Update the _FillAmount property in the shader
             if (workingZenLevel == 0)
             {
-                _zenMetreBarLevel1Material.SetFloat("_FillAmount", fillAmount);
+                _zenMetreBarMaterials[0].SetFloat(_fillAmountPropertyID, fillAmount);
             }
             else if (workingZenLevel == 1)
             {
-                zenMetreBarLevel2.gameObject.SetActive(true);
-                _zenMetreBarLevel2Material.SetFloat("_FillAmount", fillAmount);
-                if (zenMetreValue <= 0)
-                {
-                    zenMetreBarLevel2.gameObject.SetActive(false);
-                }
+                _zenMetreBarMaterials[1].SetFloat(_fillAmountPropertyID, fillAmount);
             }
             else if (workingZenLevel == 2)
             {
-                zenMetreBarLevel3.gameObject.SetActive(true);
-                _zenMetreBarLevel3Material.SetFloat("_FillAmount", fillAmount);
-                if (zenMetreValue <= 0)
-                {
-                    zenMetreBarLevel3.gameObject.SetActive(false);
-                }
+                _zenMetreBarMaterials[2].SetFloat(_fillAmountPropertyID, fillAmount);
+            }
+
+            if (workingZenLevel < 3 && zenMetreBars[2].gameObject.activeSelf)
+            {
+                _zenMetreBarMaterials[2].SetFloat(_fillAmountPropertyID, 0f);
+                zenMetreBars[2].gameObject.SetActive(false);
+            }
+            else if (workingZenLevel > 3 && !zenMetreBars[2].gameObject.activeSelf)
+            {
+                zenMetreBars[2].gameObject.SetActive(true);
+            }
+
+            if (workingZenLevel < 2 && zenMetreBars[1].gameObject.activeSelf && ZenMetreManager.Instance.zenLevelCheckpoint < 2)
+            {
+                _zenMetreBarMaterials[1].SetFloat(_fillAmountPropertyID, 0f);
+                zenMetreBars[1].gameObject.SetActive(false);
+            }
+            else if (workingZenLevel > 2 && !zenMetreBars[1].gameObject.activeSelf)
+            {
+                zenMetreBars[1].gameObject.SetActive(true);
             }
         }
         catch (Exception e)
@@ -108,7 +122,7 @@ public class ZenMetreVisualManager : MonoBehaviour
         
     }
     
-    public void ShowSparkles()
+    private void ShowSparkles()
     {
         try
         {
@@ -123,7 +137,7 @@ public class ZenMetreVisualManager : MonoBehaviour
         }
     }
     
-    public void HideSparkles()
+    private void HideSparkles()
     {
         try
         {
@@ -138,12 +152,12 @@ public class ZenMetreVisualManager : MonoBehaviour
         }
     }
     
-    public void ShowPromptText(string textToBePrompted)
+    private void ShowPromptText()
     {
         try
         {
             promptText.gameObject.SetActive(true);
-            promptText.text = textToBePrompted;
+            promptText.text = promptTextToBeShown;
         }
         catch (Exception)
         {
@@ -151,7 +165,7 @@ public class ZenMetreVisualManager : MonoBehaviour
         }
     }
     
-    public void HidePromptText()
+    private void HidePromptText()
     {
         try
         {
