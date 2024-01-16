@@ -6,18 +6,18 @@ using UnityEngine;
 public class GongScript : MonoBehaviour
 {
     //private AudioSource _audioSource;
-    //[SerializeField] private GameObject _soundManagerObj;
-    //private SoundManager _soundManager;
+    [SerializeField] private GameObject _soundManagerObj;
+    private SoundManager _soundManager;
 
     [SerializeField] private bool isMusic;
     [SerializeField] private bool isBig;
 
-    /*private void Start()
+    private void Start()
     {
         //_audioSource = GetComponent<AudioSource>();
         _soundManagerObj = GameObject.FindGameObjectWithTag("SoundManager");
         _soundManager = _soundManagerObj.GetComponent<SoundManager>();
-    }*/
+    }
 
     private void OnCollisionEnter(Collision other)
     {
@@ -32,9 +32,9 @@ public class GongScript : MonoBehaviour
                         PlayerPrefs.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicVolume") + .1f);
                         Debug.Log(PlayerPrefs.GetFloat("MusicVolume"));
                         
-                        //TODO play gong audio
+                        _soundManager.SetMusicVolume();
                         
-                        //_soundManager.SetVolume();
+                        //TODO play gong audio
 
                         //_audioSource.volume = PlayerPrefs.GetFloat("MusicVolume");
                         //_audioSource.Play();
@@ -52,9 +52,9 @@ public class GongScript : MonoBehaviour
                         PlayerPrefs.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicVolume") - .1f);
                         Debug.Log(PlayerPrefs.GetFloat("MusicVolume"));
                         
-                        //TODO play gong audio
+                        _soundManager.SetMusicVolume();
                         
-                        //_soundManager.SetVolume();
+                        //TODO play gong audio
 
                         //_audioSource.volume = PlayerPrefs.GetFloat("MusicVolume");
                         //_audioSource.Play();
@@ -75,9 +75,9 @@ public class GongScript : MonoBehaviour
                         PlayerPrefs.SetFloat("SFXVolume", PlayerPrefs.GetFloat("SFXVolume") + .1f);
                         Debug.Log(PlayerPrefs.GetFloat("SFXVolume"));
                         
+                        _soundManager.SetSFXVolume();
+                        
                         //TODO play gong audio
-
-                        //_soundManager.SetVolume();
 
                         //_audioSource.volume = PlayerPrefs.GetFloat("MusicVolume");
                         //_audioSource.Play();
@@ -95,9 +95,9 @@ public class GongScript : MonoBehaviour
                         PlayerPrefs.SetFloat("SFXVolume", PlayerPrefs.GetFloat("SFXVolume") - .1f);
                         Debug.Log(PlayerPrefs.GetFloat("SFXVolume"));
                         
+                        _soundManager.SetSFXVolume();
+                        
                         //TODO play gong audio
-
-                        //_soundManager.SetVolume();
 
                         //_audioSource.volume = PlayerPrefs.GetFloat("MusicVolume");
                         //_audioSource.Play();

@@ -22,7 +22,7 @@ public class NewBehaviourScript : MonoBehaviour
    private bool scoringOver;
    private Animator _animator;
 
-   public float numberSpeed = 0.01f;
+   //public float numberSpeed = 0.01f;
 
    private void Start()
    {
@@ -52,7 +52,7 @@ public class NewBehaviourScript : MonoBehaviour
       totalPoints = 0;
       
       if(!scoringOver)
-         InvokeRepeating("CalculateScore", 1f, numberSpeed);
+         InvokeRepeating("CalculateScore", 1f, 0.01f);
    }
 
    private void Update()
