@@ -9,7 +9,6 @@ public class ZenMetreVisualManager : MonoBehaviour
 {
     [Header("Zen Metre Bar Images and materials")]
     public GameObject[] zenMetreBars;
-    private List<Image> _zenMetreBarImages = new List<Image>();
     private List<Material> _zenMetreBarMaterials = new List<Material>();
     private int _fillAmountPropertyID;
     
@@ -32,15 +31,17 @@ public class ZenMetreVisualManager : MonoBehaviour
         {
             foreach (GameObject zenMeterbar in zenMetreBars)
             {
-                _zenMetreBarImages.Add(zenMeterbar.GetComponent<Image>());
+                // Assuming the child you want to access is the first child, modify this according to your hierarchy
+                Transform child = zenMeterbar.transform.GetChild(0);
+                
+                _zenMetreBarMaterials.Add(child.GetComponent<Image>().material);
             }
 
             _fillAmountPropertyID = Shader.PropertyToID("_FillAmount");
             
-            foreach (Image zenMetreBarImage in _zenMetreBarImages)
+            foreach (Material zenMetrebarMaterial in _zenMetreBarMaterials)
             {
-                zenMetreBarImage.material.SetFloat(_fillAmountPropertyID, 0f);
-                _zenMetreBarMaterials.Add(zenMetreBarImage.material);
+                zenMetrebarMaterial.SetFloat(_fillAmountPropertyID, 0f);
             }
             
             zenMetreBars[1].gameObject.SetActive(false);
@@ -85,7 +86,7 @@ public class ZenMetreVisualManager : MonoBehaviour
             if (workingZenLevel == 0)
             {
                 //_zenMetreBarMaterials[0].SetFloat(_fillAmountPropertyID, fillAmount);
-                _zenMetreBarMaterials[0].SetFloat("_FillAmount", fillAmount);
+                _zenMetreBarMaterials[0].SetFloat(_fillAmountPropertyID, fillAmount);
             }
             else if (workingZenLevel == 1)
             {
