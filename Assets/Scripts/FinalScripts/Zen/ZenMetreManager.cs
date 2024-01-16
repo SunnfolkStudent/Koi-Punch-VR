@@ -105,8 +105,6 @@ public class ZenMetreManager : MonoBehaviour
         
         ResetTime();
         
-        EventManager.StartBossPhase1.Invoke();
-        
         //Reset music back to normal after zen mode is over
     }
     
