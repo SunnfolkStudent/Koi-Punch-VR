@@ -23,7 +23,11 @@ public class FMODManager: MonoBehaviour
     [Range(0, 1)] private float musicVolume;
     private float playerLeftHandVelocity;
     private float playerRightHandVelocity;
-    
+
+    public string[] soundPaths;
+
+    public string[] subtitlePaths;
+   
     #endregion
     
     public float SfxVolume
@@ -55,12 +59,30 @@ public class FMODManager: MonoBehaviour
     {
         leftHand = GameObject.Find("leftHand");
         rightHand = GameObject.Find("rightHand");
+
+        soundPaths = new string[4]
+        {
+            "event:/SFX/Announcer/RandomPunchComments/AnnouncerWellDone",
+            "event:/SFX/Announcer/RandomPunchComments/AnnouncerGreatPunch",
+            "event:/SFX/Announcer/RandomPunchComments/AnnouncerFantastic",
+            "event:/SFX/Announcer/RandomPunchComments/AnnouncerYouAreDoingGreat"
+        };
+
+        subtitlePaths = new string[]
+        {
+            "WellDone",
+            "GreatPunch",
+            "Fantastic",
+            "YouAreDoingGreat"
+        };
         
         RuntimeManager.AttachInstanceToGameObject(leftHandWind,  leftHand.GetComponent<Transform>(), leftHand.GetComponent<Rigidbody>());
         RuntimeManager.AttachInstanceToGameObject(rightHandWind,  rightHand.GetComponent<Transform>(), rightHand.GetComponent<Rigidbody>());
         RuntimeManager.AttachInstanceToGameObject(levelOne, cam.GetComponent<Transform>(), cam.GetComponent<Rigidbody>());
         RuntimeManager.AttachInstanceToGameObject(levelTwo, cam.GetComponent<Transform>(), cam.GetComponent<Rigidbody>());
         RuntimeManager.AttachInstanceToGameObject(levelThree, cam.GetComponent<Transform>(), cam.GetComponent<Rigidbody>());
+
+        SelectRandomSoundSubtitle();
     }
     
     private Bus musicBus;
@@ -164,5 +186,40 @@ public class FMODManager: MonoBehaviour
             }
         }
     }
-    
+
+    void SelectRandomSoundSubtitle()
+    {
+
+        if (ShouldRun())
+        {
+            Debug.Log("The if statement ran!");
+            // Checks if the Arrays are empty
+            if (soundPaths == null || soundPaths.Length == 0 || subtitlePaths == null || subtitlePaths.Length == 0)
+            {
+                Debug.LogError("Arrays are null or empty.");
+                return;
+            }
+
+            var randomIndex = Random.Range(0, soundPaths.Length);
+
+            var selectedSoundPath = soundPaths[randomIndex];
+            var selectedSubtitle = subtitlePaths[randomIndex];
+
+            // Now you can use the selected sound and subtitle paths as needed.
+            Debug.Log("Selected Sound Path: " + selectedSoundPath);
+            Debug.Log("Selected Subtitle: " + selectedSubtitle);
+        }
+        else
+        {
+            Debug.Log("The if statement did not run.");
+        }
+        static bool ShouldRun()
+        {
+            // Generates a random number between 0 and 1
+            float randomValue = UnityEngine.Random.value;
+
+            // Checks if the random value is less than 0.1 (10% chance)
+            return randomValue < 0.1;
+        }
+    }
 }
