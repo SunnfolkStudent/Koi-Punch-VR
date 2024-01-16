@@ -6,8 +6,8 @@ namespace InDevelopment
 {
     public class FieldOfView : MonoBehaviour
     {
-        public float viewRadius;
-        [Range(0, 360)] public float viewAngle;
+        public float viewRadius = 50;
+        [Range(0, 360)] public float viewAngle = 120;
 
         public LayerMask spawnAreaMask;
         public LayerMask obstacleMask;
@@ -27,7 +27,8 @@ namespace InDevelopment
                 FindVisibleSpawnAreas();
             }
         }
-        void FindVisibleSpawnAreas()
+        
+        private void FindVisibleSpawnAreas()
         {
             visibleSpawnAreas.Clear();
             int maxSpawnAreasInView = 10;
