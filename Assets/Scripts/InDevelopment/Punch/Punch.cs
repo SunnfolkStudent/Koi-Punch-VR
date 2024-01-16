@@ -210,16 +210,16 @@ public class Punch : MonoBehaviour
         // Therefore we can just write in cubeLaunchDir.normalized.y.
         // t = (2*punchForceMultiplier*cubeLaunchDir.normalized.y)/9.81.
         var gravity = 9.81f;
-        var time = (2*punchForceMultiplier*cubeLaunchDir.normalized)/gravity;
+        var timeToTarget = (2*punchForceMultiplier*cubeLaunchDir.normalized.y)/gravity;
         var startPos = transform.position;
-        var landingPos = new Vector3((startPos.x + time.x * punchForceMultiplier), 
-            (startPos.y + time.y * punchForceMultiplier), 
-            (startPos.z + time.z * punchForceMultiplier));
+        var tmp = startPos + timeToTarget * punchForceMultiplier * cubeLaunchDir.normalized;
+        var landingPos = new Vector3(tmp.x, tmp.y, 0);
+        // var landingPos = new Vector3((startPos.x + cubeLaunchDir.x * time), (time * punchForceMultiplier), 0);
         //var landingPos = startPos + time * punchForceMultiplier;
-        
+
         if (showDebugLines)
         {
-            Debug.DrawLine(startPos, landingPos, Color.red, time.y);
+            Debug.DrawLine(startPos, landingPos, Color.red, timeToTarget);
         }
         lastPunchWasGood = true;
     }
