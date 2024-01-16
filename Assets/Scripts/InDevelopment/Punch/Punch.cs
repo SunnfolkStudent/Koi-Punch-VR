@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using VHierarchy.Libs;
 
 public class Punch : MonoBehaviour
 { 
@@ -185,17 +186,34 @@ public class Punch : MonoBehaviour
         //Add a slight upwards force
         //rigidbody.AddForce(transform.up * (punchForceMultiplier / 3), ForceMode.VelocityChange);
         
+        // ------
+        
         // Use the following variables for calculating trajectory:
+        // Landing position = origin + time * velocity
+        // transform.position + time * punchForceMultiplier = landing position
+            
         // Velocity (v) = punchForceMultiplier,
         // Direction (d) = cubeLaunchDir.normalized,
-        // Angle = arcsin(direction.y)
+        // Angle = arcSin(direction.y)
+        // Gravity = 9.81 = Newton.
         
-        // You can find the horizontal velocity through adding x & z together?
-        // Time = (2*v*cubeLaunchDir.normalized.y)/gravity (18?).
+        // Time = (2*v*sin (a))/gravity.
+        
+        // Sin x where is x = arcSin x, a.k.a. "sin (arcSin x)" is just x.
+        // Therefore we can just write in cubeLaunchDir.normalized.y.
+        // t = (2*punchForceMultiplier*cubeLaunchDir.normalized.y)/9.81.
+        var gravity = 9.81f;
+        var time = (2*punchForceMultiplier*cubeLaunchDir.normalized)/gravity;
+        var startPos = transform.position;
+        var landingPos = new Vector3((startPos.x + time.x * punchForceMultiplier), 
+            (startPos.y + time.y * punchForceMultiplier), 
+            (startPos.z + time.z * punchForceMultiplier));
+        //var landingPos = startPos + time * punchForceMultiplier;
         
         if (showDebugLines)
-            Debug.DrawLine(transform.position, transform.position + cubeLaunchDir, Color.red, 2.5f);
-        
+        {
+            Debug.DrawLine(startPos, landingPos, Color.red, time.y);
+        }
         lastPunchWasGood = true;
     }
 }
