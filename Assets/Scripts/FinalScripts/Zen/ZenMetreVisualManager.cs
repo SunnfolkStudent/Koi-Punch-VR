@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -40,13 +41,21 @@ public class ZenMetreVisualManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _zenMetreBarLevel1Material = zenMetreBarLevel1.material;
-        _zenMetreBarLevel2Material = zenMetreBarLevel2.material;
-        _zenMetreBarLevel3Material = zenMetreBarLevel3.material;
+        try
+        {
+            _zenMetreBarLevel1Material = zenMetreBarLevel1.material;
+            _zenMetreBarLevel2Material = zenMetreBarLevel2.material;
+            _zenMetreBarLevel3Material = zenMetreBarLevel3.material;
         
-        _zenMetreBarLevel1Material.SetFloat("_FillAmount", 0);
-        _zenMetreBarLevel2Material.SetFloat("_FillAmount", 0);
-        _zenMetreBarLevel3Material.SetFloat("_FillAmount", 0);
+            _zenMetreBarLevel1Material.SetFloat("_FillAmount", 0);
+            _zenMetreBarLevel2Material.SetFloat("_FillAmount", 0);
+            _zenMetreBarLevel3Material.SetFloat("_FillAmount", 0);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Exception: " + e + " occurred while initializing Zen Metre Bar.");
+        }
+        
         
         _sparkleList = GameObject.FindGameObjectsWithTag("Sparkle").ToList();
         HideSparkles();
@@ -56,55 +65,87 @@ public class ZenMetreVisualManager : MonoBehaviour
     
     public void UpdateZenBar(int workingZenLevel, float zenMetreValue)
     {
-        // Calculate fill amount based on the current Zen value
-        float fillAmount = zenMetreValue / _maxZenMetreValue;
+        try
+        {
+            // Calculate fill amount based on the current Zen value
+            float fillAmount = zenMetreValue / _maxZenMetreValue;
 
-        // Ensure the fillAmount is within the range of 0 to 1
-        fillAmount = Mathf.Clamp01(fillAmount);
+            // Ensure the fillAmount is within the range of 0 to 1
+            fillAmount = Mathf.Clamp01(fillAmount);
 
-        // Update the _FillAmount property in the shader
-        if (workingZenLevel == 0)
-        {
-            _zenMetreBarLevel1Material.SetFloat("_FillAmount", fillAmount);
+            // Update the _FillAmount property in the shader
+            if (workingZenLevel == 0)
+            {
+                _zenMetreBarLevel1Material.SetFloat("_FillAmount", fillAmount);
+            }
+            else if (workingZenLevel == 1)
+            {
+                _zenMetreBarLevel2Material.SetFloat("_FillAmount", fillAmount);
+            }
+            else if (workingZenLevel == 2)
+            {
+                _zenMetreBarLevel3Material.SetFloat("_FillAmount", fillAmount);
+            }
         }
-        else if (workingZenLevel == 1)
+        catch (Exception e)
         {
-            _zenMetreBarLevel2Material.SetFloat("_FillAmount", fillAmount);
+            Debug.LogError("Exception: " + e + " occurred while updating Zen Bar.");
         }
-        else if (workingZenLevel == 2)
-        {
-            _zenMetreBarLevel3Material.SetFloat("_FillAmount", fillAmount);
-        }
-        else
-        {
-            Debug.LogError("Zen level is not 1, 2 or 3");
-        }
+        
     }
     
     public void ShowSparkles()
     {
-        foreach (GameObject sparkle in _sparkleList)
+        try
         {
-            sparkle.SetActive(true);
+            foreach (GameObject sparkle in _sparkleList)
+            {
+                sparkle.SetActive(true);
+            }
+        }
+        catch (Exception)
+        {
+            Debug.LogError("No sparkles");
         }
     }
     
     public void HideSparkles()
     {
-        foreach (GameObject sparkle in _sparkleList)
+        try
         {
-            sparkle.SetActive(false);
+            foreach (GameObject sparkle in _sparkleList)
+            {
+                sparkle.SetActive(false);
+            }
+        }
+        catch (Exception)
+        {
+            Debug.LogError("No sparkles");
         }
     }
     
     public void ShowPromptText(string textToBePrompted)
     {
-        promptText.gameObject.SetActive(true);
-        promptText.text = textToBePrompted;
+        try
+        {
+            promptText.gameObject.SetActive(true);
+            promptText.text = textToBePrompted;
+        }
+        catch (Exception)
+        {
+            Debug.LogError("No prompt text");
+        }
     }
     
     public void HidePromptText()
     {
-        promptText.gameObject.SetActive(false);
+        try
+        {
+            promptText.gameObject.SetActive(false);
+        }
+        catch (Exception)
+        {
+            Debug.LogError("No prompt text");
+        }
     }
 }

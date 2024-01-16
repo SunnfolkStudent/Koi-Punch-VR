@@ -39,7 +39,6 @@ public class Punch : MonoBehaviour
 
     //Add some variables here if you need to test things
     [Header("Testing and Debug")]
-    public Transform testbox;
     public bool showDebugLines;
     
     //Gather necessary components
@@ -62,15 +61,6 @@ public class Punch : MonoBehaviour
         lastPunchWasGood = false;
         showDebugLines = true;
     }
-
-    /// <summary>
-    /// I think you can safely ignore this method for now
-    /// </summary>
-    private void OnTriggerEnter(Collider other)
-    {
-        Reset();
-    }
-    
     
     /// <summary>
     /// When the fist collides with the object it checks which fist it was that collided
@@ -80,8 +70,6 @@ public class Punch : MonoBehaviour
     /// </summary>
     private void OnCollisionEnter(Collision other)
     {
-        // reset testbox
-        Reset();
         
         //check the impact location and direction to object center
         Vector3 dir = FindDirectionToCenter(other);
@@ -209,24 +197,5 @@ public class Punch : MonoBehaviour
             Debug.DrawLine(transform.position, transform.position + cubeLaunchDir, Color.red, 2.5f);
         
         lastPunchWasGood = true;
-    }
-    
-    private void Reset()
-    {
-        if (name.Equals("Reset"))
-        { 
-            Debug.Log("Resetting Testbox Position"); 
-            testbox.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            testbox.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-            testbox.GetComponent<Rigidbody>().useGravity = false;
-            testbox.GetComponent<Transform>().rotation = new Quaternion(0, 0, 0, 0);
-            punched = false;
-            testbox.GetComponent<Punch>().punched = false;
-            testbox.GetComponent<Punch>().hitGround = false;
-            testbox.GetComponent<Punch>().lastPunchWasGood = false;
-            testbox.GetComponent<BoxCollider>().enabled = true;
-            testbox.position = new Vector3(0.67f, 1.229f, 0f); 
-            return;
-        }
     }
 }
