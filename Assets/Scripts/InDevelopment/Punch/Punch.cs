@@ -187,10 +187,12 @@ public class Punch : MonoBehaviour
         var cubeLaunchDir = direction * -punchForceMultiplier;
         
         Debug.Log("Force Debuff: " + forceDebuff);
-        Debug.Log("Punched with Force of " + punchForceMultiplier + "\nand a Direction of " + cubeLaunchDir.normalized);
+        Debug.Log("Punched with Force of " + punchForceMultiplier + "\nand a Direction of " + cubeLaunchDir);
         
         rigidbody.AddForce(cubeLaunchDir, ForceMode.VelocityChange);
         Debug.Log("cubeLaunch VectorNormalized:" + cubeLaunchDir.normalized);
+        
+        
         
         //Add a slight upwards force
         //rigidbody.AddForce(transform.up * (punchForceMultiplier / 3), ForceMode.VelocityChange);
@@ -198,7 +200,10 @@ public class Punch : MonoBehaviour
         // Use the following variables for calculating trajectory:
         // Velocity (v) = punchForceMultiplier,
         // Direction (d) = cubeLaunchDir.normalized,
-        // Time = (2*v*sin(o))/gravity.
+        // Angle = arcsin(direction.y)
+        
+        // You can find the horizontal velocity through adding x & z together?
+        // Time = (2*v*cubeLaunchDir.normalized.y)/gravity (18?).
         
         if (showDebugLines)
             Debug.DrawLine(transform.position, transform.position + cubeLaunchDir, Color.red, 2.5f);

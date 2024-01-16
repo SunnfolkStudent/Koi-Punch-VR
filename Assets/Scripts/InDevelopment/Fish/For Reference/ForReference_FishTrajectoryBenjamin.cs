@@ -10,6 +10,7 @@ namespace InDevelopment.Fish.For_Reference
         public Transform target;
 
         public float h = 25;
+        // the reason gravity is 18, is due to 18m/s.
         public float gravity = -18;
 
         public bool debugPath;

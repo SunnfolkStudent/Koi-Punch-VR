@@ -8,14 +8,18 @@ namespace InDevelopment.Fish
 {
     public class Boss : MonoBehaviour, IPunchable
     {
+        // TODO: Add the FishSpawnAreas / FishSpawnManager script to the boss as a component, after making FishSpawnAreas not static.
+                                                                // (I did it - blame me if needed! -Benjamin)
+        private FishSpawnAreas _fishSpawnAreas;
         [SerializeField] private Transform player;
         [SerializeField] private float zenPerHitPhase2 = 5f;
         private static BossPhase _currentBossState;
         private float _score;
-
+        
         #region ---Initialization---
         private void Start()
         {
+            _fishSpawnAreas = GetComponent<FishSpawnAreas>();
             EventManager.StartBossPhase0 += Phase0;
             EventManager.BossPhase0Completed += Phase0Completed;
             EventManager.BossPhaseSuccessful += PhaseSuccessful;
@@ -59,7 +63,7 @@ namespace InDevelopment.Fish
         {
             _currentBossState = BossPhase.Phase0;
             
-            var spawnPos = FishSpawnAreas.GetNextFishSpawnPosition();
+            var spawnPos = _fishSpawnAreas.GetNextFishSpawnPosition();
             var playerPosition = player.position;
             var rigidities = GetComponentsInChildren<Rigidbody>();
             var velocity2D = FishTrajectory.TrajectoryVelocity2DFromInitialSpeed(spawnPos, playerPosition, 35f);
@@ -87,15 +91,14 @@ namespace InDevelopment.Fish
         {
             Phase.FirstOrDefault(keyValuePair => keyValuePair.Value.score == 0).Value.Event.Invoke();
         }
-
+        
         private static void PhaseSuccessful()
         {
             Phase[_currentBossState].score = ZenMetreManager.Instance.zenMetreValue;
-            // _currentBossState++;
             Phase[_currentBossState++].Event.Invoke();
         }
         #endregion
-
+        
         #region ---PunchBoss--
         public void PunchObject(ControllerManager controllerManager, string fistUsed)
         {

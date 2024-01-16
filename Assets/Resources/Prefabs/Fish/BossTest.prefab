@@ -157,6 +157,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2585426832895262328}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 67c9a229cc5ed1f4cac3bebfd3284344,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3893891295974407099}
     - targetCorrespondingSourceObject: {fileID: 7179158139332175658, guid: 67c9a229cc5ed1f4cac3bebfd3284344,
         type: 3}
       insertIndex: -1
@@ -268,6 +272,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb67997a41c5e6844912684d67db798f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  despawnTime: 5
+  despawnAltitude: -5
+--- !u!114 &-3893891295974407099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471582657252072425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75e7b2b626534a7b99aee3d17eb1daa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxPickRate: 5
+  neighborDistanceThreshold: 5
+  chainMaxNumber: 0
+  firstPercentage: 0
+  secondPercentage: 0
+  thirdPercentage: 0
+  fourthPercentage: 0
+  fifthPercentage: 0
+  sixthPercentage: 0
 --- !u!1 &3175621927757653919 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6460379112260501209, guid: 67c9a229cc5ed1f4cac3bebfd3284344,
