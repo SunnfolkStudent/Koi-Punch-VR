@@ -8,7 +8,7 @@ namespace FinalScripts.Fish.Spawning
         // TODO: When using angle for trajectory fix why 3% chance of error
         
         #region ---Debugging---
-        private static bool _isDebugging = true;
+        private static bool _isDebugging;
         private static void Log(string message)
         {
             if(_isDebugging) Debug.Log(message);

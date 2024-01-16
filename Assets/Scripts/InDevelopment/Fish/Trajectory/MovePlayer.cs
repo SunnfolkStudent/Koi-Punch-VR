@@ -11,9 +11,24 @@ namespace InDevelopment.Fish.Trajectory
         
         private void FixedUpdate()
         {
-            transform.position += new Vector3(-Input.GetAxis("Vertical"), 0, Input.GetAxis("Horizontal")) * speed;
+            transform.position += new Vector3(-Input.GetAxisRaw("Vertical"), 0, Input.GetAxisRaw("Horizontal")) * speed;
+            
+            if (Keyboard.current.hKey.isPressed)
+            {
+                EventManager.SpawnFish.Invoke();
+            }
+            
+            if (Keyboard.current.jKey.isPressed)
+            {
+                EventManager.SpawnFish.Invoke();
+            }
+            
+            if (Keyboard.current.kKey.isPressed)
+            {
+                EventManager.SpawnFish.Invoke();
+            }
         }
-        
+
         private void Update()
         {
             if (Keyboard.current.lKey.wasPressedThisFrame)

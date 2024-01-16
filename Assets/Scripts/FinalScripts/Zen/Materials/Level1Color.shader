@@ -2,7 +2,7 @@ Shader "Custom/BlueFilterShader"
 {
     Properties
     {
-        _Color("Filter Color", Color) = (0, 0, 1, 1) // Default color is blue
+        _Color("Filter Color", Color) = (1, 0.8, 0, 1) // Default color is blue
         _MainTex("Texture", 2D) = "white" {}
     }
     SubShader

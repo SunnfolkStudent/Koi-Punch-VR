@@ -6,50 +6,70 @@ namespace FinalScripts.Fish
     public class Fish : MonoBehaviour
     {
         public FishObjectPool.Fish fish { get; set; }
-        [SerializeField] private float despawnTime = 5f;
+        
+        [Header("Despawn")]
+        [SerializeField] private float despawnTime = 10f;
         [SerializeField] private float despawnAltitude = -5f;
         private float _startTime;
         
-        #region ---Debugging---
-        private static bool _isDebugging;
-        private static void Log(string message)
-        {
-            if(_isDebugging) Debug.Log(message);
-        }
-        #endregion
-
-        private void OnTriggerEnter(Collider other)
-        {
-            var punchPosition = new Vector3();
-            if (other.gameObject.CompareTag("LeftFist") || other.gameObject.CompareTag("RightFist"))
-            {
-                
-                Debug.Log("Calculating distance from punch...");
-                GainZen();
-            }
-            
-            if (other.gameObject.CompareTag("Ground"))
-            {
-                Debug.Log("Distance Travelled:" + (transform.position-punchPosition));
-                Despawn();
-            }
-        }
+        [Header("FishChild")]
+        public float punchVelMultiplier;
+        public float velocityNeededForSuccessfulHit = 3f;
+        public bool hasBeenPunched;
+        public bool hasHitGround;
+        
+        [Header("debug")]
+        public bool isDebugging = true;
         
         private void OnEnable()
         {
             _startTime = Time.time;
+            hasBeenPunched = false;
+            hasHitGround = false;
+        }
+        
+        #region ---Debugging---
+        public void Log(string message)
+        {
+            if(isDebugging) Debug.Log(message);
+        }
+        #endregion
+        
+        private void Start()
+        {
+            var c = GetComponentsInChildren<Transform>();
+            foreach (var child in c)
+            {
+                var fishChild = child.gameObject.AddComponent<FishChild>();
+                fishChild.fish = this;
+            }
         }
         
         private void Update()
         {
-            if (transform.position.y < despawnAltitude || _startTime < Time.time - despawnTime)
-            {
-                Log("De-spawned either to time or y altitude to low");
-                Despawn();
-            }
+            DespawnIfOutOfTimeOrTooLow();
+        }
+
+        private void DespawnIfOutOfTimeOrTooLow()
+        {
+            if (transform.position.y > despawnAltitude && _startTime > Time.time - despawnTime) return;
+            Log("De-spawned: either to time or y altitude to low");
+            Despawn();
         }
         
-        // TODO: Punch script needs to make the fish call this function
+        public void FishHitGround()
+        {
+            hasHitGround = true;
+            Log("De-spawned: hit ground");
+            Despawn();
+        }
+        
+        public void FishPunched()
+        {
+            hasBeenPunched = true;
+            GainZen();
+        }
+        
         private void GainZen()
         {
             ZenMetreManager.Instance.AddHitZen(fish.FishPool.Prefab.ZenAmount);
@@ -59,7 +79,6 @@ namespace FinalScripts.Fish
         private void Despawn()
         {
             FishObjectPool.DespawnFish(fish);
-            Log("DespawnFish");
         }
     }
 }

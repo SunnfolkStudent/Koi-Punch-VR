@@ -4,7 +4,7 @@ Shader "Custom/ZenBarShaderWithColorFilter"
     {
         _MainTex("Texture", 2D) = "white" {}
         _FillAmount("Fill Amount", Range(0, 1)) = 1.0
-        _Color("Filter Color", Color) = (0, 0, 1, 1) // Default color is blue
+        _Color("Filter Color", Color) = (1, 1, 1, 1) // Default color is blue
     }
     SubShader
     {
