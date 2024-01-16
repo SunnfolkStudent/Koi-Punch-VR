@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2966538303576735511}
   m_Layer: 0
   m_Name: FishSpawnManager
-  m_TagString: Untagged
+  m_TagString: FishSpawnManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,8 +50,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   launchType: 0
-  minHeight: 5
-  maxHeight: 10
+  minHeight: 1
+  maxHeight: 3
   minSpeed: 20
   maxSpeed: 40
   minAngle: 15
@@ -71,9 +71,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishPrefab:
-  - prefabGameObject: {fileID: 1583399338037491617, guid: 35aa8376d0adbdc49936a5233dcb1642,
+  - prefabGameObject: {fileID: 471582657252072425, guid: f48f7339ab6428b4f922a0b20e52134a,
       type: 3}
-    initialAmountInPool: 10
+    initialAmountInPool: 5
+    zenFromFish: 10
+    weightInRandomTable: 100
+  - prefabGameObject: {fileID: 6937156405640096190, guid: a728f0727fa784048a4d32c0a423ba3d,
+      type: 3}
+    initialAmountInPool: 5
+    zenFromFish: 10
+    weightInRandomTable: 100
+  - prefabGameObject: {fileID: 6686629868045678716, guid: a3cb7ae3bc4469c4d9c3dc1cd3caf179,
+      type: 3}
+    initialAmountInPool: 5
+    zenFromFish: 10
+    weightInRandomTable: 100
+  - prefabGameObject: {fileID: 2485417856301522908, guid: c2f22af60da976040a6dc20692a6c378,
+      type: 3}
+    initialAmountInPool: 5
+    zenFromFish: 10
+    weightInRandomTable: 100
+  - prefabGameObject: {fileID: 7958127760677019548, guid: 91a71d622b81cf64994d5df48954add1,
+      type: 3}
+    initialAmountInPool: 5
+    zenFromFish: 10
+    weightInRandomTable: 100
+  - prefabGameObject: {fileID: 2727548984237534194, guid: 738c86af59b94dd4bae4d63944a6d7b2,
+      type: 3}
+    initialAmountInPool: 5
+    zenFromFish: 10
+    weightInRandomTable: 100
+  - prefabGameObject: {fileID: 963253384953762329, guid: 30f3b67097a55fb498db458dc1fec380,
+      type: 3}
+    initialAmountInPool: 5
+    zenFromFish: 10
+    weightInRandomTable: 100
+  - prefabGameObject: {fileID: 6656297611280775310, guid: 49186ddbcd1893249b04df56e955af2c,
+      type: 3}
+    initialAmountInPool: 5
     zenFromFish: 10
     weightInRandomTable: 100
 --- !u!114 &2074864738684994615
@@ -88,9 +123,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98665773052170a4a8ba2b3616495ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpawnRate: 5
-  minSpawnRate: 1
-  timeToMaxSpawnRate: 5
+  maxSpawnRate: 1.5
+  minSpawnRate: 0.5
+  timeToMaxSpawnRate: 20
+  bossPrefab: {fileID: 471582657252072425, guid: e3792d775295884418e0ab41c2a97d11,
+    type: 3}
 --- !u!114 &2966538303576735511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,17 +140,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75e7b2b626534a7b99aee3d17eb1daa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chainMaxNumber: 4
-  firstPercentage: 0.9
-  secondPercentage: 0.7
-  thirdPercentage: 0.5
-  fourthPercentage: 0.3
-  fifthPercentage: 0.2
-  sixthPercentage: 0.1
   maxPickRate: 5
   neighborDistanceThreshold: 5
-  weightLostFromPicked: 0.5
-  weightDistributedToNeighbors: 0
+  weightLossOfPickedArea: 0.5
+  chainMaxNumber: 4
+  firstPercentage: 0.9
+  secondPercentage: 0.66
+  thirdPercentage: 0.5
+  fourthPercentage: 0.33
+  fifthPercentage: 0.2
+  sixthPercentage: 0.1
 --- !u!1 &1704413226205134399
 GameObject:
   m_ObjectHideFlags: 0

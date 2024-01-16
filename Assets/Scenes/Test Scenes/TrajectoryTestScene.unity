@@ -4130,74 +4130,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 202575621013093645, guid: b0869e6e2e592a646852ba90d715ff4c,
         type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 60125175}
-    - target: {fileID: 202575621013093645, guid: b0869e6e2e592a646852ba90d715ff4c,
-        type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 60125175}
     - target: {fileID: 202575621013093645, guid: b0869e6e2e592a646852ba90d715ff4c,
         type: 3}
-      propertyPath: maxSize
-      value: 2
+      propertyPath: maxHeight
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 202575621013093645, guid: b0869e6e2e592a646852ba90d715ff4c,
         type: 3}
-      propertyPath: minSize
-      value: 1
+      propertyPath: minHeight
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 226389944599812216, guid: b0869e6e2e592a646852ba90d715ff4c,
         type: 3}
       propertyPath: m_Name
       value: FishSpawnManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 226389944599812216, guid: b0869e6e2e592a646852ba90d715ff4c,
-        type: 3}
-      propertyPath: m_TagString
-      value: FishSpawnManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 2074864738684994615, guid: b0869e6e2e592a646852ba90d715ff4c,
-        type: 3}
-      propertyPath: bossPrefab
-      value: 
-      objectReference: {fileID: 471582657252072425, guid: e3792d775295884418e0ab41c2a97d11,
-        type: 3}
-    - target: {fileID: 2074864738684994615, guid: b0869e6e2e592a646852ba90d715ff4c,
-        type: 3}
-      propertyPath: timeTillEnd
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 2074864738684994615, guid: b0869e6e2e592a646852ba90d715ff4c,
-        type: 3}
-      propertyPath: maxSpawnRate
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2074864738684994615, guid: b0869e6e2e592a646852ba90d715ff4c,
-        type: 3}
-      propertyPath: minSpawnRate
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2074864738684994615, guid: b0869e6e2e592a646852ba90d715ff4c,
-        type: 3}
-      propertyPath: timeToMaxSpawnRate
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2966538303576735511, guid: b0869e6e2e592a646852ba90d715ff4c,
-        type: 3}
-      propertyPath: chainMaxNumber
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2966538303576735511, guid: b0869e6e2e592a646852ba90d715ff4c,
-        type: 3}
-      propertyPath: fourthPercentage
-      value: 0.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 2966538303576735511, guid: b0869e6e2e592a646852ba90d715ff4c,
-        type: 3}
-      propertyPath: secondPercentage
-      value: 0.66
       objectReference: {fileID: 0}
     - target: {fileID: 3218944948043325081, guid: b0869e6e2e592a646852ba90d715ff4c,
         type: 3}
@@ -4248,27 +4197,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5264716505511531945, guid: b0869e6e2e592a646852ba90d715ff4c,
-        type: 3}
-      propertyPath: fishPrefab.Array.data[0].zenFromFish
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5264716505511531945, guid: b0869e6e2e592a646852ba90d715ff4c,
-        type: 3}
-      propertyPath: fishPrefab.Array.data[0].prefabGameObject
-      value: 
-      objectReference: {fileID: 471582657252072425, guid: f48f7339ab6428b4f922a0b20e52134a,
-        type: 3}
-    - target: {fileID: 5264716505511531945, guid: b0869e6e2e592a646852ba90d715ff4c,
-        type: 3}
-      propertyPath: fishPrefab.Array.data[0].initialAmountInPool
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5264716505511531945, guid: b0869e6e2e592a646852ba90d715ff4c,
-        type: 3}
-      propertyPath: fishPrefab.Array.data[0].weightInRandomTable
-      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

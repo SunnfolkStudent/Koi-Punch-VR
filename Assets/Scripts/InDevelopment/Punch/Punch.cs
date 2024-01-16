@@ -130,7 +130,14 @@ public class Punch : MonoBehaviour
             avgPoint += p.point;
         
         avgPoint /= other.contacts.Length; 
-        return (avgPoint - transform.position).normalized;
+        
+        //Gets the transform of the whole fish
+        Transform currObj = transform;
+        while (!currObj.name.StartsWith("Fish_"))
+            currObj = currObj.parent;
+        
+        Debug.Log(currObj.position);
+        return (avgPoint - currObj.position).normalized;
     }
     
     /// <summary>

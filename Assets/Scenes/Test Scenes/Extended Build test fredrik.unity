@@ -398,7 +398,7 @@ PrefabInstance:
     - target: {fileID: 2074864738684994615, guid: b0869e6e2e592a646852ba90d715ff4c,
         type: 3}
       propertyPath: minSpawnRate
-      value: 0.5
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 3218944948043325081, guid: b0869e6e2e592a646852ba90d715ff4c,
         type: 3}
@@ -462,6 +462,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264716505511531945, guid: b0869e6e2e592a646852ba90d715ff4c,
         type: 3}
+      propertyPath: fishPrefab.Array.data[1].zenFromFish
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264716505511531945, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
       propertyPath: fishPrefab.Array.data[0].prefabGameObject
       value: 
       objectReference: {fileID: 471582657252072425, guid: f48f7339ab6428b4f922a0b20e52134a,
@@ -470,12 +475,12 @@ PrefabInstance:
         type: 3}
       propertyPath: fishPrefab.Array.data[1].prefabGameObject
       value: 
-      objectReference: {fileID: 1583399338037491617, guid: 35aa8376d0adbdc49936a5233dcb1642,
+      objectReference: {fileID: 471582657252072425, guid: f48f7339ab6428b4f922a0b20e52134a,
         type: 3}
     - target: {fileID: 5264716505511531945, guid: b0869e6e2e592a646852ba90d715ff4c,
         type: 3}
       propertyPath: fishPrefab.Array.data[1].initialAmountInPool
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

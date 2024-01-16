@@ -132,10 +132,35 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1923927888}
+    - target: {fileID: 202575621013093645, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: maxHeight
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 202575621013093645, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: minHeight
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 226389944599812216, guid: b0869e6e2e592a646852ba90d715ff4c,
         type: 3}
       propertyPath: m_Name
       value: FishSpawnManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2074864738684994615, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: maxSpawnRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2074864738684994615, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: minSpawnRate
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2966538303576735511, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: maxPickRate
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3218944948043325081, guid: b0869e6e2e592a646852ba90d715ff4c,
         type: 3}
