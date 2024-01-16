@@ -84,7 +84,8 @@ public class ZenMetreVisualManager : MonoBehaviour
             // Update the _FillAmount property in the shader
             if (workingZenLevel == 0)
             {
-                _zenMetreBarMaterials[0].SetFloat(_fillAmountPropertyID, fillAmount);
+                //_zenMetreBarMaterials[0].SetFloat(_fillAmountPropertyID, fillAmount);
+                _zenMetreBarMaterials[0].SetFloat("_FillAmount", fillAmount);
             }
             else if (workingZenLevel == 1)
             {
