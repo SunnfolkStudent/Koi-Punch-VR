@@ -17,8 +17,9 @@ public class ZenMetreVisualManager : MonoBehaviour
     private Material _zenMetreBarLevel2Material;
     private Material _zenMetreBarLevel3Material;
     
-    [Header("Max Zen Metre Value")]
+    [Header("Zen Metre Values")]
     private float _maxZenMetreValue = 100f;
+    private int _oldZenLevel;
     
     [Header("Sparkle List")]
     private List<GameObject> _sparkleList = new List<GameObject>();
@@ -80,11 +81,21 @@ public class ZenMetreVisualManager : MonoBehaviour
             }
             else if (workingZenLevel == 1)
             {
+                zenMetreBarLevel2.gameObject.SetActive(true);
                 _zenMetreBarLevel2Material.SetFloat("_FillAmount", fillAmount);
+                if (zenMetreValue <= 0)
+                {
+                    zenMetreBarLevel2.gameObject.SetActive(false);
+                }
             }
             else if (workingZenLevel == 2)
             {
+                zenMetreBarLevel3.gameObject.SetActive(true);
                 _zenMetreBarLevel3Material.SetFloat("_FillAmount", fillAmount);
+                if (zenMetreValue <= 0)
+                {
+                    zenMetreBarLevel3.gameObject.SetActive(false);
+                }
             }
         }
         catch (Exception e)

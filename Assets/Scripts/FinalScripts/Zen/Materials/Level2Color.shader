@@ -2,7 +2,7 @@ Shader "Custom/RedFilterShader"
 {
     Properties
     {
-        _Color("Filter Color", Color) = (1, 0, 0, 1) // Default color is red
+        _Color("Filter Color", Color) = (1, 1, 0, 1) // Default color is red
         _MainTex("Texture", 2D) = "white" {}
     }
     SubShader
