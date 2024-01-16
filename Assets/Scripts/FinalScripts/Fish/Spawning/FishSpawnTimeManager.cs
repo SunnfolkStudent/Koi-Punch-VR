@@ -21,8 +21,8 @@ namespace FinalScripts.Fish.Spawning
             EventManager.FishSpawning += StartSpawning;
             EventManager.FishSpawningAtMaxRate += StartSpawningAtMaxRate;
             EventManager.StopFishSpawning += StopSpawning;
-            
-            EventManager.FishSpawning.Invoke(); // TODO: remove this after setting event to invoke from start level
+
+            EventManager.FishSpawning.Invoke();
         }
         #endregion
         
@@ -30,7 +30,6 @@ namespace FinalScripts.Fish.Spawning
         private void StartSpawning()
         {
             StartCoroutine(SpawnFish());
-            Invoke(nameof(StopSpawning), 5f);
         }
         
         private void StartSpawningAtMaxRate()
@@ -38,10 +37,9 @@ namespace FinalScripts.Fish.Spawning
             StartCoroutine(SpawnFishMaxRate());
         }
 
-        private void StopSpawning()
+        private static void StopSpawning()
         {
             isSpawningFish = false;
-            Instantiate(bossPrefab);
         }
         #endregion
         
