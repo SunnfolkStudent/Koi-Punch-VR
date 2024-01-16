@@ -28,6 +28,9 @@ public class ZenMetreManager : MonoBehaviour
     [Header("Particle systems and originl simulation speeds for time stop")]
     private List<ParticleSystem> _particleSystems = new List<ParticleSystem>();
     private List<float> _originalSimulationSpeeds = new List<float>();
+
+    [Header("Prefab")] 
+    [SerializeField] private GameObject BossPrefab;
     
     private void Awake()
     {
@@ -104,7 +107,9 @@ public class ZenMetreManager : MonoBehaviour
         ZenMetreVisualManager.Instance.UpdateZenBar(2, 0f);
         
         ResetTime();
-        
+
+        Instantiate(BossPrefab);
+
         //Reset music back to normal after zen mode is over
     }
     
