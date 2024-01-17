@@ -9,7 +9,7 @@ namespace InDevelopment
         void OnSceneGUI()
         {
             FieldOfView fov = (FieldOfView)target;
-            Handles.color = Color.white;
+            Handles.color = Color.magenta;
             var fovPosition = fov.transform.position;
             Handles.DrawWireArc(fovPosition, Vector3.up, Vector3.forward, 360, fov.viewRadius);
             Vector3 viewAngleA = fov.DirFromAngle(-fov.viewAngle / 2, false);
