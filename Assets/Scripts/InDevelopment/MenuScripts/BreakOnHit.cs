@@ -14,8 +14,11 @@ public class BreakOnHit : TransitionAnimation
 
     private void Awake()
     {
-        _sceneControllerObj = GameObject.FindGameObjectWithTag("SceneController");
-        _sceneController = _sceneControllerObj.GetComponent<SceneController>();
+        if (gameObject.CompareTag("SceneChanger"))
+        {
+            _sceneControllerObj = GameObject.FindGameObjectWithTag("SceneController");
+            _sceneController = _sceneControllerObj.GetComponent<SceneController>();
+        }
     }
 
     private void OnCollisionEnter(Collision other)

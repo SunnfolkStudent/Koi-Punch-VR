@@ -15,7 +15,6 @@ public class GongScript : MonoBehaviour
     private void Start()
     {
         //_audioSource = GetComponent<AudioSource>();
-        _soundManagerObj = GameObject.FindGameObjectWithTag("SoundManager");
         _soundManager = _soundManagerObj.GetComponent<SoundManager>();
     }
 
