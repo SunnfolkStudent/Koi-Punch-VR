@@ -15,7 +15,7 @@ namespace FinalScripts.Fish
         [SerializeField] private float zenPerHitPhase2 = 5f;
         private static BossPhase _currentBossState;
         private float _score;
-
+        
         #region ---Initialization---
         private void Awake()
         {
@@ -114,7 +114,7 @@ namespace FinalScripts.Fish
         {
             switch(_currentBossState){
                 case BossPhase.Phase0:
-                    EventManager.BossPhase0Completed.Invoke();
+                    Phase0Hit();
                     break;
                 case BossPhase.Phase1:
                     Debug.Log("Can't hit the boss directly in Phase1");
@@ -125,10 +125,16 @@ namespace FinalScripts.Fish
                 case BossPhase.Phase3:
                     Phase3Hit(controllerManager, fistUsed);
                     break;
+                case BossPhase.BossDefeated:
                 default:
                     Debug.Log("Boss not in valid Phase");
                     break;
             }
+        }
+        
+        private void Phase0Hit()
+        {
+            EventManager.BossPhase0Completed.Invoke();
         }
         
         private void Phase2Hit()
