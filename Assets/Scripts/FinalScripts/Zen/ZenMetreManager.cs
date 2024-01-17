@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FinalScripts.Fish;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 public class ZenMetreManager : MonoBehaviour
@@ -63,6 +64,11 @@ public class ZenMetreManager : MonoBehaviour
     
     private void Update()
     {
+        if (Keyboard.current.aKey.wasPressedThisFrame)
+        {
+            EventManager.BossPhase0Completed.Invoke();
+        }
+        
         if (zenMetreValue >= 100 && zenLevel == 0 && !_zenPhase0Invoked)
         {
             _zenPhase0Invoked = true;
@@ -120,15 +126,17 @@ public class ZenMetreManager : MonoBehaviour
         ResetTime();
 
         Debug.Log("BossSpawned");
-        
-        Instantiate(bossPrefab);
 
+        zenLevel++;
+        
+        //Instantiate(bossPrefab);
         //Reset music back to normal after zen mode is over
     }
     
     //Method that moves on to the second level of zen
     private void LevelOne()
     {
+        Debug.Log("Level1");
         zenLevel = 1;
         zenLevelCheckpoint = 1;
         zenMetreValue = 0;
@@ -193,6 +201,7 @@ public class ZenMetreManager : MonoBehaviour
     //Then wait for a certain amount of time and then set attackFieldsActive to false and destroy all attack fields.
     private IEnumerator AttackFieldSpawnTimer()
     {
+        Debug.Log("AttackFieldSpawnTimer");
         attackFieldsActive = true;
         yield return new WaitForSecondsRealtime(_attackFieldsActiveTime);
         
@@ -256,12 +265,12 @@ public class ZenMetreManager : MonoBehaviour
     //Method that resets time back to normal. Called when you fail a phase or when you do your final move.
     private void ResetTime()
     {
-        Time.timeScale = 1f;
+        /*Time.timeScale = 1f;
         for (int i = 0; i < _particleSystems.Count; i++)
         {
             var mainModule = _particleSystems[i].main;
             mainModule.simulationSpeed = _originalSimulationSpeeds[i];
-        }
+        }*/
     }
     #endregion
     

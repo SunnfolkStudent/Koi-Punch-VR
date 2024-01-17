@@ -18,6 +18,7 @@ public class AttackFieldSpawner : MonoBehaviour
         {
             _isSpawning = true;
             _targetObject = GameObject.FindGameObjectWithTag("Boss");
+            Debug.Log("Spawning attack fields");
             StartCoroutine(Spawning());
         }
         else if (!ZenMetreManager.Instance.attackFieldsActive && _isSpawning)
