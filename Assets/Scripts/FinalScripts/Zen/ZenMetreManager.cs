@@ -118,12 +118,8 @@ public class ZenMetreManager : MonoBehaviour
     private void LevelZero()
     {
         InternalZenEventManager.updateVisualZenBar.Invoke();
-        
-        ResetTime();
 
         Debug.Log("BossSpawned");
-
-        zenLevel++;
         
         //Reset music back to normal after zen mode is over
     }
@@ -188,7 +184,7 @@ public class ZenMetreManager : MonoBehaviour
         {
             zenLevel = 0;
             zenMetreValue = 100;
-            EventManager.StartBossPhase0.Invoke();
+            //EventManager.StartBossPhase0.Invoke();
         }
     }
     
@@ -210,9 +206,9 @@ public class ZenMetreManager : MonoBehaviour
         }
         else
         {
-            zenLevel = 1;
+            zenLevel = 0;
             zenMetreValue = 100;
-            EventManager.StartBossPhase0.Invoke();
+            //EventManager.StartBossPhase0.Invoke();
         }
     }
     
