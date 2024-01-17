@@ -4,21 +4,6 @@
     "m_ObjectId": "e9df48d051554472826f59df8b95f10a",
     "m_Properties": [
         {
-            "m_Id": "807d20923cc049f88fad08fa741dbb7e"
-        },
-        {
-            "m_Id": "19a440b140304887af2abd8510febfdc"
-        },
-        {
-            "m_Id": "32091de0e04c4d299e858c80c56930bd"
-        },
-        {
-            "m_Id": "6aaae39ebc5b412e8a8704c745c7faec"
-        },
-        {
-            "m_Id": "b9832058c5fc4389b4196616bf936c34"
-        },
-        {
             "m_Id": "07c9e9e1fe63405da4b17badad9aa48a"
         },
         {
@@ -1790,34 +1775,6 @@
 }
 
 {
-    "m_SGVersion": 1,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
-    "m_ObjectId": "19a440b140304887af2abd8510febfdc",
-    "m_Guid": {
-        "m_GuidSerialized": "65ba80b5-2999-4f5d-b647-2055f411cfbb"
-    },
-    "m_Name": "RippleCount",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "RippleCount",
-    "m_DefaultReferenceName": "_RippleCount",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": 4.0,
-    "m_FloatType": 0,
-    "m_RangeValues": {
-        "x": 0.0,
-        "y": 1.0
-    }
-}
-
-{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
     "m_ObjectId": "19dcff31d62b497590928b1890f03dc2",
@@ -2623,34 +2580,6 @@
         "g": 0.0,
         "b": 0.0,
         "a": 1.0
-    }
-}
-
-{
-    "m_SGVersion": 1,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
-    "m_ObjectId": "32091de0e04c4d299e858c80c56930bd",
-    "m_Guid": {
-        "m_GuidSerialized": "de0e7711-b191-45d9-ad19-074c5ab82f20"
-    },
-    "m_Name": "RippleSpeed",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "RippleSpeed",
-    "m_DefaultReferenceName": "_RippleSpeed",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": 1.0,
-    "m_FloatType": 1,
-    "m_RangeValues": {
-        "x": 0.0,
-        "y": 5.0
     }
 }
 
@@ -4092,34 +4021,6 @@
 }
 
 {
-    "m_SGVersion": 1,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
-    "m_ObjectId": "6aaae39ebc5b412e8a8704c745c7faec",
-    "m_Guid": {
-        "m_GuidSerialized": "4ff5c3bf-80e2-425f-a4af-e6ab2856070c"
-    },
-    "m_Name": "RippleStrength",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "RippleStrength",
-    "m_DefaultReferenceName": "_RippleStrength",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": 2.0,
-    "m_FloatType": 0,
-    "m_RangeValues": {
-        "x": 0.0,
-        "y": 1.0
-    }
-}
-
-{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
     "m_ObjectId": "6afea99d79ab4f848f3caceadc174198",
@@ -4643,34 +4544,6 @@
         "m_SerializableColors": []
     },
     "m_BlendMode": 1
-}
-
-{
-    "m_SGVersion": 1,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector2ShaderProperty",
-    "m_ObjectId": "807d20923cc049f88fad08fa741dbb7e",
-    "m_Guid": {
-        "m_GuidSerialized": "ad32ae23-aceb-4dbe-a09e-1c74083376e6"
-    },
-    "m_Name": "RippleCenter",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "RippleCenter",
-    "m_DefaultReferenceName": "_RippleCenter",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0,
-        "w": 0.0
-    }
 }
 
 {
@@ -6153,36 +6026,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.Texture2DShaderProperty",
-    "m_ObjectId": "b9832058c5fc4389b4196616bf936c34",
-    "m_Guid": {
-        "m_GuidSerialized": "474917aa-07ce-4e07-b289-2ba9f145dbe1"
-    },
-    "m_Name": "Main_Tex",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Main_Tex",
-    "m_DefaultReferenceName": "_Main_Tex",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"d4041a0d87bcddd43b9caf926962dcbb\",\"type\":3}}",
-        "m_Guid": ""
-    },
-    "isMainTexture": false,
-    "useTilingAndOffset": false,
-    "m_Modifiable": true,
-    "m_DefaultType": 0
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.AddNode",
     "m_ObjectId": "b988c7bfff6f465da01c31bc4eb0dffb",
     "m_Group": {
@@ -6725,21 +6568,6 @@
     "m_ObjectId": "d2ad2c342f6041f88ec4e499c8f2c246",
     "m_Name": "",
     "m_ChildObjectList": [
-        {
-            "m_Id": "807d20923cc049f88fad08fa741dbb7e"
-        },
-        {
-            "m_Id": "19a440b140304887af2abd8510febfdc"
-        },
-        {
-            "m_Id": "32091de0e04c4d299e858c80c56930bd"
-        },
-        {
-            "m_Id": "6aaae39ebc5b412e8a8704c745c7faec"
-        },
-        {
-            "m_Id": "b9832058c5fc4389b4196616bf936c34"
-        },
         {
             "m_Id": "07c9e9e1fe63405da4b17badad9aa48a"
         },
