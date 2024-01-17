@@ -47,6 +47,7 @@ namespace InDevelopment
                     if (!Physics.Raycast(transform.position, dirToSpawnArea, distanceToSpawnArea, obstacleMask))
                     {
                         visibleSpawnAreas.Add(spawnArea);
+                        Debug.Log("SpawnArea Detected");
                     }
                 }
             }
