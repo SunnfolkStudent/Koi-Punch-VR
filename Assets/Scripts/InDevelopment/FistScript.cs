@@ -22,6 +22,7 @@ namespace InDevelopment
                 if (hit.collider.gameObject.TryGetComponent(out IPunchable punch))
                 {
                     punch.PunchObject(_controllerManager, _whichFistUsed);
+                    Debug.DrawLine(transform.position, hit.point, Color.red);
                 }
             }
         }
