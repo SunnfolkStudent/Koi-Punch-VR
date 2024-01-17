@@ -200,7 +200,7 @@ public class FMODManager: MonoBehaviour
 
             // Now you can use the selected sound and subtitle paths as needed.
             Debug.Log("Selected Sound Path: " + selectedSoundPath);
-            Debug.Log("Selected Subtitle: " + VoiceLinesLoader.GetValueForKey(key: "OnPunch"));
+            Debug.Log("Selected Subtitle: " + VoiceLinesLoader.GetValueForKey(key: "OnPunch", randomIndex));
             PlayOneShot(selectedSoundPath, this.transform.position);
         }
         else
