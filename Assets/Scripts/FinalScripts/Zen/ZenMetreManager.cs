@@ -21,7 +21,7 @@ public class ZenMetreManager : MonoBehaviour
     public float zenMetreValue;
     public int zenLevel;
     public int zenLevelCheckpoint;
-    private bool _zenPhase0Invoked;
+    private bool _zenBossSpawnInvoked;
     
     [Header("Time Stop Values")]
     private float _slowdownFactor = 0.001f;
@@ -65,12 +65,10 @@ public class ZenMetreManager : MonoBehaviour
     
     private void Update()
     {
-        if (zenMetreValue >= 100 && zenLevel == 0 && !_zenPhase0Invoked)
+        if (zenMetreValue >= 100 && zenLevel == 0 && !_zenBossSpawnInvoked)
         {
-            _zenPhase0Invoked = true;
-            Debug.Log("Update");
+            _zenBossSpawnInvoked = true;
             EventManager.SpawnBoss.Invoke();
-            Debug.Log("Update2");
         }
     }
 
@@ -81,7 +79,6 @@ public class ZenMetreManager : MonoBehaviour
     
     private void Phase0Over()
     {
-        _zenPhase0Invoked = false;
     }
 
     #region -- Zen Score Methods --
@@ -184,7 +181,7 @@ public class ZenMetreManager : MonoBehaviour
         {
             zenLevel = 0;
             zenMetreValue = 100;
-            //EventManager.StartBossPhase0.Invoke();
+            EventManager.StartBossPhase0.Invoke();
         }
     }
     
@@ -208,7 +205,7 @@ public class ZenMetreManager : MonoBehaviour
         {
             zenLevel = 0;
             zenMetreValue = 100;
-            //EventManager.StartBossPhase0.Invoke();
+            EventManager.StartBossPhase0.Invoke();
         }
     }
     
