@@ -6,5 +6,6 @@ public static class InternalZenEventManager
    public static InternalZenEvents hideSparkles;
    public static InternalZenEvents showPromptText;
    public static InternalZenEvents hidePromptText;
-   
+   public static InternalZenEvents spawnWeakPoints;
+   public static InternalZenEvents stopSpawnWeakPoints;
 }

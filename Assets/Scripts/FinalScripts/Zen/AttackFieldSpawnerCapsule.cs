@@ -96,6 +96,8 @@ public class AttackFieldSpawnerCapsule : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(mainCamera.transform.position, pointOnCapsule - mainCamera.transform.position, out hit))
             {
+                
+                
                 // Check if the dot product between camera direction and surface normal is positive (facing camera)
                 if (Vector3.Dot(hit.normal, mainCamera.transform.forward) > 0)
                 {

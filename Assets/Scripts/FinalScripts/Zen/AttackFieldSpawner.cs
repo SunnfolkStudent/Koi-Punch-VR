@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -12,20 +13,24 @@ public class AttackFieldSpawner : MonoBehaviour
     private bool _isSpawning;
     private float _timeSinceLastSpawn;
 
-    private void Update()
+    private void Start()
     {
-        if (ZenMetreManager.Instance.attackFieldsActive && !_isSpawning)
-        {
-            _isSpawning = true;
-            _targetObject = GameObject.FindGameObjectWithTag("Boss");
-            Debug.Log("Spawning attack fields");
-            StartCoroutine(Spawning());
-        }
-        else if (!ZenMetreManager.Instance.attackFieldsActive && _isSpawning)
-        {
-            _isSpawning = false;
-            StopAllCoroutines();
-        }
+        InternalZenEventManager.spawnWeakPoints += SpawnWeakPoints;
+        InternalZenEventManager.stopSpawnWeakPoints += StopSpawningWeakPoints;
+    }
+    
+    private void SpawnWeakPoints()
+    {
+        _isSpawning = true;
+        _targetObject = GameObject.FindGameObjectWithTag("Boss");
+        Debug.Log("Spawning attack fields");
+        StartCoroutine(Spawning());
+    }
+    
+    private void StopSpawningWeakPoints()
+    {
+        _isSpawning = false;
+        StopAllCoroutines();
     }
 
     private IEnumerator SpawnObjectOnSurface()
@@ -69,13 +74,7 @@ public class AttackFieldSpawner : MonoBehaviour
 
     private Vector3 GetRandomPointOnVisibleSide(GameObject target)
     {
-        MeshCollider meshCollider = target.GetComponent<MeshCollider>();
-
-        if (meshCollider == null || meshCollider.sharedMesh == null)
-        {
-            Debug.LogError("MeshCollider or mesh not found on the target object.");
-            return Vector3.zero;
-        }
+        var collider = target.GetComponent<CapsuleCollider>();
 
         Camera mainCamera = Camera.main;
 
@@ -92,7 +91,7 @@ public class AttackFieldSpawner : MonoBehaviour
             Vector3 randomDirection = Random.onUnitSphere;
 
             RaycastHit hit;
-            if (meshCollider.Raycast(new Ray(target.transform.position + randomDirection * meshCollider.bounds.extents.magnitude * 2f, -randomDirection), out hit, meshCollider.bounds.extents.magnitude * 4f))
+            if (collider.Raycast(new Ray(target.transform.position + randomDirection * collider.bounds.extents.magnitude * 2f, -randomDirection), out hit, collider.bounds.extents.magnitude * 4f))
             {
                 Vector3 surfaceNormal = hit.normal;
                 Vector3 cameraToSurface = hit.point - mainCamera.transform.position;
