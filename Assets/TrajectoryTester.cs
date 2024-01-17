@@ -139,4 +139,38 @@ public class TrajectoryTester : MonoBehaviour
             LaunchProjectile(); // Call LaunchProjectile immediately when spacebar is pressed
         }
     }
+    
+    /* private void CalculatePunchedTrajectory(float punchForce, Vector3 fishLaunchDir)
+    {
+        // Use the following variables for calculating trajectory:
+        // Landing position = origin + time * velocity a.k.a. _rigidbody.position + timeToTarget * punchForce.
+    
+        // We likely have to split calculations into 3 parts - 2 vertical calculations (to apex, and from apex to landing)
+        // And 1 horizontal calculation (velocity.forward).
+        
+        // Velocity (v) = punchForceMultiplier,
+        // Direction (d) = cubeLaunchDir.normalized,
+        // Angle = arcSin(direction.y)
+        // Gravity = 9.81 = Newton.
+    
+        // Time = (2*v*sin (a))/gravity.
+    
+        // Sin x where is x = arcSin x, a.k.a. "sin (arcSin x)" is just x.
+        // Therefore we can just write in fishLaunchDir.normalized.y.
+        // t = (2*punchForce*fishLaunchDir.normalized.y)/9.81.
+        
+        // does this gravity have to match the fish's own gravity? Probably.
+        var gravity = 9.81f;
+        var timeToTarget = (2 * punchForce * fishLaunchDir.normalized.y) / gravity;
+    
+        var startPosFish = transform.position;
+        var landingPos = startPosFish + punchForce * fishLaunchDir.normalized * timeToTarget - 
+                         0.5f * gravity * Mathf.Pow(timeToTarget, 2) * Vector3.up;
+    
+        if (showDebugLines)
+        {
+            Debug.DrawLine(startPosFish, landingPos, Color.yellow, timeToTarget);
+        }
+    } */
+    
 }
