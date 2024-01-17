@@ -5,7 +5,7 @@ namespace InDevelopment.Fish.EditorScripts
 {
     public class DebugInitialLaunchWhenPunched : MonoBehaviour
     {
-        public Punch punchScript;
+        public global::Punch punchScript;
         public GameObject punchLeft;
         public GameObject punchRight;
         public Rigidbody fish;
