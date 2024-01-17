@@ -6,6 +6,7 @@ public class BreakOnHit : TransitionAnimation
 {
     [SerializeField] private GameObject _brokenPrefab;
     [SerializeField] private int LevelToGoTo;
+    [SerializeField] private GameObject newMenuParent;
 
 
     private void OnCollisionEnter(Collision other)
@@ -22,14 +23,16 @@ public class BreakOnHit : TransitionAnimation
         
         //TODO play break audio
         
-        MenuEventManager.ExplodeTransition();
         if (gameObject.CompareTag("SceneChanger"))
         {
             gameObject.transform.localScale = new Vector3(0, 0, 0);
+            //fade screen here
             SceneController.LevelSelected = LevelToGoTo;
         }
         else
         {
+            MenuEventManager.ExplodeTransition();
+            Instantiate(newMenuParent);
             Destroy(gameObject);
         }
     }

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5937077115068736218}
   m_Layer: 0
   m_Name: sign_level3
-  m_TagString: Untagged
+  m_TagString: SceneChanger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -176,6 +176,7 @@ MonoBehaviour:
   _brokenPrefab: {fileID: 5418832669615464414, guid: bb17817de87f09a4a96e9e153702f598,
     type: 3}
   LevelToGoTo: 0
+  newMenuParent: {fileID: 0}
 --- !u!1 &435875883718895133
 GameObject:
   m_ObjectHideFlags: 0
@@ -2289,7 +2290,7 @@ GameObject:
   - component: {fileID: 7813305248227535059}
   m_Layer: 0
   m_Name: sign_level1
-  m_TagString: Untagged
+  m_TagString: SceneChanger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2448,6 +2449,7 @@ MonoBehaviour:
   _brokenPrefab: {fileID: 5418832669615464414, guid: bb17817de87f09a4a96e9e153702f598,
     type: 3}
   LevelToGoTo: 0
+  newMenuParent: {fileID: 0}
 --- !u!1 &4055928936558119260
 GameObject:
   m_ObjectHideFlags: 0
@@ -2462,7 +2464,7 @@ GameObject:
   - component: {fileID: 5751050973188425814}
   - component: {fileID: 4023577800516771591}
   - component: {fileID: 8642383226839838708}
-  - component: {fileID: 3343585622864727860}
+  - component: {fileID: 5668052770621986608}
   m_Layer: 0
   m_Name: sign_mainmenu01
   m_TagString: Untagged
@@ -2609,7 +2611,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &3343585622864727860
+--- !u!114 &5668052770621986608
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2618,7 +2620,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4055928936558119260}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bc5e873506012444895cbbd46d87923, type: 3}
+  m_Script: {fileID: 11500000, guid: 51d58a826730e4646a092853dccb31dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _brokenPrefab: {fileID: 5418832669615464414, guid: bb17817de87f09a4a96e9e153702f598,
@@ -2907,11 +2909,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a12623e3d8f2554a90e3b2e61382fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _breakPrefab: {fileID: 7729019200151175257, guid: 54cd3802925125c418ce535bec4f96e1,
-    type: 3}
-  _brokenPrefab: {fileID: 5418832669615464414, guid: bb17817de87f09a4a96e9e153702f598,
-    type: 3}
-  LevelToGoTo: 0
+  _nextPrefab: {fileID: 0}
+  isBreaking: 0
 --- !u!1 &7535611880547574159
 GameObject:
   m_ObjectHideFlags: 0
@@ -3851,7 +3850,7 @@ GameObject:
   - component: {fileID: 534694669492177617}
   m_Layer: 0
   m_Name: sign_level2
-  m_TagString: Untagged
+  m_TagString: SceneChanger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4010,6 +4009,7 @@ MonoBehaviour:
   _brokenPrefab: {fileID: 5418832669615464414, guid: bb17817de87f09a4a96e9e153702f598,
     type: 3}
   LevelToGoTo: 0
+  newMenuParent: {fileID: 0}
 --- !u!1 &8682750733970950379
 GameObject:
   m_ObjectHideFlags: 0

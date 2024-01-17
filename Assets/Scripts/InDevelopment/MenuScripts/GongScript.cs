@@ -30,7 +30,7 @@ public class GongScript : MonoBehaviour
                     if (PlayerPrefs.GetFloat("MusicVolume") < 1)
                     {
                         PlayerPrefs.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicVolume") + .1f);
-                        Debug.Log(PlayerPrefs.GetFloat("MusicVolume"));
+                        //Debug.Log(PlayerPrefs.GetFloat("MusicVolume"));
                         
                         _soundManager.SetMusicVolume();
                         
@@ -50,7 +50,7 @@ public class GongScript : MonoBehaviour
                     if (PlayerPrefs.GetFloat("MusicVolume") > 0)
                     {
                         PlayerPrefs.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicVolume") - .1f);
-                        Debug.Log(PlayerPrefs.GetFloat("MusicVolume"));
+                        //Debug.Log(PlayerPrefs.GetFloat("MusicVolume"));
                         
                         _soundManager.SetMusicVolume();
                         
@@ -73,7 +73,7 @@ public class GongScript : MonoBehaviour
                     if (PlayerPrefs.GetFloat("SFXVolume") < 1)
                     {
                         PlayerPrefs.SetFloat("SFXVolume", PlayerPrefs.GetFloat("SFXVolume") + .1f);
-                        Debug.Log(PlayerPrefs.GetFloat("SFXVolume"));
+                        //Debug.Log(PlayerPrefs.GetFloat("SFXVolume"));
                         
                         _soundManager.SetSFXVolume();
                         
@@ -93,7 +93,7 @@ public class GongScript : MonoBehaviour
                     if (PlayerPrefs.GetFloat("SFXVolume") > 0)
                     {
                         PlayerPrefs.SetFloat("SFXVolume", PlayerPrefs.GetFloat("SFXVolume") - .1f);
-                        Debug.Log(PlayerPrefs.GetFloat("SFXVolume"));
+                        //Debug.Log(PlayerPrefs.GetFloat("SFXVolume"));
                         
                         _soundManager.SetSFXVolume();
                         

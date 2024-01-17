@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 2499136972681487958}
   - component: {fileID: 1124791628050378454}
   - component: {fileID: 7710644787223344820}
-  - component: {fileID: 1010479992517992993}
   - component: {fileID: 654683523683673081}
   - component: {fileID: 6256400223501135893}
+  - component: {fileID: 888188543696024833}
   m_Layer: 0
   m_Name: MainLevelsSign
   m_TagString: Untagged
@@ -113,23 +113,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1010479992517992993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1687358442793080091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bc5e873506012444895cbbd46d87923, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _brokenPrefab: {fileID: 5418832669615464414, guid: bb17817de87f09a4a96e9e153702f598,
-    type: 3}
-  LevelToGoTo: 0
-  newMenuParent: {fileID: 8809015906901388078, guid: 964b6b2948b7377458d2ce6a7b55a5fa,
-    type: 3}
 --- !u!65 &654683523683673081
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -178,6 +161,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &888188543696024833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687358442793080091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51d58a826730e4646a092853dccb31dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _brokenPrefab: {fileID: 5418832669615464414, guid: bb17817de87f09a4a96e9e153702f598,
+    type: 3}
+  LevelToGoTo: 0
+  newMenuParent: {fileID: 8809015906901388078, guid: 964b6b2948b7377458d2ce6a7b55a5fa,
+    type: 3}
 --- !u!1 &2380400597701980781
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,9 +237,9 @@ GameObject:
   - component: {fileID: 1283650338932800117}
   - component: {fileID: 5117204078521415184}
   - component: {fileID: 6753613633636146049}
-  - component: {fileID: 5874869561371835392}
   - component: {fileID: 7266744043857258766}
   - component: {fileID: 9050650311765246365}
+  - component: {fileID: 3896741055832646474}
   m_Layer: 0
   m_Name: MainSettingsSign
   m_TagString: Untagged
@@ -338,23 +338,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5874869561371835392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4497546961887014316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bc5e873506012444895cbbd46d87923, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _brokenPrefab: {fileID: 5418832669615464414, guid: bb17817de87f09a4a96e9e153702f598,
-    type: 3}
-  LevelToGoTo: 0
-  newMenuParent: {fileID: 3294393430637400887, guid: 62bb32f5400521e4695e3fdcb8ef4fdb,
-    type: 3}
 --- !u!65 &7266744043857258766
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -403,6 +386,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &3896741055832646474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4497546961887014316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51d58a826730e4646a092853dccb31dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _brokenPrefab: {fileID: 5418832669615464414, guid: bb17817de87f09a4a96e9e153702f598,
+    type: 3}
+  LevelToGoTo: 0
+  newMenuParent: {fileID: 3294393430637400887, guid: 62bb32f5400521e4695e3fdcb8ef4fdb,
+    type: 3}
 --- !u!1 &6566504091566886333
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,9 +415,9 @@ GameObject:
   - component: {fileID: 382645700650817677}
   - component: {fileID: 7881929881313361735}
   - component: {fileID: 9113209710980328320}
-  - component: {fileID: 4769097225723248892}
   - component: {fileID: 3784095613974485673}
   - component: {fileID: 7495024309679677333}
+  - component: {fileID: 3180043430705345422}
   m_Layer: 0
   m_Name: sign_play01
   m_TagString: SceneChanger
@@ -515,22 +515,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4769097225723248892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6566504091566886333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e790df3b69d8cd94387b533a9aaf59df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _brokenPrefab: {fileID: 5418832669615464414, guid: bb17817de87f09a4a96e9e153702f598,
-    type: 3}
-  LevelToGoTo: 0
-  _newSceneName: TestMenu
 --- !u!65 &3784095613974485673
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -579,3 +563,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &3180043430705345422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6566504091566886333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51d58a826730e4646a092853dccb31dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _brokenPrefab: {fileID: 5418832669615464414, guid: bb17817de87f09a4a96e9e153702f598,
+    type: 3}
+  LevelToGoTo: 0
+  newMenuParent: {fileID: 0}

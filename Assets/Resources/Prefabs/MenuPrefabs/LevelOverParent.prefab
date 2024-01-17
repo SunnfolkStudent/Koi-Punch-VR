@@ -5272,9 +5272,10 @@ GameObject:
   - component: {fileID: 2495026519032270086}
   - component: {fileID: 8240530935602509146}
   - component: {fileID: 7736350968374647655}
+  - component: {fileID: 363512022961873907}
   m_Layer: 0
   m_Name: sign_mainmenu
-  m_TagString: Untagged
+  m_TagString: SceneChanger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5348,6 +5349,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &363512022961873907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5727491235072864191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51d58a826730e4646a092853dccb31dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _brokenPrefab: {fileID: 5418832669615464414, guid: bb17817de87f09a4a96e9e153702f598,
+    type: 3}
+  LevelToGoTo: 0
+  newMenuParent: {fileID: 0}
 --- !u!1 &5826207570272978102
 GameObject:
   m_ObjectHideFlags: 0
@@ -7744,9 +7761,10 @@ GameObject:
   - component: {fileID: 393377198052712144}
   - component: {fileID: 2633430876320898156}
   - component: {fileID: 6523563277189972643}
+  - component: {fileID: 8233048700913783033}
   m_Layer: 0
   m_Name: sign_nextlevel
-  m_TagString: Untagged
+  m_TagString: SceneChanger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7820,6 +7838,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8233048700913783033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7822196605841973296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51d58a826730e4646a092853dccb31dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _brokenPrefab: {fileID: 5418832669615464414, guid: bb17817de87f09a4a96e9e153702f598,
+    type: 3}
+  LevelToGoTo: 0
+  newMenuParent: {fileID: 0}
 --- !u!1 &8490284579801887624
 GameObject:
   m_ObjectHideFlags: 0
