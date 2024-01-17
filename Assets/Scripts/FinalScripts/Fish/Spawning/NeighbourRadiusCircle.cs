@@ -1,20 +1,30 @@
+using FinalScripts.Fish.Spawning.RandomWeightedTables;
+using Unity.XR.CoreUtils;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace FinalScripts.Fish.Spawning
 {
     // Uncomment the below if you need to adjust the detection Radius, but otherwise keep commented, cuz it gets performance-heavy.
-    // [ExecuteInEditMode]
+    [ExecuteInEditMode]
     [RequireComponent(typeof(LineRenderer))]
     public class NeighbourRadiusCircle : MonoBehaviour
     {
-        [Range(0, 10)] public float neighbourDetectionRange = 2f;
+        [Header("The detection radius have to be in the center of other spawnAreas:")]
+        [Header("It also has to be adjusted from FishSpawnManager:")]
+        [SerializeField] [Range(0, 20)] private float neighbourDetectionRange = 7f;
         private readonly int _segments = 180;
         private LineRenderer _neighbourRadiusLine;
+        private GameObject _fishSpawnManager;
+        private FishSpawnAreas _fishSpawnAreas;
         
         private void Start()
         { 
-            // NeighbourRadius LineRenderer and respective component settings
+            // TODO: Optimize this script - to avoid searching for tag and making the float public. (do this if you have nothing else to do)
+            
             _neighbourRadiusLine = GetComponentInChildren<LineRenderer>();
+            _fishSpawnManager = GameObject.FindGameObjectWithTag("FishSpawnManager");
+            _fishSpawnAreas = _fishSpawnManager.GetComponent<FishSpawnAreas>();
             
             _neighbourRadiusLine.positionCount = (_segments + 1);
             _neighbourRadiusLine.useWorldSpace = false;
@@ -23,6 +33,7 @@ namespace FinalScripts.Fish.Spawning
         
         private void Update()
         {
+            neighbourDetectionRange = _fishSpawnAreas.neighborDistanceSearchRadius;
             CreatePointsNeighbourRadius();
         }
         

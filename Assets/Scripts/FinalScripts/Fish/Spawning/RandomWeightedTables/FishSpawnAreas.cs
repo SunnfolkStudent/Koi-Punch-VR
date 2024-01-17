@@ -16,9 +16,8 @@ namespace FinalScripts.Fish.Spawning.RandomWeightedTables
         [Tooltip("How often a spawnArea can be picked, before it's disabled")]
         [SerializeField] private int maxPickRate = 5;
         [Tooltip("Search distance for a neighbouring spawnArea, 1f being 1 tile")]
-        [SerializeField] private float neighborDistanceThreshold = 2f;
+        public float neighborDistanceSearchRadius = 7f;
         
-        [FormerlySerializedAs("weightLostFromPickedArea")]
         [Header("Percentage of weight lost and distributed to close neighbours")]
         [Range(0f, 1f)] [SerializeField] private float weightLossOfPickedArea = 0.5f;
         // [Range(0f, 1f)] [SerializeField]  private float weightDistributedToNeighbors = 0.75f;
@@ -151,7 +150,7 @@ namespace FinalScripts.Fish.Spawning.RandomWeightedTables
             
             var currentNeighbors = availableSpawnAreas.Where(spawnArea =>
                 (Vector3.Distance(spawnArea.GameObject.transform.position, area.GameObject.transform.position))
-                <= neighborDistanceThreshold).ToArray();
+                <= neighborDistanceSearchRadius).ToArray();
             Debug.Log(currentNeighbors.Length);
             
             if (currentNeighbors.Length !> 0) return;
