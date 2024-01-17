@@ -86,13 +86,14 @@ namespace FinalScripts.Fish
             // does this gravity have to match the fish's own gravity? Probably.
             var gravity = 9.81f;
             var timeToTarget = (2 * punchForce * fishLaunchDir.normalized.y) / gravity;
-            var startPosFish = _rigidbody.position;
-            var tmp = startPosFish + timeToTarget * punchForce * fishLaunchDir.normalized;
-            var landingPos = new Vector3(tmp.x, tmp.y, 0);
-            // if the landingPos is a bit off-set on the z-axis, then we likely have to change the z:0.
+
+            var startPosFish = transform.position;
+            var landingPos = startPosFish + punchForce * fishLaunchDir.normalized * timeToTarget 
+                             - 0.5f * gravity * Mathf.Pow(timeToTarget, 2) * Vector3.up;
+
             if (showDebugLines)
             {
-               Debug.DrawLine(startPosFish, landingPos, Color.yellow, timeToTarget); 
+                Debug.DrawLine(startPosFish, landingPos, Color.yellow, timeToTarget);
             }
         }
     }
