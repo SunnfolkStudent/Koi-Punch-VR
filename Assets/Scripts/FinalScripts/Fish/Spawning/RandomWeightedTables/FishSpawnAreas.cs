@@ -151,7 +151,8 @@ namespace FinalScripts.Fish.Spawning.RandomWeightedTables
             var currentNeighbors = availableSpawnAreas.Where(spawnArea =>
                 (Vector3.Distance(spawnArea.GameObject.transform.position, area.GameObject.transform.position))
                 <= neighborDistanceSearchRadius).ToArray();
-            Debug.Log(currentNeighbors.Length);
+            
+            Debug.Log("Neighbours connected to recent spawn:" + (currentNeighbors.Length-1));
             
             if (currentNeighbors.Length !> 0) return;
             

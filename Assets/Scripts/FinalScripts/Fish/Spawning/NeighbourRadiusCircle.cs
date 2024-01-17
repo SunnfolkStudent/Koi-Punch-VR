@@ -11,7 +11,7 @@ namespace FinalScripts.Fish.Spawning
     public class NeighbourRadiusCircle : MonoBehaviour
     {
         [Header("The detection radius have to be in the center of other spawnAreas:")]
-        [Header("It also has to be adjusted from FishSpawnManager:")]
+        [Header("It also has to be adjusted from the object FishSpawnManager:")]
         [SerializeField] [Range(0, 20)] private float neighbourDetectionRange = 7f;
         private readonly int _segments = 180;
         private LineRenderer _neighbourRadiusLine;
