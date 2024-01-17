@@ -53,7 +53,8 @@ public class ZenMetreManager : MonoBehaviour
     {
         EventManager.BossDefeated += ResetTime;
         EventManager.StartBossPhase0 += ResetTime;
-        EventManager.SpawnBoss += LevelZero;  
+        EventManager.StartBossPhase0 += LevelZero;
+        EventManager.SpawnBoss += SpawnBoss;  
         EventManager.BossPhase0Completed += StopTime;
         EventManager.BossPhase0Completed += Phase0Over;
         EventManager.StartBossPhase1 += LevelOne;
@@ -73,6 +74,11 @@ public class ZenMetreManager : MonoBehaviour
         }
     }
 
+    private void SpawnBoss()
+    {
+        Instantiate(bossPrefab);
+    }
+    
     private void Phase0Over()
     {
         _zenPhase0Invoked = false;
@@ -119,7 +125,6 @@ public class ZenMetreManager : MonoBehaviour
 
         zenLevel++;
         
-        Instantiate(bossPrefab);
         //Reset music back to normal after zen mode is over
     }
     
@@ -255,12 +260,12 @@ public class ZenMetreManager : MonoBehaviour
     //Method that resets time back to normal. Called when you fail a phase or when you do your final move.
     private void ResetTime()
     {
-        /*Time.timeScale = 1f;
+        Time.timeScale = 1f;
         for (int i = 0; i < _particleSystems.Count; i++)
         {
             var mainModule = _particleSystems[i].main;
             mainModule.simulationSpeed = _originalSimulationSpeeds[i];
-        }*/
+        }
     }
     #endregion
     
