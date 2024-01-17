@@ -197,10 +197,10 @@ public class ZenMetreManager : MonoBehaviour
     private IEnumerator AttackFieldSpawnTimer()
     {
         Debug.Log("AttackFieldSpawnTimer");
-        attackFieldsActive = true;
+        InternalZenEventManager.spawnWeakPoints.Invoke();
         yield return new WaitForSecondsRealtime(_attackFieldsActiveTime);
+        InternalZenEventManager.stopSpawnWeakPoints.Invoke();
         
-        attackFieldsActive = false;
         DestroyAllAttackFields();
         
         if (zenMetreValue >= 100)
