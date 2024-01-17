@@ -25,7 +25,7 @@ public class ZenMetreManager : MonoBehaviour
     
     [Header("Time Stop Values")]
     private float _slowdownFactor = 0.001f;
-    private float _slowdownTime = 0.5f;
+    private float _slowdownTime = 0.1f;
     
     [Header("Particle systems and original simulation speeds for time stop")]
     private List<ParticleSystem> _particleSystems = new List<ParticleSystem>();
