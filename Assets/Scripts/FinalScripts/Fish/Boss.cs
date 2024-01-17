@@ -130,7 +130,7 @@ namespace FinalScripts.Fish
                     Phase0Hit();
                     break;
                 case BossPhase.Phase1:
-                    Log("Can't hit the boss directly in Phase1");
+                    Phase1Hit();
                     break;
                 case BossPhase.Phase2:
                     Phase2Hit();
@@ -147,17 +147,25 @@ namespace FinalScripts.Fish
         
         private void Phase0Hit()
         {
+            Log("Phase 0 hit");
             EventManager.BossPhase0Completed.Invoke();
         }
-        
+
+        private void Phase1Hit()
+        {
+            Log("Can't hit boss directly in phase 1");
+        }
+
         private void Phase2Hit()
         {
+            Log("Phase 2 hit");
             ZenMetreManager.Instance.AddHitZen(zenPerHitPhase2);
         }
         
         private void Phase3Hit(ControllerManager controllerManager, string fistUsed)
         {
             if (!SpecialAttackScript.punchCharged) return;
+            Log("Phase 3 hit charged");
             
             var controllerVelocity = fistUsed == "LeftFist" ? controllerManager.leftControllerVelocity : controllerManager.rightControllerVelocity;
             var zenPunchForce = SpecialAttackScript.punchForce * controllerVelocity.normalized;
