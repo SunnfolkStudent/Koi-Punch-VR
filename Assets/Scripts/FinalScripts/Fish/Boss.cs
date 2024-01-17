@@ -16,6 +16,16 @@ namespace FinalScripts.Fish
         private static BossPhase _currentBossState;
         private float _score;
         
+        [SerializeField] private bool isDebugging;
+        
+        #region ---Debugging---
+
+        private void Log(string message)
+        {
+            if(isDebugging) Debug.Log(message);
+        }
+        #endregion
+        
         #region ---Initialization---
         private void Awake()
         {
@@ -97,14 +107,17 @@ namespace FinalScripts.Fish
         #endregion
         
         #region ---PhaseCompletion---
-        private static void Phase0Completed()
+        private void Phase0Completed()
         {
-            Phase.FirstOrDefault(keyValuePair => keyValuePair.Value.score == 0).Value.Event.Invoke();
+            var phase = Phase.FirstOrDefault(keyValuePair => keyValuePair.Value.score == 0).Value.Event;
+            Log($"Phase 0 completed go to: {phase}");
+            phase.Invoke();
         }
         
-        private static void PhaseSuccessful()
+        private void PhaseSuccessful()
         {
             Phase[_currentBossState].score = ZenMetreManager.Instance.zenMetreValue;
+            Log($"boss phase: {_currentBossState} completed | invoke: {_currentBossState++}");
             Phase[_currentBossState++].Event.Invoke();
         }
         #endregion
@@ -117,7 +130,7 @@ namespace FinalScripts.Fish
                     Phase0Hit();
                     break;
                 case BossPhase.Phase1:
-                    Debug.Log("Can't hit the boss directly in Phase1");
+                    Log("Can't hit the boss directly in Phase1");
                     break;
                 case BossPhase.Phase2:
                     Phase2Hit();
@@ -127,7 +140,7 @@ namespace FinalScripts.Fish
                     break;
                 case BossPhase.BossDefeated:
                 default:
-                    Debug.Log("Boss not in valid Phase");
+                    Log("Boss not in valid Phase");
                     break;
             }
         }
