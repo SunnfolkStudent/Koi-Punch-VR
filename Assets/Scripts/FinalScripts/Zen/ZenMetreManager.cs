@@ -52,7 +52,7 @@ public class ZenMetreManager : MonoBehaviour
     {
         EventManager.BossDefeated += ResetTime;
         EventManager.StartBossPhase0 += ResetTime;
-        EventManager.StartBossPhase0 += LevelZero;  
+        EventManager.SpawnBoss += LevelZero;  
         EventManager.BossPhase0Completed += StopTime;
         EventManager.BossPhase0Completed += Phase0Over;
         EventManager.StartBossPhase1 += LevelOne;
@@ -66,7 +66,9 @@ public class ZenMetreManager : MonoBehaviour
         if (zenMetreValue >= 100 && zenLevel == 0 && !_zenPhase0Invoked)
         {
             _zenPhase0Invoked = true;
-            EventManager.StartBossPhase0.Invoke();
+            Debug.Log("Update");
+            EventManager.SpawnBoss.Invoke();
+            Debug.Log("Update2");
         }
     }
     
