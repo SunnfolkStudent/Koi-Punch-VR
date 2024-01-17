@@ -73,7 +73,7 @@ public class SpecialAttackScript : MonoBehaviour
         ZenMetreManager.Instance.zenLevel = 0;
         ZenMetreManager.Instance.zenMetreValue = 0f;
         InternalZenEventManager.updateVisualZenBar.Invoke();
-       InternalZenEventManager.hideSparkles.Invoke();
+        InternalZenEventManager.hideSparkles.Invoke();
         // EventManager.ZenPunchReady.Invoke();
     }
 }

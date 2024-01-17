@@ -144,6 +144,7 @@ public class ZenMetreManager : MonoBehaviour
     private void LevelTwo()
     {
         zenMetreValue = 0;
+        zenLevel = 2;
         
         //Start of level 2
         zenLevelCheckpoint = 2;
@@ -156,6 +157,7 @@ public class ZenMetreManager : MonoBehaviour
     private void LevelThree()
     {
         zenMetreValue = 0;
+        zenLevel = 3;
         
         //Start of level 3
         zenAttackActive = true;
@@ -180,7 +182,6 @@ public class ZenMetreManager : MonoBehaviour
         
         if (zenMetreValue >= 100)
         {
-            zenLevel = 3;
             EventManager.BossPhaseSuccessful.Invoke();
         }
         else
@@ -205,7 +206,6 @@ public class ZenMetreManager : MonoBehaviour
         
         if (zenMetreValue >= 100)
         {
-            zenLevel = 2;
             EventManager.BossPhaseSuccessful.Invoke();
         }
         else
