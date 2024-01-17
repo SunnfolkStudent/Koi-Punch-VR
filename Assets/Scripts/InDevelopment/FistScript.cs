@@ -18,7 +18,7 @@ namespace InDevelopment
 
         private void Update()
         {
-            if (Physics.SphereCast(transform.position, sphereCastRadius, Vector3.zero, out var hit))
+            if (Physics.SphereCast(transform.position, sphereCastRadius, transform.forward, out var hit, 0f))
             {
                 if (!hit.collider.gameObject.TryGetComponent(out IPunchable punch)) return;
                 punch.PunchObject(_controllerManager, _whichFistUsed);
