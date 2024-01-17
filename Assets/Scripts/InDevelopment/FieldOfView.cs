@@ -6,8 +6,8 @@ namespace InDevelopment
 {
     public class FieldOfView : MonoBehaviour
     {
-        public float viewRadius = 50;
-        [Range(0, 360)] public float viewAngle = 90;
+        public float viewRadius = 15;
+        [Range(0, 360)] public float viewAngle = 92;
 
         public LayerMask spawnAreaMask;
         public LayerMask obstacleMask;
@@ -16,7 +16,7 @@ namespace InDevelopment
 
         private void Start()
         {
-            StartCoroutine(FindSpawnAreaWithDelay(0.1f));
+            StartCoroutine(FindSpawnAreaWithDelay(0.2f));
         }
         
         IEnumerator FindSpawnAreaWithDelay(float delay)
@@ -31,12 +31,9 @@ namespace InDevelopment
         private void FindVisibleSpawnAreas()
         {
             visibleSpawnAreas.Clear();
-            int maxSpawnAreasInView = 10;
-            Collider[] spawnAreasInViewRadius = new Collider[maxSpawnAreasInView];
-            var spawnAreasInFOV = Physics.OverlapSphereNonAlloc(transform.position, viewRadius, spawnAreasInViewRadius,
-                spawnAreaMask);
+            Collider[] spawnAreasInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, spawnAreaMask);
 
-            for (int i = 0; i < spawnAreasInFOV; i++)
+            for (int i = 0; i < spawnAreasInViewRadius.Length; i++)
             {
                 Transform spawnArea = spawnAreasInViewRadius[i].transform;
                 Vector3 dirToSpawnArea = (spawnArea.position - transform.position).normalized;
