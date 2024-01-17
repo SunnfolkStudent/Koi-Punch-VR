@@ -13,11 +13,9 @@ namespace FinalScripts.Fish.Spawning
         // TODO: Fix why spawned fish have torque
         // TODO: Flight trajectory type decided by random weighted tables
         private FishSpawnAreas _fishSpawnAreas;
+        private Transform _target;
         
         #region ---FishLaunchInspectorSettings---
-        [Header("Fish Target")] [Tooltip("Transform that the fish trajectories will aim to")]
-        [SerializeField] private Transform target;
-        
         [Header("Launch Type")] [Tooltip("Type chosen to calculate trajectory velocity")]
         [SerializeField] private LaunchType launchType;
         
@@ -48,6 +46,7 @@ namespace FinalScripts.Fish.Spawning
         #region ---Initialization---
         private void Awake()
         {
+            _target = GameObject.FindGameObjectWithTag("MainCamera").transform;
             _fishSpawnAreas = GetComponent<FishSpawnAreas>();
             EventManager.SpawnFish += SpawnFish;
         }
@@ -65,7 +64,7 @@ namespace FinalScripts.Fish.Spawning
         {
             var rigidities = fish.Children.Where(child => child.Rigidbody != null).Select(child => child.Rigidbody).ToArray();
             var fishTransform = fish.ParentGameObject.transform;
-            var targetPos = target.position;
+            var targetPos = _target.position;
             var targetDirection = (targetPos - spawnPos).normalized;
             
             fishTransform.position = spawnPos;

@@ -22,7 +22,6 @@ namespace InDevelopment
             foreach (var visibleSpawnArea in fov.visibleSpawnAreas)
             {
                 Handles.DrawLine(fov.transform.position, visibleSpawnArea.position);
-                Debug.Log("Minimum 1 Spawn Area in FOV");
             }
         }
     }

@@ -16,7 +16,7 @@ namespace InDevelopment
 
         private void Start()
         {
-            StartCoroutine(FindSpawnAreaWithDelay(0.2f));
+            StartCoroutine(FindSpawnAreaWithDelay(0.1f));
         }
         
         IEnumerator FindSpawnAreaWithDelay(float delay)
@@ -31,9 +31,12 @@ namespace InDevelopment
         private void FindVisibleSpawnAreas()
         {
             visibleSpawnAreas.Clear();
-            Collider[] spawnAreasInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, spawnAreaMask);
+            int maxSpawnAreasInView = 10;
+            Collider[] spawnAreasInViewRadius = new Collider[maxSpawnAreasInView];
+            var spawnAreasInFOV = Physics.OverlapSphereNonAlloc(transform.position, viewRadius, spawnAreasInViewRadius,
+                spawnAreaMask);
 
-            for (int i = 0; i < spawnAreasInViewRadius.Length; i++)
+            for (int i = 0; i < spawnAreasInFOV; i++)
             {
                 Transform spawnArea = spawnAreasInViewRadius[i].transform;
                 Vector3 dirToSpawnArea = (spawnArea.position - transform.position).normalized;
@@ -44,6 +47,7 @@ namespace InDevelopment
                     if (!Physics.Raycast(transform.position, dirToSpawnArea, distanceToSpawnArea, obstacleMask))
                     {
                         visibleSpawnAreas.Add(spawnArea);
+                        Debug.Log("SpawnArea Detected");
                     }
                 }
             }

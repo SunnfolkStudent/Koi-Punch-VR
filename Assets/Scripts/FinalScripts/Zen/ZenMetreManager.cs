@@ -25,7 +25,7 @@ public class ZenMetreManager : MonoBehaviour
     
     [Header("Time Stop Values")]
     private float _slowdownFactor = 0.001f;
-    private float _slowdownTime = 0.5f;
+    private float _slowdownTime = 0.1f;
     
     [Header("Particle systems and original simulation speeds for time stop")]
     private List<ParticleSystem> _particleSystems = new List<ParticleSystem>();
@@ -53,7 +53,8 @@ public class ZenMetreManager : MonoBehaviour
     {
         EventManager.BossDefeated += ResetTime;
         EventManager.StartBossPhase0 += ResetTime;
-        EventManager.SpawnBoss += LevelZero;  
+        EventManager.StartBossPhase0 += LevelZero;
+        EventManager.SpawnBoss += SpawnBoss;  
         EventManager.BossPhase0Completed += StopTime;
         EventManager.BossPhase0Completed += Phase0Over;
         EventManager.StartBossPhase1 += LevelOne;
@@ -64,11 +65,6 @@ public class ZenMetreManager : MonoBehaviour
     
     private void Update()
     {
-        if (Keyboard.current.aKey.wasPressedThisFrame)
-        {
-            EventManager.BossPhase0Completed.Invoke();
-        }
-        
         if (zenMetreValue >= 100 && zenLevel == 0 && !_zenPhase0Invoked)
         {
             _zenPhase0Invoked = true;
@@ -77,12 +73,12 @@ public class ZenMetreManager : MonoBehaviour
             Debug.Log("Update2");
         }
     }
-    
-    private void testmethod()
-    {
-        Debug.Log("testmethod");
-    }
 
+    private void SpawnBoss()
+    {
+        Instantiate(bossPrefab);
+    }
+    
     private void Phase0Over()
     {
         _zenPhase0Invoked = false;
@@ -122,14 +118,9 @@ public class ZenMetreManager : MonoBehaviour
     private void LevelZero()
     {
         InternalZenEventManager.updateVisualZenBar.Invoke();
-        
-        ResetTime();
 
         Debug.Log("BossSpawned");
-
-        zenLevel++;
         
-        //Instantiate(bossPrefab);
         //Reset music back to normal after zen mode is over
     }
     
@@ -149,6 +140,7 @@ public class ZenMetreManager : MonoBehaviour
     private void LevelTwo()
     {
         zenMetreValue = 0;
+        zenLevel = 2;
         
         //Start of level 2
         zenLevelCheckpoint = 2;
@@ -161,6 +153,7 @@ public class ZenMetreManager : MonoBehaviour
     private void LevelThree()
     {
         zenMetreValue = 0;
+        zenLevel = 3;
         
         //Start of level 3
         zenAttackActive = true;
@@ -185,14 +178,13 @@ public class ZenMetreManager : MonoBehaviour
         
         if (zenMetreValue >= 100)
         {
-            zenLevel = 3;
             EventManager.BossPhaseSuccessful.Invoke();
         }
         else
         {
             zenLevel = 0;
             zenMetreValue = 100;
-            EventManager.StartBossPhase0.Invoke();
+            //EventManager.StartBossPhase0.Invoke();
         }
     }
     
@@ -202,22 +194,21 @@ public class ZenMetreManager : MonoBehaviour
     private IEnumerator AttackFieldSpawnTimer()
     {
         Debug.Log("AttackFieldSpawnTimer");
-        attackFieldsActive = true;
+        InternalZenEventManager.spawnWeakPoints.Invoke();
         yield return new WaitForSecondsRealtime(_attackFieldsActiveTime);
+        InternalZenEventManager.stopSpawnWeakPoints.Invoke();
         
-        attackFieldsActive = false;
         DestroyAllAttackFields();
         
         if (zenMetreValue >= 100)
         {
-            zenLevel = 2;
             EventManager.BossPhaseSuccessful.Invoke();
         }
         else
         {
-            zenLevel = 1;
+            zenLevel = 0;
             zenMetreValue = 100;
-            EventManager.StartBossPhase0.Invoke();
+            //EventManager.StartBossPhase0.Invoke();
         }
     }
     
@@ -265,12 +256,12 @@ public class ZenMetreManager : MonoBehaviour
     //Method that resets time back to normal. Called when you fail a phase or when you do your final move.
     private void ResetTime()
     {
-        /*Time.timeScale = 1f;
+        Time.timeScale = 1f;
         for (int i = 0; i < _particleSystems.Count; i++)
         {
             var mainModule = _particleSystems[i].main;
             mainModule.simulationSpeed = _originalSimulationSpeeds[i];
-        }*/
+        }
     }
     #endregion
     
