@@ -1,18 +1,48 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BreakOnHit : MonoBehaviour
+public class BreakOnHit : TransitionAnimation
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject _brokenPrefab;
+    [SerializeField] private int LevelToGoTo;
+    [SerializeField] private GameObject newMenuParent;
+
+    private GameObject _sceneControllerObj;
+    private SceneController _sceneController;
+
+    private void Awake()
     {
-        
+        _sceneControllerObj = GameObject.FindGameObjectWithTag("SceneController");
+        _sceneController = _sceneControllerObj.GetComponent<SceneController>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision other)
     {
-        
+        if (other.gameObject.CompareTag("Player"))
+        {
+            HittingSign();
+        }
     }
+
+    protected void HittingSign()
+    {
+        Instantiate(_brokenPrefab,gameObject.transform.position,Quaternion.identity);
+        
+        //TODO play break audio
+        
+        if (gameObject.CompareTag("SceneChanger"))
+        {
+            gameObject.transform.localScale = new Vector3(0, 0, 0);
+            _sceneController.ChangeScenes(LevelToGoTo);
+        }
+        else
+        {
+            MenuEventManager.ExplodeTransition();
+            Instantiate(newMenuParent);
+            Destroy(gameObject);
+        }
+    }
+
 }

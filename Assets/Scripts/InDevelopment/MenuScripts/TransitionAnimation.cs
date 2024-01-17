@@ -6,25 +6,26 @@ using UnityEngine;
 public class TransitionAnimation : MonoBehaviour
 {
     private Animator _animator;
-    //[SerializeField] private string _explodingAnimClip;
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
-        //EventManager.ExplodeEvent += ExplodeTransition;
+        MenuEventManager.ExplodeEvent += ExplodeTransition;
     }
     private void ExplodeTransition()
     {
         if (_animator != null)
         {
-            _animator.SetTrigger("TransitionAnimation");
+            _animator.SetTrigger("MenuTransition");
+            
+            //TODO play explosion audio
         }
         Destroy(gameObject,5f);
     }
     
     private void OnDisable()
     {
-        //EventManager.ExplodeEvent -= ExplodeTransition;
+        MenuEventManager.ExplodeEvent -= ExplodeTransition;
     }
 
 

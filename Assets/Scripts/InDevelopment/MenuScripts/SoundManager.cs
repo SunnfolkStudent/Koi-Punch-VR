@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    //[SerializeField] private GameObject musicSlider;
-    //private float sliderPos;
+    [SerializeField] private GameObject _musicSlider;
+    private float _musicSliderPos;
+
+    [SerializeField] private GameObject _sFXSlider;
+    private float _sFXSliderPos;
 
     private void Awake()
     {
@@ -18,29 +21,35 @@ public class SoundManager : MonoBehaviour
         if (PlayerPrefs.HasKey("MusicVolume"))
         {
             PlayerPrefs.GetFloat("MusicVolume");
-            //SetVolume();
+            SetMusicVolume();
         }
         else
         {
             PlayerPrefs.SetFloat("MusicVolume", 1);
-            //SetVolume();
+            SetMusicVolume();
         }
         if (PlayerPrefs.HasKey("SFXVolume"))
         {
             PlayerPrefs.GetFloat("SFXVolume");
-            //SetVolume();
+            SetSFXVolume();
         }
         else
         {
             PlayerPrefs.SetFloat("SFXVolume", 1);
-            //SetVolume();
+            SetSFXVolume();
         }
     }
 
     public void SetMusicVolume()
     {
-        //sliderPos = PlayerPrefs.GetFloat("MusicVolume") - 0.5f;
-        //musicSlider.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + sliderPos);
-        //musicSlider.transform.= sliderPos;
+        _musicSliderPos = PlayerPrefs.GetFloat("MusicVolume") - 0.5f;
+        _musicSlider.transform.localPosition = new Vector3(transform.localPosition.x - _musicSliderPos, -0.1f, 0);
+        //_musicSlider.transform.localPosition = _musicSliderPos;
+    }
+
+    public void SetSFXVolume()
+    {
+        _sFXSliderPos = PlayerPrefs.GetFloat("SFXVolume") - 0.5f;
+        _sFXSlider.transform.localPosition = new Vector3(transform.localPosition.x - _sFXSliderPos, -0.1f, 0);
     }
 }

@@ -6,93 +6,106 @@ using UnityEngine;
 public class GongScript : MonoBehaviour
 {
     //private AudioSource _audioSource;
-    //[SerializeField] private GameObject _soundManagerObj;
-    //private SoundManager _soundManager;
+    [SerializeField] private GameObject _soundManagerObj;
+    private SoundManager _soundManager;
 
     [SerializeField] private bool isMusic;
     [SerializeField] private bool isBig;
 
-    /*private void Start()
+    private void Start()
     {
         //_audioSource = GetComponent<AudioSource>();
         _soundManagerObj = GameObject.FindGameObjectWithTag("SoundManager");
         _soundManager = _soundManagerObj.GetComponent<SoundManager>();
-    }*/
+    }
 
     private void OnCollisionEnter(Collision other)
     {
-        //Debug.Log("Triggered");
-        if (isMusic)
+        if(other.gameObject.CompareTag("Player"))
         {
-            if (isBig)
+            if (isMusic)
             {
-                if (PlayerPrefs.GetFloat("MusicVolume") < 1)
+                if (isBig)
                 {
-                    PlayerPrefs.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicVolume") + .1f);
-                    Debug.Log(PlayerPrefs.GetFloat("MusicVolume"));
-                    //_soundManager.SetVolume();
-            
-                    //_audioSource.volume = PlayerPrefs.GetFloat("MusicVolume");
-                    //_audioSource.Play();
+                    if (PlayerPrefs.GetFloat("MusicVolume") < 1)
+                    {
+                        PlayerPrefs.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicVolume") + .1f);
+                        //Debug.Log(PlayerPrefs.GetFloat("MusicVolume"));
+                        
+                        _soundManager.SetMusicVolume();
+                        
+                        //TODO play gong audio
+
+                        //_audioSource.volume = PlayerPrefs.GetFloat("MusicVolume");
+                        //_audioSource.Play();
+                    }
+                    else
+                    {
+                        PlayerPrefs.SetFloat("MusicVolume", 1);
+                    }
                 }
-                else
+
+                if (!isBig)
                 {
-                    PlayerPrefs.SetFloat("MusicVolume", 1);
+                    if (PlayerPrefs.GetFloat("MusicVolume") > 0)
+                    {
+                        PlayerPrefs.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicVolume") - .1f);
+                        //Debug.Log(PlayerPrefs.GetFloat("MusicVolume"));
+                        
+                        _soundManager.SetMusicVolume();
+                        
+                        //TODO play gong audio
+
+                        //_audioSource.volume = PlayerPrefs.GetFloat("MusicVolume");
+                        //_audioSource.Play();
+                    }
+                    else
+                    {
+                        PlayerPrefs.SetFloat("MusicVolume", 0);
+                    }
                 }
             }
 
-            if (!isBig)
+            if (!isMusic)
             {
-                if (PlayerPrefs.GetFloat("MusicVolume") > 0)
+                if (isBig)
                 {
-                    PlayerPrefs.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicVolume") - .1f);
-                    Debug.Log(PlayerPrefs.GetFloat("MusicVolume"));
-                    //_soundManager.SetVolume();
-            
-                    //_audioSource.volume = PlayerPrefs.GetFloat("MusicVolume");
-                    //_audioSource.Play();
-                }
-                else
-                {
-                    PlayerPrefs.SetFloat("MusicVolume", 0);
-                }
-            }
-        }
-        if(!isMusic)
-        {
-            if (isBig)
-            {
-                if (PlayerPrefs.GetFloat("SFXVolume") < 1)
-                {
-                    PlayerPrefs.SetFloat("SFXVolume", PlayerPrefs.GetFloat("SFXVolume") + .1f);
-                    Debug.Log(PlayerPrefs.GetFloat("SFXVolume"));
-            
-                    //_soundManager.SetVolume();
-            
-                    //_audioSource.volume = PlayerPrefs.GetFloat("MusicVolume");
-                    //_audioSource.Play();
-                }
-                else
-                {
-                    PlayerPrefs.SetFloat("SFXVolume", 1);
-                }
-            }
+                    if (PlayerPrefs.GetFloat("SFXVolume") < 1)
+                    {
+                        PlayerPrefs.SetFloat("SFXVolume", PlayerPrefs.GetFloat("SFXVolume") + .1f);
+                        //Debug.Log(PlayerPrefs.GetFloat("SFXVolume"));
+                        
+                        _soundManager.SetSFXVolume();
+                        
+                        //TODO play gong audio
 
-            if (!isBig)
-            {
-                if (PlayerPrefs.GetFloat("SFXVolume") > 0)
-                {
-                    PlayerPrefs.SetFloat("SFXVolume", PlayerPrefs.GetFloat("SFXVolume") - .1f);
-                    Debug.Log(PlayerPrefs.GetFloat("SFXVolume"));
-            
-                    //_soundManager.SetVolume();
-            
-                    //_audioSource.volume = PlayerPrefs.GetFloat("MusicVolume");
-                    //_audioSource.Play();
+                        //_audioSource.volume = PlayerPrefs.GetFloat("MusicVolume");
+                        //_audioSource.Play();
+                    }
+                    else
+                    {
+                        PlayerPrefs.SetFloat("SFXVolume", 1);
+                    }
                 }
-                else
+
+                if (!isBig)
                 {
-                    PlayerPrefs.SetFloat("SFXVolume", 0);
+                    if (PlayerPrefs.GetFloat("SFXVolume") > 0)
+                    {
+                        PlayerPrefs.SetFloat("SFXVolume", PlayerPrefs.GetFloat("SFXVolume") - .1f);
+                        //Debug.Log(PlayerPrefs.GetFloat("SFXVolume"));
+                        
+                        _soundManager.SetSFXVolume();
+                        
+                        //TODO play gong audio
+
+                        //_audioSource.volume = PlayerPrefs.GetFloat("MusicVolume");
+                        //_audioSource.Play();
+                    }
+                    else
+                    {
+                        PlayerPrefs.SetFloat("SFXVolume", 0);
+                    }
                 }
             }
         }
