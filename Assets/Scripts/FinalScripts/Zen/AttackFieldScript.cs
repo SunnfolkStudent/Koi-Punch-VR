@@ -6,7 +6,7 @@ public class AttackFieldScript : MonoBehaviour, IPunchable
 {
     private float _timeUntilDeath = 6f;
     private bool _dead;
-    private float _minVelocityToDestroy = 0.5f;
+    private float _minVelocityToDestroy = 0f;
     
     
     void Start()
