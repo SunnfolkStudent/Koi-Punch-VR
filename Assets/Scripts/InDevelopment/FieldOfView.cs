@@ -7,7 +7,7 @@ namespace InDevelopment
     public class FieldOfView : MonoBehaviour
     {
         public float viewRadius = 50;
-        [Range(0, 360)] public float viewAngle = 120;
+        [Range(0, 360)] public float viewAngle = 90;
 
         public LayerMask spawnAreaMask;
         public LayerMask obstacleMask;

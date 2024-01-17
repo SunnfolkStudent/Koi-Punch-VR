@@ -65,9 +65,14 @@ public class ZenMetreManager : MonoBehaviour
     {
         if (zenMetreValue >= 100 && zenLevel == 0 && !_zenPhase0Invoked)
         {
-            EventManager.StartBossPhase0.Invoke();
             _zenPhase0Invoked = true;
+            EventManager.StartBossPhase0.Invoke();
         }
+    }
+    
+    private void testmethod()
+    {
+        Debug.Log("testmethod");
     }
 
     private void Phase0Over()
@@ -112,6 +117,8 @@ public class ZenMetreManager : MonoBehaviour
         
         ResetTime();
 
+        Debug.Log("BossSpawned");
+        
         Instantiate(bossPrefab);
 
         //Reset music back to normal after zen mode is over
