@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,14 @@ public class BreakOnHit : TransitionAnimation
     [SerializeField] private int LevelToGoTo;
     [SerializeField] private GameObject newMenuParent;
 
+    private GameObject _sceneControllerObj;
+    private SceneController _sceneController;
+
+    private void Awake()
+    {
+        _sceneControllerObj = GameObject.FindGameObjectWithTag("SceneController");
+        _sceneController = _sceneControllerObj.GetComponent<SceneController>();
+    }
 
     private void OnCollisionEnter(Collision other)
     {
@@ -26,8 +35,7 @@ public class BreakOnHit : TransitionAnimation
         if (gameObject.CompareTag("SceneChanger"))
         {
             gameObject.transform.localScale = new Vector3(0, 0, 0);
-            //fade screen here
-            SceneController.LevelSelected = LevelToGoTo;
+            _sceneController.ChangeScenes(LevelToGoTo);
         }
         else
         {

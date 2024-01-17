@@ -17,7 +17,7 @@ public class SceneController : MonoBehaviour
     private float speed;
     private float time;
     private bool ReadyToStart;
-    public static int LevelSelected = 5;
+    //public static int LevelSelected = 5;
     private GameObject _fadeScreenObj;
     private FadeScreenScript _fadeScreen;
     #endregion
@@ -54,9 +54,9 @@ public class SceneController : MonoBehaviour
         
         #endregion
 
-        if (LevelSelected == 5) return;
+        /*if (LevelSelected == 5) return;
         StartCoroutine(ChangeLevel());
-        LevelSelected = 5;
+        LevelSelected = 5;*/
     }
 
     private IEnumerator TitleCard()
@@ -69,6 +69,11 @@ public class SceneController : MonoBehaviour
         
     }
 
+    public void ChangeScenes(int scene)
+    {
+        StartCoroutine(ChangeLevel(scene));
+    }
+
     private IEnumerator GoToMainMenuFirstTime()
     {
         _fadeScreenObj = GameObject.FindGameObjectWithTag("FadeScreen");
@@ -79,15 +84,15 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene(scene.name);
     }
 
-    private IEnumerator ChangeLevel()
+    private IEnumerator ChangeLevel(int scene)
     {
         _fadeScreenObj = GameObject.FindGameObjectWithTag("FadeScreen");
         _fadeScreen.FadeOut();
         yield return new WaitForSeconds(2);
-        SceneManager.LoadScene(Levels[LevelSelected]);
-        if (LevelSelected is 1 or 2 or 3)
+        SceneManager.LoadScene(Levels[scene]);
+        if (scene is 1 or 2 or 3)
         {
-            SceneManager.LoadScene(LightingForLevels[LevelSelected], LoadSceneMode.Additive);
+            SceneManager.LoadScene(LightingForLevels[scene], LoadSceneMode.Additive);
         }
     }
 }
