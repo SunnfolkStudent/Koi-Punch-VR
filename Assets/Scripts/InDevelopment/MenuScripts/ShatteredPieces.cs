@@ -10,13 +10,14 @@ public class ShatteredPieces : MonoBehaviour
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
-        //Destroy(gameObject,4f);
+        Destroy(gameObject,5f);
     }
 
     private void OnCollisionEnter(Collision other)
     {
+        if (rb == null) return;
         if(other.gameObject.CompareTag("Ground")) return;
-        rb.AddForce(other.rigidbody.velocity*700);
+        //rb.AddForce(other.rigidbody.velocity*1000);
     }
     
     
