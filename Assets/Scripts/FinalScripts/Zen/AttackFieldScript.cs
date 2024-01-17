@@ -23,7 +23,7 @@ public class AttackFieldScript : MonoBehaviour, IPunchable
     
     public void PunchObject(ControllerManager controllerManager, String fistUsed)
     {
-        Debug.Log($"Punched L: {controllerManager.leftControllerVelocity.magnitude} R: {controllerManager.rightControllerVelocity.magnitude}", this);
+        Debug.LogError($"Punched L: {controllerManager.leftControllerVelocity.magnitude} R: {controllerManager.rightControllerVelocity.magnitude}", this);
         if (fistUsed == "LeftFist")
         {
             if (controllerManager.leftControllerVelocity.magnitude > _minVelocityToDestroy)
