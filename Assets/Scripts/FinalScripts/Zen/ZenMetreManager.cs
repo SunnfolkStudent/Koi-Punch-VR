@@ -115,8 +115,6 @@ public class ZenMetreManager : MonoBehaviour
     private void LevelZero()
     {
         InternalZenEventManager.updateVisualZenBar.Invoke();
-
-        Debug.Log("BossSpawned");
         
         //Reset music back to normal after zen mode is over
     }
