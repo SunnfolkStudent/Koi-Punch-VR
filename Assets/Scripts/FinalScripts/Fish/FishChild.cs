@@ -6,7 +6,7 @@ namespace FinalScripts.Fish
     {
         public Fish fish;
         private Rigidbody _rigidbody;
-        [SerializeField] private bool showDebugLines;
+        [SerializeField] private bool showDebugLines = true;
         
         private void Awake()
         {
