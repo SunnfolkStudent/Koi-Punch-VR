@@ -64,11 +64,6 @@ public class ZenMetreManager : MonoBehaviour
     
     private void Update()
     {
-        if (Keyboard.current.aKey.wasPressedThisFrame)
-        {
-            EventManager.BossPhase0Completed.Invoke();
-        }
-        
         if (zenMetreValue >= 100 && zenLevel == 0 && !_zenPhase0Invoked)
         {
             _zenPhase0Invoked = true;
@@ -76,11 +71,6 @@ public class ZenMetreManager : MonoBehaviour
             EventManager.SpawnBoss.Invoke();
             Debug.Log("Update2");
         }
-    }
-    
-    private void testmethod()
-    {
-        Debug.Log("testmethod");
     }
 
     private void Phase0Over()
@@ -129,7 +119,7 @@ public class ZenMetreManager : MonoBehaviour
 
         zenLevel++;
         
-        //Instantiate(bossPrefab);
+        Instantiate(bossPrefab);
         //Reset music back to normal after zen mode is over
     }
     
