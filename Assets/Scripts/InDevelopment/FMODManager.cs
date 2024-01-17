@@ -1,6 +1,8 @@
 using UnityEngine;
 using FMOD.Studio;
 using FMODUnity;
+using UnityEngine.InputSystem;
+
 public class FMODManager: MonoBehaviour
 {
     private static FMODManager instance;
@@ -25,8 +27,8 @@ public class FMODManager: MonoBehaviour
     private float playerRightHandVelocity;
 
     public string[] soundPaths;
-
-    public string[] subtitlePaths;
+    public string selectedSoundPath;
+    
    
     #endregion
     
@@ -67,14 +69,6 @@ public class FMODManager: MonoBehaviour
             "event:/SFX/Announcer/RandomPunchComments/AnnouncerFantastic",
             "event:/SFX/Announcer/RandomPunchComments/AnnouncerYouAreDoingGreat"
         };
-
-        subtitlePaths = new string[]
-        {
-            "WellDone",
-            "GreatPunch",
-            "Fantastic",
-            "YouAreDoingGreat"
-        };
         
         RuntimeManager.AttachInstanceToGameObject(leftHandWind,  leftHand.GetComponent<Transform>(), leftHand.GetComponent<Rigidbody>());
         RuntimeManager.AttachInstanceToGameObject(rightHandWind,  rightHand.GetComponent<Transform>(), rightHand.GetComponent<Rigidbody>());
@@ -82,7 +76,7 @@ public class FMODManager: MonoBehaviour
         RuntimeManager.AttachInstanceToGameObject(levelTwo, cam.GetComponent<Transform>(), cam.GetComponent<Rigidbody>());
         RuntimeManager.AttachInstanceToGameObject(levelThree, cam.GetComponent<Transform>(), cam.GetComponent<Rigidbody>());
 
-        SelectRandomSoundSubtitle();
+        SelectRandomSound();
     }
     
     private Bus musicBus;
@@ -187,27 +181,27 @@ public class FMODManager: MonoBehaviour
         }
     }
 
-    void SelectRandomSoundSubtitle()
+    void SelectRandomSound()
     {
 
         if (ShouldRun())
         {
             Debug.Log("The if statement ran!");
-            // Checks if the Arrays are empty
-            if (soundPaths == null || soundPaths.Length == 0 || subtitlePaths == null || subtitlePaths.Length == 0)
+            // Checks if the Array is empty
+            if (soundPaths == null || soundPaths.Length == 0)
             {
-                Debug.LogError("Arrays are null or empty.");
+                Debug.LogError("Array is null or empty.");
                 return;
             }
 
             var randomIndex = Random.Range(0, soundPaths.Length);
 
-            var selectedSoundPath = soundPaths[randomIndex];
-            var selectedSubtitle = subtitlePaths[randomIndex];
+            selectedSoundPath = soundPaths[randomIndex];
 
             // Now you can use the selected sound and subtitle paths as needed.
             Debug.Log("Selected Sound Path: " + selectedSoundPath);
-            Debug.Log("Selected Subtitle: " + selectedSubtitle);
+            Debug.Log("Selected Subtitle: " + VoiceLinesLoader.GetValueForKey(key: "OnPunch"));
+            PlayOneShot(selectedSoundPath, this.transform.position);
         }
         else
         {
@@ -218,8 +212,8 @@ public class FMODManager: MonoBehaviour
             // Generates a random number between 0 and 1
             float randomValue = UnityEngine.Random.value;
 
-            // Checks if the random value is less than 0.1 (10% chance)
-            return randomValue < 0.1;
+            // Checks if the random value is less than 0.1 (10% chance) (changed to 100% for testing)
+            return randomValue < 1;
         }
     }
 }
