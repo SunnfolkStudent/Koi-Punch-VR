@@ -112,6 +112,8 @@ public class ZenMetreManager : MonoBehaviour
         
         ResetTime();
 
+        Debug.Log("BossSpawned");
+        
         Instantiate(bossPrefab);
 
         //Reset music back to normal after zen mode is over
