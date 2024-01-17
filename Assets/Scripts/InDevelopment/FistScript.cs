@@ -1,11 +1,12 @@
 using InDevelopment.Punch;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace InDevelopment
 {
     public class FistScript : MonoBehaviour
     {
-        [SerializeField] private float sphereCast;
+        [SerializeField] private float sphereCastRadius = 0.05f;
         private ControllerManager _controllerManager;
         private string _whichFistUsed;
     
@@ -17,13 +18,10 @@ namespace InDevelopment
 
         private void Update()
         {
-            if (Physics.SphereCast(transform.position, sphereCast, transform.forward, out var hit))
+            if (Physics.SphereCast(transform.position, sphereCastRadius, Vector3.zero, out var hit))
             {
-                if (hit.collider.gameObject.TryGetComponent(out IPunchable punch))
-                {
-                    punch.PunchObject(_controllerManager, _whichFistUsed);
-                    Debug.DrawLine(transform.position, hit.point, Color.red);
-                }
+                if (!hit.collider.gameObject.TryGetComponent(out IPunchable punch)) return;
+                punch.PunchObject(_controllerManager, _whichFistUsed);
             }
         }
 
