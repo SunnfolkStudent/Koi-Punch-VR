@@ -65,10 +65,14 @@ public class ZenMetreManager : MonoBehaviour
     {
         if (zenMetreValue >= 100 && zenLevel == 0 && !_zenPhase0Invoked)
         {
-            Debug.Log("ZenPhase0Invoked");
-            EventManager.StartBossPhase0.Invoke();
             _zenPhase0Invoked = true;
+            EventManager.StartBossPhase0.Invoke();
         }
+    }
+    
+    private void testmethod()
+    {
+        Debug.Log("testmethod");
     }
 
     private void Phase0Over()
