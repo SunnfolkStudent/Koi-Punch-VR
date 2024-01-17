@@ -8,7 +8,6 @@ namespace FinalScripts.Fish.Spawning.RandomWeightedTables
     public class FishSpawnAreas : MonoBehaviour
     {
         private static List<SpawnArea> _availableSpawnAreas;
-        // private List<SpawnArea> _previousNeighbours;
         private SpawnArea[] _previousNeighbouringAreas;
         private List<float> _weightDistributedToNeighbours;
 
@@ -132,13 +131,6 @@ namespace FinalScripts.Fish.Spawning.RandomWeightedTables
             }
             if (_chainCurrentNumber > chainMaxNumber) _chainCurrentNumber = chainMaxNumber;
             NeighborsNewProbability(availableSpawnAreas, area, _chainCurrentNumber);
-            
-            // Function for individually adjustable percentage changes in chain:
-            // NeighborsNewProbabilities(availableSpawnAreas, area, _chainCurrentNumber);
-            
-            // Function for constant percentage change in chain:
-            // NeighborsNewProbabilities(availableSpawnAreas, area);
-            
             NewProbabilitiesForPickedArea(area);
         }
         
@@ -173,51 +165,6 @@ namespace FinalScripts.Fish.Spawning.RandomWeightedTables
                 spawnArea.Weight += currentNeighbors.Contains(spawnArea) ? weightToNeighbours : weightForTheRest;
             }
         }
-
-        // Go to NewProbabilities and uncomment if you want the below function called upon:
-        // (When doing so, just remember to remove the other one, by commenting it out)
-        // private void NeighborsNewProbabilities(IReadOnlyCollection<SpawnArea> availableSpawnAreas, SpawnArea area)
-        // {
-        //     var currentNeighbors = availableSpawnAreas.Where(spawnArea =>
-        //         (Vector3.Distance(spawnArea.GameObject.transform.position, area.GameObject.transform.position))
-        //         <= neighborDistanceThreshold).ToArray();
-        //     
-        //     if (currentNeighbors.Length !> 0) return;
-        //     
-        //     var weightToDistribute = area.Weight * (1 - weightLostFromPickedArea);
-        //     var weightToNeighbours = weightToDistribute * weightDistributedToNeighbors / currentNeighbors.Length;
-        //     var weightForTheRest = weightToDistribute * (1 - weightDistributedToNeighbors) / (availableSpawnAreas.Count - currentNeighbors.Length);
-        //     
-        //     foreach (var spawnArea in _availableSpawnAreas)
-        //     {
-        //         spawnArea.Weight += currentNeighbors.Contains(spawnArea) ? weightToNeighbours : weightForTheRest;
-        //     }
-        // }
-        //
-        // private void NeighborsNewProbabilities(IReadOnlyCollection<SpawnArea> availableSpawnAreas, SpawnArea area, int neighbourChainNumber)
-        // {
-        //     if (_chainCurrentNumber > chainMaxNumber) { _chainCurrentNumber = chainMaxNumber; }
-        //     _previousNeighbours = new List<SpawnArea>();
-        //     
-        //     var currentNeighbors = availableSpawnAreas.Where(spawnArea =>
-        //         (Vector3.Distance(spawnArea.GameObject.transform.position, area.GameObject.transform.position))
-        //         <= neighborDistanceThreshold).ToArray();
-        //     
-        //     if (currentNeighbors.Length !> 0) return;
-        //     
-        //     var weightToDistribute = area.Weight * (1 - weightLossOfPickedArea);
-        //     var weightToNeighbours = weightToDistribute * _weightDistributedToNeighbours[neighbourChainNumber-1] / currentNeighbors.Length;
-        //     var weightForTheRest = weightToDistribute * (1 - _weightDistributedToNeighbours[neighbourChainNumber-1]) / (availableSpawnAreas.Count - currentNeighbors.Length);
-        //     
-        //     foreach (var spawnArea in _availableSpawnAreas)
-        //     {
-        //         if (currentNeighbors.Contains(spawnArea))
-        //         {
-        //             _previousNeighbours.Add(spawnArea);
-        //         }
-        //         spawnArea.Weight += currentNeighbors.Contains(spawnArea) ? weightToNeighbours : weightForTheRest;
-        //     }
-        // }
         #endregion
     }
 }

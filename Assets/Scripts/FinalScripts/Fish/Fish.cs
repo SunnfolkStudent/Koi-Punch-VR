@@ -68,7 +68,8 @@ namespace FinalScripts.Fish
         {
             hasHitGround = true;
             Log("De-spawned: hit ground");
-            Despawn();
+            Invoke(nameof(Despawn), 2.5f);
+            // Despawn();
         }
         
         public void FishPunched()
