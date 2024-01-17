@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace FinalScripts.Fish
@@ -7,6 +6,7 @@ namespace FinalScripts.Fish
     {
         public Fish fish;
         private Rigidbody _rigidbody;
+        [SerializeField] private bool showDebugLines;
         
         private void Awake()
         {
@@ -63,6 +63,37 @@ namespace FinalScripts.Fish
 
             _rigidbody.AddForce(fishLaunch, ForceMode.VelocityChange);
             fish.Log("Punched with Force of " + punchForce + "\nand a Direction of " + direction);
+            
+            CalculatePunchedTrajectory(punchForce, fishLaunchDir:direction);
+        }
+
+        private void CalculatePunchedTrajectory(float punchForce, Vector3 fishLaunchDir)
+        {
+            // Use the following variables for calculating trajectory:
+            // Landing position = origin + time * velocity a.k.a. _rigidbody.position + timeToTarget * punchForce.
+            
+            // Velocity (v) = punchForceMultiplier,
+            // Direction (d) = cubeLaunchDir.normalized,
+            // Angle = arcSin(direction.y)
+            // Gravity = 9.81 = Newton.
+        
+            // Time = (2*v*sin (a))/gravity.
+        
+            // Sin x where is x = arcSin x, a.k.a. "sin (arcSin x)" is just x.
+            // Therefore we can just write in fishLaunchDir.normalized.y.
+            // t = (2*punchForce*fishLaunchDir.normalized.y)/9.81.
+            
+            // does this gravity have to match the fish's own gravity? Probably.
+            var gravity = 9.81f;
+            var timeToTarget = (2 * punchForce * fishLaunchDir.normalized.y) / gravity;
+            var startPosFish = _rigidbody.position;
+            var tmp = startPosFish + timeToTarget * punchForce * fishLaunchDir.normalized;
+            var landingPos = new Vector3(tmp.x, tmp.y, 0);
+            // if the landingPos is a bit off-set on the z-axis, then we likely have to change the z:0.
+            if (showDebugLines)
+            {
+               Debug.DrawLine(startPosFish, landingPos, Color.yellow, timeToTarget); 
+            }
         }
     }
 }

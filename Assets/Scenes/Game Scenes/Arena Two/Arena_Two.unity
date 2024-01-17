@@ -10168,11 +10168,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5694240260748228460, guid: f960f628d92a26249aa5454b07ce42c0,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1958199586}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f960f628d92a26249aa5454b07ce42c0, type: 3}
 --- !u!4 &1923927888 stripped
 Transform:
@@ -10180,33 +10176,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1923927887}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1958199584 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5694240260748228460, guid: f960f628d92a26249aa5454b07ce42c0,
-    type: 3}
-  m_PrefabInstance: {fileID: 1923927887}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1958199586
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1958199584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c980a1fd0f89e24facd1bb2a1181072, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  viewRadius: 50
-  viewAngle: 90
-  spawnAreaMask:
-    serializedVersion: 2
-    m_Bits: 0
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 0
-  visibleSpawnAreas: []
 --- !u!1001 &2044567507
 PrefabInstance:
   m_ObjectHideFlags: 0
