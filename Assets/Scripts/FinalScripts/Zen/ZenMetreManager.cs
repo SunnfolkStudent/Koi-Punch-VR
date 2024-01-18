@@ -3,18 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using FinalScripts.Fish;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class ZenMetreManager : MonoBehaviour
 {
     public static ZenMetreManager Instance;
     
     [Header("Variables for zen events")]
-    public bool tripleScoreActive;
     public bool zenAttackActive;
     private float _tripleScoreTimer = 10f;
-    public bool attackFieldsActive;
     private float _attackFieldsActiveTime = 15f;
     
     [Header("Zen Metre Values")]
@@ -199,10 +195,7 @@ public class ZenMetreManager : MonoBehaviour
     //Then wait for a certain amount of time and then set tripleScoreActive to false.
     private IEnumerator TripleScoreTimer()
     {
-        tripleScoreActive = true;
         yield return new WaitForSecondsRealtime(_tripleScoreTimer);
-        
-        tripleScoreActive = false;
         
         if (zenMetreValue >= 100)
         {
