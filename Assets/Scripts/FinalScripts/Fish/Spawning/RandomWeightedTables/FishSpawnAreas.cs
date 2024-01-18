@@ -7,6 +7,9 @@ namespace FinalScripts.Fish.Spawning.RandomWeightedTables
 {
     public class FishSpawnAreas : MonoBehaviour
     {
+        // TODO: Add more weight on Level 2 to prioritize the frontal spawnAreas.
+        // ...Maybe just reduce maxPickRate on individual spawnAreas you want to see less... 
+        
         private static List<SpawnArea> _availableSpawnAreas;
         private SpawnArea[] _previousNeighbouringAreas;
         private List<float> _weightDistributedToNeighbours;
