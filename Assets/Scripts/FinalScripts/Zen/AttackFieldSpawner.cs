@@ -27,7 +27,7 @@ namespace FinalScripts.Zen
         
         private void SpawnWeakPoints()
         {
-            GetBoss();
+            if (_boss == null) GetBoss();
             StartCoroutine(Spawning());
         }
 

@@ -10,8 +10,8 @@ namespace FinalScripts.Zen
         [SerializeField] private float timeUntilDeath = 6f;
         private bool _dead;
         // private float _minVelocityToDestroy = 0f;
-    
-        void Start()
+
+        private void OnEnable()
         { 
             StartCoroutine(DeathTimer());
         }
