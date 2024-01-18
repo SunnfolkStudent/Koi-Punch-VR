@@ -6,7 +6,8 @@ namespace FinalScripts.Fish
     public class Fish : MonoBehaviour
     {
         public FishObjectPool.Fish fish { get; set; }
-        
+
+        #region ---InspectorSettings---
         [Header("Despawn")]
         [Tooltip("Determines how long it takes for the fish to despawn")]
         [SerializeField] private float despawnTime = 10f;
@@ -26,21 +27,9 @@ namespace FinalScripts.Fish
         
         [Header("debug")]
         public bool isDebugging = true;
-        
-        private void OnEnable()
-        {
-            _startTime = Time.time;
-            hasBeenPunched = false;
-            hasHitGround = false;
-        }
-        
-        #region ---Debugging---
-        public void Log(string message)
-        {
-            if(isDebugging) Debug.Log(message);
-        }
         #endregion
-        
+
+        #region ---Initialization---
         private void Start()
         {
             var c = GetComponentsInChildren<Transform>();
@@ -50,6 +39,21 @@ namespace FinalScripts.Fish
                 fishChild.fish = this;
             }
         }
+
+        private void OnEnable()
+        {
+            _startTime = Time.time;
+            hasBeenPunched = false;
+            hasHitGround = false;
+        }
+        #endregion
+        
+        #region ---Debugging---
+        public void Log(string message)
+        {
+            if(isDebugging) Debug.Log(message);
+        }
+        #endregion
         
         private void Update()
         {
