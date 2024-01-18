@@ -26,11 +26,11 @@ namespace FinalScripts.Zen
                 {
                     case "LeftFist":
                         Destroy(gameObject);
-                        HapticManager.leftZenPunch1 = true;
+                        //HapticManager.leftZenPunch1 = true;
                         break;
                     case "RightFist":
                         Destroy(gameObject);
-                        HapticManager.rightZenPunch1 = true;
+                        //HapticManager.rightZenPunch1 = true;
                         break;
                 }
             }
@@ -48,6 +48,7 @@ namespace FinalScripts.Zen
             if (!_dead)
             {
                 ZenMetreManager.Instance.AddAttackFieldZen();
+                
             }
         }
     
