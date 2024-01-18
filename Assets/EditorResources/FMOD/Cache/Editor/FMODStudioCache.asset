@@ -1,5 +1,33 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9161524687458127279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/PlayerSounds/KoiPunch/KoiPunch
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/PlayerSounds/KoiPunch/KoiPunch
+  Guid:
+    Data1: 211333718
+    Data2: 1219390968
+    Data3: -105047391
+    Data4: -497749526
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -731980368466317622}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4675
 --- !u!114 &-7985871429262521722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27,7 +55,31 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-7879646298773465607
+--- !u!114 &-7861563079758658885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Zen1/SwagLevel
+  m_EditorClassIdentifier: 
+  Name: SwagLevel
+  StudioPath: 
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 48307657
+    data2: 2140632288
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-7801974930776322344
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -37,14 +89,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Ambience/AmbientSFX
+  m_Name: event:/SFX/PlayerSounds/KoiPunch/KoiPunchImpact
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Ambience/AmbientSFX
+  Path: event:/SFX/PlayerSounds/KoiPunch/KoiPunchImpact
   Guid:
-    Data1: -1947035250
-    Data2: 1118217839
-    Data3: -468917614
-    Data4: 1411338425
+    Data1: -1202465871
+    Data2: 1137576997
+    Data3: 120204466
+    Data4: -1431931061
   Banks:
   - {fileID: -893817079267125501}
   IsStream: 0
@@ -53,7 +105,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 4414
 --- !u!114 &-7553286442666304258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,6 +124,34 @@ MonoBehaviour:
     Data2: 1326367932
     Data3: 777530763
     Data4: 1738886625
+  Banks:
+  - {fileID: 6714764706478201932}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -3498706762230938988}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 205894
+--- !u!114 &-7552915490978264856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Stingers/ZenMeterFull
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Stingers/ZenMeterFull
+  Guid:
+    Data1: 305379420
+    Data2: 1265745822
+    Data3: 1023675533
+    Data4: 1233040725
   Banks:
   - {fileID: 6714764706478201932}
   IsStream: 0
@@ -104,37 +184,11 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
-  Parameters: []
+  Parameters:
+  - {fileID: -5953331912282834704}
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
---- !u!114 &-6343622929815324880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/LevelMusic/FallLevel
-  m_EditorClassIdentifier: 
-  Path: event:/Music/LevelMusic/FallLevel
-  Guid:
-    Data1: 230221487
-    Data2: 1183866685
-    Data3: 2126064265
-    Data4: -2034878093
-  Banks:
-  - {fileID: 6714764706478201932}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
+  Length: 814
 --- !u!114 &-6334840867718939931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,11 +204,116 @@ MonoBehaviour:
   Path: C:/Users/a penguin/OneDrive/Documents/FMOD Studio/placeholder/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638403940021976239
+  lastModified: 638411834796876497
   FileSizes:
   - Name: Desktop
-    Value: 2486
+    Value: 2560
   Exists: 1
+--- !u!114 &-5953331912282834704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/SuccessfulPunch/koiPunchSoundState
+  m_EditorClassIdentifier: 
+  Name: koiPunchSoundState
+  StudioPath: 
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 818482255
+    data2: 573094537
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-5678048118223378165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/FishSounds/FishImpact
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/FishSounds/FishImpact
+  Guid:
+    Data1: 2104581635
+    Data2: 1306762225
+    Data3: 1774406054
+    Data4: -665348753
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1500
+--- !u!114 &-5619107479411155224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/FishSounds/FishSlap
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/FishSounds/FishSlap
+  Guid:
+    Data1: 1362691473
+    Data2: 1303167437
+    Data3: 2016142485
+    Data4: -1288829827
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1087
+--- !u!114 &-5286066432729537786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Stingers/CombatComplete
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Stingers/CombatComplete
+  Guid:
+    Data1: 2098851776
+    Data2: 1111242693
+    Data3: -196178795
+    Data4: 1674097435
+  Banks:
+  - {fileID: 6714764706478201932}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-5264123793402584295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,13 +335,13 @@ MonoBehaviour:
   Banks:
   - {fileID: -893817079267125501}
   IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
+  Is3D: 1
+  IsOneShot: 0
   Parameters:
   - {fileID: 4706070005379597630}
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 8000
 --- !u!114 &-4994444882430963251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,12 +357,12 @@ MonoBehaviour:
   Path: C:/Users/a penguin/OneDrive/Documents/FMOD Studio/placeholder/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638403940021946246
+  lastModified: 638411834796826481
   FileSizes:
   - Name: Desktop
     Value: 1340
   Exists: 1
---- !u!114 &-3651308551458511650
+--- !u!114 &-4896449346990678863
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -213,14 +372,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Stingers/CombatComplete
+  m_Name: event:/SFX/Voice/RandomPunchComments/PlayerMiss
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Stingers/CombatComplete
+  Path: event:/SFX/Voice/RandomPunchComments/PlayerMiss
   Guid:
-    Data1: 2098851776
-    Data2: 1111242693
-    Data3: -196178795
-    Data4: 1674097435
+    Data1: 861750013
+    Data2: 1198607789
+    Data3: 916438420
+    Data4: -906657188
   Banks:
   - {fileID: -893817079267125501}
   IsStream: 0
@@ -229,8 +388,8 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
---- !u!114 &-3486733328369293899
+  Length: 4360
+--- !u!114 &-4785207930136196373
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -240,24 +399,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/PlayerSounds/ChargeSounds/KoiPunchImpact
+  m_Name: event:/Music/LevelMusic/Level2
   m_EditorClassIdentifier: 
-  Path: event:/SFX/PlayerSounds/ChargeSounds/KoiPunchImpact
+  Path: event:/Music/LevelMusic/Level2
   Guid:
-    Data1: -1202465871
-    Data2: 1137576997
-    Data3: 120204466
-    Data4: -1431931061
+    Data1: -1845606850
+    Data2: 1164150616
+    Data3: 764582802
+    Data4: 793082042
   Banks:
-  - {fileID: -893817079267125501}
-  IsStream: 0
+  - {fileID: 6714764706478201932}
+  IsStream: 1
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
---- !u!114 &-3423444155596828016
+  Length: 79020
+--- !u!114 &-3806573463180112973
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -267,14 +426,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Stingers/LevelStart
+  m_Name: event:/SFX/Voice/RandomPunchComments/PlayerCriticalHit
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Stingers/LevelStart
+  Path: event:/SFX/Voice/RandomPunchComments/PlayerCriticalHit
   Guid:
-    Data1: -1890973197
-    Data2: 1168236871
-    Data3: -1859814251
-    Data4: 1860653147
+    Data1: 1953929315
+    Data2: 1237704574
+    Data3: 810372496
+    Data4: -785623918
   Banks:
   - {fileID: -893817079267125501}
   IsStream: 0
@@ -283,8 +442,133 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
---- !u!114 &-3296977096358847252
+  Length: 2600
+--- !u!114 &-3498706762230938988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Zen2/SwagLevel
+  m_EditorClassIdentifier: 
+  Name: SwagLevel
+  StudioPath: 
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 48307657
+    data2: 2140632288
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-3423536945865117563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/PlayerSounds/KoiPunch/KoiPunchReady
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/PlayerSounds/KoiPunch/KoiPunchReady
+  Guid:
+    Data1: 694575361
+    Data2: 1160129199
+    Data3: 1892329140
+    Data4: -741126619
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 9757
+--- !u!114 &-3190656216091272765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/LevelMusic/Level3
+  m_EditorClassIdentifier: 
+  Path: event:/Music/LevelMusic/Level3
+  Guid:
+    Data1: 761860081
+    Data2: 1137815033
+    Data3: 263358115
+    Data4: 589025207
+  Banks:
+  - {fileID: 6714764706478201932}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 60831
+--- !u!114 &-1835448826973844317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/ZenMusic/ZenComplete
+  m_EditorClassIdentifier: 
+  Path: event:/Music/ZenMusic/ZenComplete
+  Guid:
+    Data1: 2120904360
+    Data2: 1289138628
+    Data3: -2126609994
+    Data4: -1390030456
+  Banks:
+  - {fileID: 6714764706478201932}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 20210
+--- !u!114 &-893817079267125501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: 
+  Path: C:/Users/a penguin/OneDrive/Documents/FMOD Studio/placeholder/Build/Desktop/SFX.bank
+  Name: SFX
+  StudioPath: bank:/SFX
+  lastModified: 638411848938564430
+  FileSizes:
+  - Name: Desktop
+    Value: 1367584
+  Exists: 1
+--- !u!114 &-731980368466317622
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -308,161 +592,6 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &-2240725231993148898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Announcer/AnnouncerHit
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Announcer/AnnouncerHit
-  Guid:
-    Data1: 1837456406
-    Data2: 1257833490
-    Data3: 122067859
-    Data4: 1066601559
-  Banks:
-  - {fileID: -893817079267125501}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-2130298556780031175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Stingers/ZenModeStart
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Stingers/ZenModeStart
-  Guid:
-    Data1: -1302467433
-    Data2: 1328091066
-    Data3: -310187089
-    Data4: 1890090922
-  Banks:
-  - {fileID: -893817079267125501}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-2061298642196157542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/LevelMusic/WinterLevel
-  m_EditorClassIdentifier: 
-  Path: event:/Music/LevelMusic/WinterLevel
-  Guid:
-    Data1: 761860081
-    Data2: 1137815033
-    Data3: 263358115
-    Data4: 589025207
-  Banks:
-  - {fileID: 6714764706478201932}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-1835448826973844317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/ZenMusic/ZenComplete
-  m_EditorClassIdentifier: 
-  Path: event:/Music/ZenMusic/ZenComplete
-  Guid:
-    Data1: 2120904360
-    Data2: 1289138628
-    Data3: -2126609994
-    Data4: -1390030456
-  Banks:
-  - {fileID: 6714764706478201932}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-986500150675407002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/ZenMusic/Zen3
-  m_EditorClassIdentifier: 
-  Path: event:/Music/ZenMusic/Zen3
-  Guid:
-    Data1: 65858787
-    Data2: 1122563911
-    Data3: 1325659808
-    Data4: 834035996
-  Banks:
-  - {fileID: 6714764706478201932}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-893817079267125501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/SFX.bank
-  m_EditorClassIdentifier: 
-  Path: C:/Users/a penguin/OneDrive/Documents/FMOD Studio/placeholder/Build/Desktop/SFX.bank
-  Name: SFX
-  StudioPath: bank:/SFX
-  lastModified: 638403940024782085
-  FileSizes:
-  - Name: Desktop
-    Value: 60128
-  Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,68 +612,42 @@ MonoBehaviour:
   EditorEvents:
   - {fileID: 7451941171806008727}
   - {fileID: 53606116969686336}
-  - {fileID: 6798830533697172152}
-  - {fileID: -3486733328369293899}
-  - {fileID: 7112464892630031496}
   - {fileID: -7109748266049691999}
-  - {fileID: 8079872046339563680}
-  - {fileID: 5572074428346379}
-  - {fileID: -2130298556780031175}
-  - {fileID: -3651308551458511650}
-  - {fileID: 5392373779169140470}
-  - {fileID: -3423444155596828016}
-  - {fileID: 6397357032514795925}
   - {fileID: -7553286442666304258}
   - {fileID: -1835448826973844317}
-  - {fileID: -6343622929815324880}
   - {fileID: 7507595253703383435}
-  - {fileID: -986500150675407002}
-  - {fileID: -2061298642196157542}
-  - {fileID: 2269108306097016916}
-  - {fileID: -2240725231993148898}
   - {fileID: 1994738907624628319}
   - {fileID: -5264123793402584295}
-  - {fileID: -7879646298773465607}
-  - {fileID: 3996171639036040058}
-  - {fileID: 7428759608777491287}
   - {fileID: -7985871429262521722}
-  - {fileID: 2885696044250346736}
   - {fileID: 2240920930864637158}
   - {fileID: 4858676778192775680}
+  - {fileID: -7552915490978264856}
+  - {fileID: 6765067701677436724}
+  - {fileID: 3117125922648048613}
+  - {fileID: -5286066432729537786}
+  - {fileID: 4842483140629396089}
+  - {fileID: 953240987607647001}
+  - {fileID: -4785207930136196373}
+  - {fileID: 1425447013965603186}
+  - {fileID: -3190656216091272765}
+  - {fileID: -3423536945865117563}
+  - {fileID: -5678048118223378165}
+  - {fileID: 8954620955950177194}
+  - {fileID: -9161524687458127279}
+  - {fileID: -3806573463180112973}
+  - {fileID: -5619107479411155224}
+  - {fileID: -7801974930776322344}
+  - {fileID: 4891591361268523726}
+  - {fileID: 812625612749181375}
+  - {fileID: -4896449346990678863}
+  - {fileID: 929862128883885155}
   EditorParameters: []
   MasterBanks:
   - {fileID: -4994444882430963251}
   StringsBanks:
   - {fileID: -6334840867718939931}
-  cacheTime: 638403940024782085
+  cacheTime: 638411848938564430
   cacheVersion: 131616
---- !u!114 &5572074428346379
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Stingers/ZenComplete
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Stingers/ZenComplete
-  Guid:
-    Data1: -1433537924
-    Data2: 1136769021
-    Data3: 360360332
-    Data4: -336550949
-  Banks:
-  - {fileID: -893817079267125501}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &53606116969686336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -565,6 +668,114 @@ MonoBehaviour:
     Data4: -1945151264
   Banks:
   - {fileID: -893817079267125501}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &812625612749181375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Ambience/Level2
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Ambience/Level2
+  Guid:
+    Data1: -1690109493
+    Data2: 1129878980
+    Data3: 700960939
+    Data4: 486954555
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 22000
+--- !u!114 &929862128883885155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Voice/RandomPunchComments/PlayerGreatHit
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Voice/RandomPunchComments/PlayerGreatHit
+  Guid:
+    Data1: 1384947744
+    Data2: 1306423826
+    Data3: -1616648558
+    Data4: -767490246
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1800
+--- !u!114 &953240987607647001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Stingers/LevelStart
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Stingers/LevelStart
+  Guid:
+    Data1: -1890973197
+    Data2: 1168236871
+    Data3: -1859814251
+    Data4: 1860653147
+  Banks:
+  - {fileID: 6714764706478201932}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &1425447013965603186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/LevelMusic/Level1
+  m_EditorClassIdentifier: 
+  Path: event:/Music/LevelMusic/Level1
+  Guid:
+    Data1: 230221487
+    Data2: 1183866685
+    Data3: 2126064265
+    Data4: -2034878093
+  Banks:
+  - {fileID: 6714764706478201932}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -626,7 +837,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &2269108306097016916
+--- !u!114 &3117125922648048613
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -636,70 +847,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Announcer/AnnouncerGreatHit
+  m_Name: event:/Music/Stingers/ZenModeStart
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Announcer/AnnouncerGreatHit
+  Path: event:/Music/Stingers/ZenModeStart
   Guid:
-    Data1: 1048482323
-    Data2: 1226608405
-    Data3: 652619416
-    Data4: -127980301
+    Data1: -1302467433
+    Data2: 1328091066
+    Data3: -310187089
+    Data4: 1890090922
   Banks:
-  - {fileID: -893817079267125501}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &2885696044250346736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Announcer/AnnouncerMiss
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Announcer/AnnouncerMiss
-  Guid:
-    Data1: -2025212219
-    Data2: 1122857952
-    Data3: -208254835
-    Data4: 1265724397
-  Banks:
-  - {fileID: -893817079267125501}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &3996171639036040058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Announcer/AnnouncerLevelStart
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Announcer/AnnouncerLevelStart
-  Guid:
-    Data1: 334423727
-    Data2: 1245799377
-    Data3: -601532253
-    Data4: -684832825
-  Banks:
-  - {fileID: -893817079267125501}
+  - {fileID: 6714764706478201932}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -731,6 +888,33 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &4842483140629396089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Stingers/BossComplete
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Stingers/BossComplete
+  Guid:
+    Data1: -938812207
+    Data2: 1232395803
+    Data3: -1804703095
+    Data4: -221537809
+  Banks:
+  - {fileID: 6714764706478201932}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &4858676778192775680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -758,7 +942,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &5392373779169140470
+--- !u!114 &4891591361268523726
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -768,50 +952,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Stingers/BossComplete
+  m_Name: event:/SFX/PlayerSounds/KoiPunch/ChargingKoiPunch
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Stingers/BossComplete
+  Path: event:/SFX/PlayerSounds/KoiPunch/ChargingKoiPunch
   Guid:
-    Data1: -938812207
-    Data2: 1232395803
-    Data3: -1804703095
-    Data4: -221537809
+    Data1: -697126988
+    Data2: 1276348840
+    Data3: -94430534
+    Data4: -775580040
   Banks:
   - {fileID: -893817079267125501}
   IsStream: 0
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
---- !u!114 &6397357032514795925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/LevelMusic/SpringLevel
-  m_EditorClassIdentifier: 
-  Path: event:/Music/LevelMusic/SpringLevel
-  Guid:
-    Data1: -1845606850
-    Data2: 1164150616
-    Data3: 764582802
-    Data4: 793082042
-  Banks:
-  - {fileID: 6714764706478201932}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
+  Length: 8428
 --- !u!114 &6714764706478201932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -827,12 +984,12 @@ MonoBehaviour:
   Path: C:/Users/a penguin/OneDrive/Documents/FMOD Studio/placeholder/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638403940022166286
+  lastModified: 638411830080545349
   FileSizes:
   - Name: Desktop
-    Value: 4058
+    Value: 9228768
   Exists: 1
---- !u!114 &6798830533697172152
+--- !u!114 &6765067701677436724
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -842,71 +999,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/PlayerSounds/ChargeSounds/KoiPunch
+  m_Name: event:/Music/Stingers/ZenComplete
   m_EditorClassIdentifier: 
-  Path: event:/SFX/PlayerSounds/ChargeSounds/KoiPunch
+  Path: event:/Music/Stingers/ZenComplete
   Guid:
-    Data1: 211333718
-    Data2: 1219390968
-    Data3: -105047391
-    Data4: -497749526
+    Data1: -1433537924
+    Data2: 1136769021
+    Data3: 360360332
+    Data4: -336550949
   Banks:
-  - {fileID: -893817079267125501}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 0
-  Parameters:
-  - {fileID: -3296977096358847252}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 4675
---- !u!114 &7112464892630031496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/PlayerSounds/ChargeSounds/ChargingKoiPunch
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/PlayerSounds/ChargeSounds/ChargingKoiPunch
-  Guid:
-    Data1: -697126988
-    Data2: 1276348840
-    Data3: -94430534
-    Data4: -775580040
-  Banks:
-  - {fileID: -893817079267125501}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &7428759608777491287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Announcer/AnnouncerLevelEnd
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Announcer/AnnouncerLevelEnd
-  Guid:
-    Data1: 1150356659
-    Data2: 1133938840
-    Data3: -336565343
-    Data4: 93828736
-  Banks:
-  - {fileID: -893817079267125501}
+  - {fileID: 6714764706478201932}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -961,14 +1063,15 @@ MonoBehaviour:
     Data4: 41715647
   Banks:
   - {fileID: 6714764706478201932}
-  IsStream: 0
+  IsStream: 1
   Is3D: 0
-  IsOneShot: 1
-  Parameters: []
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -7861563079758658885}
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
---- !u!114 &8079872046339563680
+  Length: 20210
+--- !u!114 &8954620955950177194
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -978,14 +1081,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Stingers/ZenMeterFull
+  m_Name: event:/SFX/Voice/RandomPunchComments/PlayerFantasticHit
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Stingers/ZenMeterFull
+  Path: event:/SFX/Voice/RandomPunchComments/PlayerFantasticHit
   Guid:
-    Data1: 305379420
-    Data2: 1265745822
-    Data3: 1023675533
-    Data4: 1233040725
+    Data1: -1140381644
+    Data2: 1142274952
+    Data3: -1579293507
+    Data4: 913994088
   Banks:
   - {fileID: -893817079267125501}
   IsStream: 0
@@ -994,4 +1097,4 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 2600

@@ -1,6 +1,9 @@
 using UnityEngine;
 using FMOD.Studio;
 using FMODUnity;
+using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
+
 public class FMODManager: MonoBehaviour
 {
     private static FMODManager instance;
@@ -13,10 +16,10 @@ public class FMODManager: MonoBehaviour
     
     private EventInstance leftHandWind = RuntimeManager.CreateInstance("event:/SFX/PlayerSounds/HandSounds/HandWind");
     private EventInstance rightHandWind = RuntimeManager.CreateInstance("event:/SFX/PlayerSounds/HandSounds/HandWind");
-    private EventInstance levelOne = RuntimeManager.CreateInstance("event:/Music/LevelMusic/SpringLevel");
-    private EventInstance levelTwo = RuntimeManager.CreateInstance("event:/Music/LevelMusic/FallLevel");
-    private EventInstance levelThree = RuntimeManager.CreateInstance("event:/Music/LevelMusic/WinterLevel");
-    private EventInstance koiPunch = RuntimeManager.CreateInstance("event:/SFX/PlayerSounds/ChargeSounds/KoiPunch");
+    private EventInstance levelOne = RuntimeManager.CreateInstance("event:/Music/LevelMusic/Level1");
+    private EventInstance levelTwo = RuntimeManager.CreateInstance("event:/Music/LevelMusic/Level2");
+    private EventInstance levelThree = RuntimeManager.CreateInstance("event:/Music/LevelMusic/Level3");
+    private EventInstance koiPunch = RuntimeManager.CreateInstance("event:/SFX/PlayerSounds/ChargeSounds/KoiPunch"); //not done!
     
     [SerializeField] [Range(0,100)] private float velocityFloor;
     [Range(0, 1)] private float sfxVolume;
@@ -25,8 +28,8 @@ public class FMODManager: MonoBehaviour
     private float playerRightHandVelocity;
 
     public string[] soundPaths;
-
-    public string[] subtitlePaths;
+    public string selectedSoundPath;
+    
    
     #endregion
     
@@ -60,20 +63,10 @@ public class FMODManager: MonoBehaviour
         leftHand = GameObject.Find("leftHand");
         rightHand = GameObject.Find("rightHand");
 
-        soundPaths = new string[4]
+        soundPaths = new string[2]
         {
-            "event:/SFX/Announcer/RandomPunchComments/AnnouncerWellDone",
-            "event:/SFX/Announcer/RandomPunchComments/AnnouncerGreatPunch",
-            "event:/SFX/Announcer/RandomPunchComments/AnnouncerFantastic",
-            "event:/SFX/Announcer/RandomPunchComments/AnnouncerYouAreDoingGreat"
-        };
-
-        subtitlePaths = new string[]
-        {
-            "WellDone",
-            "GreatPunch",
-            "Fantastic",
-            "YouAreDoingGreat"
+            "event:/SFX/Voice/RandomPunchComments/PlayerGreatHit",
+            "event:/SFX/Voice/RandomPunchComments/PlayerFantasticHit",
         };
         
         RuntimeManager.AttachInstanceToGameObject(leftHandWind,  leftHand.GetComponent<Transform>(), leftHand.GetComponent<Rigidbody>());
@@ -81,8 +74,7 @@ public class FMODManager: MonoBehaviour
         RuntimeManager.AttachInstanceToGameObject(levelOne, cam.GetComponent<Transform>(), cam.GetComponent<Rigidbody>());
         RuntimeManager.AttachInstanceToGameObject(levelTwo, cam.GetComponent<Transform>(), cam.GetComponent<Rigidbody>());
         RuntimeManager.AttachInstanceToGameObject(levelThree, cam.GetComponent<Transform>(), cam.GetComponent<Rigidbody>());
-
-        SelectRandomSoundSubtitle();
+        
     }
     
     private Bus musicBus;
@@ -111,6 +103,11 @@ public class FMODManager: MonoBehaviour
         {
             rightHandWind.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
+
+        if (Input.GetKeyDown("space"))
+        {
+            SelectRandomPunchSound();
+        }
     }
     
     /*how to use:
@@ -133,7 +130,7 @@ public class FMODManager: MonoBehaviour
             }
             case 1:
             {
-                RuntimeManager.PlayOneShotAttached("event:/SFX/Stingers/LevelStart", cam.gameObject);
+                RuntimeManager.PlayOneShotAttached("event:/Music/Stingers/LevelStart", cam.gameObject);
                 levelTwo.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 levelThree.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 levelOne.start();
@@ -141,7 +138,7 @@ public class FMODManager: MonoBehaviour
             }
             case 2:
             {
-                RuntimeManager.PlayOneShotAttached("event:/SFX/Stingers/LevelStart", cam.gameObject);
+                RuntimeManager.PlayOneShotAttached("event:/Music/Stingers/LevelStart", cam.gameObject);
                 levelThree.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 levelOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 levelTwo.start();
@@ -149,7 +146,7 @@ public class FMODManager: MonoBehaviour
             }
             case 3:
             {
-                RuntimeManager.PlayOneShotAttached("event:/SFX/Stingers/LevelStart", cam.gameObject);
+                RuntimeManager.PlayOneShotAttached("event:/Music/Stingers/LevelStart", cam.gameObject);
                 levelOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 levelTwo.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 levelThree.start();
@@ -168,7 +165,7 @@ public class FMODManager: MonoBehaviour
         this.leftHand = leftHand;
     }
 
-    public void KoiPunchSounds(int koiPunchState)
+    public void KoiPunchSounds(int koiPunchState) //not done!
     {
         switch (koiPunchState)
         {
@@ -187,27 +184,28 @@ public class FMODManager: MonoBehaviour
         }
     }
 
-    void SelectRandomSoundSubtitle()
+    void SelectRandomPunchSound()
     {
 
         if (ShouldRun())
         {
             Debug.Log("The if statement ran!");
-            // Checks if the Arrays are empty
-            if (soundPaths == null || soundPaths.Length == 0 || subtitlePaths == null || subtitlePaths.Length == 0)
+            // Checks if the Array is empty
+            if (soundPaths == null || soundPaths.Length == 0)
             {
-                Debug.LogError("Arrays are null or empty.");
+                Debug.LogError("Array is null or empty.");
                 return;
             }
 
             var randomIndex = Random.Range(0, soundPaths.Length);
 
-            var selectedSoundPath = soundPaths[randomIndex];
-            var selectedSubtitle = subtitlePaths[randomIndex];
+            selectedSoundPath = soundPaths[randomIndex];
 
             // Now you can use the selected sound and subtitle paths as needed.
             Debug.Log("Selected Sound Path: " + selectedSoundPath);
-            Debug.Log("Selected Subtitle: " + selectedSubtitle);
+            Debug.Log("Selected Subtitle: " + VoiceLinesLoader.GetValueForKey(key: "OnPunch", randomIndex));
+            PlayOneShot(selectedSoundPath, this.transform.position);
+            SubtitleEventManager.PlaySubtitle(VoiceLinesLoader.GetValueForKey(key: "OnPunch", randomIndex));
         }
         else
         {
