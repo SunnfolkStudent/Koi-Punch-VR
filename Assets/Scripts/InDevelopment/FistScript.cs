@@ -5,8 +5,8 @@ namespace InDevelopment
 {
     public class FistScript : MonoBehaviour
     {
-        [SerializeField] private float sphereCastRadius = 0.05f;
-        [SerializeField] private int maxColliders = 10;
+        // [SerializeField] private float sphereCastRadius = 0.05f;
+        // [SerializeField] private int maxColliders = 10;
         private ControllerManager _controllerManager;
         private string _whichFistUsed;
     
@@ -16,30 +16,30 @@ namespace InDevelopment
             _whichFistUsed = gameObject.tag;
         }
 
-        private void Update()
-        {
-            var hitColliders = new Collider[maxColliders];
-            var numColliders = Physics.OverlapSphereNonAlloc(transform.position, sphereCastRadius, hitColliders);
-            for (var i = 0; i < numColliders; i++)
-            {
-                if (!hitColliders[i].gameObject.TryGetComponent(out IPunchable punch)) return;
-                punch.PunchObject(_controllerManager, _whichFistUsed);
-            }
-            
-            // if (Physics.SphereCast(transform.position, sphereCastRadius, transform.forward, out var hit, 0f))
-            // {
-            //     if (!hit.collider.gameObject.TryGetComponent(out IPunchable punch)) return;
-            //     punch.PunchObject(_controllerManager, _whichFistUsed);
-            // }
-        }
-
-        // private void OnCollisionEnter(Collision other)
+        // private void Update()
         // {
-        //     
-        //     if (other.gameObject.TryGetComponent(out IPunchable punchableObject))
+        //     var hitColliders = new Collider[maxColliders];
+        //     var numColliders = Physics.OverlapSphereNonAlloc(transform.position, sphereCastRadius, hitColliders);
+        //     for (var i = 0; i < numColliders; i++)
         //     {
-        //             punchableObject.PunchObject(controllerManager, whichFistUsed);
+        //         if (!hitColliders[i].gameObject.TryGetComponent(out IPunchable punch)) return;
+        //         punch.PunchObject(_controllerManager, _whichFistUsed);
         //     }
+        //     
+        //     // if (Physics.SphereCast(transform.position, sphereCastRadius, transform.forward, out var hit, 0f))
+        //     // {
+        //     //     if (!hit.collider.gameObject.TryGetComponent(out IPunchable punch)) return;
+        //     //     punch.PunchObject(_controllerManager, _whichFistUsed);
+        //     // }
         // }
+
+        private void OnCollisionEnter(Collision other)
+        {
+            
+            if (other.gameObject.TryGetComponent(out IPunchable punchableObject))
+            {
+                    punchableObject.PunchObject(_controllerManager, _whichFistUsed);
+            }
+        }
     }
 }
