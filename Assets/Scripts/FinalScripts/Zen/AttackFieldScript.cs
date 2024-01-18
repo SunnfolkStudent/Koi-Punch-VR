@@ -22,18 +22,25 @@ namespace FinalScripts.Zen
             var numColliders = Physics.OverlapSphereNonAlloc(transform.position, sphereCastRadius, hitColliders);
             for (var i = 0; i < numColliders; i++)
             {
-                switch (hitColliders[0].transform.tag)
+                switch (hitColliders[i].transform.tag)
                 {
                     case "LeftFist":
-                        Destroy(gameObject);
+                        Hit();
                         //HapticManager.leftZenPunch1 = true;
                         break;
                     case "RightFist":
-                        Destroy(gameObject);
+                        Hit();
                         //HapticManager.rightZenPunch1 = true;
                         break;
                 }
             }
+        }
+
+        private void Hit()
+        {
+            Debug.Log("---WeakPointHit---");
+            ZenMetreManager.Instance.AddAttackFieldZen();
+            Destroy(gameObject);
         }
     
         private IEnumerator DeathTimer()
@@ -43,14 +50,14 @@ namespace FinalScripts.Zen
             Destroy(gameObject);
         }
 
-        private void OnDestroy()
-        {
-            if (!_dead)
-            {
-                ZenMetreManager.Instance.AddAttackFieldZen();
-                
-            }
-        }
+        // private void OnDestroy()
+        // {
+        //     if (!_dead)
+        //     {
+        //         ZenMetreManager.Instance.AddAttackFieldZen();
+        //         
+        //     }
+        // }
     
         // public void PunchObject(ControllerManager controllerManager, String fistUsed)
         // {
