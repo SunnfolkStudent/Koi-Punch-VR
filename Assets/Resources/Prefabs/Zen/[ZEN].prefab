@@ -114,7 +114,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1026234401038934196}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 2.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -368,7 +368,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1951507055125555257}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -688,8 +688,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: badbfe47f1b660b4dbfd3a4557e4ecfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToSpawn: {fileID: 1259329698490334870, guid: 825a7aab160dfa747a6f8797e196939d,
-    type: 3}
+  weakPointPrefab: {fileID: 0}
+  distanceBetweenSpawns: 1
   spawnInterval: 2
 --- !u!114 &3483118490097113330
 MonoBehaviour:
@@ -703,9 +703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 001387d164be94d488556f6cfb9f4a29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tripleScoreActive: 0
   zenAttackActive: 0
-  attackFieldsActive: 0
   zenMetreValue: 0
   zenLevel: 0
   zenLevelCheckpoint: 0
@@ -841,7 +839,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7454928029414591339}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
