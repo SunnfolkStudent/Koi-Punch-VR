@@ -1,12 +1,12 @@
 using InDevelopment.Punch;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace InDevelopment
 {
     public class FistScript : MonoBehaviour
     {
         [SerializeField] private float sphereCastRadius = 0.05f;
+        [SerializeField] private int maxColliders = 10;
         private ControllerManager _controllerManager;
         private string _whichFistUsed;
     
@@ -18,11 +18,19 @@ namespace InDevelopment
 
         private void Update()
         {
-            if (Physics.SphereCast(transform.position, sphereCastRadius, transform.forward, out var hit, 0f))
+            var hitColliders = new Collider[maxColliders];
+            var numColliders = Physics.OverlapSphereNonAlloc(transform.position, sphereCastRadius, hitColliders);
+            for (var i = 0; i < numColliders; i++)
             {
-                if (!hit.collider.gameObject.TryGetComponent(out IPunchable punch)) return;
+                if (!hitColliders[i].gameObject.TryGetComponent(out IPunchable punch)) return;
                 punch.PunchObject(_controllerManager, _whichFistUsed);
             }
+            
+            // if (Physics.SphereCast(transform.position, sphereCastRadius, transform.forward, out var hit, 0f))
+            // {
+            //     if (!hit.collider.gameObject.TryGetComponent(out IPunchable punch)) return;
+            //     punch.PunchObject(_controllerManager, _whichFistUsed);
+            // }
         }
 
         // private void OnCollisionEnter(Collision other)
