@@ -5,7 +5,7 @@ using UnityEngine;
 public class OverlapSphereTest : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Time.timeScale = 0.00001f;
     }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class SphereCast : MonoBehaviour
 {
     public Vector3 cubePosition;
+    public Vector3 cubePosition2;
     
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,28 @@ public class SphereCast : MonoBehaviour
         if (Physics.SphereCast(gameObject.transform.position, 1f, cubePosition, out hit, 0.1f))
         {
             distanceToObstacle = hit.distance;
-            Debug.Log(distanceToObstacle + "Hi");
+            Debug.Log(distanceToObstacle + "1");
         }
+        
+        if (Physics.SphereCast(gameObject.transform.position, 1f, -cubePosition, out hit, 0.1f))
+        {
+            distanceToObstacle = hit.distance;
+            Debug.Log(distanceToObstacle + "2");
+        }
+        
+        if (Physics.SphereCast(gameObject.transform.position, 1f, cubePosition2, out hit, 0.1f))
+        {
+            distanceToObstacle = hit.distance;
+            Debug.Log(distanceToObstacle + "3");
+        }
+        
+        if (Physics.SphereCast(gameObject.transform.position, 1f, -cubePosition2, out hit, 0.1f))
+        {
+            distanceToObstacle = hit.distance;
+            Debug.Log(distanceToObstacle + "4");
+        }
+        
+        
+        Debug.DrawRay(transform.position, cubePosition * 0.1f, Color.red);
     }
 }
