@@ -1,39 +1,17 @@
 using System.Collections;
+using InDevelopment.Punch;
 using UnityEngine;
 
 namespace FinalScripts.Zen
 {
-    public class AttackFieldScript : MonoBehaviour//, IPunchable
+    public class AttackFieldScript : MonoBehaviour, IPunchable
     {
-        [SerializeField] private int maxColliders = 10;
-        [SerializeField] private float sphereCastRadius = 1.25f;
-        [SerializeField] private float timeUntilDeath = 6f;
-        private bool _dead;
-        // private float _minVelocityToDestroy = 0f;
-
+        [SerializeField] private float despawnTime = 6f;
+        [SerializeField] private float rumbleDuration = 1f;
+        
         private void OnEnable()
         { 
             StartCoroutine(DeathTimer());
-        }
-    
-        private void Update()
-        {
-            var hitColliders = new Collider[maxColliders];
-            var numColliders = Physics.OverlapSphereNonAlloc(transform.position, sphereCastRadius, hitColliders);
-            for (var i = 0; i < numColliders; i++)
-            {
-                switch (hitColliders[i].transform.tag)
-                {
-                    case "LeftFist":
-                        Hit();
-                        //HapticManager.leftZenPunch1 = true;
-                        break;
-                    case "RightFist":
-                        Hit();
-                        //HapticManager.rightZenPunch1 = true;
-                        break;
-                }
-            }
         }
 
         private void Hit()
@@ -45,39 +23,39 @@ namespace FinalScripts.Zen
     
         private IEnumerator DeathTimer()
         {
-            yield return new WaitForSecondsRealtime(timeUntilDeath);
-            _dead = true;
+            yield return new WaitForSecondsRealtime(despawnTime);
             Destroy(gameObject);
         }
-
-        // private void OnDestroy()
-        // {
-        //     if (!_dead)
-        //     {
-        //         ZenMetreManager.Instance.AddAttackFieldZen();
-        //         
-        //     }
-        // }
     
-        // public void PunchObject(ControllerManager controllerManager, String fistUsed)
-        // {
-        //     Debug.LogError($"Punched L: {controllerManager.leftControllerVelocity.magnitude} R: {controllerManager.rightControllerVelocity.magnitude}", this);
-        //     if (fistUsed == "LeftFist")
-        //     {
-        //         if (controllerManager.leftControllerVelocity.magnitude > _minVelocityToDestroy)
-        //         {
-        //             Destroy(gameObject);
-        //             HapticManager.leftZenPunch1 = true;
-        //         }
-        //     }
-        //     else if (fistUsed == "RightFist")
-        //     {
-        //         if (controllerManager.rightControllerVelocity.magnitude > _minVelocityToDestroy)
-        //         {
-        //             Destroy(gameObject);
-        //             HapticManager.rightZenPunch1 = true;
-        //         }
-        //     }
-        // }
+        public void PunchObject(ControllerManager controllerManager, string fistUsed)
+        {
+            switch (fistUsed)
+            {
+                case "LeftFist":
+                    StartCoroutine(LeftRumble());
+                    Hit();
+                    break;
+                case "RightFist":
+                    StartCoroutine(RightRumble());
+                    Hit();
+                    break;
+            }
+        }
+
+        #region ---Rumble---
+        private IEnumerator LeftRumble()
+        {
+            HapticManager.leftZenPunch1 = true;
+            yield return new WaitForSecondsRealtime(rumbleDuration);
+            HapticManager.leftZenPunch1 = false;
+        }
+        
+        private IEnumerator RightRumble()
+        {
+            HapticManager.rightZenPunch1 = true;
+            yield return new WaitForSecondsRealtime(rumbleDuration);
+            HapticManager.rightZenPunch1 = false;
+        }
+        #endregion
     }
 }
