@@ -4,15 +4,24 @@ namespace FinalScripts.Fish
 {
     public class SetWeakPointsActive : MonoBehaviour
     {
+        private Transform[] _weakPoints;
         private void Start()
         {
+            _weakPoints = GetComponentsInChildren<Transform>();
             EventManager.StartBossPhase1 += SetAllActive;
-            gameObject.SetActive(false);
+
+            foreach (var transform1 in _weakPoints)
+            {
+                transform1.gameObject.SetActive(false);
+            }
         }
     
         private void SetAllActive()
         {
-            gameObject.SetActive(true);
+            foreach (var transform1 in _weakPoints)
+            {
+                transform1.gameObject.SetActive(true);
+            }
         }
     }
 }
