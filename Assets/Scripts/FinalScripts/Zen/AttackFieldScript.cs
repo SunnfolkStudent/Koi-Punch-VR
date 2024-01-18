@@ -1,51 +1,75 @@
-using System;
 using System.Collections;
-using InDevelopment.Punch;
 using UnityEngine;
 
-public class AttackFieldScript : MonoBehaviour, IPunchable
+namespace FinalScripts.Zen
 {
-    private float _timeUntilDeath = 6f;
-    private bool _dead;
-    private float _minVelocityToDestroy = 0f;
-    
-    
-    void Start()
-    { 
-        StartCoroutine(DeathTimer());
-    }
-    
-    private IEnumerator DeathTimer()
+    public class AttackFieldScript : MonoBehaviour//, IPunchable
     {
-        yield return new WaitForSecondsRealtime(_timeUntilDeath);
-        _dead = true;
-        Destroy(gameObject);
-    }
+        [SerializeField] private int maxColliders = 10;
+        [SerializeField] private float sphereCastRadius = 1.25f;
+        [SerializeField] private float timeUntilDeath = 6f;
+        private bool _dead;
+        // private float _minVelocityToDestroy = 0f;
     
-    public void PunchObject(ControllerManager controllerManager, String fistUsed)
-    {
-        Debug.LogError($"Punched L: {controllerManager.leftControllerVelocity.magnitude} R: {controllerManager.rightControllerVelocity.magnitude}", this);
-        if (fistUsed == "LeftFist")
+        void Start()
+        { 
+            StartCoroutine(DeathTimer());
+        }
+    
+        private void Update()
         {
-            if (controllerManager.leftControllerVelocity.magnitude > _minVelocityToDestroy)
+            var hitColliders = new Collider[maxColliders];
+            var numColliders = Physics.OverlapSphereNonAlloc(transform.position, sphereCastRadius, hitColliders);
+            for (var i = 0; i < numColliders; i++)
             {
-                Destroy(gameObject);
+                switch (hitColliders[0].transform.tag)
+                {
+                    case "LeftFist":
+                        Destroy(gameObject);
+                        HapticManager.leftZenPunch1 = true;
+                        break;
+                    case "RightFist":
+                        Destroy(gameObject);
+                        HapticManager.rightZenPunch1 = true;
+                        break;
+                }
             }
         }
-        else if (fistUsed == "RightFist")
+    
+        private IEnumerator DeathTimer()
         {
-            if (controllerManager.rightControllerVelocity.magnitude > _minVelocityToDestroy)
-            {
-                Destroy(gameObject);
-            }
+            yield return new WaitForSecondsRealtime(timeUntilDeath);
+            _dead = true;
+            Destroy(gameObject);
         }
-    }
 
-    private void OnDestroy()
-    {
-        if (!_dead)
+        private void OnDestroy()
         {
-            ZenMetreManager.Instance.AddAttackFieldZen();
+            if (!_dead)
+            {
+                ZenMetreManager.Instance.AddAttackFieldZen();
+            }
         }
+    
+        // public void PunchObject(ControllerManager controllerManager, String fistUsed)
+        // {
+        //     Debug.LogError($"Punched L: {controllerManager.leftControllerVelocity.magnitude} R: {controllerManager.rightControllerVelocity.magnitude}", this);
+        //     if (fistUsed == "LeftFist")
+        //     {
+        //         if (controllerManager.leftControllerVelocity.magnitude > _minVelocityToDestroy)
+        //         {
+        //             Destroy(gameObject);
+        //             HapticManager.leftZenPunch1 = true;
+        //         }
+        //     }
+        //     else if (fistUsed == "RightFist")
+        //     {
+        //         if (controllerManager.rightControllerVelocity.magnitude > _minVelocityToDestroy)
+        //         {
+        //             Destroy(gameObject);
+        //             HapticManager.rightZenPunch1 = true;
+        //         }
+        //     }
+        // }
     }
 }
