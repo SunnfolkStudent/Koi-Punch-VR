@@ -30,6 +30,7 @@ public class AttackFieldScript : MonoBehaviour, IPunchable
             if (controllerManager.leftControllerVelocity.magnitude > _minVelocityToDestroy)
             {
                 Destroy(gameObject);
+                HapticManager.leftZenPunch1 = true;
             }
         }
         else if (fistUsed == "RightFist")
@@ -37,6 +38,7 @@ public class AttackFieldScript : MonoBehaviour, IPunchable
             if (controllerManager.rightControllerVelocity.magnitude > _minVelocityToDestroy)
             {
                 Destroy(gameObject);
+                HapticManager.rightZenPunch1 = true;
             }
         }
     }
