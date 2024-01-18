@@ -1,7 +1,6 @@
 using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace FinalScripts.Zen
@@ -21,17 +20,21 @@ namespace FinalScripts.Zen
 
         private void Start()
         {
-            
+            // _mainCamera = Camera.main;
             InternalZenEventManager.spawnWeakPoints += SpawnWeakPoints;
             InternalZenEventManager.stopSpawnWeakPoints += StopSpawningWeakPoints;
         }
         
         private void SpawnWeakPoints()
         {
+            GetBoss();
+            StartCoroutine(Spawning());
+        }
+
+        private void GetBoss()
+        {
             _boss = GameObject.FindGameObjectWithTag("Boss");
             _bossCollider = _boss.GetComponent<CapsuleCollider>();
-            // _mainCamera = Camera.main;
-            StartCoroutine(Spawning());
         }
     
         private void StopSpawningWeakPoints()
