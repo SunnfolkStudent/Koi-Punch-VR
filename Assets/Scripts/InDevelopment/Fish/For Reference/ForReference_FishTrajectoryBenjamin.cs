@@ -7,6 +7,8 @@ namespace InDevelopment.Fish.For_Reference
     public class ForReference_FishTrajectoryBenjamin : MonoBehaviour
     {
         public Rigidbody ball;
+        public Rigidbody fish;
+        public Transform estimatedTarget;
         public Transform target;
 
         public float h = 25;
@@ -59,10 +61,44 @@ namespace InDevelopment.Fish.For_Reference
             float displacementY = targetPosition.y - ballPosition.y;
             Vector3 displacementXZ = new Vector3(targetPosition.x - ballPosition.x, 0, targetPosition.z - ballPosition.z);
             float time = Mathf.Sqrt(-2 * h / gravity) + Mathf.Sqrt(2 * (displacementY - h) / gravity);
+            // Figure out the vertical velocity and the horizontal velocity - this is needed for the curve the fish will be launched at
             Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * h);
             Vector3 velocityXZ = displacementXZ / time;
 
             return new LaunchData(velocityXZ + velocityY * -Mathf.Sign(gravity), time);
+        }
+
+        LaunchData2 CalculateLaunchData2(float punchForce, Vector3 fishLaunchDir)
+        {
+            var fishPosition = fish.position;
+            var landingPosition = estimatedTarget.position;
+
+            float displacementY = landingPosition.y - fishPosition.y;
+            Vector3 displacementXZ =
+                new Vector3(landingPosition.x - fishPosition.x, 0, landingPosition.z - fishPosition.z);
+            
+            // TODO: Figure out where displacementY goes in.
+            
+            float timeToReachVerticalApex = (2*punchForce*fishLaunchDir.normalized.y)/gravity + (1);
+            float timeFromApexToLandingPos = 2;
+            float timeFromStartToEnd = timeToReachVerticalApex + timeFromApexToLandingPos;
+
+            Vector3 velocityY2 = Vector3.up * Mathf.Sqrt(-2 * gravity * h);
+            Vector3 velocityXZ2 = displacementXZ / timeFromStartToEnd;
+
+            return new LaunchData2(velocityXZ2 + velocityY2 * -Mathf.Sign(gravity), timeFromStartToEnd);
+        }
+
+        struct LaunchData2
+        {
+            public readonly Vector3 InitialVelocity2;
+            public readonly float TimeToTarget2;
+            
+            public LaunchData2(Vector3 initialVelocity2, float timeToTarget2)
+            {
+                InitialVelocity2 = initialVelocity2;
+                TimeToTarget2 = timeToTarget2;
+            }
         }
 
         void DebugDrawPath()
