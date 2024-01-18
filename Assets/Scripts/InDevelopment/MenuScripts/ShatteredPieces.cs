@@ -17,7 +17,7 @@ public class ShatteredPieces : MonoBehaviour
     {
         if (rb == null) return;
         if(other.gameObject.CompareTag("Ground")) return;
-        //rb.AddForce(other.rigidbody.velocity*1000);
+        rb.AddForce(other.rigidbody.velocity*500);
     }
     
     

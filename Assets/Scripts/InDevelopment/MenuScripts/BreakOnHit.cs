@@ -9,6 +9,8 @@ public class BreakOnHit : TransitionAnimation
     [SerializeField] private GameObject _brokenPrefab;
     [SerializeField] private int LevelToGoTo;
     [SerializeField] private GameObject newMenuParent;
+    
+    [SerializeField] private GameObject currentMenuParent;
 
     private GameObject _sceneControllerObj;
     private SceneController _sceneController;
@@ -32,7 +34,8 @@ public class BreakOnHit : TransitionAnimation
 
     protected void HittingSign()
     {
-        Instantiate(_brokenPrefab,gameObject.transform.position,Quaternion.identity);
+        //Instantiate(_brokenPrefab, transform.position, Quaternion.Euler(new Vector3(0,transform.rotation.y+180,transform.rotation.z)));
+        //Instantiate(_brokenPrefab, this.transform);
         
         //TODO play break audio
         
