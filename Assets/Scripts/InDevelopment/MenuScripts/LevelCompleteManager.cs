@@ -1,11 +1,9 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEditor.VFX.UI;
 
-public class NewBehaviourScript : MonoBehaviour
+
+public class LevelCompleteManager : MonoBehaviour
 {
    private GameObject _scoreManagerObj;
    private ScoreManager _scoreManager;

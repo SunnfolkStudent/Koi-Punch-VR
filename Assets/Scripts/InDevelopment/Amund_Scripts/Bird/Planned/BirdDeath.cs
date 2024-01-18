@@ -1,5 +1,4 @@
 using UnityEngine;
-using VHierarchy.Libs;
 
 public class BirdDeath : MonoBehaviour
 {
@@ -7,6 +6,6 @@ public class BirdDeath : MonoBehaviour
     {
         print("Collision");
         //Play VFX
-        gameObject.Destroy();
+        Destroy(gameObject);
     }
 }
