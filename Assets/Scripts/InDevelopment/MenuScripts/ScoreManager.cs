@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using VHierarchy.Libs;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -24,12 +23,12 @@ public class ScoreManager : MonoBehaviour
 
     /*Added to the beginning of each script that adds to ScoreManager
      *
-     * private GameObject _scoreManagerObj;
+     * [SerializeField] private GameObject _scoreManagerObj;
         private ScoreManager _scoreManager;
         
         private void Start()
     {
-       _scoreManagerObj = GameObject.FindGameObjectWithTag("ScoreManager");
+       //_scoreManagerObj = GameObject.FindGameObjectWithTag("ScoreManager");
        _scoreManager = _scoreManagerObj.GetComponent<ScoreManager>();
     }
 
@@ -110,7 +109,7 @@ public class ScoreManager : MonoBehaviour
     //points added to bonusPoints int
     public void BonusHit(int pointsGiven)
     {
-        multiplierTime += 20;
+        multiplierTime += 5;
         if(!multiplierOn)
             StartCoroutine(Multiplier());
         

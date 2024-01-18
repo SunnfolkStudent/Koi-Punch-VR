@@ -87,10 +87,6 @@ MonoBehaviour:
   xButton: {fileID: -8920639286951503854, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
   yButton: {fileID: 4924213766314083203, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  _Abutton: 0
-  _Bbutton: 0
-  _Xbutton: 0
-  _Ybutton: 0
   leftFistTest: 0
   rightFistTest: 0
   hapticCancelButton: {fileID: 0}
@@ -253,7 +249,7 @@ PrefabInstance:
     - target: {fileID: 9130530840331138497, guid: a362c6b4c813e9849a9d7a566da1778b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.046
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9130530840331138497, guid: a362c6b4c813e9849a9d7a566da1778b,
         type: 3}
@@ -314,6 +310,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4064142795961015387}
     m_Modifications:
+    - target: {fileID: 1087512789609413547, guid: 62d65635dd823a74c9166df236601c19,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1087512789609413547, guid: 62d65635dd823a74c9166df236601c19,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1087512789609413547, guid: 62d65635dd823a74c9166df236601c19,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1766742068160544996, guid: 62d65635dd823a74c9166df236601c19,
         type: 3}
       propertyPath: m_Name
@@ -327,7 +338,7 @@ PrefabInstance:
     - target: {fileID: 4936548526502338436, guid: 62d65635dd823a74c9166df236601c19,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.16
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4936548526502338436, guid: 62d65635dd823a74c9166df236601c19,
         type: 3}
@@ -369,10 +380,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6102629444566815224, guid: 62d65635dd823a74c9166df236601c19,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7443269884471826283, guid: 62d65635dd823a74c9166df236601c19,
+        type: 3}
+      propertyPath: m_CameraYOffset
+      value: 1.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 7945479647905930347, guid: 62d65635dd823a74c9166df236601c19,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7945479647905930347, guid: 62d65635dd823a74c9166df236601c19,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7945479647905930347, guid: 62d65635dd823a74c9166df236601c19,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2336330453796618464, guid: 62d65635dd823a74c9166df236601c19, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1766742068160544996, guid: 62d65635dd823a74c9166df236601c19,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 703392636627010688}
   m_SourcePrefab: {fileID: 100100000, guid: 62d65635dd823a74c9166df236601c19, type: 3}
 --- !u!114 &2428591365961635543 stripped
 MonoBehaviour:
@@ -410,3 +451,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8601946829218410400}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8062845880504332100 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1766742068160544996, guid: 62d65635dd823a74c9166df236601c19,
+    type: 3}
+  m_PrefabInstance: {fileID: 8601946829218410400}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &703392636627010688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8062845880504332100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c980a1fd0f89e24facd1bb2a1181072, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 15
+  viewAngle: 92
+  spawnAreaMask:
+    serializedVersion: 2
+    m_Bits: 256
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 512
+  visibleSpawnAreas: []

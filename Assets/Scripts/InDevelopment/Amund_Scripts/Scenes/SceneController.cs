@@ -77,8 +77,9 @@ public class SceneController : MonoBehaviour
     private IEnumerator GoToMainMenuFirstTime()
     {
         _fadeScreenObj = GameObject.FindGameObjectWithTag("FadeScreen");
+        _fadeScreen = _fadeScreenObj.GetComponent<FadeScreenScript>();
         _fadeScreen.FadeOut();
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.5f);
         SceneManager.UnloadSceneAsync(IntroScene);
         var scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
@@ -87,8 +88,9 @@ public class SceneController : MonoBehaviour
     private IEnumerator ChangeLevel(int scene)
     {
         _fadeScreenObj = GameObject.FindGameObjectWithTag("FadeScreen");
+        _fadeScreen = _fadeScreenObj.GetComponent<FadeScreenScript>();
         _fadeScreen.FadeOut();
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene(Levels[scene]);
         if (scene is 1 or 2 or 3)
         {

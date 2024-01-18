@@ -103,6 +103,8 @@ public class HapticManager : MonoBehaviour
         {
             StopRumble();
         }*/
+
+        leftZenPunch1 = false;
     }
     
     [ContextMenu("Test Left Fish Punch")]

@@ -2,29 +2,31 @@ using UnityEngine;
 
 namespace FinalScripts.Fish.Spawning
 {
-    [ExecuteInEditMode]
+    // Uncomment the below if you need to place SpawnAreas, but otherwise keep commented, cuz it gets performance-heavy.
+    // [ExecuteInEditMode]
     [RequireComponent(typeof(LineRenderer))]
     public class SpawnAreaCircle : MonoBehaviour
     {
         [Range(0, 20)] public float spawnAreaRadius;
         private readonly int _segments = 180;
-        private LineRenderer _line;
+        private LineRenderer _spawnAreaRadiusLine;
         
-        private void Start ()
+        private void Start()
         {
-            _line = GetComponent<LineRenderer>();
+            // First, spawnArea LineRenderer and respective component settings.
+            _spawnAreaRadiusLine = GetComponent<LineRenderer>();
 
-            _line.positionCount = (_segments + 1);
-            _line.useWorldSpace = false;
-            CreatePoints();
+            _spawnAreaRadiusLine.positionCount = (_segments + 1);
+            _spawnAreaRadiusLine.useWorldSpace = false;
+            CreatePointsSpawnArea();
         }
         
         private void Update()
         {
-            CreatePoints();
+            CreatePointsSpawnArea();
         }
         
-        private void CreatePoints()
+        private void CreatePointsSpawnArea()
         {
             var angle = 20f;
             
@@ -33,7 +35,7 @@ namespace FinalScripts.Fish.Spawning
                 var x = Mathf.Sin (Mathf.Deg2Rad * angle) * spawnAreaRadius;
                 var y = Mathf.Cos (Mathf.Deg2Rad * angle) * spawnAreaRadius;
                 
-                _line.SetPosition (i,new Vector3(x,y,0) );
+                _spawnAreaRadiusLine.SetPosition (i,new Vector3(x,y,0) );
                 
                 angle += (360f / _segments);
             }

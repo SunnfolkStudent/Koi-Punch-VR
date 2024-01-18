@@ -3,29 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using FinalScripts.Fish;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class ZenMetreManager : MonoBehaviour
 {
     public static ZenMetreManager Instance;
     
     [Header("Variables for zen events")]
-    public bool tripleScoreActive;
     public bool zenAttackActive;
     private float _tripleScoreTimer = 10f;
-    public bool attackFieldsActive;
     private float _attackFieldsActiveTime = 15f;
     
     [Header("Zen Metre Values")]
     public float zenMetreValue;
     public int zenLevel;
     public int zenLevelCheckpoint;
-    private bool _zenPhase0Invoked;
+    private bool _zenBossSpawnInvoked;
     
     [Header("Time Stop Values")]
     private float _slowdownFactor = 0.001f;
-    private float _slowdownTime = 0.5f;
+    private float _slowdownTime = 0.1f;
     
     [Header("Particle systems and original simulation speeds for time stop")]
     private List<ParticleSystem> _particleSystems = new List<ParticleSystem>();
@@ -53,7 +49,8 @@ public class ZenMetreManager : MonoBehaviour
     {
         EventManager.BossDefeated += ResetTime;
         EventManager.StartBossPhase0 += ResetTime;
-        EventManager.SpawnBoss += LevelZero;  
+        EventManager.StartBossPhase0 += LevelZero;
+        EventManager.SpawnBoss += SpawnBoss;  
         EventManager.BossPhase0Completed += StopTime;
         EventManager.BossPhase0Completed += Phase0Over;
         EventManager.StartBossPhase1 += LevelOne;
@@ -64,28 +61,20 @@ public class ZenMetreManager : MonoBehaviour
     
     private void Update()
     {
-        if (Keyboard.current.aKey.wasPressedThisFrame)
+        if (zenMetreValue >= 100 && zenLevel == 0 && !_zenBossSpawnInvoked)
         {
-            EventManager.BossPhase0Completed.Invoke();
-        }
-        
-        if (zenMetreValue >= 100 && zenLevel == 0 && !_zenPhase0Invoked)
-        {
-            _zenPhase0Invoked = true;
-            Debug.Log("Update");
+            _zenBossSpawnInvoked = true;
             EventManager.SpawnBoss.Invoke();
-            Debug.Log("Update2");
         }
-    }
-    
-    private void testmethod()
-    {
-        Debug.Log("testmethod");
     }
 
+    private void SpawnBoss()
+    {
+        Instantiate(bossPrefab);
+    }
+    
     private void Phase0Over()
     {
-        _zenPhase0Invoked = false;
     }
 
     #region -- Zen Score Methods --
@@ -123,13 +112,6 @@ public class ZenMetreManager : MonoBehaviour
     {
         InternalZenEventManager.updateVisualZenBar.Invoke();
         
-        ResetTime();
-
-        Debug.Log("BossSpawned");
-
-        zenLevel++;
-        
-        //Instantiate(bossPrefab);
         //Reset music back to normal after zen mode is over
     }
     
@@ -149,9 +131,10 @@ public class ZenMetreManager : MonoBehaviour
     private void LevelTwo()
     {
         zenMetreValue = 0;
+        zenLevel = 2;
+        zenLevelCheckpoint = 2;
         
         //Start of level 2
-        zenLevelCheckpoint = 2;
         StartCoroutine(TripleScoreTimer());
         
         //Add music for the third level of zen
@@ -161,10 +144,11 @@ public class ZenMetreManager : MonoBehaviour
     private void LevelThree()
     {
         zenMetreValue = 0;
+        zenLevel = 3;
+        zenLevelCheckpoint = 3;
         
         //Start of level 3
         zenAttackActive = true;
-        zenLevelCheckpoint = 3;
         InternalZenEventManager.showPromptText.Invoke();
         
         //Add music for the fourth level of zen
@@ -172,50 +156,25 @@ public class ZenMetreManager : MonoBehaviour
     #endregion
     
     #region -- Zen Event Methods --
-    
-    //This event is called in phase two when triple score is supposed to be activated.
-    //tripleScoreActive is set to true and the timer starts.
-    //Then wait for a certain amount of time and then set tripleScoreActive to false.
-    private IEnumerator TripleScoreTimer()
-    {
-        tripleScoreActive = true;
-        yield return new WaitForSecondsRealtime(_tripleScoreTimer);
-        
-        tripleScoreActive = false;
-        
-        if (zenMetreValue >= 100)
-        {
-            zenLevel = 3;
-            EventManager.BossPhaseSuccessful.Invoke();
-        }
-        else
-        {
-            zenLevel = 0;
-            zenMetreValue = 100;
-            EventManager.StartBossPhase0.Invoke();
-        }
-    }
-    
     //This event is called in phase one when attack field weak points are supposed to spawn.
     //attackFieldsActive is set to true and the attack fields are spawned.
     //Then wait for a certain amount of time and then set attackFieldsActive to false and destroy all attack fields.
     private IEnumerator AttackFieldSpawnTimer()
     {
         Debug.Log("AttackFieldSpawnTimer");
-        attackFieldsActive = true;
+        InternalZenEventManager.spawnWeakPoints.Invoke();
         yield return new WaitForSecondsRealtime(_attackFieldsActiveTime);
+        InternalZenEventManager.stopSpawnWeakPoints.Invoke();
         
-        attackFieldsActive = false;
         DestroyAllAttackFields();
         
         if (zenMetreValue >= 100)
         {
-            zenLevel = 2;
             EventManager.BossPhaseSuccessful.Invoke();
         }
         else
         {
-            zenLevel = 1;
+            zenLevel = 0;
             zenMetreValue = 100;
             EventManager.StartBossPhase0.Invoke();
         }
@@ -228,6 +187,25 @@ public class ZenMetreManager : MonoBehaviour
         foreach (GameObject attackField in attackFields)
         {
             Destroy(attackField);
+        }
+    }
+    
+    //This event is called in phase two when triple score is supposed to be activated.
+    //tripleScoreActive is set to true and the timer starts.
+    //Then wait for a certain amount of time and then set tripleScoreActive to false.
+    private IEnumerator TripleScoreTimer()
+    {
+        yield return new WaitForSecondsRealtime(_tripleScoreTimer);
+        
+        if (zenMetreValue >= 100)
+        {
+            EventManager.BossPhaseSuccessful.Invoke();
+        }
+        else
+        {
+            zenLevel = 0;
+            zenMetreValue = 100;
+            EventManager.StartBossPhase0.Invoke();
         }
     }
 
@@ -265,12 +243,12 @@ public class ZenMetreManager : MonoBehaviour
     //Method that resets time back to normal. Called when you fail a phase or when you do your final move.
     private void ResetTime()
     {
-        /*Time.timeScale = 1f;
+        Time.timeScale = 1f;
         for (int i = 0; i < _particleSystems.Count; i++)
         {
             var mainModule = _particleSystems[i].main;
             mainModule.simulationSpeed = _originalSimulationSpeeds[i];
-        }*/
+        }
     }
     #endregion
     

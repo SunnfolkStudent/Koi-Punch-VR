@@ -15,13 +15,12 @@ public class GongScript : MonoBehaviour
     private void Start()
     {
         //_audioSource = GetComponent<AudioSource>();
-        _soundManagerObj = GameObject.FindGameObjectWithTag("SoundManager");
         _soundManager = _soundManagerObj.GetComponent<SoundManager>();
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.CompareTag("Player"))
+        if(other.gameObject.CompareTag("LeftFist") || other.gameObject.CompareTag("RightFist"))
         {
             if (isMusic)
             {

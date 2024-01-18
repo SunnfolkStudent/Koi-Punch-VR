@@ -1,127 +1,115 @@
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class AttackFieldSpawner : MonoBehaviour
+namespace FinalScripts.Zen
 {
-    public GameObject objectToSpawn; // Prefab of the object to spawn
-    private GameObject _targetObject; // The game object onto which to spawn objects
-    public float spawnInterval = 2f; // Interval between spawns
-    private float _distanceBetweenSpawns = 1f; // Distance between spawned objects
-
-    private bool _isSpawning;
-    private float _timeSinceLastSpawn;
-
-    private void Update()
+    public class AttackFieldSpawner : MonoBehaviour
     {
-        if (ZenMetreManager.Instance.attackFieldsActive && !_isSpawning)
+        [Header("Spawning")]
+        [SerializeField] private GameObject weakPointPrefab;
+        [SerializeField] private float distanceBetweenSpawns = 1f;
+        [SerializeField] private  float spawnInterval = 2f;
+        private bool _isSpawning;
+        private float _timeSinceLastSpawn;
+        
+        private GameObject _boss;
+        private CapsuleCollider _bossCollider;
+        // private Camera _mainCamera;
+
+        private void Start()
         {
-            _isSpawning = true;
-            _targetObject = GameObject.FindGameObjectWithTag("Boss");
-            Debug.Log("Spawning attack fields");
+            // _mainCamera = Camera.main;
+            InternalZenEventManager.spawnWeakPoints += SpawnWeakPoints;
+            InternalZenEventManager.stopSpawnWeakPoints += StopSpawningWeakPoints;
+        }
+        
+        private void SpawnWeakPoints()
+        {
+            if (_boss == null) GetBoss();
             StartCoroutine(Spawning());
         }
-        else if (!ZenMetreManager.Instance.attackFieldsActive && _isSpawning)
+
+        private void GetBoss()
+        {
+            _boss = GameObject.FindGameObjectWithTag("Boss");
+            _bossCollider = _boss.GetComponent<CapsuleCollider>();
+        }
+    
+        private void StopSpawningWeakPoints()
         {
             _isSpawning = false;
-            StopAllCoroutines();
+            // StopAllCoroutines();
         }
-    }
 
-    private IEnumerator SpawnObjectOnSurface()
-    {
-        bool isReady = false;
-        Vector3 randomPoint = Vector3.zero;
-        
-        while (!isReady)
+        private IEnumerator SpawnObjectOnSurface(GameObject[] attackFields)
         {
-            // Get a random point on the surface of the target object
-            randomPoint = GetRandomPointOnVisibleSide(_targetObject);
-
-            isReady = true;
+            var maxWhileCount = 5;
+            var whileCount = 0;
             
-            GameObject[] attackFields = GameObject.FindGameObjectsWithTag("AttackField");
-            
-            if (attackFields.Length > 0)
+            var randomPoint = Vector3.zero;
+            var isReady = false;
+            while (!isReady)
             {
-                foreach (GameObject attackField in attackFields)
+                randomPoint = GetRandomPointOnGameObject(_boss);
+                isReady = true;
+                
+                foreach (var attackField in attackFields)
                 {
-                    if (attackField != null)
+                    if (Vector3.Distance(randomPoint, attackField.transform.position) < distanceBetweenSpawns)
                     {
-                        if (Vector3.Distance(randomPoint, attackField.transform.position) < _distanceBetweenSpawns)
-                        {
-                            isReady = false;
-                        }
+                        isReady = false;
                     }
                 }
+                
+                if (whileCount++ < maxWhileCount) continue;
+                Debug.LogError("WhileLoop looped more times than allowed");
+                isReady = false;
             }
-
-            if (!isReady)
-            {
-                yield return new WaitForSecondsRealtime(0.1f);
-            }
+            
+            Instantiate(weakPointPrefab, randomPoint, Quaternion.identity);
+            yield return null;
         }
         
-        // Spawn the object at the random point on the surface
-        Instantiate(objectToSpawn, randomPoint, Quaternion.identity);
-        yield return null;
-    }
-
-    private Vector3 GetRandomPointOnVisibleSide(GameObject target)
-    {
-        MeshCollider meshCollider = target.GetComponent<MeshCollider>();
-
-        if (meshCollider == null || meshCollider.sharedMesh == null)
+        private Vector3 GetRandomPointOnGameObject(GameObject target)
         {
-            Debug.LogError("MeshCollider or mesh not found on the target object.");
-            return Vector3.zero;
-        }
-
-        Camera mainCamera = Camera.main;
-
-        if (mainCamera == null)
-        {
-            Debug.LogError("Main camera not found in the scene.");
-            return Vector3.zero;
-        }
-
-        Vector3 randomPoint;
-
-        while (true)
-        {
-            Vector3 randomDirection = Random.onUnitSphere;
-
-            RaycastHit hit;
-            if (meshCollider.Raycast(new Ray(target.transform.position + randomDirection * meshCollider.bounds.extents.magnitude * 2f, -randomDirection), out hit, meshCollider.bounds.extents.magnitude * 4f))
+            var maxWhileCount = 5;
+            var whileCount = 0;
+            Vector3 randomPoint;
+            while (true)
             {
-                Vector3 surfaceNormal = hit.normal;
-                Vector3 cameraToSurface = hit.point - mainCamera.transform.position;
-
-                // Check if the dot product between camera direction and surface normal is positive (facing camera)
-                if (Vector3.Dot(cameraToSurface.normalized, surfaceNormal.normalized) < 0)
+                if (whileCount++ >= maxWhileCount)
                 {
-                    randomPoint = hit.point;
+                    Debug.LogError("WhileLoop looped more times than allowed");
+                    randomPoint = _boss.transform.position;
                     break;
                 }
+
+                if (!_bossCollider.Raycast(new Ray(target.transform.position, Random.onUnitSphere), out var hit, math.abs(_bossCollider.bounds.extents.magnitude))) continue;
+                randomPoint = hit.point;
+                break;
             }
+
+            return randomPoint;
         }
 
-        return randomPoint;
-    }
-
-    private IEnumerator Spawning()
-    {
-        while (_isSpawning)
+        private IEnumerator Spawning()
         {
-            _timeSinceLastSpawn += Time.unscaledDeltaTime;
-            if (_timeSinceLastSpawn >= spawnInterval)
+            _isSpawning = true;
+            Debug.Log("Spawning attack fields");
+            while (_isSpawning)
             {
-                _timeSinceLastSpawn = 0f;
-                StopCoroutine(SpawnObjectOnSurface());
-                StartCoroutine(SpawnObjectOnSurface());
-            }
+                _timeSinceLastSpawn += Time.unscaledDeltaTime;
+                if (_timeSinceLastSpawn >= spawnInterval)
+                {
+                    var attackFields = GameObject.FindGameObjectsWithTag("AttackField");
+                    StopCoroutine(SpawnObjectOnSurface(attackFields));
+                    _timeSinceLastSpawn = 0f;
+                }
 
-            yield return null;
+                yield return null;
+            }
         }
     }
 }

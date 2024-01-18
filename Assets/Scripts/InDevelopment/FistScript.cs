@@ -1,26 +1,26 @@
-using System;
+using InDevelopment.Punch;
 using UnityEngine;
 
-public class FistScript : MonoBehaviour
+namespace InDevelopment
 {
-
-    private ControllerManager controllerManager;
-
-    private String whichFistUsed;
-    
-    // Update is called once per frame
-    private void Start()
+    public class FistScript : MonoBehaviour
     {
-        controllerManager = GetComponentInParent<ControllerManager>();
-        whichFistUsed = gameObject.tag;
-    }
-
-    private void OnCollisionEnter(Collision other)
-    {
+        private ControllerManager _controllerManager;
+        private string _whichFistUsed;
         
-        if (other.gameObject.TryGetComponent(out IPunchable punchableObject))
+        private void Start()
         {
-                punchableObject.PunchObject(controllerManager, whichFistUsed);
+            _controllerManager = GetComponentInParent<ControllerManager>();
+            _whichFistUsed = gameObject.tag;
+        }
+        
+        private void OnCollisionEnter(Collision other)
+        {
+            
+            if (other.gameObject.TryGetComponent(out IPunchable punchableObject))
+            {
+                    punchableObject.PunchObject(_controllerManager, _whichFistUsed);
+            }
         }
     }
 }

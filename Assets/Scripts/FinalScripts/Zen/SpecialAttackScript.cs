@@ -25,11 +25,12 @@ public class SpecialAttackScript : MonoBehaviour
         //IF BUTTON WAS PRESSED
         //SET PROMPT TO OFF
         //SET CHARGING PUNCH TO TRUE
-        if (HapticManager.zenChargeing && !chargingPunch && ZenMetreManager.Instance.zenAttackActive)
+        if (ZenMetreManager.Instance.zenAttackActive && HapticManager.zenChargeing && !chargingPunch)
         {
             ZenMetreManager.Instance.zenAttackActive = true;
             InternalZenEventManager.hidePromptText.Invoke();
             chargingPunch = true;
+            HapticManager.zenCharge = true;
         }
         
         //IF BUTTON WAS RELEASED
@@ -41,6 +42,7 @@ public class SpecialAttackScript : MonoBehaviour
             chargingPunch = false;
             punchCharged = true;
             ZenMetreManager.Instance.zenAttackActive = false;
+            HapticManager.zenCharge = false;
             CalculatePunchForce();
         }
         
@@ -73,7 +75,6 @@ public class SpecialAttackScript : MonoBehaviour
         ZenMetreManager.Instance.zenLevel = 0;
         ZenMetreManager.Instance.zenMetreValue = 0f;
         InternalZenEventManager.updateVisualZenBar.Invoke();
-       InternalZenEventManager.hideSparkles.Invoke();
-        // EventManager.ZenPunchReady.Invoke();
+        InternalZenEventManager.hideSparkles.Invoke();
     }
 }
