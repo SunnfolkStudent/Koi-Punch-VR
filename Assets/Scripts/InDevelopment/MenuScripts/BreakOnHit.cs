@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using InDevelopment.Punch;
 using UnityEngine;
 
 public class BreakOnHit : TransitionAnimation
@@ -23,7 +24,7 @@ public class BreakOnHit : TransitionAnimation
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("LeftFist") || other.gameObject.CompareTag("RightFist"))
         {
             HittingSign();
         }
@@ -47,5 +48,4 @@ public class BreakOnHit : TransitionAnimation
             Destroy(gameObject);
         }
     }
-
 }
