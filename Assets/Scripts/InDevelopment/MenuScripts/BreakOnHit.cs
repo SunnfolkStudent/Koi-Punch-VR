@@ -38,6 +38,8 @@ public class BreakOnHit : TransitionAnimation
         
         if (gameObject.CompareTag("SceneChanger"))
         {
+            if (_sceneControllerObj == null)
+                return;
             gameObject.transform.localScale = new Vector3(0, 0, 0);
             _sceneController.ChangeScenes(LevelToGoTo);
         }

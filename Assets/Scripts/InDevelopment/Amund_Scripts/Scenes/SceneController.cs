@@ -23,16 +23,16 @@ public class SceneController : MonoBehaviour
     #endregion
     
     
-    private void Awake()
+    /*private void Awake()
     {
         DontDestroyOnLoad(gameObject);
         //Play intro music
         _fadeScreenObj = GameObject.FindGameObjectWithTag("FadeScreen");
         _fadeScreen = _fadeScreenObj.GetComponent<FadeScreenScript>();
         SceneManager.LoadScene(IntroScene, LoadSceneMode.Additive);
-    }
+    }*/
 
-    private void Update()
+    /*private void Update()
     {
         #region TitleCard
         if (IntroTrigger == null)
@@ -54,10 +54,10 @@ public class SceneController : MonoBehaviour
         
         #endregion
 
-        /*if (LevelSelected == 5) return;
-        StartCoroutine(ChangeLevel());
-        LevelSelected = 5;*/
-    }
+        //if (LevelSelected == 5) return;
+        //StartCoroutine(ChangeLevel());
+        //LevelSelected = 5;
+    }*/
 
     private IEnumerator TitleCard()
     {
