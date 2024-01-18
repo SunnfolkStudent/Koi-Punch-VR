@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -20,23 +21,23 @@ namespace FinalScripts.Zen
 
         private void Start()
         {
-            _boss = GameObject.FindGameObjectWithTag("Boss");
-            _bossCollider = _boss.GetComponent<CapsuleCollider>();
-            // _mainCamera = Camera.main;
             
             InternalZenEventManager.spawnWeakPoints += SpawnWeakPoints;
             InternalZenEventManager.stopSpawnWeakPoints += StopSpawningWeakPoints;
         }
-    
+        
         private void SpawnWeakPoints()
         {
+            _boss = GameObject.FindGameObjectWithTag("Boss");
+            _bossCollider = _boss.GetComponent<CapsuleCollider>();
+            // _mainCamera = Camera.main;
             StartCoroutine(Spawning());
         }
     
         private void StopSpawningWeakPoints()
         {
             _isSpawning = false;
-            StopAllCoroutines();
+            // StopAllCoroutines();
         }
 
         private IEnumerator SpawnObjectOnSurface(GameObject[] attackFields)
@@ -48,7 +49,7 @@ namespace FinalScripts.Zen
             var isReady = false;
             while (!isReady)
             {
-                randomPoint = GetRandomPointOnVisibleSide(_boss);
+                randomPoint = GetRandomPointOnGameObject(_boss);
                 isReady = true;
                 
                 foreach (var attackField in attackFields)
@@ -60,22 +61,16 @@ namespace FinalScripts.Zen
                 }
                 
                 if (whileCount++ < maxWhileCount) continue;
-                isReady = false;
                 Debug.LogError("WhileLoop looped more times than allowed");
+                isReady = false;
             }
             
             Instantiate(weakPointPrefab, randomPoint, Quaternion.identity);
             yield return null;
         }
         
-        private Vector3 GetRandomPointOnVisibleSide(GameObject target)
+        private Vector3 GetRandomPointOnGameObject(GameObject target)
         {
-            // if (_mainCamera == null)
-            // {
-            //     Debug.LogError("Main camera not found in the scene.");
-            //     return Vector3.zero;
-            // }
-            
             var maxWhileCount = 5;
             var whileCount = 0;
             Vector3 randomPoint;
@@ -84,18 +79,11 @@ namespace FinalScripts.Zen
                 if (whileCount++ >= maxWhileCount)
                 {
                     Debug.LogError("WhileLoop looped more times than allowed");
-                    randomPoint = Vector3.zero;
+                    randomPoint = _boss.transform.position;
                     break;
                 }
-                
-                var randomDirection = Random.onUnitSphere;
 
-                if (!_bossCollider.Raycast(new Ray(target.transform.position + randomDirection * _bossCollider.bounds.extents.magnitude * 2f, -randomDirection), out var hit, _bossCollider.bounds.extents.magnitude * 4f)) continue;
-                // var surfaceNormal = hit.normal;
-                // var cameraToSurface = hit.point - _mainCamera.transform.position;
-                // 
-                // Check if the dot product between camera direction and surface normal is positive (facing camera)
-                // if (Vector3.Dot(cameraToSurface.normalized, surfaceNormal.normalized) >= 0) continue;
+                if (!_bossCollider.Raycast(new Ray(target.transform.position, Random.onUnitSphere), out var hit, math.abs(_bossCollider.bounds.extents.magnitude))) continue;
                 randomPoint = hit.point;
                 break;
             }
@@ -112,11 +100,9 @@ namespace FinalScripts.Zen
                 _timeSinceLastSpawn += Time.unscaledDeltaTime;
                 if (_timeSinceLastSpawn >= spawnInterval)
                 {
-                    _timeSinceLastSpawn = 0f;
-                    
                     var attackFields = GameObject.FindGameObjectsWithTag("AttackField");
                     StopCoroutine(SpawnObjectOnSurface(attackFields));
-                    // StartCoroutine(SpawnObjectOnSurface(attackFields));
+                    _timeSinceLastSpawn = 0f;
                 }
 
                 yield return null;
