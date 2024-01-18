@@ -4,7 +4,7 @@ using System.IO;
 
 public static class VoiceLinesLoader
 {
-    public static string GetValueForKey(string key)
+    public static string GetValueForKey(string key, int _randomIndex)
     {
         string filePath = Path.Combine(Application.streamingAssetsPath, "SubtitlesTXTFiles/VoiceLines.json");
 
@@ -35,8 +35,8 @@ public static class VoiceLinesLoader
                     JArray punchCommentsArray = (JArray)property.Value;
                     if (punchCommentsArray != null && punchCommentsArray.Count > 0)
                     {
-                        int randomIndex = Random.Range(0, punchCommentsArray.Count);
-                        return punchCommentsArray[randomIndex].ToString();
+                        //int randomIndex = Random.Range(0, punchCommentsArray.Count);
+                        return punchCommentsArray[_randomIndex].ToString();
                     }
                 }
 

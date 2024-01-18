@@ -23,7 +23,7 @@ public class SubtitleHandler : MonoBehaviour
             _canvasGroup = subtitleText.gameObject.AddComponent<CanvasGroup>();
         }
 
-        SubtitleEventManager.PlaySubtitle.Invoke(VoiceLinesLoader.GetValueForKey("OnGameStart"));
+        //SubtitleEventManager.PlaySubtitle.Invoke(VoiceLinesLoader.GetValueForKey("OnGameStart"));
     }
 
     private void ShowSubtitle(string subtitle)
