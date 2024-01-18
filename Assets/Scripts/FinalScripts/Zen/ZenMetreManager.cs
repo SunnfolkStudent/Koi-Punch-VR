@@ -136,9 +136,9 @@ public class ZenMetreManager : MonoBehaviour
     {
         zenMetreValue = 0;
         zenLevel = 2;
+        zenLevelCheckpoint = 2;
         
         //Start of level 2
-        zenLevelCheckpoint = 2;
         StartCoroutine(TripleScoreTimer());
         
         //Add music for the third level of zen
@@ -149,10 +149,10 @@ public class ZenMetreManager : MonoBehaviour
     {
         zenMetreValue = 0;
         zenLevel = 3;
+        zenLevelCheckpoint = 3;
         
         //Start of level 3
         zenAttackActive = true;
-        zenLevelCheckpoint = 3;
         InternalZenEventManager.showPromptText.Invoke();
         
         //Add music for the fourth level of zen
@@ -160,29 +160,6 @@ public class ZenMetreManager : MonoBehaviour
     #endregion
     
     #region -- Zen Event Methods --
-    
-    //This event is called in phase two when triple score is supposed to be activated.
-    //tripleScoreActive is set to true and the timer starts.
-    //Then wait for a certain amount of time and then set tripleScoreActive to false.
-    private IEnumerator TripleScoreTimer()
-    {
-        tripleScoreActive = true;
-        yield return new WaitForSecondsRealtime(_tripleScoreTimer);
-        
-        tripleScoreActive = false;
-        
-        if (zenMetreValue >= 100)
-        {
-            EventManager.BossPhaseSuccessful.Invoke();
-        }
-        else
-        {
-            zenLevel = 0;
-            zenMetreValue = 100;
-            EventManager.StartBossPhase0.Invoke();
-        }
-    }
-    
     //This event is called in phase one when attack field weak points are supposed to spawn.
     //attackFieldsActive is set to true and the attack fields are spawned.
     //Then wait for a certain amount of time and then set attackFieldsActive to false and destroy all attack fields.
@@ -214,6 +191,28 @@ public class ZenMetreManager : MonoBehaviour
         foreach (GameObject attackField in attackFields)
         {
             Destroy(attackField);
+        }
+    }
+    
+    //This event is called in phase two when triple score is supposed to be activated.
+    //tripleScoreActive is set to true and the timer starts.
+    //Then wait for a certain amount of time and then set tripleScoreActive to false.
+    private IEnumerator TripleScoreTimer()
+    {
+        tripleScoreActive = true;
+        yield return new WaitForSecondsRealtime(_tripleScoreTimer);
+        
+        tripleScoreActive = false;
+        
+        if (zenMetreValue >= 100)
+        {
+            EventManager.BossPhaseSuccessful.Invoke();
+        }
+        else
+        {
+            zenLevel = 0;
+            zenMetreValue = 100;
+            EventManager.StartBossPhase0.Invoke();
         }
     }
 
