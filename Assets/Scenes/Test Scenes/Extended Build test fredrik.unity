@@ -219,33 +219,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &419668154 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8062845880504332100, guid: f960f628d92a26249aa5454b07ce42c0,
-    type: 3}
-  m_PrefabInstance: {fileID: 6006856673527985236}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &419668159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 419668154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c980a1fd0f89e24facd1bb2a1181072, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  viewRadius: 15
-  viewAngle: 92
-  spawnAreaMask:
-    serializedVersion: 2
-    m_Bits: 256
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 512
-  visibleSpawnAreas: []
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -11964,26 +11937,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Rig
       objectReference: {fileID: 0}
-    - target: {fileID: 1811646292646638539, guid: f960f628d92a26249aa5454b07ce42c0,
-        type: 3}
-      propertyPath: m_Center.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1811646292646638539, guid: f960f628d92a26249aa5454b07ce42c0,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1811646292646638539, guid: f960f628d92a26249aa5454b07ce42c0,
-        type: 3}
-      propertyPath: m_Center.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3789516052054994106, guid: f960f628d92a26249aa5454b07ce42c0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4064142795961015387, guid: f960f628d92a26249aa5454b07ce42c0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12034,50 +11987,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6507439951083574305, guid: f960f628d92a26249aa5454b07ce42c0,
-        type: 3}
-      propertyPath: sphereCast
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 6507439951083574305, guid: f960f628d92a26249aa5454b07ce42c0,
-        type: 3}
-      propertyPath: sphereCastRadius
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8680650959111623691, guid: f960f628d92a26249aa5454b07ce42c0,
-        type: 3}
-      propertyPath: m_Center.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8680650959111623691, guid: f960f628d92a26249aa5454b07ce42c0,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8680650959111623691, guid: f960f628d92a26249aa5454b07ce42c0,
-        type: 3}
-      propertyPath: m_Center.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8814261413916198127, guid: f960f628d92a26249aa5454b07ce42c0,
-        type: 3}
-      propertyPath: sphereCast
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 8814261413916198127, guid: f960f628d92a26249aa5454b07ce42c0,
-        type: 3}
-      propertyPath: sphereCastRadius
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6272407329143385920, guid: f960f628d92a26249aa5454b07ce42c0, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8062845880504332100, guid: f960f628d92a26249aa5454b07ce42c0,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 419668159}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f960f628d92a26249aa5454b07ce42c0, type: 3}
 --- !u!20 &6006856673527985237 stripped
 Camera:

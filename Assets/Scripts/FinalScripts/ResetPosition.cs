@@ -9,6 +9,9 @@ public class ResetPosition : MonoBehaviour
     [SerializeField] private InputActionReference leftResetButton;
     [SerializeField] private InputActionReference rightResetButton;
 
+    //public Keyboard Keyboard;
+    //private bool _resetPosKeyboard;
+    
     private bool _resetPosLeft;
     private bool _resetPosRight;
     
@@ -43,7 +46,8 @@ public class ResetPosition : MonoBehaviour
     {
         _resetPosLeft = leftResetButton.action.WasPressedThisFrame();
         _resetPosRight = rightResetButton.action.WasPressedThisFrame();
-
+        //_resetPosKeyboard = Keyboard.aKey.wasPressedThisFrame;
+        
         if (_resetPosLeft || _resetPosRight)
         {
             ResetPos();
