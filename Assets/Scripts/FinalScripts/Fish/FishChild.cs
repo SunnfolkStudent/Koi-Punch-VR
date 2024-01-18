@@ -47,7 +47,7 @@ namespace FinalScripts.Fish
         public void PunchObject(ControllerManager controllerManager, string fistUsed)
         {
             var v = fistUsed == "LeftFist" ? controllerManager.leftControllerVelocity : controllerManager.rightControllerVelocity;
-            if (math.abs(v.magnitude) >= fish.SuccessfulPunchThreshold) PunchObject(v);
+            if (math.abs(v.magnitude) >= fish.successfulPunchThreshold) PunchObject(v);
             else fish.Log("Punch Velocity was too weak");
         }
 
@@ -64,7 +64,7 @@ namespace FinalScripts.Fish
             var direction = velocity.normalized;
             var punchForce = velocity.magnitude * fish.punchVelMultiplier;
             
-            var forceDebuff = (velocity.magnitude - fish.SuccessfulPunchThreshold) + 0.70f;
+            var forceDebuff = (velocity.magnitude - fish.successfulPunchThreshold) + 0.70f;
             forceDebuff = forceDebuff >= 1f ?  1f : forceDebuff;
             punchForce *= forceDebuff;
             

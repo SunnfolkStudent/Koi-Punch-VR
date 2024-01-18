@@ -173,9 +173,10 @@ namespace FinalScripts.Fish
             var force = controllerVelocity + zenPunchForce;
             
             GetComponent<Rigidbody>().AddForce(force);
+            EventManager.BossDefeated.Invoke();
             
             var totalScore = Phase.Sum(pair => pair.Value.score);
-            // TODO: ScoreManager.score += totalScore
+            Log($"BossDefeated | TotalScore: {totalScore}");
         }
         #endregion
     }
