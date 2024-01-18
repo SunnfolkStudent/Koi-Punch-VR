@@ -15,6 +15,7 @@ namespace FinalScripts.Fish.Spawning.RandomWeightedTables
         [Header("Spawn Area Settings")]
         [Tooltip("How often a spawnArea can be picked, before it's disabled")]
         [SerializeField] private int maxPickRate = 5;
+        [Header("Neighbour Detection Range (Connected to Neighbour Circle):")]
         [Tooltip("Search distance for a neighbouring spawnArea, 1f being 1 tile")]
         public float neighborDistanceSearchRadius = 7f;
         
