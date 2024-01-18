@@ -1,26 +1,37 @@
-using System;
+using InDevelopment.Punch;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class FistScript : MonoBehaviour
+namespace InDevelopment
 {
-
-    private ControllerManager controllerManager;
-
-    private String whichFistUsed;
+    public class FistScript : MonoBehaviour
+    {
+        [SerializeField] private float sphereCastRadius = 0.05f;
+        private ControllerManager _controllerManager;
+        private string _whichFistUsed;
     
-    // Update is called once per frame
-    private void Start()
-    {
-        controllerManager = GetComponentInParent<ControllerManager>();
-        whichFistUsed = gameObject.tag;
-    }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        
-        if (other.gameObject.TryGetComponent(out IPunchable punchableObject))
+        private void Start()
         {
-                punchableObject.PunchObject(controllerManager, whichFistUsed);
+            _controllerManager = GetComponentInParent<ControllerManager>();
+            _whichFistUsed = gameObject.tag;
         }
+
+        private void Update()
+        {
+            if (Physics.SphereCast(transform.position, sphereCastRadius, transform.forward, out var hit, 0f))
+            {
+                if (!hit.collider.gameObject.TryGetComponent(out IPunchable punch)) return;
+                punch.PunchObject(_controllerManager, _whichFistUsed);
+            }
+        }
+
+        // private void OnCollisionEnter(Collision other)
+        // {
+        //     
+        //     if (other.gameObject.TryGetComponent(out IPunchable punchableObject))
+        //     {
+        //             punchableObject.PunchObject(controllerManager, whichFistUsed);
+        //     }
+        // }
     }
 }

@@ -1,7 +1,7 @@
-using System;
-using UnityEngine;
-
-public interface IPunchable
+namespace InDevelopment.Punch
 {
-    void PunchObject(ControllerManager controllerManager, String fistUsed);
+    public interface IPunchable
+    {
+        void PunchObject(ControllerManager controllerManager, string fistUsed);
+    }
 }
