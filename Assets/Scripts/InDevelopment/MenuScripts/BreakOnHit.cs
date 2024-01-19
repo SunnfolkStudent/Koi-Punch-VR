@@ -5,7 +5,7 @@ using InDevelopment.Punch;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class BreakOnHit : TransitionAnimation
+public class BreakOnHit : TransitionAnimation//, IPunchable
 {
     [SerializeField] private GameObject _brokenPrefab;
     [SerializeField] private int LevelToGoTo;
@@ -16,7 +16,7 @@ public class BreakOnHit : TransitionAnimation
 
     private void Awake()
     {
-        if (gameObject.CompareTag("SceneChanger"))
+        if (gameObject.CompareTag("SceneChanger") || gameObject.CompareTag("StartButton"))
         {
             _sceneControllerObj = GameObject.FindGameObjectWithTag("SceneController");
             _sceneController = _sceneControllerObj.GetComponent<SceneController>();
@@ -27,15 +27,17 @@ public class BreakOnHit : TransitionAnimation
     {
         if ((other.gameObject.CompareTag("LeftFist") && CylinderTrigger.LeftHandCanHit) || (other.gameObject.CompareTag("RightFist") && CylinderTrigger.RightHandCanHit))
         {
+            Debug.Log("Hit went through");
             CylinderTrigger.LeftHandCanHit = false;
             CylinderTrigger.RightHandCanHit = false;
             HittingSign();
         }
     }
 
-    protected void HittingSign()
+    private void HittingSign()
     {
         Instantiate(_brokenPrefab, transform.position, _brokenPrefab.transform.rotation);
+        MenuEventManager.ExplodeTransition();
         
         //TODO play break audio
         
@@ -46,11 +48,19 @@ public class BreakOnHit : TransitionAnimation
             gameObject.transform.localScale = new Vector3(0, 0, 0);
             _sceneController.ChangeScenes(LevelToGoTo);
         }
+        else if (gameObject.CompareTag("StartButton"))
+        {
+            _sceneController.StartGame();
+        }
         else
         {
-            MenuEventManager.ExplodeTransition();
             Instantiate(newMenuParent);
             Destroy(gameObject);
         }
     }
+
+    /*public void PunchObject(ControllerManager controllerManager, string fistUsed)
+    {
+        throw new NotImplementedException();
+    }*/
 }

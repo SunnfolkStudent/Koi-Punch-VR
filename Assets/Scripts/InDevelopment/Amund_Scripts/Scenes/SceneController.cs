@@ -10,62 +10,55 @@ public class SceneController : MonoBehaviour
     [SerializeField] private string[] LightingForLevels;
     [SerializeField] private Transform Goal;
     [SerializeField] private GameObject Title;
-    [SerializeField] private GameObject IntroTrigger;
     [SerializeField] private AudioClip musicLength;
     [SerializeField] private AnimationCurve titleSpeed;
     private float speed;
     private float time;
-    private bool ReadyToStart;
-    //public static int LevelSelected = 5;
+    //private bool ReadyToStart;
     private GameObject _fadeScreenObj;
     private FadeScreenScript _fadeScreen;
+    
+    private static SceneController instance;
+
+    [SerializeField] private GameObject secondStartSign;
     #endregion
     
     
-    /*private void Awake()
+    private void Awake()
     {
+        if (instance == null)
+            instance = this;
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
         DontDestroyOnLoad(gameObject);
+        
         //Play intro music
+        
         _fadeScreenObj = GameObject.FindGameObjectWithTag("FadeScreen");
         _fadeScreen = _fadeScreenObj.GetComponent<FadeScreenScript>();
-        SceneManager.LoadScene(IntroScene, LoadSceneMode.Additive);
-    }*/
+    }
 
-    /*private void Update()
-    {
-        #region TitleCard
-        if (IntroTrigger == null)
-        {
-            speed = titleSpeed.Evaluate(time);
-            time += Time.deltaTime;
-            Title.transform.position = Vector3.MoveTowards(Title.transform.position, Goal.transform.position, speed);
-        }
-
-        if (Title.transform.position == Goal.transform.position)
-        {
-            StartCoroutine(TitleCard());
-        }
-
-        if (ReadyToStart)
-        {
-            StartCoroutine(GoToMainMenuFirstTime());
-        }
-        
-        #endregion
-
-        //if (LevelSelected == 5) return;
-        //StartCoroutine(ChangeLevel());
-        //LevelSelected = 5;
-    }*/
 
     private IEnumerator TitleCard()
     {
         print("Play Music"); //Play music here
         
+        speed = titleSpeed.Evaluate(time);
+        time += Time.deltaTime;
+        Title.transform.position = Vector3.MoveTowards(Title.transform.position, Goal.transform.position, speed);
+
+        Debug.Log("second start sign appear!");
+        Instantiate(secondStartSign);
+        
         yield return new WaitForSeconds(musicLength.length);
-        
-        ReadyToStart = true;
-        
+
+        StartCoroutine(ChangeLevel(1));
+
+        //ReadyToStart = true;
+
     }
 
     public void ChangeScenes(int scene)
@@ -73,12 +66,9 @@ public class SceneController : MonoBehaviour
         StartCoroutine(ChangeLevel(scene));
     }
 
-    private IEnumerator GoToMainMenuFirstTime()
+    public void StartGame()
     {
-        _fadeScreenObj = GameObject.FindGameObjectWithTag("FadeScreen");
-        _fadeScreen = _fadeScreenObj.GetComponent<FadeScreenScript>();
-        _fadeScreen.FadeOut();
-        yield return new WaitForSeconds(1.5f);
+        StartCoroutine(TitleCard());
     }
 
     private IEnumerator ChangeLevel(int scene)

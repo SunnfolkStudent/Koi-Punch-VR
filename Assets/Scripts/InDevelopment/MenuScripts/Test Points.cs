@@ -46,5 +46,10 @@ public class TestPoints : MonoBehaviour
             Instantiate(scoringGatePrefab);
             gameObject.SetActive(false);
         }
+
+        if (typeOfPoint == 5)
+        {
+            _scoreManager.ShowZenPoints(90);
+        }
     }
 }

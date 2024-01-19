@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FinalScripts.Fish;
 using UnityEngine;
 using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
-    public int fishPunchPoints, distancePoints, bonusPoints, hitByFish, zenPhaseOne, zenPhaseTwo, zenPoints;
+    public int fishPunchPoints, distancePoints, bonusPoints, hitByFish, zenPoints;
     
     [SerializeField] private GameObject textPrefab;
     [SerializeField] private GameObject textSpawner;
@@ -16,19 +17,27 @@ public class ScoreManager : MonoBehaviour
     public float multiplierTime;
     public bool multiplierOn;
 
+    private int visableZenPoints;
+    private bool zenModeOn;
+    [SerializeField] private GameObject zenTextPrefab;
+    private TMP_Text zenText;
+
     private void Start()
     {
-        fishPunchPoints = distancePoints = bonusPoints = hitByFish = zenPhaseOne = zenPhaseTwo = zenPoints = 0;
+        fishPunchPoints = distancePoints = bonusPoints = hitByFish = zenPoints = 0;
+        zenModeOn = false;
+        EventManager.ScoreChanged += ShowZenPoints;
+        EventManager.BossDefeatedTotalScore += ZenEnd;
     }
 
     /*Added to the beginning of each script that adds to ScoreManager
      *
-     * [SerializeField] private GameObject _scoreManagerObj;
+     * private GameObject _scoreManagerObj;
         private ScoreManager _scoreManager;
         
         private void Start()
     {
-       //_scoreManagerObj = GameObject.FindGameObjectWithTag("ScoreManager");
+       _scoreManagerObj = GameObject.FindGameObjectWithTag("ScoreManager");
        _scoreManager = _scoreManagerObj.GetComponent<ScoreManager>();
     }
 
@@ -37,8 +46,8 @@ public class ScoreManager : MonoBehaviour
     /******************************************/
     
     //Successful or Failed Fish punch
-    //successful punch = 5 points
-    //failed punch = 1 point
+    //successful punch = 10 points
+    //failed punch = ? point
     //add to fishPunchPoints int (check if multiplier on)
     public void FishPunch(bool successful)
     {
@@ -109,7 +118,7 @@ public class ScoreManager : MonoBehaviour
     //points added to bonusPoints int
     public void BonusHit(int pointsGiven)
     {
-        multiplierTime += 5;
+        multiplierTime += 10;
         if(!multiplierOn)
             StartCoroutine(Multiplier());
         
@@ -128,39 +137,33 @@ public class ScoreManager : MonoBehaviour
     
     /************************************************/
 
-    //Zen mode phase 2
-    //Successful punches are given points
-    //points are added to zenPhaseOnePoints;
+    //Zen points are added to the zen score
 
-    public void ZenPhaseOne(int phaseOnePoints)
+    public void ZenEnd(int allZenPoints)
     {
-        zenPhaseOne = 0;
-        zenPhaseOne += phaseOnePoints;
+        zenPoints += allZenPoints;
     }
 
-    //Zen mode phase 3
-    //Successful punches are given points
-    //points are added to zenPhaseTwoPoints;
 
-    public void ZenPhaseTwo(int phaseTwoPoints)
+    public void ShowZenPoints(int currentZenPoints)
     {
-        zenPhaseTwo = 0;
-        zenPhaseTwo += phaseTwoPoints;
+        if (!zenModeOn)
+        {
+            //set zentext prefab to active? or instantiate
+            zenTextPrefab.SetActive(true);
+            zenText = zenTextPrefab.GetComponent<TextMeshPro>();
+      
+            zenText.text = currentZenPoints.ToString("0");
+            
+            zenModeOn = true;
+        }
+        else
+        {
+            zenText.text = currentZenPoints.ToString("0");
+        }
     }
-
-    //Zen mode phase 4
-    //Zen and Velocity are calculated into points
-    //points for phase four as well as all previous rounds are added into zenModePoints int;
-
-    public void ZenEnd(int phaseThreePoints)
-    {
-        zenPoints += phaseThreePoints;
-        zenPoints += zenPhaseTwo;
-        zenPoints += zenPhaseOne;
-
-        zenPhaseOne = 0;
-        zenPhaseTwo = 0;
-    }
+    
+    
 
     /*****************************************/
     
