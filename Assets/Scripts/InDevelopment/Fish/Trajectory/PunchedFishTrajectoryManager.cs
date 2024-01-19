@@ -1,5 +1,9 @@
+using System;
 using System.Numerics;
+using Unity.Burst;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
 namespace InDevelopment.Fish.Trajectory
@@ -112,18 +116,122 @@ namespace InDevelopment.Fish.Trajectory
         #endregion
 
     #endregion
-    public class PunchedFishTrajectoryTest : MonoBehaviour
+    public class PunchedFishTrajectoryManager : MonoBehaviour
     {
         // TODO: Figure out the received variables from punch.
         // TODO: Make a Vector2 forwardVelocity from X & Z-axis positions;
         
         // TODO: Create a punchObject applying velocityForce to the object in the air, and make object stay in the air by using Sleep.
-
-        public Rigidbody punchObject;
-        public Rigidbody testingCube;
-        public GameObject landingMarkPrefab;
         
-        public Vector3 PlotTrajectoryAtTime (Vector3 startPos, Vector3 initialVelocity, float time) 
+        private Rigidbody _fish;
+        public Vector3 startPos;
+        public Vector3 landingPos;
+        public Vector3 punchVelocity;
+        
+        public Rigidbody punchObject;
+        public GameObject landingMarkPrefab;
+
+        [Header("Adjustable Parameters for our testCapsule:")]
+        [Header("Force applied with given Direction:")]
+        [SerializeField] [Range(0, 150)] private float initialForce = 10f;
+        [SerializeField] [Range(0, 90)] private float launchAngleFromXAxis = 60f;
+
+        [Header("Direction for each axis given to testCapsule:")]
+        [SerializeField] [Range(0, 300)] private float xDirection;
+        [SerializeField] [Range(0, 300)] private float yDirection;
+        [SerializeField] [Range(0, 300)] private float zDirection;
+        
+        [SerializeField] private float gravity = 9.81f;
+        
+        [SerializeField] private bool fishAsleep = true;
+        
+        void Start()
+        {
+            _fish = GetComponentInChildren<Rigidbody>();
+            startPos = _fish.position;
+            print("StartPos in worldSpace:" + startPos);
+            print(startPos-startPos);
+            
+            // Put the Rigidbody to sleep initially (no physics are being calculated)
+            if (fishAsleep)
+            {
+                _fish.Sleep();
+            }
+        }
+
+        // Step 3 - Create a method LaunchObject()
+        public void LaunchObject(Vector3 fistVelocity)
+        {
+            if (fishAsleep)
+            {
+                _fish.WakeUp();
+                fishAsleep = false;
+            }
+            
+            /*// Convert launch angle to radians
+            float launchAngleRad = Mathf.Deg2Rad * launchAngleFromXAxis;
+
+            // Calculate launch direction components
+            float xComponent = Mathf.Cos(launchAngleRad);
+            float yComponent = Mathf.Sin(launchAngleRad);
+            float zComponent = 0f; // Assuming you want to launch along the XY plane*/
+
+            // Normalize the punch velocity to get the launch direction
+            Vector3 launchDirection = fistVelocity.normalized;
+            _fish.AddForce(launchDirection * initialForce, ForceMode.VelocityChange);
+        }
+
+        // TODO: Set a limit to have the below function respond to entering Ground every 1 sec.
+        public void FishHitGround()
+        {
+            Instantiate(landingMarkPrefab, _fish.position, Quaternion.identity);
+            print("Distance Travelled:" + (_fish.position - startPos));
+        }
+        
+        void CalculateApex()
+        {
+            // Step 3.2 - Calculate y-apex
+            float timeToApex = initialForce / gravity;
+            float apexHeight = startPos.y + (0.5f * gravity * Mathf.Pow(timeToApex, 2));
+
+            Debug.Log("Apex Height: " + apexHeight);
+        }
+
+        // Step 4 - Set up keyboard input to trigger launch
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                LaunchObject(punchVelocity);
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            landingPos += _fish.position;
+        }
+
+        private void OnCollisionEnter(Collision other)
+        {
+            switch (other.transform.tag)
+            {
+                case "Ground":
+                    Instantiate(landingMarkPrefab, _fish.position, Quaternion.identity);
+                    break;
+                case "LeftFist":
+                    HapticManager.leftFishPunch = true;
+                    break;
+                case "RightFist":
+                    HapticManager.rightFishPunch = true;
+                    break;
+            }
+            
+            Debug.Log("Distance Travelled:" + (landingPos - startPos));
+        }
+        
+        // TODO: The below is for LineRenderer - to be set up once predicted trajectory works.
+        
+        /*public Vector3 PlotTrajectoryAtTime (Vector3 startPos, Vector3 initialVelocity, float time) 
         {
             return startPos + initialVelocity*time + Physics.gravity*time*time*0.5f;
         }
@@ -149,8 +257,6 @@ namespace InDevelopment.Fish.Trajectory
             var startPosFish = transform.position;
             var landingPos = startPosFish + punchForce * direction.normalized * timeToTarget -
                              0.5f * gravity * Mathf.Pow(timeToTarget, 2) * Vector3.up;
-        }
-        
-        
+        }*/
     }
 }
