@@ -13,6 +13,7 @@ namespace FinalScripts.Fish.BossBattle
         private Transform _player;
         private Rigidbody[] _rigidities;
         [SerializeField] private float bossInitialLaunchSpeed = 35f;
+        [SerializeField] private float height;
         [SerializeField] private float zenPerHitPhase2 = 5f;
         private static BossPhase _currentBossState;
         private float _score;
@@ -86,7 +87,8 @@ namespace FinalScripts.Fish.BossBattle
             transform.position = spawnPos;
             var playerPosition = _player.position;
             transform.LookAt(playerPosition, Vector3.up);
-            var velocity2D = FishTrajectory.TrajectoryVelocity2DFromInitialSpeed(spawnPos, playerPosition, bossInitialLaunchSpeed);
+            var velocity2D = FishTrajectory.TrajectoryVelocity2DFromPeakHeight(spawnPos, playerPosition, height);
+            // var velocity2D = FishTrajectory.TrajectoryVelocity2DFromInitialSpeed(spawnPos, playerPosition, bossInitialLaunchSpeed);
             FishSpawnManager.LaunchRigiditiesDirectionWithVelocityTowards(_rigidities, (playerPosition - spawnPos).normalized, velocity2D);
         }
         
@@ -178,5 +180,17 @@ namespace FinalScripts.Fish.BossBattle
             Log($"BossDefeated | TotalScore: {totalScore}");
         }
         #endregion
+        
+        private void OnCollisionEnter(Collision other)
+        {
+            if (other.transform.CompareTag("Ground"))
+            {
+                EventManager.StartBossPhase0.Invoke();
+            }
+            else if (other.transform.CompareTag("MainCamera"))
+            {
+                EventManager.StartBossPhase0.Invoke();
+            }
+        }
     }
 }
