@@ -83,8 +83,8 @@ namespace FinalScripts.Fish
         
         private void GainZen()
         {
-            ZenMetreManager.Instance.AddHitZen(fish.FishPool.Prefab.ZenAmount);
-            Log("Zen gained: " + fish.FishPool.Prefab.ZenAmount);
+            ZenMetreManager.Instance.AddHitZen(fish.FishPool.FishRecord.ZenAmount);
+            Log("Zen gained: " + fish.FishPool.FishRecord.ZenAmount);
         }
         
         private void Despawn()
