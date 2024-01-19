@@ -9,6 +9,7 @@ namespace InDevelopment
         [SerializeField] private int maxColliders = 10;
         [SerializeField] private float sphereCastRadius = 0.2f;
         
+        private bool _collidedPreviously;
         private ControllerManager _controllerManager;
         private string _whichFistUsed;
         
@@ -20,7 +21,6 @@ namespace InDevelopment
         
         private void OnCollisionEnter(Collision other)
         {
-            
             if (other.gameObject.TryGetComponent(out IPunchable punchableObject))
             {
                 punchableObject.PunchObject(_controllerManager, _whichFistUsed);
@@ -39,12 +39,15 @@ namespace InDevelopment
         {
             var hitColliders = new Collider[maxColliders];
             var numColliders = Physics.OverlapSphereNonAlloc(transform.position, sphereCastRadius, hitColliders);
+            
+            if (numColliders == 0) _collidedPreviously = false;
+            if (_collidedPreviously) return;
+            
             for (var i = 0; i < numColliders; i++)
             {
-                if (hitColliders[i].TryGetComponent(out IPunchable punchableObject))
-                {
-                    punchableObject.PunchObject(_controllerManager, _whichFistUsed);
-                }
+                if (!hitColliders[i].TryGetComponent(out IPunchable punchableObject)) continue;
+                punchableObject.PunchObject(_controllerManager, _whichFistUsed);
+                _collidedPreviously = true;
             }
         }
     }

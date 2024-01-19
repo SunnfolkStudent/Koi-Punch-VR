@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using FinalScripts.Fish.FishSrubs;
 using FinalScripts.Fish.Spawning.RandomWeightedTables;
 using UnityEngine;
 
@@ -10,25 +10,25 @@ namespace FinalScripts.Fish.Spawning
     {
         private static List<FishPool> _fishPools;
         private static Transform _fishContainer;
-        [SerializeField] private InspectorPrefab[] fishPrefab;
+        [SerializeField] private FishSrub[] fishPrefab;
         
-        [Serializable]
-        public class InspectorPrefab
-        {
-            public GameObject prefabGameObject;
-            public int initialAmountInPool = 5;
-            public float zenFromFish = 10f;
-            public float weightInRandomTable = 100f;
-        }
+        // [Serializable]
+        // public class InspectorPrefab
+        // {
+        //     public GameObject prefabGameObject;
+        //     public int initialAmountInPool = 5;
+        //     public float zenFromFish = 10f;
+        //     public float weightInRandomTable = 100f;
+        // }
         
         #region ---Initialization---
         private void Awake()
         {
             _fishContainer = transform.GetChild(0);
             _fishPools = new List<FishPool>();
-            foreach (var prefab in fishPrefab)
+            foreach (var fishSrub in fishPrefab)
             {
-                _fishPools.Add(new FishPool(prefab.prefabGameObject, prefab.initialAmountInPool, prefab.zenFromFish, prefab.weightInRandomTable));
+                _fishPools.Add(new FishPool(fishSrub.prefab, fishSrub.initialAmountInPool, fishSrub.zenFromFish, fishSrub.weightInRandomTable));
             }
             FishSpawnType.InitializeFishSpawnTypes(_fishPools);
         }
