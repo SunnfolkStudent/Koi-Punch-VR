@@ -124,8 +124,6 @@ public class ZenMetreManager : MonoBehaviour
     private void LevelZero()
     {
         InternalZenEventManager.updateVisualZenBar.Invoke();
-        
-        //Reset music back to normal after zen mode is over
     }
     
     //Method that moves on to the second level of zen
@@ -137,8 +135,6 @@ public class ZenMetreManager : MonoBehaviour
         zenMetreValue = 0;
         InternalZenEventManager.updateVisualZenBar.Invoke();
         StartCoroutine(AttackFieldSpawnTimer());
-        
-        //Add music for the second level of zen
     }
     
     //Method that moves on to the third level of zen
@@ -150,8 +146,6 @@ public class ZenMetreManager : MonoBehaviour
         InternalZenEventManager.updateVisualZenBar.Invoke();
         //Start of level 2
         StartCoroutine(TripleScoreTimer());
-        
-        //Add music for the third level of zen
     }
     
     //Level four is the last level of zen and is the level where you unlock your ultimate move.
@@ -162,8 +156,6 @@ public class ZenMetreManager : MonoBehaviour
         //Start of level 3
         zenAttackActive = true;
         InternalZenEventManager.showPromptText.Invoke();
-        
-        //Add music for the fourth level of zen
     }
     #endregion
     
