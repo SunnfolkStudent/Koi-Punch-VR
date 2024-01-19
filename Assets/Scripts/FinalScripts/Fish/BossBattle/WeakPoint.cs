@@ -10,13 +10,10 @@ namespace FinalScripts.Fish.BossBattle
         [SerializeField] private float despawnTime = 2f;
         
         [Header("Rumble")]
-        [SerializeField] private float rumbleDuration = 1f;
-        
-        [Header("Rumble")]
         [SerializeField] private float onHitRumbleDuration = 1f;
         
         [Header("Weak Point")]
-        [SerializeField] private float weakPointScore = 60;
+        [SerializeField] private int weakPointScore = 60;
         
         private void OnEnable()
         {
@@ -42,11 +39,12 @@ namespace FinalScripts.Fish.BossBattle
         private void Hit()
         {
             Boss.Score += weakPointScore;
+            EventManager.ScoreChanged.Invoke(Boss.Score);
             ZenMetreManager.Instance.AddAttackFieldZen();
             Destroy(gameObject);
         }
 
-        #region ---Rumble---
+        #region >>>---Rumble---
         private IEnumerator LeftRumble()
         {
             HapticManager.leftZenPunch1 = true;
