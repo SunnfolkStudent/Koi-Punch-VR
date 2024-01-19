@@ -19,6 +19,9 @@ namespace FinalScripts.Fish
         {
             switch (other.transform.tag)
             {
+                case "Player":
+                    fish.FishHitPlayer();
+                    break;
                 case "Ground":
                     fish.FishHitGround();
                     break;
