@@ -91,7 +91,7 @@ public class ScoreManager : MonoBehaviour
 
         distancePoints += distance;
         
-        FloatingText(distance +" Distance!", Color.green );
+        FloatingText("+" + distance, Color.green);
     }
     
     /*Function on Fish? script to get distance points
@@ -118,7 +118,7 @@ public class ScoreManager : MonoBehaviour
 
         bonusPoints += pointsGiven;
 
-        FloatingText(pointsGiven +" Points!", Color.yellow );
+        FloatingText("+" + pointsGiven, new Color(255, 215, 0) );
     }
     
     /*Function on Fish/bird/? to get points and start multiplier
@@ -169,8 +169,8 @@ public class ScoreManager : MonoBehaviour
     
     private void FloatingText(string msg, Color txtColor)
     {
-        GameObject instantiated = Instantiate(textPrefab, textSpawner.transform.position,
-            Quaternion.identity);
+        GameObject instantiated = Instantiate(textPrefab, textSpawner.transform.localPosition,
+            textSpawner.transform.rotation);
         TextMeshPro FloatingTxt = instantiated.GetComponent<TextMeshPro>();
         FloatingTxt.text = msg;
         FloatingTxt.color = txtColor;
