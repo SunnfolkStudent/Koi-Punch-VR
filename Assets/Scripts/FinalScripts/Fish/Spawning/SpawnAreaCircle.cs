@@ -3,7 +3,7 @@ using UnityEngine;
 namespace FinalScripts.Fish.Spawning
 {
     // Uncomment the below if you need to place SpawnAreas, but otherwise keep commented, cuz it gets performance-heavy.
-    // [ExecuteInEditMode]
+    [ExecuteInEditMode]
     [RequireComponent(typeof(LineRenderer))]
     public class SpawnAreaCircle : MonoBehaviour
     {
