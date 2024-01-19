@@ -1,5 +1,7 @@
+using System.Collections;
 using FinalScripts.Fish.Spawning;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace FinalScripts.Fish
 {
@@ -9,6 +11,8 @@ namespace FinalScripts.Fish
 
         #region ---InspectorSettings---
         [Header("Despawn")]
+        [Tooltip("Despawn after this amount of seconds when fish hits the ground")]
+        [SerializeField] private float despawnDelay = 2.5f;
         [Tooltip("Determines how long it takes for the fish to despawn")]
         [SerializeField] private float despawnTime = 10f;
         [Tooltip("Determines how low the fish has to be before it despawns")]
@@ -45,6 +49,7 @@ namespace FinalScripts.Fish
             _startTime = Time.time;
             hasBeenPunched = false;
             hasHitGround = false;
+            StopCoroutine(DespawnAfterTime(despawnDelay));
         }
         #endregion
         
@@ -71,8 +76,13 @@ namespace FinalScripts.Fish
         {
             hasHitGround = true;
             Log("De-spawning: hit ground");
-            Invoke(nameof(Despawn), 2.5f);
-            // Despawn();
+            StartCoroutine(DespawnAfterTime(despawnDelay));
+        }
+
+        private IEnumerator DespawnAfterTime(float time)
+        {
+            yield return new WaitForSeconds(time);
+            Despawn();
         }
         
         public void FishPunched()
