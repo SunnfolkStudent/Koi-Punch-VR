@@ -97,22 +97,22 @@ public class ZenMetreVisualManager : MonoBehaviour
                 _zenMetreBarMaterials[2].SetFloat(_fillAmountPropertyID, fillAmount);
             }
 
-            if (workingZenLevel < 3 && zenMetreBars[2].gameObject.activeSelf)
+            if (workingZenLevel < 2 && zenMetreBars[2].gameObject.activeSelf)
             {
                 _zenMetreBarMaterials[2].SetFloat(_fillAmountPropertyID, 0f);
                 zenMetreBars[2].gameObject.SetActive(false);
             }
-            else if (workingZenLevel > 3 && !zenMetreBars[2].gameObject.activeSelf)
+            else if (workingZenLevel >= 2 && !zenMetreBars[2].gameObject.activeSelf)
             {
                 zenMetreBars[2].gameObject.SetActive(true);
             }
 
-            if (workingZenLevel < 2 && zenMetreBars[1].gameObject.activeSelf && ZenMetreManager.Instance.zenLevelCheckpoint < 2)
+            if (workingZenLevel < 1 && zenMetreBars[1].gameObject.activeSelf && ZenMetreManager.Instance.zenLevelCheckpoint < 2)
             {
                 _zenMetreBarMaterials[1].SetFloat(_fillAmountPropertyID, 0f);
                 zenMetreBars[1].gameObject.SetActive(false);
             }
-            else if (workingZenLevel > 2 && !zenMetreBars[1].gameObject.activeSelf)
+            else if (workingZenLevel >= 1 && !zenMetreBars[1].gameObject.activeSelf)
             {
                 zenMetreBars[1].gameObject.SetActive(true);
             }
