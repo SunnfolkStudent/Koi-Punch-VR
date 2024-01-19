@@ -6,13 +6,20 @@ namespace FinalScripts.Fish.BossBattle
 {
     public class WeakPoint : MonoBehaviour, IPunchable
     {
-        [Header("Despawn Time")][Tooltip("Time before weak-point de-spawns")]
+        [Header("Despawn Time")]
         [SerializeField] private float despawnTime = 2f;
-        [Header("Rumble")][Tooltip("Rumble controller on hits")]
+        
+        [Header("Rumble")]
         [SerializeField] private float rumbleDuration = 1f;
         
+        [Header("Rumble")]
+        [SerializeField] private float onHitRumbleDuration = 1f;
+        
+        [Header("Weak Point")]
+        [SerializeField] private float weakPointScore = 60;
+        
         private void OnEnable()
-        { 
+        {
             Destroy(gameObject, despawnTime);
         }
         
@@ -34,8 +41,7 @@ namespace FinalScripts.Fish.BossBattle
 
         private void Hit()
         {
-            Debug.Log("---WeakPointHit---");
-            Boss.Score += 5f;
+            Boss.Score += weakPointScore;
             ZenMetreManager.Instance.AddAttackFieldZen();
             Destroy(gameObject);
         }
@@ -44,14 +50,14 @@ namespace FinalScripts.Fish.BossBattle
         private IEnumerator LeftRumble()
         {
             HapticManager.leftZenPunch1 = true;
-            yield return new WaitForSecondsRealtime(rumbleDuration);
+            yield return new WaitForSecondsRealtime(onHitRumbleDuration);
             HapticManager.leftZenPunch1 = false;
         }
         
         private IEnumerator RightRumble()
         {
             HapticManager.rightZenPunch1 = true;
-            yield return new WaitForSecondsRealtime(rumbleDuration);
+            yield return new WaitForSecondsRealtime(onHitRumbleDuration);
             HapticManager.rightZenPunch1 = false;
         }
         #endregion

@@ -30,8 +30,6 @@ namespace FinalScripts.Fish
         
         [Header("debug")]
         public bool isDebugging;
-
-
         #endregion
         
         #region ---Initialization---
@@ -79,7 +77,7 @@ namespace FinalScripts.Fish
             Log("De-spawning: hit ground");
             StartCoroutine(DespawnAfterTime(despawnDelay));
         }
-
+        
         private IEnumerator DespawnAfterTime(float time)
         {
             yield return new WaitForSeconds(time);

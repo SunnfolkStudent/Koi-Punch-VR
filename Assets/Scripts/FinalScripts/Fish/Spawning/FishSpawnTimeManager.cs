@@ -5,7 +5,7 @@ namespace FinalScripts.Fish.Spawning
 {
     public class FishSpawnTimeManager : MonoBehaviour
     {
-        public static bool isSpawningFish{ get; private set; }
+        private static bool _isSpawningFish;
         
         [Header("FishSpawnFrequencyTimer")]
         [SerializeField] private float maxSpawnRate = 1.5f;
@@ -20,8 +20,6 @@ namespace FinalScripts.Fish.Spawning
             EventManager.FishSpawningAtMaxRate += StartSpawningAtMaxRate;
             EventManager.StopFishSpawning += StopSpawning;
             EventManager.SpawnBoss += StopSpawning;
-            
-            EventManager.FishSpawning.Invoke();
         }
         #endregion
         
@@ -41,19 +39,18 @@ namespace FinalScripts.Fish.Spawning
         [ContextMenu("StopSpawning")]
         private void StopSpawning()
         {
-            isSpawningFish = false;
+            _isSpawningFish = false;
         }
         #endregion
         
         #region ---FishFrequencyTimer---
         private IEnumerator SpawnFish()
         {
-            isSpawningFish = true;
+            _isSpawningFish = true;
             var minSpawnTime = 1 / maxSpawnRate;
             var maxSpawnTime = 1 / minSpawnRate;
-            while (isSpawningFish)
+            while (_isSpawningFish)
             {
-                // var nextSpawnTime = Mathf.Lerp(maxSpawnTime, minSpawnTime, Time.time / timeToMaxSpawnRate);
                 var nextSpawnTime = Mathf.Lerp(minSpawnTime, maxSpawnTime, (animationCurve.Evaluate(Time.time / timeToMaxSpawnRate)));
                 yield return new WaitForSeconds(nextSpawnTime);
                 EventManager.SpawnFish.Invoke();
@@ -63,7 +60,7 @@ namespace FinalScripts.Fish.Spawning
         private IEnumerator SpawnFishMaxRate()
         {
             var spawnTime = 1 / maxSpawnRate;
-            while (isSpawningFish)
+            while (_isSpawningFish)
             {
                 yield return new WaitForSeconds(spawnTime);
                 EventManager.SpawnFish.Invoke();

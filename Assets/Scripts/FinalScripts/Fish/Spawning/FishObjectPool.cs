@@ -76,7 +76,6 @@ namespace FinalScripts.Fish.Spawning
         {
             public readonly FishPool FishPool;
             public readonly GameObject ParentGameObject;
-            public readonly FinalScripts.Fish.Fish FishScript;
             public readonly Child[] Children;
             
             public Fish(FishPool fishPool)
@@ -86,9 +85,6 @@ namespace FinalScripts.Fish.Spawning
                 ParentGameObject.SetActive(false);
                 
                 Children = ParentGameObject.GetComponentsInChildren<Transform>().Select(transform1 => new Child(transform1)).ToArray();
-
-                FishScript = ParentGameObject.GetComponent<FinalScripts.Fish.Fish>();
-                FishScript.fish = this;
             }
         }
         
