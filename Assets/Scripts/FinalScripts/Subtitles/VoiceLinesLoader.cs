@@ -4,7 +4,7 @@ using System.IO;
 
 public static class VoiceLinesLoader
 {
-    public static string GetValueForKey(string key)
+    public static string GetValueForKey(string key,int _randomIndex)
     {
         string filePath = Path.Combine(Application.streamingAssetsPath, "SubtitlesTXTFiles/VoiceLines.json");
 

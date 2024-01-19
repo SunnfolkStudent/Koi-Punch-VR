@@ -1,6 +1,7 @@
 using InDevelopment.Punch;
 using Unity.Mathematics;
 using UnityEngine;
+using FMODUnity;
 
 namespace FinalScripts.Fish
 {
@@ -24,9 +25,11 @@ namespace FinalScripts.Fish
                     break;
                 case "LeftFist":
                     HapticManager.leftFishPunch = true;
+                    FMODManager.instance.PlayOneShot("event:/SFX/PlayerSounds/HandSounds/SuccessfulPunch", GameObject.Find("Hand_L").transform.position);
                     break;
                 case "RightFist":
                     HapticManager.rightFishPunch = true;
+                    FMODManager.instance.PlayOneShot("event:/SFX/PlayerSounds/HandSounds/SuccessfulPunch", GameObject.Find("Hand_R").transform.position);
                     break;
             }
         }

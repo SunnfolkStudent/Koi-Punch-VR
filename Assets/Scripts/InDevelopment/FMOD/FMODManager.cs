@@ -1,36 +1,56 @@
-using UnityEngine;
+      using System.Collections;
+      using UnityEngine;
 using FMOD.Studio;
 using FMODUnity;
-using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 public class FMODManager: MonoBehaviour
 {
-    private static FMODManager instance;
+    public static FMODManager instance;
     
     #region Variables
+
+    public ControllerManager controllerManager;
     
     private Camera cam;
-    private GameObject leftHand;
-    private GameObject rightHand;
-    
-    private EventInstance leftHandWind = RuntimeManager.CreateInstance("event:/SFX/PlayerSounds/HandSounds/HandWind");
-    private EventInstance rightHandWind = RuntimeManager.CreateInstance("event:/SFX/PlayerSounds/HandSounds/HandWind");
+
+    private GameObject Left = GameObject.Find("Hand_L");
+    private GameObject Right = GameObject.Find("Hand_R");
+  
     private EventInstance levelOne = RuntimeManager.CreateInstance("event:/Music/LevelMusic/Level1");
     private EventInstance levelTwo = RuntimeManager.CreateInstance("event:/Music/LevelMusic/Level2");
     private EventInstance levelThree = RuntimeManager.CreateInstance("event:/Music/LevelMusic/Level3");
     private EventInstance koiPunch = RuntimeManager.CreateInstance("event:/SFX/PlayerSounds/ChargeSounds/KoiPunch"); //not done!
     
-    [SerializeField] [Range(0,100)] private float velocityFloor;
+    [SerializeField] [Range(0,100)] private float velocityFloor; 
     [Range(0, 1)] private float sfxVolume;
     [Range(0, 1)] private float musicVolume;
     private float playerLeftHandVelocity;
     private float playerRightHandVelocity;
+    [SerializeField] [Range(0, 100)] private float wooshVolume;
+    [SerializeField] private bool windPlaying = false;
+
+    private IEnumerator LeftHandWind()
+    {
+        PlayOneShot("event:/SFX/PlayerSounds/HandSounds/HandWind", controllerManager.leftVelMagnitude*wooshVolume, Left.transform.position);
+        windPlaying = true;
+        yield return new WaitForSeconds(1);
+        windPlaying = false;
+    }
+    private IEnumerator RightHandWind()
+    {
+        PlayOneShot("event:/SFX/PlayerSounds/HandSounds/HandWind", controllerManager.leftVelMagnitude*wooshVolume, Right.transform.position);
+        windPlaying = true;
+        yield return new WaitForSeconds(1);
+        windPlaying = false;
+    }
 
     public string[] soundPaths;
     public string selectedSoundPath;
     
-   
+    private Bus musicBus;
+    private Bus sfxBus;
+    
     #endregion
     
     public float SfxVolume
@@ -60,63 +80,54 @@ public class FMODManager: MonoBehaviour
 
     private void Start()
     {
-        leftHand = GameObject.Find("leftHand");
-        rightHand = GameObject.Find("rightHand");
-
         soundPaths = new string[2]
         {
             "event:/SFX/Voice/RandomPunchComments/PlayerGreatHit",
             "event:/SFX/Voice/RandomPunchComments/PlayerFantasticHit",
         };
         
-        RuntimeManager.AttachInstanceToGameObject(leftHandWind,  leftHand.GetComponent<Transform>(), leftHand.GetComponent<Rigidbody>());
-        RuntimeManager.AttachInstanceToGameObject(rightHandWind,  rightHand.GetComponent<Transform>(), rightHand.GetComponent<Rigidbody>());
         RuntimeManager.AttachInstanceToGameObject(levelOne, cam.GetComponent<Transform>(), cam.GetComponent<Rigidbody>());
         RuntimeManager.AttachInstanceToGameObject(levelTwo, cam.GetComponent<Transform>(), cam.GetComponent<Rigidbody>());
         RuntimeManager.AttachInstanceToGameObject(levelThree, cam.GetComponent<Transform>(), cam.GetComponent<Rigidbody>());
-        
     }
     
-    private Bus musicBus;
-    private Bus sfxBus;
     private void Update()
     {
         sfxBus.setVolume(sfxVolume);
         musicBus.setVolume(musicVolume);
         
-        if (playerLeftHandVelocity > velocityFloor)
-        {
-            leftHandWind.start();
-            leftHandWind.setParameterByName("soundVelocity", playerLeftHandVelocity);
-        }
-        else
-        {
-            leftHandWind.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        }
-
-        if (playerRightHandVelocity > velocityFloor)
-        {
-            rightHandWind.start();
-            rightHandWind.setParameterByName("soundVelocity", playerRightHandVelocity);
-        }
-        else
-        {
-            rightHandWind.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        }
-
         if (Input.GetKeyDown("space"))
         {
             SelectRandomPunchSound();
         }
     }
-    
+
+    private void FixedUpdate()
+    {
+        if (controllerManager.leftVelMagnitude > velocityFloor && windPlaying == false)
+        {
+            StartCoroutine(LeftHandWind());
+        }
+       
+        if (controllerManager.rightVelMagnitude > velocityFloor && windPlaying == false)
+        {
+            StartCoroutine(RightHandWind());
+        }
+    }
+
     /*how to use:
      1: using FMODUnity
-     2: [SerializeField] private EventReference exampleVariable
-     3: FMODManager.instance.PlayOneShot(exampleVariable, this.transform.position)*/
+     2: FMODManager.instance.PlayOneShot(string path, GameObject.Find("exampleGameObject").transform.position)*/
     public void PlayOneShot(string sound, Vector3 worldPos)
     {
         RuntimeManager.PlayOneShot(sound, worldPos);
+        
+    }
+    
+    public void PlayOneShot(string sound, float volume, Vector3 worldPos)
+    {
+        RuntimeManager.PlayOneShot(sound, volume, worldPos);
+        
     }
     
     public void OnStartLevelMusic(int levelNumber)
@@ -160,10 +171,10 @@ public class FMODManager: MonoBehaviour
         
     }
 
-    public FMODManager(GameObject leftHand)
+    /*public FMODManager(GameObject leftHand)
     {
         this.leftHand = leftHand;
-    }
+    }*/
 
     public void KoiPunchSounds(int koiPunchState) //not done!
     {

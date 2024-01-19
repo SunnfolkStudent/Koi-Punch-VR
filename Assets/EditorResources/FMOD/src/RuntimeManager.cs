@@ -1227,6 +1227,28 @@ retry:
             }
         }
 
+        #region New PlayOneSHot With Audio
+        public static void PlayOneShot(string path, float volume, Vector3 position = new Vector3())
+        {
+            try
+            {
+                PlayOneShot(PathToGUID(path), volume, position);
+            }
+            catch (EventNotFoundException)
+            {
+                RuntimeUtils.DebugLogWarning("[FMOD] Event not found: " + path);
+            }
+        }
+
+        public static void PlayOneShot(FMOD.GUID guid, float volume, Vector3 position = new Vector3())
+        {
+            var instance = CreateInstance(guid);
+            instance.set3DAttributes(RuntimeUtils.To3DAttributes(position));
+            instance.setVolume(volume);
+            instance.start();
+            instance.release();
+        }
+        #endregion
         public static void PlayOneShot(FMOD.GUID guid, Vector3 position = new Vector3())
         {
             var instance = CreateInstance(guid);

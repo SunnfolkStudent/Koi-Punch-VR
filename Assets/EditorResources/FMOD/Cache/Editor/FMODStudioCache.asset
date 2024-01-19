@@ -1,33 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-9161524687458127279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/PlayerSounds/KoiPunch/KoiPunch
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/PlayerSounds/KoiPunch/KoiPunch
-  Guid:
-    Data1: 211333718
-    Data2: 1219390968
-    Data3: -105047391
-    Data4: -497749526
-  Banks:
-  - {fileID: -893817079267125501}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 0
-  Parameters:
-  - {fileID: -731980368466317622}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 4675
 --- !u!114 &-7985871429262521722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,33 +51,6 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &-7801974930776322344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/PlayerSounds/KoiPunch/KoiPunchImpact
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/PlayerSounds/KoiPunch/KoiPunchImpact
-  Guid:
-    Data1: -1202465871
-    Data2: 1137576997
-    Data3: 120204466
-    Data4: -1431931061
-  Banks:
-  - {fileID: -893817079267125501}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 4414
 --- !u!114 &-7553286442666304258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,11 +129,37 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
-  Parameters:
-  - {fileID: -5953331912282834704}
+  Parameters: []
   MinDistance: 1
   MaxDistance: 20
   Length: 814
+--- !u!114 &-6831258994209286237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Voice/BossComments/DragonRun
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Voice/BossComments/DragonRun
+  Guid:
+    Data1: 711148382
+    Data2: 1212467814
+    Data3: -822235475
+    Data4: -886301334
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 5500
 --- !u!114 &-6334840867718939931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,34 +175,10 @@ MonoBehaviour:
   Path: C:/Users/a penguin/OneDrive/Documents/FMOD Studio/placeholder/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638411834796876497
+  lastModified: 638412602563912000
   FileSizes:
   - Name: Desktop
-    Value: 2560
-  Exists: 1
---- !u!114 &-5953331912282834704
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/SuccessfulPunch/koiPunchSoundState
-  m_EditorClassIdentifier: 
-  Name: koiPunchSoundState
-  StudioPath: 
-  Min: 0
-  Max: 10
-  Default: 0
-  ID:
-    data1: 818482255
-    data2: 573094537
-  Type: 1
-  IsGlobal: 0
-  Labels: []
+    Value: 3016
   Exists: 1
 --- !u!114 &-5678048118223378165
 MonoBehaviour:
@@ -287,6 +234,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1087
+--- !u!114 &-5447753987725076673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Voice/BossComments/Ooo
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Voice/BossComments/Ooo
+  Guid:
+    Data1: -1951368188
+    Data2: 1096001134
+    Data3: 952535468
+    Data4: -1904867697
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1720
 --- !u!114 &-5286066432729537786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,13 +309,13 @@ MonoBehaviour:
   Banks:
   - {fileID: -893817079267125501}
   IsStream: 0
-  Is3D: 1
-  IsOneShot: 0
+  Is3D: 0
+  IsOneShot: 1
   Parameters:
   - {fileID: 4706070005379597630}
   MinDistance: 1
   MaxDistance: 20
-  Length: 8000
+  Length: 4500
 --- !u!114 &-4994444882430963251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,7 +331,7 @@ MonoBehaviour:
   Path: C:/Users/a penguin/OneDrive/Documents/FMOD Studio/placeholder/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638411834796826481
+  lastModified: 638412602563852064
   FileSizes:
   - Name: Desktop
     Value: 1340
@@ -416,6 +390,62 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 79020
+--- !u!114 &-4484593889358307681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Voice/BossComments/BossPhase3
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Voice/BossComments/BossPhase3
+  Guid:
+    Data1: 1676460099
+    Data2: 1101243095
+    Data3: -388250217
+    Data4: -1829593757
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 5500
+--- !u!114 &-3939702224328049588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/KoiPunch/KoiPunch
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/KoiPunch/KoiPunch
+  Guid:
+    Data1: -697126988
+    Data2: 1276348840
+    Data3: -94430534
+    Data4: -775580040
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -3532701064457138366}
+  - {fileID: 2856346535250844228}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 28414
 --- !u!114 &-3806573463180112973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -443,6 +473,32 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2600
+--- !u!114 &-3532701064457138366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/KoiPunch/koiPunchImpactState
+  m_EditorClassIdentifier: 
+  Name: koiPunchImpactState
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3466604515
+    data2: 241176808
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Weak
+  - Strong
+  Exists: 1
 --- !u!114 &-3498706762230938988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,33 +523,6 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &-3423536945865117563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/PlayerSounds/KoiPunch/KoiPunchReady
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/PlayerSounds/KoiPunch/KoiPunchReady
-  Guid:
-    Data1: 694575361
-    Data2: 1160129199
-    Data3: 1892329140
-    Data4: -741126619
-  Banks:
-  - {fileID: -893817079267125501}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 9757
 --- !u!114 &-3190656216091272765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,6 +550,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 60831
+--- !u!114 &-2253150670670485279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Voice/BossComments/Breather
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Voice/BossComments/Breather
+  Guid:
+    Data1: 855328144
+    Data2: 1186216613
+    Data3: -710731872
+    Data4: -1024574112
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4507
+--- !u!114 &-2090427017458581486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Voice/GameStart
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Voice/GameStart
+  Guid:
+    Data1: -1018482715
+    Data2: 1285357087
+    Data3: -299831112
+    Data4: -214718056
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2136
 --- !u!114 &-1835448826973844317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,12 +646,12 @@ MonoBehaviour:
   Path: C:/Users/a penguin/OneDrive/Documents/FMOD Studio/placeholder/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638411848938564430
+  lastModified: 638412602566224771
   FileSizes:
   - Name: Desktop
-    Value: 1367584
+    Value: 2087136
   Exists: 1
---- !u!114 &-731980368466317622
+--- !u!114 &-733588973798191999
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -577,21 +660,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/KoiPunch/koiPunchSoundState
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Voice/BossComments/PunchTheWeakpoints
   m_EditorClassIdentifier: 
-  Name: koiPunchSoundState
-  StudioPath: 
-  Min: 0
-  Max: 10
-  Default: 0
-  ID:
-    data1: 818482255
-    data2: 573094537
-  Type: 1
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
+  Path: event:/SFX/Voice/BossComments/PunchTheWeakpoints
+  Guid:
+    Data1: -1973126312
+    Data2: 1237239439
+    Data3: -1959466059
+    Data4: -1249286585
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4000
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -630,23 +716,32 @@ MonoBehaviour:
   - {fileID: -4785207930136196373}
   - {fileID: 1425447013965603186}
   - {fileID: -3190656216091272765}
-  - {fileID: -3423536945865117563}
   - {fileID: -5678048118223378165}
   - {fileID: 8954620955950177194}
-  - {fileID: -9161524687458127279}
   - {fileID: -3806573463180112973}
   - {fileID: -5619107479411155224}
-  - {fileID: -7801974930776322344}
-  - {fileID: 4891591361268523726}
   - {fileID: 812625612749181375}
   - {fileID: -4896449346990678863}
   - {fileID: 929862128883885155}
+  - {fileID: -5447753987725076673}
+  - {fileID: 277722926967354296}
+  - {fileID: 6262089173180937641}
+  - {fileID: 8961657327173905361}
+  - {fileID: -4484593889358307681}
+  - {fileID: -733588973798191999}
+  - {fileID: -6831258994209286237}
+  - {fileID: 2645573633654717053}
+  - {fileID: -2253150670670485279}
+  - {fileID: 8463395871421217492}
+  - {fileID: -2090427017458581486}
+  - {fileID: 2545318512467174250}
+  - {fileID: -3939702224328049588}
   EditorParameters: []
   MasterBanks:
   - {fileID: -4994444882430963251}
   StringsBanks:
   - {fileID: -6334840867718939931}
-  cacheTime: 638411848938564430
+  cacheTime: 638412602566224771
   cacheVersion: 131616
 --- !u!114 &53606116969686336
 MonoBehaviour:
@@ -675,6 +770,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &277722926967354296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Voice/BossComments/PhaseFailed
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Voice/BossComments/PhaseFailed
+  Guid:
+    Data1: -1519749880
+    Data2: 1114979877
+    Data3: 2033296809
+    Data4: -2114172542
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3000
 --- !u!114 &812625612749181375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -809,7 +931,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 3500
 --- !u!114 &2240920930864637158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -837,6 +959,87 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &2545318512467174250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Voice/BossComments/BossSpawn
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Voice/BossComments/BossSpawn
+  Guid:
+    Data1: -261133579
+    Data2: 1237112607
+    Data3: -46602330
+    Data4: -152029186
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4500
+--- !u!114 &2645573633654717053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Voice/BossComments/BossPhase2
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Voice/BossComments/BossPhase2
+  Guid:
+    Data1: 155754636
+    Data2: 1240609828
+    Data3: -545109863
+    Data4: 1071484778
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3500
+--- !u!114 &2856346535250844228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/KoiPunch/koiPunchSoundState
+  m_EditorClassIdentifier: 
+  Name: koiPunchSoundState
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 2249693165
+    data2: 1579170967
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Charging
+  - Ready
+  - Impact
+  Exists: 1
 --- !u!114 &3117125922648048613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -942,7 +1145,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &4891591361268523726
+--- !u!114 &6262089173180937641
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -952,23 +1155,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/PlayerSounds/KoiPunch/ChargingKoiPunch
+  m_Name: event:/SFX/Voice/PlayerHit
   m_EditorClassIdentifier: 
-  Path: event:/SFX/PlayerSounds/KoiPunch/ChargingKoiPunch
+  Path: event:/SFX/Voice/PlayerHit
   Guid:
-    Data1: -697126988
-    Data2: 1276348840
-    Data3: -94430534
-    Data4: -775580040
+    Data1: 1537606941
+    Data2: 1094655744
+    Data3: -415212361
+    Data4: -971971229
   Banks:
   - {fileID: -893817079267125501}
   IsStream: 0
   Is3D: 0
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 8428
+  Length: 4000
 --- !u!114 &6714764706478201932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1071,6 +1274,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 20210
+--- !u!114 &8463395871421217492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Voice/BossComments/BossPhase0
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Voice/BossComments/BossPhase0
+  Guid:
+    Data1: -87265059
+    Data2: 1124585585
+    Data3: 1448905652
+    Data4: -693465297
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 5000
 --- !u!114 &8954620955950177194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1098,3 +1328,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2600
+--- !u!114 &8961657327173905361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Voice/BossComments/Rarara
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Voice/BossComments/Rarara
+  Guid:
+    Data1: -1468729045
+    Data2: 1287587104
+    Data3: -2020838472
+    Data4: -2133095998
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
