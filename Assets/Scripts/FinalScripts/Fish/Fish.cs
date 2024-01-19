@@ -9,7 +9,7 @@ namespace FinalScripts.Fish
         public FishObjectPool.Fish fish { get; set; }
         
         #region ---InspectorSettings---
-        [Header("Despawn")]
+        [Header("Despawn")] 
         [Tooltip("Despawn after this amount of seconds when fish hits the ground")]
         [SerializeField] private float despawnDelay = 2.5f;
         [Tooltip("Determines how long it takes for the fish to despawn")]
@@ -23,6 +23,8 @@ namespace FinalScripts.Fish
         public float punchVelMultiplier;
         [Tooltip("The punch velocity need to exceed this value for the punch to count as successful.")]
         [Range(0f, 5f)]public float successfulPunchThreshold = 3f;
+
+        private Vector3 _punchedPosition;
         
         [HideInInspector] public bool hasBeenPunched;
         [HideInInspector] public bool hasHitGround;
@@ -74,8 +76,18 @@ namespace FinalScripts.Fish
         public void FishHitGround()
         {
             hasHitGround = true;
+            if (hasBeenPunched)
+            {
+                GainPoints();
+            }
             Log("De-spawning: hit ground");
             StartCoroutine(DespawnAfterTime(despawnDelay));
+        }
+
+        private void GainPoints()
+        {
+            var points = Vector3.Distance(transform.position, _punchedPosition) * fish.FishPool.FishRecord.ScoreMultiplierDistance;
+            EventManager.GainScore(points);
         }
         
         private IEnumerator DespawnAfterTime(float time)
@@ -93,6 +105,7 @@ namespace FinalScripts.Fish
         public void FishPunched()
         {
             hasBeenPunched = true;
+            _punchedPosition = transform.position;
             GainZen();
         }
         

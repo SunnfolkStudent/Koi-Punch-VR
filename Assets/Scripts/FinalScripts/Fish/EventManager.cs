@@ -24,16 +24,8 @@ namespace FinalScripts.Fish
         public static Event StartBossPhase3 = StartBossPhase3Debug; // Starts phase 3.
         public static Event BossDefeated = BossDefeatedDebug;
         #endregion
-        #endregion
         
-        #region ---ScoreEvents---
-        public delegate void ScoreEvent(float score);
-        
-        public static ScoreEvent GainScore; // TODO: have points gained call this fish and end of bossBattle
-        public static ScoreEvent ScoreChanged; // Called to show the current bossBattle score
-        public static ScoreEvent BossDefeatedTotalScore; // TODO: call this at end of boss fight and add listener in scoreManager
-        #endregion
-        #region ---EventDebugs---
+        #region >>>---EventDebugs---
         private static void SpawnFishDebug()
         {
             Debug.Log("---Fish Spawning started---");
@@ -68,6 +60,15 @@ namespace FinalScripts.Fish
         {
             Debug.Log("---Boss Defeated---");
         }
+        #endregion
+        #endregion
+        
+        #region ---ScoreEvents---
+        public delegate void ScoreEvent(float score);
+        
+        public static ScoreEvent GainScore; // Points gained call this eks: fish hit ground and end of bossBattle
+        public static ScoreEvent ScoreChanged; // Invoked with the current boss score
+        public static ScoreEvent BossDefeatedTotalScore; // Invoked at the end of the boss fight
         #endregion
     }
 }

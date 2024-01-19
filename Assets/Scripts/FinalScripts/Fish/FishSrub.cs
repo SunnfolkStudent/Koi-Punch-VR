@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace FinalScripts.Fish.FishSrubs
+namespace FinalScripts.Fish
 {
     [CreateAssetMenu(fileName = "NewFish", menuName = "Fish/New Fish", order = 1)]
     public class FishSrub : ScriptableObject
@@ -9,6 +9,7 @@ namespace FinalScripts.Fish.FishSrubs
         public GameObject prefab;
         public int initialAmountInPool = 5;
         public float zenFromFish = 10f;
+        public float scoreMultiplierDistance = 1f;
         public float weightInRandomTable = 100f;
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using InDevelopment.Punch;
 using UnityEngine;
 
@@ -35,15 +36,15 @@ namespace FinalScripts.Fish.BossBattle
                     break;
             }
         }
-
+        
         private void Hit()
         {
             Boss.Score += weakPointScore;
-            EventManager.ScoreChanged.Invoke(Boss.Score);
+            EventManager.ScoreChanged.Invoke(Boss.Score + Boss.Phase.Sum(pair => pair.Value.score));
             ZenMetreManager.Instance.AddAttackFieldZen();
             Destroy(gameObject);
         }
-
+        
         #region >>>---Rumble---
         private IEnumerator LeftRumble()
         {

@@ -5,7 +5,6 @@ using FinalScripts.Fish.Spawning;
 using FinalScripts.Fish.Spawning.RandomWeightedTables;
 using InDevelopment.Punch;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace FinalScripts.Fish.BossBattle
 {
@@ -70,7 +69,8 @@ namespace FinalScripts.Fish.BossBattle
         #endregion
         
         #region ---PhaseProperties---
-        private enum BossPhase
+
+        public enum BossPhase
         {
             Phase1,
             Phase2,
@@ -78,15 +78,15 @@ namespace FinalScripts.Fish.BossBattle
             BossDefeated,
             Phase0
         }
-        
-        private static readonly Dictionary<BossPhase, PhaseInfo> Phase = new()
+
+        public static readonly Dictionary<BossPhase, PhaseInfo> Phase = new()
         {
             { BossPhase.Phase1, new PhaseInfo(() => EventManager.StartBossPhase1.Invoke()) },
             { BossPhase.Phase2, new PhaseInfo(() => EventManager.StartBossPhase2.Invoke()) },
             { BossPhase.Phase3, new PhaseInfo(() => EventManager.StartBossPhase3.Invoke()) }
         };
-        
-        private class PhaseInfo
+
+        public class PhaseInfo
         {
             public float score { get; set; }
             public readonly EventManager.Event Event;
@@ -202,7 +202,7 @@ namespace FinalScripts.Fish.BossBattle
         {
             Log("Phase 2 hit");
             Score += scorePerHitPhase2;
-            EventManager.ScoreChanged.Invoke(Score);
+            EventManager.ScoreChanged.Invoke(Score + Phase.Sum(pair => pair.Value.score));
             ZenMetreManager.Instance.AddHitZen(zenPerHitPhase2);
         }
         
@@ -217,11 +217,11 @@ namespace FinalScripts.Fish.BossBattle
             var force = controllerVelocity + zenPunchForce;
             force *= zenPunchMultiplier;
             
-            _rigidbody.AddForce(force);
             _bossIsDead = true;
+            _rigidbody.AddForce(force);
             EventManager.BossDefeated.Invoke();
             
-            var totalScore = Phase.Sum(pair => pair.Value.score);
+            var totalScore = force.magnitude + Phase.Sum(pair => pair.Value.score);
             Log($"BossDefeated | TotalScore: {totalScore}");
             EventManager.BossDefeatedTotalScore.Invoke(totalScore);
         }

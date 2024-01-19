@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using FinalScripts.Fish.FishSrubs;
 using FinalScripts.Fish.Spawning.RandomWeightedTables;
 using UnityEngine;
 
@@ -19,7 +18,7 @@ namespace FinalScripts.Fish.Spawning
             _fishPools = new List<FishPool>();
             foreach (var fishSrub in fishTypes)
             {
-                _fishPools.Add(new FishPool(fishSrub.prefab, fishSrub.initialAmountInPool, fishSrub.zenFromFish, fishSrub.weightInRandomTable));
+                _fishPools.Add(new FishPool(fishSrub));
             }
             FishSpawnType.InitializeFishSpawnTypes(_fishPools);
         }
@@ -32,13 +31,13 @@ namespace FinalScripts.Fish.Spawning
             public readonly List<Fish> Fishes;
             public float Weight;
             public int TimesSpawned;
-
-            public FishPool(GameObject prefab, int initialAmount, float zenFromFish, float weight)
+            
+            public FishPool(FishSrub fishSrub)
             {
-                FishRecord = new FishRecord(prefab, zenFromFish);
+                FishRecord = new FishRecord(fishSrub.prefab, fishSrub.zenFromFish, fishSrub.scoreMultiplierDistance);
                 Fishes = new List<Fish>();
-                AddMultipleFishToPool(initialAmount, this);
-                Weight = weight;
+                AddMultipleFishToPool(fishSrub.initialAmountInPool, this);
+                Weight = fishSrub.weightInRandomTable;
                 TimesSpawned = 0;
             }
         }
@@ -49,12 +48,14 @@ namespace FinalScripts.Fish.Spawning
             public readonly GameObject GameObject;
             public readonly PrefabChild[] Children;
             public readonly float ZenAmount;
+            public readonly float ScoreMultiplierDistance;
             
-            public FishRecord(GameObject gameObject, float zenFromFish)
+            public FishRecord(GameObject gameObject, float zenFromFish, float scoreMultiplierDistance)
             {
                 GameObject = gameObject;
                 Children = gameObject.GetComponentsInChildren<Transform>().Select(transform1 => new PrefabChild(transform1)).ToArray();
                 ZenAmount = zenFromFish;
+                ScoreMultiplierDistance = scoreMultiplierDistance;
             }
         }
         
@@ -62,7 +63,7 @@ namespace FinalScripts.Fish.Spawning
         {
             public readonly Transform InitialTransform;
             public readonly Rigidbody Rigidbody;
-
+            
             public PrefabChild(Transform transform)
             {
                 InitialTransform = transform;
