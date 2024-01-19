@@ -21,6 +21,8 @@ namespace FinalScripts.Fish.Spawning
             EventManager.FishSpawningAtMaxRate += StartSpawningAtMaxRate;
             EventManager.StopFishSpawning += StopSpawning;
             EventManager.SpawnBoss += StopSpawning;
+            
+            EventManager.FishSpawning.Invoke();
         }
         #endregion
         
