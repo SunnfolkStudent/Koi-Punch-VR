@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{4f046fc2-8e6d-4c01-88b4-0e503ac769be}">
+		<property name="name">
+			<value>zenLevel</value>
+		</property>
+		<relationship name="folder">
+			<destination>{b9c84acb-6ed7-49b2-be46-8f76f5b14868}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{a99d07b2-80f8-4241-9e58-c4c8d84bfaba}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{a99d07b2-80f8-4241-9e58-c4c8d84bfaba}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>3</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Zen1</value>
+			<value>Zen2</value>
+			<value>Zen3</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

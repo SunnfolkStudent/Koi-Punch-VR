@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{efbe158c-9234-4d81-a59d-41bbd6594d61}">
+		<property name="name">
+			<value>SwagLevel</value>
+		</property>
+		<relationship name="folder">
+			<destination>{b9c84acb-6ed7-49b2-be46-8f76f5b14868}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{2c5b1f2b-1b96-4207-bd57-885cdac28acc}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{2c5b1f2b-1b96-4207-bd57-885cdac28acc}">
+		<property name="maximum">
+			<value>10</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
