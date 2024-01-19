@@ -117,7 +117,7 @@ public class FMODManager: MonoBehaviour
     }
     private IEnumerator RightHandWind()
     {
-        PlayOneShot("event:/SFX/PlayerSounds/HandSounds/HandWind", controllerManager.leftVelMagnitude * wooshVolume, Right.transform.position);
+        PlayOneShot("event:/SFX/PlayerSounds/HandSounds/HandWind", controllerManager.rightVelMagnitude * wooshVolume, Right.transform.position);
         yield return new WaitForSeconds(time);
         windPlayingRight = false;
     }
