@@ -15,10 +15,10 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638412794024725355
+  lastModified: 638412981389954198
   FileSizes:
   - Name: Desktop
-    Value: 3354
+    Value: 3300
   Exists: 1
 --- !u!114 &-7985871429262521722
 MonoBehaviour:
@@ -306,8 +306,7 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
-  Parameters:
-  - {fileID: 4706070005379597630}
+  Parameters: []
   MinDistance: 1
   MaxDistance: 20
   Length: 4500
@@ -678,10 +677,10 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638412943728803124
+  lastModified: 638412981409275497
   FileSizes:
   - Name: Desktop
-    Value: 3947520
+    Value: 3947008
   Exists: 1
 --- !u!114 &-733588973798191999
 MonoBehaviour:
@@ -832,7 +831,7 @@ MonoBehaviour:
   - {fileID: 1559442095300902716}
   StringsBanks:
   - {fileID: -9216946279702738478}
-  cacheTime: 638412945674585021
+  cacheTime: 638412981409275497
   cacheVersion: 131616
 --- !u!114 &53606116969686336
 MonoBehaviour:
@@ -1092,7 +1091,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638412794024675340
+  lastModified: 638412981389934194
   FileSizes:
   - Name: Desktop
     Value: 1340
@@ -1259,30 +1258,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &4706070005379597630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/HandWind/soundVelocity
-  m_EditorClassIdentifier: 
-  Name: soundVelocity
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 840685148
-    data2: 360210893
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
 --- !u!114 &4842483140629396089
 MonoBehaviour:
   m_ObjectHideFlags: 0

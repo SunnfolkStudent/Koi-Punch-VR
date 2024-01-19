@@ -24,7 +24,7 @@ public class FMODManager: MonoBehaviour
     [Range(0, 1)] private float musicVolume;
     private float playerLeftHandVelocity;
     private float playerRightHandVelocity;
-    [SerializeField] [Range(0, 100)] private float wooshVolume;
+    [SerializeField] [Range(0, 2)] private float wooshVolume;
     [SerializeField] private bool windPlaying = false;
 
     public string[] soundPaths;
@@ -89,7 +89,7 @@ public class FMODManager: MonoBehaviour
         
         if (Input.GetKeyDown("space"))
         {
-            SelectRandomPunchSound();
+           SelectRandomPunchSound();
         }
     }
 
@@ -110,13 +110,13 @@ public class FMODManager: MonoBehaviour
     private IEnumerator LeftHandWind()
     {
         PlayOneShot("event:/SFX/PlayerSounds/HandSounds/HandWind", controllerManager.leftVelMagnitude * wooshVolume, Left.transform.position);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         windPlaying = false;
     }
     private IEnumerator RightHandWind()
     {
         PlayOneShot("event:/SFX/PlayerSounds/HandSounds/HandWind", controllerManager.leftVelMagnitude * wooshVolume, Right.transform.position);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         windPlaying = false;
     }
 
