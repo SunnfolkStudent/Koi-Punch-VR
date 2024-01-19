@@ -25,7 +25,8 @@ public class FMODManager: MonoBehaviour
     private float playerLeftHandVelocity;
     private float playerRightHandVelocity;
     [SerializeField] [Range(0, 2)] private float wooshVolume;
-    [SerializeField] private bool windPlaying = false;
+    [SerializeField] private bool windPlayingLeft = false;
+    [SerializeField] private bool windPlayingRight = false;
     [SerializeField] [Range(0, 1)] private float time;
 
     public string[] soundPaths;
@@ -96,15 +97,15 @@ public class FMODManager: MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (controllerManager.leftVelMagnitude > velocityFloor && windPlaying == false)
+        if (controllerManager.leftVelMagnitude > velocityFloor && windPlayingLeft == false)
         {
-            windPlaying = true;
+            windPlayingLeft = true;
             StartCoroutine(LeftHandWind());
         }
        
-        if (controllerManager.rightVelMagnitude > velocityFloor && windPlaying == false)
+        if (controllerManager.rightVelMagnitude > velocityFloor && windPlayingRight == false)
         {
-            windPlaying = true;
+            windPlayingRight = true;
             StartCoroutine(RightHandWind());
         }
     }
@@ -112,13 +113,13 @@ public class FMODManager: MonoBehaviour
     {
         PlayOneShot("event:/SFX/PlayerSounds/HandSounds/HandWind", controllerManager.leftVelMagnitude * wooshVolume, Left.transform.position);
         yield return new WaitForSeconds(time);
-        windPlaying = false;
+        windPlayingLeft = false;
     }
     private IEnumerator RightHandWind()
     {
         PlayOneShot("event:/SFX/PlayerSounds/HandSounds/HandWind", controllerManager.leftVelMagnitude * wooshVolume, Right.transform.position);
         yield return new WaitForSeconds(time);
-        windPlaying = false;
+        windPlayingRight = false;
     }
 
     /*how to use:
