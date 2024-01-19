@@ -5,7 +5,7 @@ using FinalScripts.Fish.Spawning.RandomWeightedTables;
 using InDevelopment.Punch;
 using UnityEngine;
 
-namespace FinalScripts.Fish
+namespace FinalScripts.Fish.BossBattle
 {
     public class Boss : MonoBehaviour, IPunchable
     {
@@ -20,7 +20,6 @@ namespace FinalScripts.Fish
         [SerializeField] private bool isDebugging;
         
         #region ---Debugging---
-
         private void Log(string message)
         {
             if(isDebugging) Debug.Log(message);
