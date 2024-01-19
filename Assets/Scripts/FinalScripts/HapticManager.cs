@@ -106,6 +106,10 @@ public class HapticManager : MonoBehaviour
 
         leftZenPunch1 = false;
         rightZenPunch1 = false;
+        leftZenPunch2 = false;
+        rightZenPunch2 = false;
+        leftZenPunch3 = false;
+        rightZenPunch3 = false;
     }
     
     [ContextMenu("Test Left Fish Punch")]
