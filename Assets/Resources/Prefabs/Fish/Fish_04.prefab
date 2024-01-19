@@ -58,10 +58,50 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3133277522541741974, guid: 97692a0b96f7c464995523c96dd7d79c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -2924452563138137217, guid: 97692a0b96f7c464995523c96dd7d79c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -2751537534896755492, guid: 97692a0b96f7c464995523c96dd7d79c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 419891622335181835, guid: 97692a0b96f7c464995523c96dd7d79c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 97692a0b96f7c464995523c96dd7d79c,
         type: 3}
       propertyPath: m_Name
       value: Fish_04
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 97692a0b96f7c464995523c96dd7d79c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1626807159669605300, guid: 97692a0b96f7c464995523c96dd7d79c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2051886018744014863, guid: 97692a0b96f7c464995523c96dd7d79c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7036213049465896255, guid: 97692a0b96f7c464995523c96dd7d79c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8879528566716807029, guid: 97692a0b96f7c464995523c96dd7d79c,
         type: 3}
@@ -187,7 +227,7 @@ MonoBehaviour:
   despawnTime: 10
   despawnAltitude: -5
   punchVelMultiplier: 30
-  velocityNeededForSuccessfulHit: 3
+  successfulPunchThreshold: 3
   hasBeenPunched: 0
   hasHitGround: 0
   isDebugging: 1

@@ -72,6 +72,7 @@ public class HapticManager : MonoBehaviour
         _Bbutton = bButton.action.IsPressed();
         _Xbutton = xButton.action.IsPressed();
         _Ybutton = yButton.action.IsPressed();
+        cancelHaptics = hapticCancelButton.action.WasPressedThisFrame();
         
         if (_Abutton || _Bbutton || _Xbutton || _Ybutton)
         {zenChargeing = true;}
@@ -99,10 +100,10 @@ public class HapticManager : MonoBehaviour
             zenChargeIntensity = 0;
         }
 
-        /*if ()
+        if (cancelHaptics)
         {
             StopRumble();
-        }*/
+        }
 
         leftZenPunch1 = false;
         rightZenPunch1 = false;

@@ -688,9 +688,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: badbfe47f1b660b4dbfd3a4557e4ecfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weakPointPrefab: {fileID: 0}
+  weakPointPrefab: {fileID: 1259329698490334870, guid: 825a7aab160dfa747a6f8797e196939d,
+    type: 3}
   distanceBetweenSpawns: 1
   spawnInterval: 2
+  maxWhileLooping: 10
 --- !u!114 &3483118490097113330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -705,9 +707,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zenAttackActive: 0
   zenMetreValue: 0
-  zenLevel: 0
+  zenLevel: 1
   zenLevelCheckpoint: 0
-  bossPrefab: {fileID: 0}
+  bossPrefab: {fileID: 471582657252072425, guid: e3792d775295884418e0ab41c2a97d11,
+    type: 3}
 --- !u!114 &6941716316594716263
 MonoBehaviour:
   m_ObjectHideFlags: 0
