@@ -19,17 +19,19 @@ namespace FinalScripts.Fish
         private float _startTime;
         
         [Header("FishChild")]
-        [Tooltip("A higher value will apply more force to the object after it is punched in addition to the force the speed of the punch itself applies.")]
+        [Tooltip("A higher value will apply more force to the object after it is punched")]
         public float punchVelMultiplier;
-        [Tooltip("The punch velocity need to exceed this value for the punch to count. This value can go from 0 to 5 inclusive.")]
+        [Tooltip("The punch velocity need to exceed this value for the punch to count as successful.")]
         [Range(0f, 5f)]public float successfulPunchThreshold = 3f;
-        [Tooltip("If set to true then the object cannot be punched. It is automatically set to true after being punched")]
-        public bool hasBeenPunched;
-        [Tooltip("If set to true then the object cannot be punched. It is automatically set to true after hitting the ground")]
-        public bool hasHitGround;
+        
+        [HideInInspector] public bool hasBeenPunched;
+        [HideInInspector] public bool hasHitGround;
+        [HideInInspector] public bool hasHitPlayer;
         
         [Header("debug")]
         public bool isDebugging;
+
+
         #endregion
         
         #region ---Initialization---
@@ -82,6 +84,12 @@ namespace FinalScripts.Fish
         {
             yield return new WaitForSeconds(time);
             Despawn();
+        }
+        
+        public void FishHitPlayer()
+        {
+            hasHitPlayer = true;
+            ZenMetreManager.Instance.RemoveZen(fish.FishPool.FishRecord.ZenAmount * 2);
         }
         
         public void FishPunched()
