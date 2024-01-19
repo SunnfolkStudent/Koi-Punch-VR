@@ -7,10 +7,6 @@ namespace FinalScripts.Fish.BossBattle
 {
     public class WeakPointSpawner : MonoBehaviour
     {
-        [Header("Spawning")]
-        [SerializeField] private GameObject weakPointPrefab;
-        [SerializeField] private float distanceBetweenSpawns = 0.75f;
-        [SerializeField] private  float spawnInterval = 2f;
         private bool _isSpawning;
         private float _timeSinceLastSpawn;
         
@@ -18,26 +14,30 @@ namespace FinalScripts.Fish.BossBattle
         private CapsuleCollider _bossCollider;
         private Camera _mainCamera;
 
+        #region ---InspectorSettings---
+        [Header("Spawning")]
+        [SerializeField] private GameObject weakPointPrefab;
+        [SerializeField] private float distanceBetweenSpawns = 0.75f;
+        [SerializeField] private  float spawnInterval = 2f;
+
         [Header("While-loops")]
         [SerializeField] private int maxWhileLooping = 10;
+        #endregion
 
+        #region ---Initialization---
         private void Start()
         {
             _mainCamera = Camera.main;
             InternalZenEventManager.spawnWeakPoints += SpawnWeakPoints;
             InternalZenEventManager.stopSpawnWeakPoints += StopSpawningWeakPoints;
         }
+        #endregion
         
+        #region ---Spawning---
         private void SpawnWeakPoints()
         {
-            if (_boss == null) GetBoss();
-            _bossCollider = _boss.GetComponent<CapsuleCollider>();
+            GetBoss();
             StartCoroutine(Spawning());
-        }
-
-        private void GetBoss()
-        {
-            _boss = GameObject.FindGameObjectWithTag("Boss");
         }
     
         private void StopSpawningWeakPoints()
@@ -45,6 +45,31 @@ namespace FinalScripts.Fish.BossBattle
             _isSpawning = false;
         }
 
+        private void GetBoss()
+        {
+            _boss ??= GameObject.FindGameObjectWithTag("Boss");
+            _bossCollider ??= _boss.GetComponent<CapsuleCollider>();
+        }
+        
+        private IEnumerator Spawning()
+        {
+            _isSpawning = true;
+            Debug.Log("Spawning attack fields");
+            while (_isSpawning)
+            {
+                _timeSinceLastSpawn += Time.unscaledDeltaTime;
+                if (_timeSinceLastSpawn >= spawnInterval)
+                {
+                    var attackFields = GameObject.FindGameObjectsWithTag("AttackField");
+                    Instantiate(weakPointPrefab, GetWeakPointSpawnPosition(attackFields), Quaternion.identity);
+                    _timeSinceLastSpawn = 0f;
+                }
+                
+                yield return null;
+            }
+        }
+
+        #region ---GetSpawningPositions---
         private Vector3 GetWeakPointSpawnPosition(GameObject[] attackFields)
         {
             var whileCount = 0;
@@ -91,23 +116,8 @@ namespace FinalScripts.Fish.BossBattle
             Debug.LogWarning($"WhileLoop couldn't find a hit.point on bossCollider visible by the camera within {maxWhileLooping} iterations.");
             return _boss.transform.position;
         }
+        #endregion
         
-        private IEnumerator Spawning()
-        {
-            _isSpawning = true;
-            Debug.Log("Spawning attack fields");
-            while (_isSpawning)
-            {
-                _timeSinceLastSpawn += Time.unscaledDeltaTime;
-                if (_timeSinceLastSpawn >= spawnInterval)
-                {
-                    var attackFields = GameObject.FindGameObjectsWithTag("AttackField");
-                    Instantiate(weakPointPrefab, GetWeakPointSpawnPosition(attackFields), Quaternion.identity);
-                    _timeSinceLastSpawn = 0f;
-                }
-                
-                yield return null;
-            }
-        }
+        #endregion
     }
 }
