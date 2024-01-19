@@ -26,6 +26,7 @@ public class FMODManager: MonoBehaviour
     private float playerRightHandVelocity;
     [SerializeField] [Range(0, 2)] private float wooshVolume;
     [SerializeField] private bool windPlaying = false;
+    [SerializeField] [Range(0, 1)] private float time;
 
     public string[] soundPaths;
     public string selectedSoundPath;
@@ -110,13 +111,13 @@ public class FMODManager: MonoBehaviour
     private IEnumerator LeftHandWind()
     {
         PlayOneShot("event:/SFX/PlayerSounds/HandSounds/HandWind", controllerManager.leftVelMagnitude * wooshVolume, Left.transform.position);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(time);
         windPlaying = false;
     }
     private IEnumerator RightHandWind()
     {
         PlayOneShot("event:/SFX/PlayerSounds/HandSounds/HandWind", controllerManager.leftVelMagnitude * wooshVolume, Right.transform.position);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(time);
         windPlaying = false;
     }
 
