@@ -27,6 +27,7 @@ public class SpecialAttackScript : MonoBehaviour
         //SET CHARGING PUNCH TO TRUE
         if (ZenMetreManager.Instance.zenAttackActive && HapticManager.zenChargeing && !chargingPunch)
         {
+            Debug.Log("Charging Punch");
             ZenMetreManager.Instance.zenAttackActive = true;
             InternalZenEventManager.hidePromptText.Invoke();
             chargingPunch = true;
