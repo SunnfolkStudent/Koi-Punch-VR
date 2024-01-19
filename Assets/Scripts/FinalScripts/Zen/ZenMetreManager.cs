@@ -103,6 +103,18 @@ public class ZenMetreManager : MonoBehaviour
         
         InternalZenEventManager.updateVisualZenBar.Invoke();
     }
+    
+    public void RemoveZen(float zen)
+    {
+        zenMetreValue -= zen;
+        
+        if (zenMetreValue < 0)
+        {
+            zenMetreValue = 0;
+        }
+        
+        InternalZenEventManager.updateVisualZenBar.Invoke();
+    }
     #endregion
     
     #region -- Zen Level Methods --
