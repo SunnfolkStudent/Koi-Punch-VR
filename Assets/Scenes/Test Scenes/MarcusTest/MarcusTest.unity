@@ -548,31 +548,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FishSpawnManager
       objectReference: {fileID: 0}
-    - target: {fileID: 2074864738684994615, guid: b0869e6e2e592a646852ba90d715ff4c,
-        type: 3}
-      propertyPath: maxSpawnRate
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2074864738684994615, guid: b0869e6e2e592a646852ba90d715ff4c,
-        type: 3}
-      propertyPath: minSpawnRate
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2074864738684994615, guid: b0869e6e2e592a646852ba90d715ff4c,
-        type: 3}
-      propertyPath: animationCurve.m_Curve.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2074864738684994615, guid: b0869e6e2e592a646852ba90d715ff4c,
-        type: 3}
-      propertyPath: animationCurve.m_Curve.Array.data[1].time
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2074864738684994615, guid: b0869e6e2e592a646852ba90d715ff4c,
-        type: 3}
-      propertyPath: animationCurve.m_Curve.Array.data[1].value
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3218944948043325081, guid: b0869e6e2e592a646852ba90d715ff4c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -623,6 +598,59 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5264716505511531945, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: fishTypes.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264716505511531945, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: 'fishTypes.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 9af46e9e3bf9a264894e49bdff836b0d,
+        type: 2}
+    - target: {fileID: 5264716505511531945, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: 'fishTypes.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 209d60b2cdaeba845b303e304d8906b0,
+        type: 2}
+    - target: {fileID: 5264716505511531945, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: 'fishTypes.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 59bdfed8c442ee048a0da8b33e56faf3,
+        type: 2}
+    - target: {fileID: 5264716505511531945, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: 'fishTypes.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: c7b6c35bafec3db479a0a5faa1297a94,
+        type: 2}
+    - target: {fileID: 5264716505511531945, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: 'fishTypes.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: db51d2c91f7df94419cc193af36de853,
+        type: 2}
+    - target: {fileID: 5264716505511531945, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: 'fishTypes.Array.data[5]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 0c0da4e35abe91e48a6d96cfb2dc35ca,
+        type: 2}
+    - target: {fileID: 5264716505511531945, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: 'fishTypes.Array.data[6]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 40f30fb2fc9c2bb458fe079befa52442,
+        type: 2}
+    - target: {fileID: 5264716505511531945, guid: b0869e6e2e592a646852ba90d715ff4c,
+        type: 3}
+      propertyPath: 'fishTypes.Array.data[7]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 3f2f5f2ab8ad7fe48a233610490e369d,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9340,6 +9368,11 @@ PrefabInstance:
         type: 3}
       propertyPath: maxWhileLooping
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 455929467435902613, guid: 5e3b634f79c580a4b9ea9a485235bef0,
+        type: 3}
+      propertyPath: distanceBetweenSpawns
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1270338550801801397, guid: 5e3b634f79c580a4b9ea9a485235bef0,
         type: 3}

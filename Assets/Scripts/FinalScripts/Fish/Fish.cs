@@ -1,3 +1,4 @@
+using System.Collections;
 using FinalScripts.Fish.Spawning;
 using UnityEngine;
 
@@ -6,9 +7,11 @@ namespace FinalScripts.Fish
     public class Fish : MonoBehaviour
     {
         public FishObjectPool.Fish fish { get; set; }
-
+        
         #region ---InspectorSettings---
         [Header("Despawn")]
+        [Tooltip("Despawn after this amount of seconds when fish hits the ground")]
+        [SerializeField] private float despawnDelay = 2.5f;
         [Tooltip("Determines how long it takes for the fish to despawn")]
         [SerializeField] private float despawnTime = 10f;
         [Tooltip("Determines how low the fish has to be before it despawns")]
@@ -28,7 +31,7 @@ namespace FinalScripts.Fish
         [Header("debug")]
         public bool isDebugging;
         #endregion
-
+        
         #region ---Initialization---
         private void Start()
         {
@@ -45,6 +48,7 @@ namespace FinalScripts.Fish
             _startTime = Time.time;
             hasBeenPunched = false;
             hasHitGround = false;
+            StopCoroutine(DespawnAfterTime(despawnDelay));
         }
         #endregion
         
@@ -59,7 +63,7 @@ namespace FinalScripts.Fish
         {
             DespawnIfOutOfTimeOrTooLow();
         }
-
+        
         private void DespawnIfOutOfTimeOrTooLow()
         {
             if (transform.position.y > despawnAltitude && _startTime > Time.time - despawnTime) return;
@@ -71,8 +75,13 @@ namespace FinalScripts.Fish
         {
             hasHitGround = true;
             Log("De-spawning: hit ground");
-            Invoke(nameof(Despawn), 2.5f);
-            // Despawn();
+            StartCoroutine(DespawnAfterTime(despawnDelay));
+        }
+
+        private IEnumerator DespawnAfterTime(float time)
+        {
+            yield return new WaitForSeconds(time);
+            Despawn();
         }
         
         public void FishPunched()
@@ -83,8 +92,8 @@ namespace FinalScripts.Fish
         
         private void GainZen()
         {
-            ZenMetreManager.Instance.AddHitZen(fish.FishPool.Prefab.ZenAmount);
-            Log("Zen gained: " + fish.FishPool.Prefab.ZenAmount);
+            ZenMetreManager.Instance.AddHitZen(fish.FishPool.FishRecord.ZenAmount);
+            Log("Zen gained: " + fish.FishPool.FishRecord.ZenAmount);
         }
         
         private void Despawn()

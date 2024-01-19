@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using FinalScripts.Fish.FishSrubs;
 using FinalScripts.Fish.Spawning.RandomWeightedTables;
 using UnityEngine;
 
@@ -10,25 +10,16 @@ namespace FinalScripts.Fish.Spawning
     {
         private static List<FishPool> _fishPools;
         private static Transform _fishContainer;
-        [SerializeField] private InspectorPrefab[] fishPrefab;
-        
-        [Serializable]
-        public class InspectorPrefab
-        {
-            public GameObject prefabGameObject;
-            public int initialAmountInPool = 5;
-            public float zenFromFish = 10f;
-            public float weightInRandomTable = 100f;
-        }
+        [SerializeField] private FishSrub[] fishTypes;
         
         #region ---Initialization---
         private void Awake()
         {
             _fishContainer = transform.GetChild(0);
             _fishPools = new List<FishPool>();
-            foreach (var prefab in fishPrefab)
+            foreach (var fishSrub in fishTypes)
             {
-                _fishPools.Add(new FishPool(prefab.prefabGameObject, prefab.initialAmountInPool, prefab.zenFromFish, prefab.weightInRandomTable));
+                _fishPools.Add(new FishPool(fishSrub.prefab, fishSrub.initialAmountInPool, fishSrub.zenFromFish, fishSrub.weightInRandomTable));
             }
             FishSpawnType.InitializeFishSpawnTypes(_fishPools);
         }
@@ -37,14 +28,14 @@ namespace FinalScripts.Fish.Spawning
         #region ---FishPoolInfo---
         public class FishPool
         {
-            public readonly Prefab Prefab;
+            public readonly FishRecord FishRecord;
             public readonly List<Fish> Fishes;
             public float Weight;
             public int TimesSpawned;
 
             public FishPool(GameObject prefab, int initialAmount, float zenFromFish, float weight)
             {
-                Prefab = new Prefab(prefab, zenFromFish);
+                FishRecord = new FishRecord(prefab, zenFromFish);
                 Fishes = new List<Fish>();
                 AddMultipleFishToPool(initialAmount, this);
                 Weight = weight;
@@ -53,13 +44,13 @@ namespace FinalScripts.Fish.Spawning
         }
         
         #region >>>---Prefab---
-        public record Prefab
+        public record FishRecord
         {
             public readonly GameObject GameObject;
             public readonly PrefabChild[] Children;
             public readonly float ZenAmount;
             
-            public Prefab(GameObject gameObject, float zenFromFish)
+            public FishRecord(GameObject gameObject, float zenFromFish)
             {
                 GameObject = gameObject;
                 Children = gameObject.GetComponentsInChildren<Transform>().Select(transform1 => new PrefabChild(transform1)).ToArray();
@@ -85,17 +76,19 @@ namespace FinalScripts.Fish.Spawning
         {
             public readonly FishPool FishPool;
             public readonly GameObject ParentGameObject;
+            public readonly FinalScripts.Fish.Fish FishScript;
             public readonly Child[] Children;
             
             public Fish(FishPool fishPool)
             {
                 FishPool = fishPool;
-                ParentGameObject = Instantiate(fishPool.Prefab.GameObject, _fishContainer);
+                ParentGameObject = Instantiate(fishPool.FishRecord.GameObject, _fishContainer);
                 ParentGameObject.SetActive(false);
                 
                 Children = ParentGameObject.GetComponentsInChildren<Transform>().Select(transform1 => new Child(transform1)).ToArray();
-                
-                ParentGameObject.GetComponent<FinalScripts.Fish.Fish>().fish = this;
+
+                FishScript = ParentGameObject.GetComponent<FinalScripts.Fish.Fish>();
+                FishScript.fish = this;
             }
         }
         
@@ -131,9 +124,9 @@ namespace FinalScripts.Fish.Spawning
         {
             for (var i = 0; i < fish.Children.Length; i++)
             {
-                fish.Children[i].Transform.position = fish.FishPool.Prefab.Children[i].InitialTransform.position;
-                fish.Children[i].Transform.rotation = fish.FishPool.Prefab.Children[i].InitialTransform.rotation;
-                fish.Children[i].Transform.localScale = fish.FishPool.Prefab.Children[i].InitialTransform.localScale;
+                fish.Children[i].Transform.position = fish.FishPool.FishRecord.Children[i].InitialTransform.position;
+                fish.Children[i].Transform.rotation = fish.FishPool.FishRecord.Children[i].InitialTransform.rotation;
+                fish.Children[i].Transform.localScale = fish.FishPool.FishRecord.Children[i].InitialTransform.localScale;
             }
         }
         

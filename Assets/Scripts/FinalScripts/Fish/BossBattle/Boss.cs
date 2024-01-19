@@ -28,7 +28,7 @@ namespace FinalScripts.Fish.BossBattle
         [SerializeField] private float scorePerHitPhase2 = 5f;
         
         [Header("ZenPunch")]
-        [SerializeField] private float zenPunchMultiplier = 1f;
+        [SerializeField] private float zenPunchMultiplier = 100f;
         
         [Header("debug")]
         [SerializeField] private bool isDebugging;
