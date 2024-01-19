@@ -18,9 +18,8 @@ public class LevelCompleteManager : MonoBehaviour
    [SerializeField] private GameObject _newHighScoreParent;
    [SerializeField] private TMP_Text _newHighScoreText;
    private bool scoringOver;
-
-   [SerializeField] private GameObject _oldHighScorePanel;
-   private Animator _oldHighScoreAnimator;
+   
+   [SerializeField] private Animator _oldHighScoreAnimator;
 
    [SerializeField] private int arenaNumber;
    private int highScore;
@@ -71,8 +70,6 @@ public class LevelCompleteManager : MonoBehaviour
          
          highScoreText.text = highScore.ToString("0");
       }
-
-      _oldHighScoreAnimator = _oldHighScorePanel.GetComponent<Animator>();
       
       _scoreManagerObj = GameObject.FindGameObjectWithTag("ScoreManager");
       _scoreManager = _scoreManagerObj.GetComponent<ScoreManager>();

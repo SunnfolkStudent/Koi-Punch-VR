@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     #region Definitions
-    [SerializeField] private string IntroScene;
     [SerializeField] private string[] Levels;
     [SerializeField] private string[] LightingForLevels;
     [SerializeField] private Transform Goal;
@@ -80,9 +79,6 @@ public class SceneController : MonoBehaviour
         _fadeScreen = _fadeScreenObj.GetComponent<FadeScreenScript>();
         _fadeScreen.FadeOut();
         yield return new WaitForSeconds(1.5f);
-        SceneManager.UnloadSceneAsync(IntroScene);
-        var scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
     }
 
     private IEnumerator ChangeLevel(int scene)
