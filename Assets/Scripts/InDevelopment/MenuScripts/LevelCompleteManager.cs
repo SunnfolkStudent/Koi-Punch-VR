@@ -8,36 +8,69 @@ public class LevelCompleteManager : MonoBehaviour
    private GameObject _scoreManagerObj;
    private ScoreManager _scoreManager;
    
-   public int punchPoints, distancePoints, bonusPoints, zenPoints, penaltyPoints;
+   [SerializeField] private int punchPoints, distancePoints, bonusPoints, zenPoints, penaltyPoints;
    private int punchPointsEnd, distancePointsEnd, bonusPointsEnd, zenPointsEnd, penaltyPointsEnd, totalPoints;
    [SerializeField] private TMP_Text punchScore, distanceScore, bonusScore, zenScore, penaltyScore, totalScore;
    private bool gameOver;
    private int growthRate = 1;
    public TMP_Text highScoreText;
 
-   [SerializeField] private GameObject _newHighScorePrefab;
-   private TMP_Text _newHighScoreText;
+   [SerializeField] private GameObject _newHighScoreParent;
+   [SerializeField] private TMP_Text _newHighScoreText;
    private bool scoringOver;
 
    [SerializeField] private GameObject _oldHighScorePanel;
    private Animator _oldHighScoreAnimator;
 
-   //public float numberSpeed = 0.01f;
+   [SerializeField] private int arenaNumber;
+   private int highScore;
 
    private void Start()
    {
-      /*if (PlayerPrefs.HasKey("HighScore"))
+      if (arenaNumber == 1)
       {
-         PlayerPrefs.GetInt("HighScore");
+         /*if (PlayerPrefs.HasKey("HighScoreLevelOne"))
+         {
+            highScore = PlayerPrefs.GetInt("HighScoreLevelOne");
+         }
+         else*/
+         {
+            PlayerPrefs.SetInt("HighScoreLevelOne", 0);
+            highScore = PlayerPrefs.GetInt("HighScoreLevelOne");
+         }
+
+         highScoreText.text = highScore.ToString("0");
       }
-      else
+
+      if (arenaNumber == 2)
       {
-         PlayerPrefs.SetInt("HighScore", 0);
-      }*/
-      
-      PlayerPrefs.SetInt("HighScore", 200);
-      
-      highScoreText.text = PlayerPrefs.GetInt("HighScore").ToString("0");
+         if (PlayerPrefs.HasKey("HighScoreLevelTwo"))
+         {
+            highScore = PlayerPrefs.GetInt("HighScoreLevelTwo");
+         }
+         else
+         {
+            PlayerPrefs.SetInt("HighScoreLevelTwo", 0);
+            highScore = PlayerPrefs.GetInt("HighScoreLevelTwo");
+         }
+         
+         highScoreText.text = highScore.ToString("0");
+      }
+
+      if (arenaNumber == 3)
+      {
+         if (PlayerPrefs.HasKey("HighScoreLevelThree"))
+         {
+            highScore = PlayerPrefs.GetInt("HighScoreLevelThree");
+         }
+         else
+         {
+            PlayerPrefs.SetInt("HighScoreLevelThree", 0);
+            highScore = PlayerPrefs.GetInt("HighScoreLevelThree");
+         }
+         
+         highScoreText.text = highScore.ToString("0");
+      }
 
       _oldHighScoreAnimator = _oldHighScorePanel.GetComponent<Animator>();
       
@@ -52,28 +85,34 @@ public class LevelCompleteManager : MonoBehaviour
       totalPoints = 0;
       
       if(!scoringOver)
-         InvokeRepeating("CalculateScore", 1f, 0.01f);
+         InvokeRepeating("CalculateScore", 5f, .005f);
    }
 
    private void Update()
    {
-      punchScore.text = punchPointsEnd.ToString("0");
-      distanceScore.text = distancePointsEnd.ToString("0");
-      bonusScore.text = bonusPointsEnd.ToString("0");
-      zenScore.text = zenPointsEnd.ToString("0");
-      penaltyScore.text = penaltyPointsEnd.ToString("0");
-      totalScore.text = totalPoints.ToString("0");
+      
+      if(!scoringOver)
+      {
+         punchScore.text = punchPointsEnd.ToString("0");
+         distanceScore.text = distancePointsEnd.ToString("0");
+         bonusScore.text = bonusPointsEnd.ToString("0");
+         zenScore.text = zenPointsEnd.ToString("0");
+         penaltyScore.text = penaltyPointsEnd.ToString("0");
+         totalScore.text = totalPoints.ToString("0");
+      }
       
       if(totalPoints < 1000)
          totalScore.color = Color.gray;
-      else if (totalPoints < 3000)
+      else if (totalPoints < 2000)
          totalScore.color = Color.red;
       else if (totalPoints < 5000)
          totalScore.color = Color.green;
       else if(totalPoints < 7000)
          totalScore.color = Color.blue;
-      else if (totalPoints >= 9000)
+      else if (totalPoints < 9000)
          totalScore.color = Color.magenta;
+      else
+         totalScore.color = Color.yellow;
 
    }
 
@@ -83,7 +122,7 @@ public class LevelCompleteManager : MonoBehaviour
       {
          punchPointsEnd += growthRate;
          totalPoints += growthRate;
-         
+
          //TODO play points going up audio
       }
       else if (distancePoints != distancePointsEnd && distancePoints > distancePointsEnd)
@@ -114,7 +153,7 @@ public class LevelCompleteManager : MonoBehaviour
          
          //TODO play points going up audio
       }
-      else if (totalPoints > PlayerPrefs.GetInt("HighScore"))
+      else if (totalPoints > highScore)
       {
          StartCoroutine(NewHighScore());
          scoringOver = true;
@@ -123,13 +162,25 @@ public class LevelCompleteManager : MonoBehaviour
 
    private IEnumerator NewHighScore()
    {
-      PlayerPrefs.SetInt("HighScore", totalPoints);
       _oldHighScoreAnimator.SetTrigger("NewHighScore");
       yield return new WaitForSeconds(3);
-      Instantiate(_newHighScorePrefab);
+      _newHighScoreParent.SetActive(true);
+      if (arenaNumber == 1)
+      {
+         PlayerPrefs.SetInt("HighScoreLevelOne", totalPoints);
+         _newHighScoreText.text = PlayerPrefs.GetInt("HighScoreLevelOne").ToString("0");
+      }
+
+      if (arenaNumber == 2)
+      {
+         PlayerPrefs.SetInt("HighScoreLevelTwo", totalPoints);
+         _newHighScoreText.text = PlayerPrefs.GetInt("HighScoreLevelTwo").ToString("0");
+      }
+
+      if (arenaNumber == 3)
+      {
+         PlayerPrefs.SetInt("HighScoreLevelThree", totalPoints);
+         _newHighScoreText.text = PlayerPrefs.GetInt("HighScoreLevelThree").ToString("0");
+      }
    }
-   
-   //new high score function
-   // make last high score fall
-   //new high score with "New high score" panel fall
 }

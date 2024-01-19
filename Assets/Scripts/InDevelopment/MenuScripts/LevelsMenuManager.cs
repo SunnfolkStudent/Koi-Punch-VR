@@ -11,7 +11,14 @@ public class LevelsMenuManager : MonoBehaviour
     
     void Start()
     {
-        levelOneScore.text = PlayerPrefs.GetInt("HighScore").ToString("0");
+        if (PlayerPrefs.HasKey("HighScore"))
+        {
+            levelOneScore.text = PlayerPrefs.GetInt("HighScore").ToString("0");
+        }
+        else
+        {
+            levelOneScore.text = "0";
+        }
     }
     
 }

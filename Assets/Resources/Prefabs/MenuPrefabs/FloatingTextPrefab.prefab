@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9185622660852484129}
   - component: {fileID: 5499384826139051035}
   - component: {fileID: 6911485675513359374}
+  - component: {fileID: 1342564462603965542}
   m_Layer: 0
   m_Name: FloatingTextPrefab
   m_TagString: Untagged
@@ -212,3 +213,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1444b0c9144fe324a983eb7fe09b16f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floatingText: {fileID: 0}
+--- !u!320 &1342564462603965542
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723132749056987256}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 45f8460bb6967d24192862338c2e4e3b, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 908643611604801135, guid: 45f8460bb6967d24192862338c2e4e3b, type: 2}
+    value: {fileID: 5499384826139051035}
+  m_ExposedReferences:
+    m_References: []
