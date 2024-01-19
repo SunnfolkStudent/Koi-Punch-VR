@@ -1,14 +1,13 @@
 using System.Collections;
 using FinalScripts.Fish.Spawning;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace FinalScripts.Fish
 {
     public class Fish : MonoBehaviour
     {
         public FishObjectPool.Fish fish { get; set; }
-
+        
         #region ---InspectorSettings---
         [Header("Despawn")]
         [Tooltip("Despawn after this amount of seconds when fish hits the ground")]
@@ -32,7 +31,7 @@ namespace FinalScripts.Fish
         [Header("debug")]
         public bool isDebugging;
         #endregion
-
+        
         #region ---Initialization---
         private void Start()
         {
@@ -64,7 +63,7 @@ namespace FinalScripts.Fish
         {
             DespawnIfOutOfTimeOrTooLow();
         }
-
+        
         private void DespawnIfOutOfTimeOrTooLow()
         {
             if (transform.position.y > despawnAltitude && _startTime > Time.time - despawnTime) return;
