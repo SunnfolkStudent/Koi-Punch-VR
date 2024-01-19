@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace FinalScripts.Fish.Spawning
 {
@@ -11,6 +12,7 @@ namespace FinalScripts.Fish.Spawning
         [SerializeField] private float maxSpawnRate = 1.5f;
         [SerializeField] private float minSpawnRate = 0.5f;
         [SerializeField] private float timeToMaxSpawnRate = 20f;
+        [SerializeField] private AnimationCurve animationCurve;
         
         #region ---Initialization---
         private void Start()
@@ -50,6 +52,8 @@ namespace FinalScripts.Fish.Spawning
             while (isSpawningFish)
             {
                 var nextSpawnTime = Mathf.Lerp(maxSpawnTime, minSpawnTime, Time.time / timeToMaxSpawnRate);
+                // TODO: Set up AnimationCurve in response to fishSpawnTimes over time... (looks something like the below line)
+                // var nextSpawnTime = Mathf.Lerp(minSpawnTime, maxSpawnTime, (animationCurve.Evaluate(maxSpawnTime / minSpawnTime)));
                 yield return new WaitForSeconds(nextSpawnTime);
                 EventManager.SpawnFish.Invoke();
             }
