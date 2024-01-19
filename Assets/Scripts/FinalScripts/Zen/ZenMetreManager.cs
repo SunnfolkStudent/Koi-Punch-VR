@@ -118,6 +118,7 @@ public class ZenMetreManager : MonoBehaviour
     //Method that moves on to the second level of zen
     private void LevelOne()
     {
+        InternalZenEventManager.updateVisualZenBar.Invoke();
         Debug.Log("Level1");
         zenLevel = 1;
         zenLevelCheckpoint = 1;
@@ -130,6 +131,7 @@ public class ZenMetreManager : MonoBehaviour
     //Method that moves on to the third level of zen
     private void LevelTwo()
     {
+        InternalZenEventManager.updateVisualZenBar.Invoke();
         zenMetreValue = 0;
         zenLevel = 2;
         zenLevelCheckpoint = 2;

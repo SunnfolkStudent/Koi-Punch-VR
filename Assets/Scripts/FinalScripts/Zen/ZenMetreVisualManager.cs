@@ -82,45 +82,41 @@ public class ZenMetreVisualManager : MonoBehaviour
             fillAmount = Mathf.Clamp01(fillAmount);
 
             // Update the _FillAmount property in the shader
-            if (workingZenLevel == 0)
+            switch (workingZenLevel)
             {
-                //_zenMetreBarMaterials[0].SetFloat(_fillAmountPropertyID, fillAmount);
-                _zenMetreBarMaterials[0].SetFloat(_fillAmountPropertyID, fillAmount);
-            }
-            else if (workingZenLevel == 1)
-            {
-                _zenMetreBarMaterials[1].SetFloat(_fillAmountPropertyID, fillAmount);
-            }
-            else if (workingZenLevel == 2)
-            {
-                _zenMetreBarMaterials[2].SetFloat(_fillAmountPropertyID, fillAmount);
-            }
-
-            if (workingZenLevel < 2 && zenMetreBars[2].gameObject.activeSelf)
-            {
-                _zenMetreBarMaterials[2].SetFloat(_fillAmountPropertyID, 0f);
-                zenMetreBars[2].gameObject.SetActive(false);
-            }
-            else if (workingZenLevel >= 2 && !zenMetreBars[2].gameObject.activeSelf)
-            {
-                zenMetreBars[2].gameObject.SetActive(true);
+                case 0:
+                    _zenMetreBarMaterials[0].SetFloat(_fillAmountPropertyID, fillAmount);
+                    break;
+                case 1:
+                    _zenMetreBarMaterials[1].SetFloat(_fillAmountPropertyID, fillAmount);
+                    break;
+                case 2:
+                    _zenMetreBarMaterials[2].SetFloat(_fillAmountPropertyID, fillAmount);
+                    break;
             }
 
-            if (workingZenLevel < 1 && zenMetreBars[1].gameObject.activeSelf && ZenMetreManager.Instance.zenLevelCheckpoint < 2)
-            {
-                _zenMetreBarMaterials[1].SetFloat(_fillAmountPropertyID, 0f);
-                zenMetreBars[1].gameObject.SetActive(false);
-            }
-            else if (workingZenLevel >= 1 && !zenMetreBars[1].gameObject.activeSelf)
-            {
-                zenMetreBars[1].gameObject.SetActive(true);
-            }
+            //Turns on/off the second zen bar
+            TurnOnOrOffZenbar(1, workingZenLevel);
+            //Turns on/off the third zen bar
+            TurnOnOrOffZenbar(2, workingZenLevel);
         }
         catch (Exception e)
         {
             Debug.LogError("Exception: " + e + " occurred while updating Zen Bar.");
         }
-        
+    }
+    
+    private void TurnOnOrOffZenbar(int zenbarIndex, int workingZenLevel)
+    {
+        if (zenMetreBars[zenbarIndex].gameObject.activeSelf && workingZenLevel < 1 && ZenMetreManager.Instance.zenLevelCheckpoint < (zenbarIndex + 1))
+        {
+            _zenMetreBarMaterials[zenbarIndex].SetFloat(_fillAmountPropertyID, 0f);
+            zenMetreBars[zenbarIndex].gameObject.SetActive(false);
+        }
+        else if (!zenMetreBars[zenbarIndex].gameObject.activeSelf && workingZenLevel >= 1)
+        {
+            zenMetreBars[zenbarIndex].gameObject.SetActive(true);
+        }
     }
     
     private void ShowSparkles()
