@@ -108,7 +108,7 @@ namespace FinalScripts.Fish.Spawning.RandomWeightedTables
             foreach (var area in availableSpawnAreas)
             {
                 sum += area.Weight;
-                if (sum < rnd) continue;
+                if (sum >= rnd) continue;
                 NewProbabilities(availableSpawnAreas, area);
                 return area;
             }
