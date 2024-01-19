@@ -97,27 +97,27 @@ public class FMODManager: MonoBehaviour
     {
         if (controllerManager.leftVelMagnitude > velocityFloor && windPlaying == false)
         {
+            windPlaying = true;
             StartCoroutine(LeftHandWind());
-            windPlaying = false;
         }
        
         if (controllerManager.rightVelMagnitude > velocityFloor && windPlaying == false)
         {
+            windPlaying = true;
             StartCoroutine(RightHandWind());
-            windPlaying = false;
         }
     }
     private IEnumerator LeftHandWind()
     {
         PlayOneShot("event:/SFX/PlayerSounds/HandSounds/HandWind", controllerManager.leftVelMagnitude * wooshVolume, Left.transform.position);
         yield return new WaitForSeconds(1);
-        windPlaying = true;
+        windPlaying = false;
     }
     private IEnumerator RightHandWind()
     {
         PlayOneShot("event:/SFX/PlayerSounds/HandSounds/HandWind", controllerManager.leftVelMagnitude * wooshVolume, Right.transform.position);
         yield return new WaitForSeconds(1);
-        windPlaying = true;
+        windPlaying = false;
     }
 
     /*how to use:
