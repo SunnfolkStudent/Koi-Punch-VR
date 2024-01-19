@@ -35,6 +35,7 @@ namespace FinalScripts.Fish.BossBattle
         private void Hit()
         {
             Debug.Log("---WeakPointHit---");
+            Boss.Score += 5f;
             ZenMetreManager.Instance.AddAttackFieldZen();
             Destroy(gameObject);
         }
