@@ -32,6 +32,8 @@ public class SpecialAttackScript : MonoBehaviour
             InternalZenEventManager.hidePromptText.Invoke();
             chargingPunch = true;
             HapticManager.zenCharge = true;
+            
+            //TODO: PLAY "KOOOOOOOOOOOOOOOOOOOOOOOOO"
         }
         
         //IF BUTTON WAS RELEASED
@@ -45,6 +47,9 @@ public class SpecialAttackScript : MonoBehaviour
             ZenMetreManager.Instance.zenAttackActive = false;
             HapticManager.zenCharge = false;
             CalculatePunchForce();
+            
+            //TODO: STOP PLAYING "KOOOOOOOOOOOOOOOOOOOOOOOOO"
+            //TODO: PLAY "I"
         }
         
         if (chargingPunch && !punchCharged)
@@ -64,6 +69,9 @@ public class SpecialAttackScript : MonoBehaviour
                 ZenMetreManager.Instance.zenAttackActive = false;
                 ZenMetreManager.Instance.zenMetreValue = 0f;
                 CalculatePunchForce();
+                
+                //TODO: STOP PLAYING "KOOOOOOOOOOOOOOOOOOOOOOOOO"
+                //TODO: PLAY "I"
             }
             
             InternalZenEventManager.updateVisualZenBar.Invoke();
