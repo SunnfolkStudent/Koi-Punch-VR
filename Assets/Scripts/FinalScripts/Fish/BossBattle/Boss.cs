@@ -4,7 +4,6 @@ using FinalScripts.Fish.Spawning;
 using FinalScripts.Fish.Spawning.RandomWeightedTables;
 using InDevelopment.Punch;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace FinalScripts.Fish.BossBattle
 {
@@ -12,16 +11,28 @@ namespace FinalScripts.Fish.BossBattle
     {
         private FishSpawnAreas _fishSpawnAreas;
         private Transform _player;
+        private Rigidbody _rigidbody;
         private Rigidbody[] _rigidities;
-        [SerializeField] private float height;
-        [SerializeField] private float zenPerHitPhase2 = 5f;
         private static BossPhase _currentBossState;
+        private bool _bossIsDead;
+        
+        #region ---InspectorSettings---
+        [Header("BossLaunch")]
+        [SerializeField] private float height;
+        
+        [Header("ZenGained")]
+        [SerializeField] private float zenPerHitPhase2 = 5f;
         
         [Header("Score")]
         public static float Score;
         [SerializeField] private float scorePerHitPhase2 = 5f;
         
+        [Header("ZenPunch")]
+        [SerializeField] private float zenPunchMultiplier = 1f;
+        
+        [Header("debug")]
         [SerializeField] private bool isDebugging;
+        #endregion
         
         #region ---Debugging---
         private void Log(string message)
@@ -45,6 +56,7 @@ namespace FinalScripts.Fish.BossBattle
         private void Start()
         {
             _player = GameObject.FindGameObjectWithTag("MainCamera").transform;
+            _rigidbody = GetComponent<Rigidbody>();
             _rigidities = GetComponentsInChildren<Rigidbody>().ToArray();
             EventManager.StartBossPhase0.Invoke();
         }
@@ -123,7 +135,7 @@ namespace FinalScripts.Fish.BossBattle
         
         private void PhaseSuccessful()
         {
-            Phase[_currentBossState].score = ZenMetreManager.Instance.zenMetreValue;
+            Phase[_currentBossState].score = Score;
             Log($"boss phase: {_currentBossState} completed | invoke: {_currentBossState++}");
             Phase[_currentBossState++].Event.Invoke();
         }
@@ -181,25 +193,36 @@ namespace FinalScripts.Fish.BossBattle
             var controllerVelocity = fistUsed == "LeftFist" ? controllerManager.leftControllerVelocity : controllerManager.rightControllerVelocity;
             var zenPunchForce = SpecialAttackScript.punchForce * controllerVelocity.normalized;
             var force = controllerVelocity + zenPunchForce;
+            force *= zenPunchMultiplier;
             
-            GetComponent<Rigidbody>().AddForce(force);
+            _rigidbody.AddForce(force);
+            _bossIsDead = true;
             EventManager.BossDefeated.Invoke();
             
             var totalScore = Phase.Sum(pair => pair.Value.score);
             Log($"BossDefeated | TotalScore: {totalScore}");
         }
         #endregion
-        
+
+        #region ---Collision---
         private void OnCollisionEnter(Collision other)
         {
             if (other.transform.CompareTag("Ground"))
             {
-                EventManager.StartBossPhase0.Invoke();
+                if (_bossIsDead)
+                {
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    EventManager.StartBossPhase0.Invoke();
+                }
             }
             else if (other.transform.CompareTag("MainCamera"))
             {
                 EventManager.StartBossPhase0.Invoke();
             }
         }
+        #endregion
     }
 }

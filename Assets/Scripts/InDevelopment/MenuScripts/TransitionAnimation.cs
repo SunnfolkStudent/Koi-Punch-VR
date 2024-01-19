@@ -20,7 +20,7 @@ public class TransitionAnimation : MonoBehaviour
             
             //TODO play explosion audio
         }
-        Destroy(gameObject,5f);
+        Destroy(gameObject,7f);
     }
     
     private void OnDisable()

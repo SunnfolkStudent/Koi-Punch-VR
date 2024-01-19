@@ -169,7 +169,7 @@ public class ScoreManager : MonoBehaviour
     
     private void FloatingText(string msg, Color txtColor)
     {
-        GameObject instantiated = Instantiate(textPrefab, textSpawner.transform.localPosition,
+        GameObject instantiated = Instantiate(textPrefab, new Vector3(textSpawner.transform.position.x, 25,textSpawner.transform.position.z),
             textSpawner.transform.rotation);
         TextMeshPro FloatingTxt = instantiated.GetComponent<TextMeshPro>();
         FloatingTxt.text = msg;
