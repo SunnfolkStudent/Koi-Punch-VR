@@ -95,6 +95,7 @@
 		<property name="length">
 			<value>4.5</value>
 		</property>
+		<property name="name" />
 		<relationship name="sounds">
 			<destination>{04287f77-9d39-4967-b6b1-5d6ba1e6a8cc}</destination>
 			<destination>{63beb084-0746-429a-8da5-ae221ffd820d}</destination>
@@ -121,6 +122,7 @@
 		<relationship name="effects">
 			<destination>{08271e81-281e-420f-add6-cd6db48aa42b}</destination>
 			<destination>{5f8c6641-a3f2-4e78-9512-6e96cb2e56ba}</destination>
+			<destination>{33e7e4be-71a0-46d6-9d36-6a9881a4ab6e}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{dfa36f43-f4d2-4594-812c-6102772ab363}">
@@ -195,10 +197,14 @@
 	<object class="MixerBusFader" id="{55461ef0-76f7-420e-8389-9b69eff4d3f4}" />
 	<object class="MixerBusFader" id="{08271e81-281e-420f-add6-cd6db48aa42b}" />
 	<object class="GainEffect" id="{5f8c6641-a3f2-4e78-9512-6e96cb2e56ba}">
+		<property name="bypass">
+			<value>true</value>
+		</property>
 		<relationship name="automators">
 			<destination>{d8042ddd-3527-4697-9753-aa670b5c3208}</destination>
 		</relationship>
 	</object>
+	<object class="ObjectSpatialiserEffect" id="{33e7e4be-71a0-46d6-9d36-6a9881a4ab6e}" />
 	<object class="Automator" id="{d8042ddd-3527-4697-9753-aa670b5c3208}">
 		<property name="nameOfPropertyBeingAutomated">
 			<value>gain</value>
