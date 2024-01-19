@@ -18,6 +18,7 @@ public class ZenMetreManager : MonoBehaviour
     public int zenLevel;
     public int zenLevelCheckpoint;
     private bool _zenBossSpawnInvoked;
+    [SerializeField] private float zenFromWeakpoint = 10f;
     
     [Header("Time Stop Values")]
     private float _slowdownFactor = 0.001f;
@@ -94,7 +95,7 @@ public class ZenMetreManager : MonoBehaviour
     
     public void AddAttackFieldZen()
     {
-        zenMetreValue += 20f;
+        zenMetreValue += zenFromWeakpoint;
         
         if (zenMetreValue > 100)
         {
