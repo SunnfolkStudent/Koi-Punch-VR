@@ -48,7 +48,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba9f4ff21b27384aa6188b732cd8237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   launchType: 0
   minHeight: 1
   maxHeight: 3
@@ -126,8 +125,12 @@ MonoBehaviour:
   maxSpawnRate: 1.5
   minSpawnRate: 0.5
   timeToMaxSpawnRate: 20
-  bossPrefab: {fileID: 471582657252072425, guid: e3792d775295884418e0ab41c2a97d11,
-    type: 3}
+  animationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &2966538303576735511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,11 +144,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPickRate: 5
-  neighborDistanceThreshold: 5
+  neighborDistanceSearchRadius: 7
   weightLossOfPickedArea: 0.5
   chainMaxNumber: 4
-  firstPercentage: 0.9
-  secondPercentage: 0.66
+  firstPercentage: 0.95
+  secondPercentage: 0.7
   thirdPercentage: 0.5
   fourthPercentage: 0.33
   fifthPercentage: 0.2
