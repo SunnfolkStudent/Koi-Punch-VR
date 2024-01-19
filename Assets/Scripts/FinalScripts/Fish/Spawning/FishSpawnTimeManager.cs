@@ -52,9 +52,8 @@ namespace FinalScripts.Fish.Spawning
             var maxSpawnTime = 1 / minSpawnRate;
             while (isSpawningFish)
             {
-                var nextSpawnTime = Mathf.Lerp(maxSpawnTime, minSpawnTime, Time.time / timeToMaxSpawnRate);
-                // TODO: Set up AnimationCurve in response to fishSpawnTimes over time... (looks something like the below line)
-                // var nextSpawnTime = Mathf.Lerp(minSpawnTime, maxSpawnTime, (animationCurve.Evaluate(maxSpawnTime / minSpawnTime)));
+                // var nextSpawnTime = Mathf.Lerp(maxSpawnTime, minSpawnTime, Time.time / timeToMaxSpawnRate);
+                var nextSpawnTime = Mathf.Lerp(minSpawnTime, maxSpawnTime, (animationCurve.Evaluate(Time.time / timeToMaxSpawnRate)));
                 yield return new WaitForSeconds(nextSpawnTime);
                 EventManager.SpawnFish.Invoke();
             }
