@@ -144,8 +144,6 @@ public class ZenMetreManager : MonoBehaviour
     private void LevelThree()
     {
         zenMetreValue = 0;
-        zenLevel = 3;
-        zenLevelCheckpoint = 3;
         
         //Start of level 3
         zenAttackActive = true;
@@ -256,7 +254,7 @@ public class ZenMetreManager : MonoBehaviour
 
     private void CheckForMaxZen()
     {
-        if (zenMetreValue >= 100 && zenLevel >= 2)
+        if (zenMetreValue >= 100 && zenLevel == 2)
         {
             InternalZenEventManager.showSparkles.Invoke();
         }
