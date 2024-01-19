@@ -58,6 +58,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3133277522541741974, guid: 2d65a409040c2a94ebb8954ab92ebcc1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -2924452563138137217, guid: 2d65a409040c2a94ebb8954ab92ebcc1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -2751537534896755492, guid: 2d65a409040c2a94ebb8954ab92ebcc1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -1453495296788207366, guid: 2d65a409040c2a94ebb8954ab92ebcc1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -68,10 +83,35 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.12
       objectReference: {fileID: 0}
+    - target: {fileID: 419891622335181835, guid: 2d65a409040c2a94ebb8954ab92ebcc1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2d65a409040c2a94ebb8954ab92ebcc1,
         type: 3}
       propertyPath: m_Name
       value: Fish_05
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2d65a409040c2a94ebb8954ab92ebcc1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1107740607342998373, guid: 2d65a409040c2a94ebb8954ab92ebcc1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2051886018744014863, guid: 2d65a409040c2a94ebb8954ab92ebcc1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7036213049465896255, guid: 2d65a409040c2a94ebb8954ab92ebcc1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8879528566716807029, guid: 2d65a409040c2a94ebb8954ab92ebcc1,
         type: 3}
@@ -675,7 +715,7 @@ MonoBehaviour:
   despawnTime: 10
   despawnAltitude: -5
   punchVelMultiplier: 30
-  velocityNeededForSuccessfulHit: 3
+  successfulPunchThreshold: 3
   hasBeenPunched: 0
   hasHitGround: 0
   isDebugging: 1

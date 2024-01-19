@@ -36,7 +36,7 @@ namespace FinalScripts.Fish.Spawning
             var displacement = SpacialDifference(objPos, targetPos);
             if (height - 1 < displacement.y)
             {
-                Debug.LogWarning("Peak trajectory height set lower than target altitude");
+                Log("Peak trajectory height set lower than target altitude");
                 height = displacement.y + 1;
             }
             var velocityForward = Mathf.Sqrt(-2 * Physics.gravity.y * height);

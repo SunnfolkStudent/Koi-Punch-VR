@@ -8,6 +8,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8920280285390185855, guid: 59e64ca8026c1af48a4785bf68b9c7a0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 59e64ca8026c1af48a4785bf68b9c7a0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -58,10 +63,55 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8519931663936982330, guid: 59e64ca8026c1af48a4785bf68b9c7a0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 791360617678317653, guid: 59e64ca8026c1af48a4785bf68b9c7a0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 59e64ca8026c1af48a4785bf68b9c7a0,
         type: 3}
       propertyPath: m_Name
       value: Fish_08
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 59e64ca8026c1af48a4785bf68b9c7a0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2689259502305228471, guid: 59e64ca8026c1af48a4785bf68b9c7a0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3493458595592669036, guid: 59e64ca8026c1af48a4785bf68b9c7a0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871038910638414084, guid: 59e64ca8026c1af48a4785bf68b9c7a0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526497581362860629, guid: 59e64ca8026c1af48a4785bf68b9c7a0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7036213049465896255, guid: 59e64ca8026c1af48a4785bf68b9c7a0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7334566243585793578, guid: 59e64ca8026c1af48a4785bf68b9c7a0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8879528566716807029, guid: 59e64ca8026c1af48a4785bf68b9c7a0,
         type: 3}
@@ -754,7 +804,7 @@ MonoBehaviour:
   despawnTime: 10
   despawnAltitude: -5
   punchVelMultiplier: 30
-  velocityNeededForSuccessfulHit: 3
+  successfulPunchThreshold: 3
   hasBeenPunched: 0
   hasHitGround: 0
   isDebugging: 1
