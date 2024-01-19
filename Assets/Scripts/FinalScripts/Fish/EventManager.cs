@@ -27,7 +27,8 @@ namespace FinalScripts.Fish
         #endregion
         
         public delegate void ScoreEvent(int score);
-        public static ScoreEvent ScoreChanged;
+        public static ScoreEvent ScoreChanged; // TODO: have points gained call this
+        public static ScoreEvent BossDefeatedTotalScore; // TODO: call this at end of boss fight
         
         #region ---EventDebugs---
         private static void SpawnFishDebug()
