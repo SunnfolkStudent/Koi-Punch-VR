@@ -57,7 +57,6 @@ public class HapticManager : MonoBehaviour
 
     [Header("HapticCancel")] 
     public static bool cancelHaptics;
-    [SerializeField] private InputActionReference hapticCancelButton;
 
     [Header("zenChargeIntensity")]
     [Range(0,0.8f)]
@@ -72,12 +71,20 @@ public class HapticManager : MonoBehaviour
         _Bbutton = bButton.action.IsPressed();
         _Xbutton = xButton.action.IsPressed();
         _Ybutton = yButton.action.IsPressed();
-        cancelHaptics = hapticCancelButton.action.WasPressedThisFrame();
-        
-        if (_Abutton || _Bbutton || _Xbutton || _Ybutton)
-        {zenChargeing = true;}
-        else {zenChargeing = false;}
 
+        if (_Abutton || _Bbutton || _Xbutton || _Ybutton)
+        {
+            zenChargeing = true;
+        }
+        else
+        {
+            zenChargeing = false;
+        }
+         
+        if (zenChargeing)
+         {
+             Debug.Log("ZEN IS CHARGING");   
+         }
         zenAmplifier = 0.8f / SpecialAttackScript.timeToCharge;
         
         if (leftFishPunch) {LeftFishPunch();} 

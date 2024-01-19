@@ -7,7 +7,7 @@ namespace InDevelopment
     {
         [Header("SphereCast")][Tooltip("SphereCast is for collision detection during time-stop")]
         [SerializeField] private int maxColliders = 10;
-        [SerializeField] private float sphereCastRadius = 1.25f;
+        [SerializeField] private float sphereCastRadius = 0.2f;
         
         private ControllerManager _controllerManager;
         private string _whichFistUsed;
