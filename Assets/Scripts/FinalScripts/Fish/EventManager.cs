@@ -26,6 +26,9 @@ namespace FinalScripts.Fish
         #endregion
         #endregion
         
+        public delegate void ScoreEvent(int score);
+        public static ScoreEvent ScoreChanged;
+        
         #region ---EventDebugs---
         private static void SpawnFishDebug()
         {

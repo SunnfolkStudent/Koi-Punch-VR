@@ -1,14 +1,17 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using FinalScripts.Fish.Spawning;
 using FinalScripts.Fish.Spawning.RandomWeightedTables;
 using InDevelopment.Punch;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace FinalScripts.Fish.BossBattle
 {
     public class Boss : MonoBehaviour, IPunchable
     {
+        [SerializeField] private ScoreManager scoreManager;
         private FishSpawnAreas _fishSpawnAreas;
         private Transform _player;
         private Rigidbody _rigidbody;
@@ -17,6 +20,10 @@ namespace FinalScripts.Fish.BossBattle
         private bool _bossIsDead;
         
         #region ---InspectorSettings---
+        [Header("Delay")]
+        [SerializeField] private float phase0Delay = 5f;
+        [SerializeField] private float attackDelay = 5f;
+        
         [Header("BossLaunch")]
         [SerializeField] private float height;
         
@@ -25,7 +32,7 @@ namespace FinalScripts.Fish.BossBattle
         
         [Header("Score")]
         public static float Score;
-        [SerializeField] private float scorePerHitPhase2 = 5f;
+        [SerializeField] private float scorePerHitPhase2 = 30;
         
         [Header("ZenPunch")]
         [SerializeField] private float zenPunchMultiplier = 100f;
@@ -58,7 +65,7 @@ namespace FinalScripts.Fish.BossBattle
             _player = GameObject.FindGameObjectWithTag("MainCamera").transform;
             _rigidbody = GetComponent<Rigidbody>();
             _rigidities = GetComponentsInChildren<Rigidbody>().ToArray();
-            EventManager.StartBossPhase0.Invoke();
+            StartCoroutine(OnSpawn());
         }
 
         #endregion
@@ -94,10 +101,22 @@ namespace FinalScripts.Fish.BossBattle
         #endregion
         
         #region ---BossPhasesStart---
+        private IEnumerator OnSpawn()
+        {
+            yield return new WaitForSeconds(phase0Delay);
+            EventManager.StartBossPhase0.Invoke();
+        }
+        
         private void Phase0()
         {
             _currentBossState = BossPhase.Phase0;
+            // TODO: Play Fight the Dragon audio
             
+            Invoke(nameof(Attack), attackDelay);
+        }
+
+        private void Attack()
+        {
             var spawnPos = _fishSpawnAreas.GetNextFishSpawnPosition();
             transform.position = spawnPos;
             var playerPosition = _player.position;
@@ -108,12 +127,14 @@ namespace FinalScripts.Fish.BossBattle
         
         private void Phase1()
         {
+            // TODO: Play Punch out voice line
             Score = 0;
             _currentBossState = BossPhase.Phase1;
         }
         
         private void Phase2()
         {
+            // TODO: Play Punch out voice line
             Score += scorePerHitPhase2;
             _currentBossState = BossPhase.Phase2;
         }
@@ -189,6 +210,7 @@ namespace FinalScripts.Fish.BossBattle
         {
             if (!SpecialAttackScript.punchCharged) return;
             Log("Phase 3 hit charged");
+            // TODO: Play "Puuuunch" voice line
             
             var controllerVelocity = fistUsed == "LeftFist" ? controllerManager.leftControllerVelocity : controllerManager.rightControllerVelocity;
             var zenPunchForce = SpecialAttackScript.punchForce * controllerVelocity.normalized;
