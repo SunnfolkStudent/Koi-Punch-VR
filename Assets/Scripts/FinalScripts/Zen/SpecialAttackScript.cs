@@ -72,6 +72,7 @@ public class SpecialAttackScript : MonoBehaviour
                 
                 //TODO: STOP PLAYING "KOOOOOOOOOOOOOOOOOOOOOOOOO"
                 //TODO: PLAY "I"
+                //TODO: PS: THERE IS NO DUPLICATE. EITHER THIS RUNS OR THE OTHER ONE. NOT BOTH
             }
             
             InternalZenEventManager.updateVisualZenBar.Invoke();
