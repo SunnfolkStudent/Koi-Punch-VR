@@ -26,8 +26,8 @@ public class ScoreManager : MonoBehaviour
     {
         fishPunchPoints = distancePoints = bonusPoints = hitByFish = zenPoints = 0;
         zenModeOn = false;
-        EventManager.ScoreChanged += ShowZenPoints;
-        EventManager.BossDefeatedTotalScore += ZenEnd;
+        //EventManager.ScoreChanged += ShowZenPoints;
+        //EventManager.BossDefeatedTotalScore += ZenEnd;
     }
 
     /*Added to the beginning of each script that adds to ScoreManager
