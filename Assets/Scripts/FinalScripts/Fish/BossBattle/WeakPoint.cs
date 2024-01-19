@@ -7,7 +7,7 @@ namespace FinalScripts.Fish.BossBattle
     public class WeakPoint : MonoBehaviour, IPunchable
     {
         [Header("Despawn Time")][Tooltip("Time before weak-point de-spawns")]
-        [SerializeField] private float despawnTime = 6f;
+        [SerializeField] private float despawnTime = 2f;
         [Header("Rumble")][Tooltip("Rumble controller on hits")]
         [SerializeField] private float rumbleDuration = 1f;
         
