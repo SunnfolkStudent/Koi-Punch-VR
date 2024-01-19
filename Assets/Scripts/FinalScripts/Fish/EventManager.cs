@@ -26,10 +26,13 @@ namespace FinalScripts.Fish
         #endregion
         #endregion
         
-        public delegate void ScoreEvent(int score);
-        public static ScoreEvent ScoreChanged; // TODO: have points gained call this
-        public static ScoreEvent BossDefeatedTotalScore; // TODO: call this at end of boss fight
+        #region ---ScoreEvents---
+        public delegate void ScoreEvent(float score);
         
+        public static ScoreEvent GainScore; // TODO: have points gained call this fish and end of bossBattle
+        public static ScoreEvent ScoreChanged; // Called to show the current bossBattle score
+        public static ScoreEvent BossDefeatedTotalScore; // TODO: call this at end of boss fight and add listener in scoreManager
+        #endregion
         #region ---EventDebugs---
         private static void SpawnFishDebug()
         {

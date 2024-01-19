@@ -11,7 +11,6 @@ namespace FinalScripts.Fish.BossBattle
 {
     public class Boss : MonoBehaviour, IPunchable
     {
-        [SerializeField] private ScoreManager scoreManager;
         private FishSpawnAreas _fishSpawnAreas;
         private Transform _player;
         private Rigidbody _rigidbody;
@@ -28,11 +27,11 @@ namespace FinalScripts.Fish.BossBattle
         [SerializeField] private float height;
         
         [Header("ZenGained")]
-        [SerializeField] private float zenPerHitPhase2 = 5f;
+        [SerializeField] private int zenPerHitPhase2 = 5;
         
         [Header("Score")]
-        public static float Score;
-        [SerializeField] private float scorePerHitPhase2 = 30;
+        public static int Score;
+        [SerializeField] private int scorePerHitPhase2 = 30;
         
         [Header("ZenPunch")]
         [SerializeField] private float zenPunchMultiplier = 100f;
@@ -135,7 +134,7 @@ namespace FinalScripts.Fish.BossBattle
         private void Phase2()
         {
             // TODO: Play Punch out voice line
-            Score += scorePerHitPhase2;
+            Score = 0;
             _currentBossState = BossPhase.Phase2;
         }
         
@@ -202,7 +201,8 @@ namespace FinalScripts.Fish.BossBattle
         private void Phase2Hit()
         {
             Log("Phase 2 hit");
-            Score = 0;
+            Score += scorePerHitPhase2;
+            EventManager.ScoreChanged.Invoke(Score);
             ZenMetreManager.Instance.AddHitZen(zenPerHitPhase2);
         }
         
@@ -223,6 +223,7 @@ namespace FinalScripts.Fish.BossBattle
             
             var totalScore = Phase.Sum(pair => pair.Value.score);
             Log($"BossDefeated | TotalScore: {totalScore}");
+            EventManager.BossDefeatedTotalScore.Invoke(totalScore);
         }
         #endregion
 
