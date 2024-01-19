@@ -12,7 +12,7 @@ namespace FinalScripts.Fish.BossBattle
         private FishSpawnAreas _fishSpawnAreas;
         private Transform _player;
         private Rigidbody[] _rigidities;
-        [SerializeField] private float bossInitialLaunchSpeed = 35f;
+        // [SerializeField] private float bossInitialLaunchSpeed = 35f;
         [SerializeField] private float height;
         [SerializeField] private float zenPerHitPhase2 = 5f;
         private static BossPhase _currentBossState;
@@ -111,9 +111,9 @@ namespace FinalScripts.Fish.BossBattle
         #region ---PhaseCompletion---
         private void Phase0Completed()
         {
-            var phase = Phase.FirstOrDefault(keyValuePair => keyValuePair.Value.score == 0).Value.Event;
-            Log($"Phase 0 completed go to: {phase}");
-            phase.Invoke();
+            var (key, value) = Phase.FirstOrDefault(keyValuePair => keyValuePair.Value.score == 0);
+            Log($"Phase 0 completed go to: {key}");
+            value.Event.Invoke();
         }
         
         private void PhaseSuccessful()
@@ -147,17 +147,20 @@ namespace FinalScripts.Fish.BossBattle
             }
         }
         
+        [ContextMenu("HitBossPhase0")]
         private void Phase0Hit()
         {
             Log("Phase 0 hit");
             EventManager.BossPhase0Completed.Invoke();
         }
 
+        [ContextMenu("HitBossPhase1")]
         private void Phase1Hit()
         {
             Log("Can't hit boss directly in phase 1");
         }
 
+        [ContextMenu("HitBossPhase2")]
         private void Phase2Hit()
         {
             Log("Phase 2 hit");

@@ -11,7 +11,6 @@ namespace FinalScripts.Fish.Spawning
     public class FishSpawnManager : MonoBehaviour
     {
         // TODO: Fix why spawned fish have torque
-        // TODO: Flight trajectory type decided by random weighted tables
         private FishSpawnAreas _fishSpawnAreas;
         private Transform _target;
         

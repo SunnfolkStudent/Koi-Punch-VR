@@ -26,7 +26,7 @@ namespace FinalScripts.Fish
         public bool hasHitGround;
         
         [Header("debug")]
-        public bool isDebugging = true;
+        public bool isDebugging;
         #endregion
 
         #region ---Initialization---

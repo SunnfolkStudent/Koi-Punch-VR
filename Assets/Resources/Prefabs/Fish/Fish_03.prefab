@@ -58,10 +58,55 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8519931663936982330, guid: 91873384e75735a49a19088ab793fdf0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -7832192784192425036, guid: 91873384e75735a49a19088ab793fdf0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -6854815567300710532, guid: 91873384e75735a49a19088ab793fdf0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -4710228040279637439, guid: 91873384e75735a49a19088ab793fdf0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -2305462951423286556, guid: 91873384e75735a49a19088ab793fdf0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 91873384e75735a49a19088ab793fdf0,
         type: 3}
       propertyPath: m_Name
       value: Fish_03
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 91873384e75735a49a19088ab793fdf0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5063494597415994248, guid: 91873384e75735a49a19088ab793fdf0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7036213049465896255, guid: 91873384e75735a49a19088ab793fdf0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8398582388422309285, guid: 91873384e75735a49a19088ab793fdf0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8879528566716807029, guid: 91873384e75735a49a19088ab793fdf0,
         type: 3}
@@ -679,7 +724,7 @@ MonoBehaviour:
   despawnTime: 10
   despawnAltitude: -5
   punchVelMultiplier: 30
-  velocityNeededForSuccessfulHit: 3
+  successfulPunchThreshold: 3
   hasBeenPunched: 0
   hasHitGround: 0
   isDebugging: 1

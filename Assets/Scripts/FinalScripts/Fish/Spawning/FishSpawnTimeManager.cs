@@ -21,23 +21,24 @@ namespace FinalScripts.Fish.Spawning
             EventManager.FishSpawningAtMaxRate += StartSpawningAtMaxRate;
             EventManager.StopFishSpawning += StopSpawning;
             EventManager.SpawnBoss += StopSpawning;
-
-            EventManager.FishSpawning.Invoke();
         }
         #endregion
         
         #region ---FishSpawnFrequencyControls---
+        [ContextMenu("StartSpawning")]
         private void StartSpawning()
         {
             StartCoroutine(SpawnFish());
         }
         
+        [ContextMenu("StartSpawningAtMaxRate")]
         private void StartSpawningAtMaxRate()
         {
             StartCoroutine(SpawnFishMaxRate());
         }
 
-        private static void StopSpawning()
+        [ContextMenu("StopSpawning")]
+        private void StopSpawning()
         {
             isSpawningFish = false;
         }
