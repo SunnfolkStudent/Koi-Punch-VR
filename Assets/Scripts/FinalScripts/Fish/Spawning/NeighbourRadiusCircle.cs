@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 namespace FinalScripts.Fish.Spawning
 {
     // Uncomment the below if you need to adjust the detection Radius, but otherwise keep commented, cuz it gets performance-heavy.
-    [ExecuteInEditMode]
+    // [ExecuteInEditMode]
     [RequireComponent(typeof(LineRenderer))]
     public class NeighbourRadiusCircle : MonoBehaviour
     {
