@@ -4,6 +4,7 @@ using FinalScripts.Fish.Spawning;
 using FinalScripts.Fish.Spawning.RandomWeightedTables;
 using InDevelopment.Punch;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace FinalScripts.Fish.BossBattle
 {
@@ -12,11 +13,13 @@ namespace FinalScripts.Fish.BossBattle
         private FishSpawnAreas _fishSpawnAreas;
         private Transform _player;
         private Rigidbody[] _rigidities;
-        // [SerializeField] private float bossInitialLaunchSpeed = 35f;
         [SerializeField] private float height;
         [SerializeField] private float zenPerHitPhase2 = 5f;
         private static BossPhase _currentBossState;
-        private float _score;
+        
+        [Header("Score")]
+        public static float Score;
+        [SerializeField] private float scorePerHitPhase2 = 5f;
         
         [SerializeField] private bool isDebugging;
         
@@ -88,22 +91,24 @@ namespace FinalScripts.Fish.BossBattle
             var playerPosition = _player.position;
             transform.LookAt(playerPosition, Vector3.up);
             var velocity2D = FishTrajectory.TrajectoryVelocity2DFromPeakHeight(spawnPos, playerPosition, height);
-            // var velocity2D = FishTrajectory.TrajectoryVelocity2DFromInitialSpeed(spawnPos, playerPosition, bossInitialLaunchSpeed);
             FishSpawnManager.LaunchRigiditiesDirectionWithVelocityTowards(_rigidities, (playerPosition - spawnPos).normalized, velocity2D);
         }
         
-        private static void Phase1()
+        private void Phase1()
         {
+            Score = 0;
             _currentBossState = BossPhase.Phase1;
         }
         
-        private static void Phase2()
+        private void Phase2()
         {
+            Score += scorePerHitPhase2;
             _currentBossState = BossPhase.Phase2;
         }
         
-        private static void Phase3()
+        private void Phase3()
         {
+            Score = 0;
             _currentBossState = BossPhase.Phase3;
         }
         #endregion
@@ -164,6 +169,7 @@ namespace FinalScripts.Fish.BossBattle
         private void Phase2Hit()
         {
             Log("Phase 2 hit");
+            Score = 0;
             ZenMetreManager.Instance.AddHitZen(zenPerHitPhase2);
         }
         
