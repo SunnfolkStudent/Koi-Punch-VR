@@ -154,8 +154,8 @@ namespace FinalScripts.Fish.Spawning.RandomWeightedTables
             _previousNeighbouringAreas = null;
             
             var currentNeighbors = availableSpawnAreas.Where(spawnArea =>
-                (Vector3.Distance(spawnArea.GameObject.transform.position, area.GameObject.transform.position))
-                <= neighborDistanceSearchRadius).ToArray();
+                Vector3.Distance(spawnArea.GameObject.transform.position, area.GameObject.transform.position)
+                  <= neighborDistanceSearchRadius && spawnArea.TimesSpawned < maxPickRate).ToArray();
             
             Debug.Log("Neighbours connected to recent spawn:" + (currentNeighbors.Length-1));
             
@@ -163,7 +163,8 @@ namespace FinalScripts.Fish.Spawning.RandomWeightedTables
             
             var weightToDistribute = area.Weight * (1 - weightLossOfPickedArea);
             var weightToNeighbours = weightToDistribute * _weightDistributedToNeighbours[neighbourChainNumber-1] / currentNeighbors.Length;
-            var weightForTheRest = weightToDistribute * (1 - _weightDistributedToNeighbours[neighbourChainNumber-1]) / (availableSpawnAreas.Count - currentNeighbors.Length);
+            var weightForTheRest = weightToDistribute * (1 - _weightDistributedToNeighbours[neighbourChainNumber-1]) 
+                                   / (availableSpawnAreas.Count - currentNeighbors.Length);
             
             _previousNeighbouringAreas = currentNeighbors;
             foreach (var spawnArea in _availableSpawnAreas)
