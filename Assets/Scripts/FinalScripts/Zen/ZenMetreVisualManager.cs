@@ -14,7 +14,6 @@ public class ZenMetreVisualManager : MonoBehaviour
     
     [Header("Zen Metre Values")]
     private float _maxZenMetreValue = 100f;
-    private int _oldZenLevel;
     
     [Header("Sparkle List")]
     private List<GameObject> _sparkleList = new List<GameObject>();
