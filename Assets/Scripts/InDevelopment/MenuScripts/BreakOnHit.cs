@@ -25,8 +25,10 @@ public class BreakOnHit : TransitionAnimation
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("LeftFist") || other.gameObject.CompareTag("RightFist"))
+        if ((other.gameObject.CompareTag("LeftFist") && CylinderTrigger.LeftHandCanHit) || (other.gameObject.CompareTag("RightFist") && CylinderTrigger.RightHandCanHit))
         {
+            CylinderTrigger.LeftHandCanHit = false;
+            CylinderTrigger.RightHandCanHit = false;
             HittingSign();
         }
     }
