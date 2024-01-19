@@ -5273,6 +5273,8 @@ GameObject:
   - component: {fileID: 8240530935602509146}
   - component: {fileID: 7736350968374647655}
   - component: {fileID: 363512022961873907}
+  - component: {fileID: 1639159181732499575}
+  - component: {fileID: 2068525779756588112}
   m_Layer: 0
   m_Name: sign_mainmenu
   m_TagString: SceneChanger
@@ -5361,10 +5363,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d58a826730e4646a092853dccb31dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _brokenPrefab: {fileID: 54784063115915970, guid: 2317e9baa367d4d428a3dd44ed19b0f6,
+  _brokenPrefab: {fileID: 54784063115915970, guid: c262f5e914a8bfa4e9f87f7bae90b820,
     type: 3}
   LevelToGoTo: 0
   newMenuParent: {fileID: 0}
+--- !u!65 &1639159181732499575
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5727491235072864191}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0062380116, y: 0.00095160946, z: 0.004481101}
+  m_Center: {x: 0.000032165222, y: -0.000015629348, z: 0.009563705}
+--- !u!54 &2068525779756588112
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5727491235072864191}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &5826207570272978102
 GameObject:
   m_ObjectHideFlags: 0
@@ -7762,6 +7812,8 @@ GameObject:
   - component: {fileID: 2633430876320898156}
   - component: {fileID: 6523563277189972643}
   - component: {fileID: 8233048700913783033}
+  - component: {fileID: 4754551558165065382}
+  - component: {fileID: 7264392270115768941}
   m_Layer: 0
   m_Name: sign_nextlevel
   m_TagString: SceneChanger
@@ -7854,6 +7906,54 @@ MonoBehaviour:
     type: 3}
   LevelToGoTo: 0
   newMenuParent: {fileID: 0}
+--- !u!54 &4754551558165065382
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7822196605841973296}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!65 &7264392270115768941
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7822196605841973296}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.006147481, y: 0.00095160946, z: 0.0045315702}
+  m_Center: {x: -0.000060482536, y: -0.00001562908, z: 0.009573168}
 --- !u!1 &8490284579801887624
 GameObject:
   m_ObjectHideFlags: 0
