@@ -27,58 +27,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-7861563079758658885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Zen1/SwagLevel
-  m_EditorClassIdentifier: 
-  Name: SwagLevel
-  StudioPath: 
-  Min: 0
-  Max: 10
-  Default: 0
-  ID:
-    data1: 48307657
-    data2: 2140632288
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &-7553286442666304258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/ZenMusic/Zen2
-  m_EditorClassIdentifier: 
-  Path: event:/Music/ZenMusic/Zen2
-  Guid:
-    Data1: -1066503778
-    Data2: 1326367932
-    Data3: 777530763
-    Data4: 1738886625
-  Banks:
-  - {fileID: 6714764706478201932}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: -3498706762230938988}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 205894
 --- !u!114 &-7552915490978264856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,6 +54,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-7507822075219898564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/MenuSounds/Gong
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/MenuSounds/Gong
+  Guid:
+    Data1: -46153051
+    Data2: 1110759707
+    Data3: -2049631060
+    Data4: 812343670
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2482
 --- !u!114 &-7109748266049691999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,10 +150,10 @@ MonoBehaviour:
   Path: C:/Users/a penguin/OneDrive/Documents/FMOD Studio/placeholder/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638412602563912000
+  lastModified: 638412794024725355
   FileSizes:
   - Name: Desktop
-    Value: 3016
+    Value: 3354
   Exists: 1
 --- !u!114 &-5678048118223378165
 MonoBehaviour:
@@ -331,7 +306,7 @@ MonoBehaviour:
   Path: C:/Users/a penguin/OneDrive/Documents/FMOD Studio/placeholder/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638412602563852064
+  lastModified: 638412794024675340
   FileSizes:
   - Name: Desktop
     Value: 1340
@@ -417,6 +392,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 5500
+--- !u!114 &-4423545550332848887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/FishSounds/BossImpact
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/FishSounds/BossImpact
+  Guid:
+    Data1: -1033946647
+    Data2: 1201813678
+    Data3: -504397164
+    Data4: -836884546
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
+--- !u!114 &-3982875594683265274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/MenuSounds/WoodHitGrass
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/MenuSounds/WoodHitGrass
+  Guid:
+    Data1: 633610173
+    Data2: 1312006499
+    Data3: -1462567255
+    Data4: -684019706
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
 --- !u!114 &-3939702224328049588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,7 +528,7 @@ MonoBehaviour:
   - Weak
   - Strong
   Exists: 1
---- !u!114 &-3498706762230938988
+--- !u!114 &-3393019871189154782
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -508,21 +537,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Zen2/SwagLevel
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Ambience/Level3
   m_EditorClassIdentifier: 
-  Name: SwagLevel
-  StudioPath: 
-  Min: 0
-  Max: 10
-  Default: 0
-  ID:
-    data1: 48307657
-    data2: 2140632288
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
+  Path: event:/SFX/Ambience/Level3
+  Guid:
+    Data1: 1341509277
+    Data2: 1311573814
+    Data3: 83769011
+    Data4: 2104300338
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 44000
 --- !u!114 &-3190656216091272765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -550,6 +582,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 60831
+--- !u!114 &-2787481745867980283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/KoiPunch/ZenModeCircleImpact
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/KoiPunch/ZenModeCircleImpact
+  Guid:
+    Data1: 1468783530
+    Data2: 1106467440
+    Data3: 42176935
+    Data4: -187159438
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
 --- !u!114 &-2253150670670485279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -604,33 +663,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2136
---- !u!114 &-1835448826973844317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/ZenMusic/ZenComplete
-  m_EditorClassIdentifier: 
-  Path: event:/Music/ZenMusic/ZenComplete
-  Guid:
-    Data1: 2120904360
-    Data2: 1289138628
-    Data3: -2126609994
-    Data4: -1390030456
-  Banks:
-  - {fileID: 6714764706478201932}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 20210
 --- !u!114 &-893817079267125501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -646,10 +678,10 @@ MonoBehaviour:
   Path: C:/Users/a penguin/OneDrive/Documents/FMOD Studio/placeholder/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638412602566224771
+  lastModified: 638412794036587329
   FileSizes:
   - Name: Desktop
-    Value: 2087136
+    Value: 3947520
   Exists: 1
 --- !u!114 &-733588973798191999
 MonoBehaviour:
@@ -678,6 +710,59 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 4000
+--- !u!114 &-411936013825736634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/ZenMusic/SwagLevel
+  m_EditorClassIdentifier: 
+  Name: SwagLevel
+  StudioPath: 
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 48307657
+    data2: 2140632288
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-326527565624274494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/ZenMusic/ZenMusic
+  m_EditorClassIdentifier: 
+  Path: event:/Music/ZenMusic/ZenMusic
+  Guid:
+    Data1: 69998864
+    Data2: 1225915740
+    Data3: 1822498464
+    Data4: 694526095
+  Banks:
+  - {fileID: 6714764706478201932}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -411936013825736634}
+  - {fileID: 1314005592999247648}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 266526
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -699,9 +784,6 @@ MonoBehaviour:
   - {fileID: 7451941171806008727}
   - {fileID: 53606116969686336}
   - {fileID: -7109748266049691999}
-  - {fileID: -7553286442666304258}
-  - {fileID: -1835448826973844317}
-  - {fileID: 7507595253703383435}
   - {fileID: 1994738907624628319}
   - {fileID: -5264123793402584295}
   - {fileID: -7985871429262521722}
@@ -736,12 +818,21 @@ MonoBehaviour:
   - {fileID: -2090427017458581486}
   - {fileID: 2545318512467174250}
   - {fileID: -3939702224328049588}
+  - {fileID: -326527565624274494}
+  - {fileID: 5150586908416749807}
+  - {fileID: 455586289999107736}
+  - {fileID: -3393019871189154782}
+  - {fileID: -7507822075219898564}
+  - {fileID: -2787481745867980283}
+  - {fileID: -3982875594683265274}
+  - {fileID: 416816881958681959}
+  - {fileID: -4423545550332848887}
   EditorParameters: []
   MasterBanks:
   - {fileID: -4994444882430963251}
   StringsBanks:
   - {fileID: -6334840867718939931}
-  cacheTime: 638412602566224771
+  cacheTime: 638412812531123500
   cacheVersion: 131616
 --- !u!114 &53606116969686336
 MonoBehaviour:
@@ -797,6 +888,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 3000
+--- !u!114 &416816881958681959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/MenuSounds/PlankBreak
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/MenuSounds/PlankBreak
+  Guid:
+    Data1: -770100019
+    Data2: 1159225432
+    Data3: 2041455524
+    Data4: -479924466
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
+--- !u!114 &455586289999107736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/MenuSounds/PlankTap
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/MenuSounds/PlankTap
+  Guid:
+    Data1: 805905978
+    Data2: 1217029461
+    Data3: -1480706143
+    Data4: -334737209
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
 --- !u!114 &812625612749181375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -878,6 +1023,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &1314005592999247648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/ZenMusic/zenLevel
+  m_EditorClassIdentifier: 
+  Name: zenLevel
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 1316655319
+    data2: 216571271
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Zen1
+  - Zen2
+  - Zen3
+  Exists: 1
 --- !u!114 &1425447013965603186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1145,6 +1317,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &5150586908416749807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Ambience/Level1
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Ambience/Level1
+  Guid:
+    Data1: -417434316
+    Data2: 1155684966
+    Data3: -1042464375
+    Data4: 36082053
+  Banks:
+  - {fileID: -893817079267125501}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 22000
 --- !u!114 &6262089173180937641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1187,10 +1386,10 @@ MonoBehaviour:
   Path: C:/Users/a penguin/OneDrive/Documents/FMOD Studio/placeholder/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638411830080545349
+  lastModified: 638412812531123500
   FileSizes:
   - Name: Desktop
-    Value: 9228768
+    Value: 9231776
   Exists: 1
 --- !u!114 &6765067701677436724
 MonoBehaviour:
@@ -1246,34 +1445,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &7507595253703383435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/ZenMusic/Zen1
-  m_EditorClassIdentifier: 
-  Path: event:/Music/ZenMusic/Zen1
-  Guid:
-    Data1: 444282546
-    Data2: 1212573735
-    Data3: -150646620
-    Data4: 41715647
-  Banks:
-  - {fileID: 6714764706478201932}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: -7861563079758658885}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 20210
 --- !u!114 &8463395871421217492
 MonoBehaviour:
   m_ObjectHideFlags: 0

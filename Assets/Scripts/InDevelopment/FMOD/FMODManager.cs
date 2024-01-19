@@ -1,5 +1,5 @@
-      using System.Collections;
-      using UnityEngine;
+using System.Collections;
+using UnityEngine;
 using FMOD.Studio;
 using FMODUnity;
 using Random = UnityEngine.Random;
@@ -14,13 +14,10 @@ public class FMODManager: MonoBehaviour
     
     private Camera cam;
 
-    private GameObject Left = GameObject.Find("Hand_L");
-    private GameObject Right = GameObject.Find("Hand_R");
-  
-    private EventInstance levelOne = RuntimeManager.CreateInstance("event:/Music/LevelMusic/Level1");
-    private EventInstance levelTwo = RuntimeManager.CreateInstance("event:/Music/LevelMusic/Level2");
-    private EventInstance levelThree = RuntimeManager.CreateInstance("event:/Music/LevelMusic/Level3");
-    private EventInstance koiPunch = RuntimeManager.CreateInstance("event:/SFX/PlayerSounds/ChargeSounds/KoiPunch"); //not done!
+    private EventInstance levelOne;
+    private EventInstance levelTwo;
+    private EventInstance levelThree;
+    //private EventInstance koiPunch = RuntimeManager.CreateInstance("event:/SFX/PlayerSounds/ChargeSounds/KoiPunch"); //not done!
     
     [SerializeField] [Range(0,100)] private float velocityFloor; 
     [Range(0, 1)] private float sfxVolume;
@@ -30,26 +27,14 @@ public class FMODManager: MonoBehaviour
     [SerializeField] [Range(0, 100)] private float wooshVolume;
     [SerializeField] private bool windPlaying = false;
 
-    private IEnumerator LeftHandWind()
-    {
-        PlayOneShot("event:/SFX/PlayerSounds/HandSounds/HandWind", controllerManager.leftVelMagnitude*wooshVolume, Left.transform.position);
-        windPlaying = true;
-        yield return new WaitForSeconds(1);
-        windPlaying = false;
-    }
-    private IEnumerator RightHandWind()
-    {
-        PlayOneShot("event:/SFX/PlayerSounds/HandSounds/HandWind", controllerManager.leftVelMagnitude*wooshVolume, Right.transform.position);
-        windPlaying = true;
-        yield return new WaitForSeconds(1);
-        windPlaying = false;
-    }
-
     public string[] soundPaths;
     public string selectedSoundPath;
     
     private Bus musicBus;
     private Bus sfxBus;
+
+    private GameObject Left;
+    private GameObject Right;
     
     #endregion
     
@@ -75,7 +60,7 @@ public class FMODManager: MonoBehaviour
         }
         cam = Camera.main;
         musicBus = RuntimeManager.GetBus("bus:/Music");
-        musicBus = RuntimeManager.GetBus("bus:/SFX");
+        sfxBus = RuntimeManager.GetBus("bus:/SFX");
     }
 
     private void Start()
@@ -85,6 +70,12 @@ public class FMODManager: MonoBehaviour
             "event:/SFX/Voice/RandomPunchComments/PlayerGreatHit",
             "event:/SFX/Voice/RandomPunchComments/PlayerFantasticHit",
         };
+        
+        Left = GameObject.Find("Hand_L");
+        Right = GameObject.Find("Hand_R");
+        levelOne = RuntimeManager.CreateInstance("event:/Music/LevelMusic/Level1");
+        levelTwo = RuntimeManager.CreateInstance("event:/Music/LevelMusic/Level2");
+        levelThree = RuntimeManager.CreateInstance("event:/Music/LevelMusic/Level3");
         
         RuntimeManager.AttachInstanceToGameObject(levelOne, cam.GetComponent<Transform>(), cam.GetComponent<Rigidbody>());
         RuntimeManager.AttachInstanceToGameObject(levelTwo, cam.GetComponent<Transform>(), cam.GetComponent<Rigidbody>());
@@ -107,12 +98,26 @@ public class FMODManager: MonoBehaviour
         if (controllerManager.leftVelMagnitude > velocityFloor && windPlaying == false)
         {
             StartCoroutine(LeftHandWind());
+            windPlaying = false;
         }
        
         if (controllerManager.rightVelMagnitude > velocityFloor && windPlaying == false)
         {
             StartCoroutine(RightHandWind());
+            windPlaying = false;
         }
+    }
+    private IEnumerator LeftHandWind()
+    {
+        PlayOneShot("event:/SFX/PlayerSounds/HandSounds/HandWind", controllerManager.leftVelMagnitude * wooshVolume, Left.transform.position);
+        yield return new WaitForSeconds(1);
+        windPlaying = true;
+    }
+    private IEnumerator RightHandWind()
+    {
+        PlayOneShot("event:/SFX/PlayerSounds/HandSounds/HandWind", controllerManager.leftVelMagnitude * wooshVolume, Right.transform.position);
+        yield return new WaitForSeconds(1);
+        windPlaying = true;
     }
 
     /*how to use:
@@ -121,16 +126,14 @@ public class FMODManager: MonoBehaviour
     public void PlayOneShot(string sound, Vector3 worldPos)
     {
         RuntimeManager.PlayOneShot(sound, worldPos);
-        
     }
     
     public void PlayOneShot(string sound, float volume, Vector3 worldPos)
     {
         RuntimeManager.PlayOneShot(sound, volume, worldPos);
-        
     }
     
-    public void OnStartLevelMusic(int levelNumber)
+  public void OnStartLevelMusic(int levelNumber)
     {
         switch (levelNumber)
         {
@@ -170,34 +173,9 @@ public class FMODManager: MonoBehaviour
     {
         
     }
-
-    /*public FMODManager(GameObject leftHand)
-    {
-        this.leftHand = leftHand;
-    }*/
-
-    public void KoiPunchSounds(int koiPunchState) //not done!
-    {
-        switch (koiPunchState)
-        {
-            case 1:
-            {
-                koiPunch.start();
-                koiPunch.setParameterByName("koiPunchSoundState", 0);
-                break;
-            }
-            case 2:
-            {
-                koiPunch.start();
-                koiPunch.setParameterByName("koiPunchSoundState", 1);
-                break;
-            }
-        }
-    }
-
+    
     void SelectRandomPunchSound()
     {
-
         if (ShouldRun())
         {
             Debug.Log("The if statement ran!");
