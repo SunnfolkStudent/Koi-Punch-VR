@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 104656861}
   - component: {fileID: 104656860}
+  - component: {fileID: 104656862}
   m_Layer: 0
   m_Name: audio manager
   m_TagString: Untagged
@@ -171,6 +172,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &104656862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104656859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba589163bc39a3b498de2f07bc6eaefc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!20 &250165707 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 3118340925108139346, guid: f960f628d92a26249aa5454b07ce42c0,

@@ -14,9 +14,15 @@ public class FMODManager: MonoBehaviour
     
     private Camera cam;
 
-    private EventInstance levelOne;
-    private EventInstance levelTwo;
-    private EventInstance levelThree;
+    public EventInstance levelOne;
+    public EventInstance levelTwo;
+    public EventInstance levelThree;
+    public EventInstance ambientOne;
+    public EventInstance ambientTwo;
+    public EventInstance ambientThree;
+    public EventInstance menuTheme;
+    public EventInstance zenMusic;
+    public EventInstance koiPunch;
     //private EventInstance koiPunch = RuntimeManager.CreateInstance("event:/SFX/PlayerSounds/ChargeSounds/KoiPunch"); //not done!
     
     [SerializeField] [Range(0,100)] private float velocityFloor; 
@@ -60,7 +66,6 @@ public class FMODManager: MonoBehaviour
         {
             Destroy(gameObject);
         }
-        cam = Camera.main;
         musicBus = RuntimeManager.GetBus("bus:/Music");
         sfxBus = RuntimeManager.GetBus("bus:/SFX");
     }
@@ -78,10 +83,12 @@ public class FMODManager: MonoBehaviour
         levelOne = RuntimeManager.CreateInstance("event:/Music/LevelMusic/Level1");
         levelTwo = RuntimeManager.CreateInstance("event:/Music/LevelMusic/Level2");
         levelThree = RuntimeManager.CreateInstance("event:/Music/LevelMusic/Level3");
-        
-        RuntimeManager.AttachInstanceToGameObject(levelOne, cam.GetComponent<Transform>(), cam.GetComponent<Rigidbody>());
-        RuntimeManager.AttachInstanceToGameObject(levelTwo, cam.GetComponent<Transform>(), cam.GetComponent<Rigidbody>());
-        RuntimeManager.AttachInstanceToGameObject(levelThree, cam.GetComponent<Transform>(), cam.GetComponent<Rigidbody>());
+        ambientOne = RuntimeManager.CreateInstance(("event:/SFX/Ambience/Level1"));
+        ambientTwo = RuntimeManager.CreateInstance(("event:/SFX/Ambience/Level2"));
+        ambientThree = RuntimeManager.CreateInstance(("event:/SFX/Ambience/Level3"));
+        menuTheme = RuntimeManager.CreateInstance(("event:/Music/LevelMusic/MenuTheme"));
+        zenMusic = RuntimeManager.CreateInstance("event:/Music/ZenMusic/ZenMusic");
+        koiPunch = RuntimeManager.CreateInstance("event:/SFX/KoiPunch/KoiPunch");
     }
     
     private void Update()
@@ -125,6 +132,10 @@ public class FMODManager: MonoBehaviour
     /*how to use:
      1: using FMODUnity
      2: FMODManager.instance.PlayOneShot(string path, GameObject.Find("exampleGameObject").transform.position)*/
+    public void PlayOneShot(string sound)
+    {
+        RuntimeManager.PlayOneShot((sound));
+    }
     public void PlayOneShot(string sound, Vector3 worldPos)
     {
         RuntimeManager.PlayOneShot(sound, worldPos);
@@ -135,42 +146,6 @@ public class FMODManager: MonoBehaviour
         RuntimeManager.PlayOneShot(sound, volume, worldPos);
     }
     
-  public void OnStartLevelMusic(int levelNumber)
-    {
-        switch (levelNumber)
-        {
-            case 0:
-            {
-                //add main menu logic
-                break;
-            }
-            case 1:
-            {
-                RuntimeManager.PlayOneShotAttached("event:/Music/Stingers/LevelStart", cam.gameObject);
-                levelTwo.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                levelThree.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                levelOne.start();
-                break;
-            }
-            case 2:
-            {
-                RuntimeManager.PlayOneShotAttached("event:/Music/Stingers/LevelStart", cam.gameObject);
-                levelThree.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                levelOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                levelTwo.start();
-                break;
-            }
-            case 3:
-            {
-                RuntimeManager.PlayOneShotAttached("event:/Music/Stingers/LevelStart", cam.gameObject);
-                levelOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                levelTwo.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                levelThree.start();
-                break;
-            }
-        }
-    }
-
     public void ZenModeMusicManager(int zenStage, float zenPercent)
     {
         

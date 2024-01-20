@@ -15,11 +15,38 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638413473293656771
+  lastModified: 638413601099169334
   FileSizes:
   - Name: Desktop
-    Value: 3048
+    Value: 3242
   Exists: 1
+--- !u!114 &-8109356598145742215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Stingers/Zen1Full
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Stingers/Zen1Full
+  Guid:
+    Data1: -1104098210
+    Data2: 1291859095
+    Data3: 286300824
+    Data4: -1736494211
+  Banks:
+  - {fileID: -7126503527933286965}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
 --- !u!114 &-7985871429262521722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41,12 +68,39 @@ MonoBehaviour:
   Banks:
   - {fileID: -1567451530557062852}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-7591426892256243061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Stingers/Zen2Full
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Stingers/Zen2Full
+  Guid:
+    Data1: 2130668687
+    Data2: 1185979043
+    Data3: 97004953
+    Data4: -1838210062
+  Banks:
+  - {fileID: -7126503527933286965}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
 --- !u!114 &-7507822075219898564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,7 +122,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -1567451530557062852}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -89,10 +143,10 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638413477303156716
+  lastModified: 638413601100439622
   FileSizes:
   - Name: Desktop
-    Value: 9333056
+    Value: 11948608
   Exists: 1
 --- !u!114 &-7109748266049691999
 MonoBehaviour:
@@ -115,7 +169,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -1567451530557062852}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -169,7 +223,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -1567451530557062852}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -196,7 +250,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -1567451530557062852}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -358,7 +412,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -1567451530557062852}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -385,7 +439,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -1567451530557062852}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -412,7 +466,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -1567451530557062852}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 0
   Parameters:
   - {fileID: -3532701064457138366}
@@ -548,7 +602,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -1567451530557062852}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -623,10 +677,10 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638413473302309134
+  lastModified: 638413601103644486
   FileSizes:
   - Name: Desktop
-    Value: 3940416
+    Value: 4209632
   Exists: 1
 --- !u!114 &-733588973798191999
 MonoBehaviour:
@@ -766,12 +820,16 @@ MonoBehaviour:
   - {fileID: -3982875594683265274}
   - {fileID: 416816881958681959}
   - {fileID: -4423545550332848887}
+  - {fileID: -8109356598145742215}
+  - {fileID: -7591426892256243061}
+  - {fileID: 7375219772682049789}
+  - {fileID: 4508762753797456821}
   EditorParameters: []
   MasterBanks:
   - {fileID: 1559442095300902716}
   StringsBanks:
   - {fileID: -9216946279702738478}
-  cacheTime: 638413477303156716
+  cacheTime: 638413601103644486
   cacheVersion: 131616
 --- !u!114 &53606116969686336
 MonoBehaviour:
@@ -794,12 +852,12 @@ MonoBehaviour:
   Banks:
   - {fileID: -1567451530557062852}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 2000
 --- !u!114 &277722926967354296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -848,7 +906,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -1567451530557062852}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -875,7 +933,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -1567451530557062852}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -1005,7 +1063,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638413473293646771
+  lastModified: 638413601099149352
   FileSizes:
   - Name: Desktop
     Value: 1340
@@ -1031,7 +1089,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -1567451530557062852}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -1058,7 +1116,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -1567451530557062852}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -1145,6 +1203,59 @@ MonoBehaviour:
   - Ready
   - Impact
   Exists: 1
+--- !u!114 &3726557772772731504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MenuTheme/PunchedThing
+  m_EditorClassIdentifier: 
+  Name: PunchedThing
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 4286939527
+    data2: 521782825
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - False
+  - True
+  Exists: 1
+--- !u!114 &4508762753797456821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Voice/FishTalk/KoiTalk
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Voice/FishTalk/KoiTalk
+  Guid:
+    Data1: 1748127913
+    Data2: 1142660188
+    Data3: 621560753
+    Data4: 1198073700
+  Banks:
+  - {fileID: -1567451530557062852}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
 --- !u!114 &4858676778192775680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1166,7 +1277,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -1567451530557062852}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -1226,6 +1337,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 4000
+--- !u!114 &7375219772682049789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/LevelMusic/MenuTheme
+  m_EditorClassIdentifier: 
+  Path: event:/Music/LevelMusic/MenuTheme
+  Guid:
+    Data1: 620514549
+    Data2: 1333450776
+    Data3: 2092843939
+    Data4: 546355628
+  Banks:
+  - {fileID: -7126503527933286965}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 3726557772772731504}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 198528
 --- !u!114 &7451941171806008727
 MonoBehaviour:
   m_ObjectHideFlags: 0

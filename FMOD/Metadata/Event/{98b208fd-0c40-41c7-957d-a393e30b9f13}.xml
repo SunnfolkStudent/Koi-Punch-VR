@@ -38,11 +38,6 @@
 		</relationship>
 	</object>
 	<object class="MasterTrack" id="{b9de2f3a-ed77-4765-a628-6d20982dd14a}">
-		<relationship name="automationTracks">
-			<destination>{892e6774-908b-4a19-b40a-d11886fff296}</destination>
-			<destination>{7a3dd026-c128-40b6-aeb4-96c08a9b0a03}</destination>
-			<destination>{1bf907d7-6921-4f0e-8b4a-5c241c979baf}</destination>
-		</relationship>
 		<relationship name="modules">
 			<destination>{a3b0bb86-0759-4dfd-9f58-761ecf888565}</destination>
 		</relationship>
@@ -79,21 +74,6 @@
 			<destination>{fd7bf459-569c-469b-aa94-5ea0b3df238d}</destination>
 		</relationship>
 	</object>
-	<object class="AutomationTrack" id="{892e6774-908b-4a19-b40a-d11886fff296}">
-		<relationship name="automator">
-			<destination>{1f0a6bcd-1bf8-4c88-a8cb-d617dc12f769}</destination>
-		</relationship>
-	</object>
-	<object class="AutomationTrack" id="{7a3dd026-c128-40b6-aeb4-96c08a9b0a03}">
-		<relationship name="automator">
-			<destination>{e2d655a7-c718-4753-b274-ed4d8c3679bf}</destination>
-		</relationship>
-	</object>
-	<object class="AutomationTrack" id="{1bf907d7-6921-4f0e-8b4a-5c241c979baf}">
-		<relationship name="automator">
-			<destination>{ef36c951-14a8-4f8d-990f-ce1431018f22}</destination>
-		</relationship>
-	</object>
 	<object class="MultiSound" id="{a3b0bb86-0759-4dfd-9f58-761ecf888565}">
 		<property name="length">
 			<value>0.81462585034013602</value>
@@ -121,6 +101,7 @@
 		<relationship name="effects">
 			<destination>{ee9b1a59-5e59-4ad4-ade9-7394ab964c00}</destination>
 			<destination>{9aa7dcae-ab4d-4c55-a3ed-4498e302bec6}</destination>
+			<destination>{234940e8-0697-4811-9178-33ce22ef4353}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{1cd77268-ab55-4dc7-bf4b-dfdc562ffbbd}" />
@@ -183,34 +164,9 @@
 	<object class="MixerBusFader" id="{811e8eb3-851f-44fb-82b9-30964cbd4260}" />
 	<object class="MixerBusFader" id="{ee9b1a59-5e59-4ad4-ade9-7394ab964c00}" />
 	<object class="ThreeEQEffect" id="{9aa7dcae-ab4d-4c55-a3ed-4498e302bec6}">
-		<property name="midGain">
-			<value>-12</value>
-		</property>
-		<property name="highGain">
-			<value>-12</value>
-		</property>
 		<property name="crossoverSlope">
 			<value>0</value>
 		</property>
-		<relationship name="automators">
-			<destination>{1f0a6bcd-1bf8-4c88-a8cb-d617dc12f769}</destination>
-			<destination>{e2d655a7-c718-4753-b274-ed4d8c3679bf}</destination>
-			<destination>{ef36c951-14a8-4f8d-990f-ce1431018f22}</destination>
-		</relationship>
 	</object>
-	<object class="Automator" id="{1f0a6bcd-1bf8-4c88-a8cb-d617dc12f769}">
-		<property name="nameOfPropertyBeingAutomated">
-			<value>highGain</value>
-		</property>
-	</object>
-	<object class="Automator" id="{e2d655a7-c718-4753-b274-ed4d8c3679bf}">
-		<property name="nameOfPropertyBeingAutomated">
-			<value>midGain</value>
-		</property>
-	</object>
-	<object class="Automator" id="{ef36c951-14a8-4f8d-990f-ce1431018f22}">
-		<property name="nameOfPropertyBeingAutomated">
-			<value>lowGain</value>
-		</property>
-	</object>
+	<object class="ObjectSpatialiserEffect" id="{234940e8-0697-4811-9178-33ce22ef4353}" />
 </objects>
