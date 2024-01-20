@@ -52,7 +52,7 @@ public class SceneController : MonoBehaviour
             time += Time.deltaTime;
             Title.transform.position = Vector3.MoveTowards(Title.transform.position, Goal.transform.position, speed);
         }
-        if (Title.transform.position == Goal.transform.position)
+        if (Title.transform.position == Goal.transform.position && ReadyToStart)
         {
             Instantiate(secondStartSign);
             ReadyToStart = false;
