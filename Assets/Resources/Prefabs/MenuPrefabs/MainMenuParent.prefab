@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 654683523683673081}
   - component: {fileID: 6256400223501135893}
   - component: {fileID: 888188543696024833}
+  - component: {fileID: 4666696107057504440}
   m_Layer: 0
   m_Name: MainLevelsSign
   m_TagString: Untagged
@@ -178,6 +179,18 @@ MonoBehaviour:
   LevelToGoTo: 0
   newMenuParent: {fileID: 8809015906901388078, guid: 964b6b2948b7377458d2ce6a7b55a5fa,
     type: 3}
+--- !u!114 &4666696107057504440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687358442793080091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc32b8f88c5fb0b4faaa60b9cbd65b56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2380400597701980781
 GameObject:
   m_ObjectHideFlags: 0
