@@ -71,6 +71,7 @@ public class SpecialAttackScript : MonoBehaviour
                 punchCharged = true;
                 ZenMetreManager.Instance.zenAttackActive = false;
                 ZenMetreManager.Instance.zenMetreValue = 0f;
+                HapticManager.zenCharge = false;
                 CalculatePunchForce();
                 
                 //TODO: STOP PLAYING "KOOOOOOOOOOOOOOOOOOOOOOOOO"
