@@ -21,6 +21,8 @@ public class SceneController : MonoBehaviour
     
     private static SceneController instance;
 
+    private int startScene;
+
     [SerializeField] private GameObject secondStartSign;
     #endregion
     
@@ -50,6 +52,11 @@ public class SceneController : MonoBehaviour
             time += Time.deltaTime;
             Title.transform.position = Vector3.MoveTowards(Title.transform.position, Goal.transform.position, speed);
         }
+        if (Title.transform.position == Goal.transform.position)
+        {
+            Instantiate(secondStartSign);
+            ReadyToStart = false;
+        }
     }
 
 
@@ -59,22 +66,17 @@ public class SceneController : MonoBehaviour
 
         ReadyToStart = true;
         
-        Debug.Log("second start sign appear!");
-
-        yield return new WaitForSeconds(5);
-        
-        Instantiate(secondStartSign);
-        
-        //yield return new WaitForSeconds(musicLength.length - 5);
+        //yield return new WaitForSeconds(musicLength.length);
         yield return new WaitForSeconds(10);
 
-        ChangeScenes(1);
+        if(canChangeScene)
+            StartCoroutine(ChangeLevelStart());
     }
 
     public void ChangeScenes(int scene)
     {
         if(canChangeScene)
-            StartCoroutine(ChangeLevel(scene));
+            StartCoroutine(ChangeLevelFish(scene));
     }
 
     public void StartGame()
@@ -82,14 +84,52 @@ public class SceneController : MonoBehaviour
         StartCoroutine(TitleCard());
     }
 
-    private IEnumerator ChangeLevel(int scene)
+    public void StartGameAfterIntro()
+    {
+        StartCoroutine(ChangeLevelStart());
+    }
+
+    private IEnumerator ChangeLevelStart()
     {
         canChangeScene = false;
         _fadeScreenObj = GameObject.FindGameObjectWithTag("FadeScreen");
         _fadeScreen = _fadeScreenObj.GetComponent<FadeScreenScript>();
         _fadeScreen.FadeOut();
-        ReadyToStart = false;
         yield return new WaitForSeconds(1.5f);
+        Debug.Log("Changing scenes");
+        CheckStartScene();
+        SceneManager.LoadScene(Levels[startScene]);
+        canChangeScene = true;
+    }
+
+    private void CheckStartScene()
+    {
+        if (PlayerPrefs.GetInt("HighScoreLevelThree") > 0)
+        {
+            startScene = 1;
+        }
+        else if(PlayerPrefs.GetInt("HighScoreLevelTwo") > 0)
+        {
+            startScene = 3;
+        }
+        else if (PlayerPrefs.GetInt("HighScoreLevelOne") > 0)
+        {
+            startScene = 2;
+        }
+        else
+        {
+            startScene = 1;
+        }
+    }
+
+    private IEnumerator ChangeLevelFish(int scene)
+    {
+        canChangeScene = false;
+        //_fadeScreenObj = GameObject.FindGameObjectWithTag("FadeScreen");
+        //_fadeScreen = _fadeScreenObj.GetComponent<FadeScreenScript>();
+        //_fadeScreen.FadeOut();
+        yield return new WaitForSeconds(1.5f);
+        Debug.Log("Changing scenes");
         SceneManager.LoadScene(Levels[scene]);
         canChangeScene = true;
     }

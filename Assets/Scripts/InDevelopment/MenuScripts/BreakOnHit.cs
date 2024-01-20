@@ -42,14 +42,16 @@ public class BreakOnHit : TransitionAnimation//, IPunchable
         
         if (gameObject.CompareTag("SceneChanger"))
         {
-            if (_sceneControllerObj == null)
-                return;
             gameObject.transform.localScale = new Vector3(0, 0, 0);
             _sceneController.ChangeScenes(LevelToGoTo);
         }
         else if (gameObject.CompareTag("StartButton"))
         {
             _sceneController.StartGame();
+        }
+        else if (gameObject.CompareTag("StartButton2"))
+        {
+            _sceneController.StartGameAfterIntro();
         }
         else
         {
