@@ -8,4 +8,7 @@ public static class InternalZenEventManager
    public static InternalZenEvents hidePromptText;
    public static InternalZenEvents spawnWeakPoints;
    public static InternalZenEvents stopSpawnWeakPoints;
+
+   public static InternalZenEvents startChargeVfx;
+   public static InternalZenEvents stopChargeVfx;
 }

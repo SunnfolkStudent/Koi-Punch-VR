@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.VFX;
-
+//using FMOD.Studio;
+//using FMODUnity;
 
 public class SpecialAttackScript : MonoBehaviour
 {
@@ -33,6 +33,8 @@ public class SpecialAttackScript : MonoBehaviour
             InternalZenEventManager.hidePromptText.Invoke();
             chargingPunch = true;
             HapticManager.zenCharge = true;
+            
+            InternalZenEventManager.startChargeVfx.Invoke();
             
             //TODO: PLAY "KOOOOOOOOOOOOOOOOOOOOOOOOO"
         }
