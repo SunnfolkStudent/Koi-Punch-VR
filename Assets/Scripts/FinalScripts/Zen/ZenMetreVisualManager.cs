@@ -9,7 +9,7 @@ using UnityEngine.VFX;
 public class ZenMetreVisualManager : MonoBehaviour
 {
     [Header("Zen Metre Bar Images and materials")]
-    public GameObject[] zenMetreBars;
+    [SerializeField] private GameObject[] zenMetreBars;
     private List<Material> _zenMetreBarMaterials = new List<Material>();
     private int _fillAmountPropertyID;
     private List<VisualEffect> _sparkleVFX = new List<VisualEffect>();
@@ -21,7 +21,7 @@ public class ZenMetreVisualManager : MonoBehaviour
     private List<GameObject> _sparkleList = new List<GameObject>();
     
     [Header("Prompt Text")]
-    public TextMeshProUGUI promptText;
+    [SerializeField] private TextMeshProUGUI promptText;
     public static string promptTextToBeShown;
 
     // Start is called before the first frame update
