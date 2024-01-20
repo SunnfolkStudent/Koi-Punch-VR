@@ -8451,12 +8451,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e3b634f79c580a4b9ea9a485235bef0, type: 3}
---- !u!1 &1768926546 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3204315951702012953, guid: f960f628d92a26249aa5454b07ce42c0,
-    type: 3}
-  m_PrefabInstance: {fileID: 6006856673527985236}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1794878604 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3842183564481136301, guid: 4e23f5bcf4bf6154eae9abbac475bc6e,
@@ -12253,21 +12247,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Rig
       objectReference: {fileID: 0}
-    - target: {fileID: 3118340925108139346, guid: f960f628d92a26249aa5454b07ce42c0,
-        type: 3}
-      propertyPath: field of view
-      value: 60.000004
-      objectReference: {fileID: 0}
-    - target: {fileID: 3118340925108139346, guid: f960f628d92a26249aa5454b07ce42c0,
-        type: 3}
-      propertyPath: m_FocalLength
-      value: 20.78461
-      objectReference: {fileID: 0}
-    - target: {fileID: 3118340925108139346, guid: f960f628d92a26249aa5454b07ce42c0,
-        type: 3}
-      propertyPath: m_projectionMatrixMode
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4064142795961015387, guid: f960f628d92a26249aa5454b07ce42c0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12318,14 +12297,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4612309860717164102, guid: f960f628d92a26249aa5454b07ce42c0,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4612309860717164102, guid: f960f628d92a26249aa5454b07ce42c0,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4612309860717164102, guid: f960f628d92a26249aa5454b07ce42c0,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4612309860717164102, guid: f960f628d92a26249aa5454b07ce42c0,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6067904567964966882, guid: f960f628d92a26249aa5454b07ce42c0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3204315951702012953, guid: f960f628d92a26249aa5454b07ce42c0,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6006856673527985241}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f960f628d92a26249aa5454b07ce42c0, type: 3}
 --- !u!20 &6006856673527985237 stripped
 Camera:
@@ -12333,27 +12333,6 @@ Camera:
     type: 3}
   m_PrefabInstance: {fileID: 6006856673527985236}
   m_PrefabAsset: {fileID: 0}
---- !u!135 &6006856673527985241
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1768926546}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.14
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
