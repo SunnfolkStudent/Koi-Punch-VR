@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water Flowing
+  m_Name: Water Flowing 1
   m_Shader: {fileID: -6465566751694194690, guid: a1e1c59caf9d93e4ab665e46b09cdc7e,
     type: 3}
   m_Parent: {fileID: -876546973899608171, guid: a1e1c59caf9d93e4ab665e46b09cdc7e,
@@ -42,24 +42,22 @@ Material:
     m_Ints: []
     m_Floats:
     - _CloudIntensity: 0.625
-    - _CloudScale: 5
-    - _Depth: 10.17
-    - _DepthToAlpha: 0.272
+    - _Depth: 0
+    - _DepthToAlpha: 0
     - _DisplacementStrength: 0
-    - _EdgeMaxAlpha: 0.78
-    - _FlowSpeed: 0
-    - _NormalStrength: 1
+    - _EdgeMaxAlpha: 0.625
+    - _FlowSpeed: 0.05
     - _QueueControl: 1
     - _QueueOffset: 7
     - _RippleCount: 1.49
-    - _RippleIntesity: 0.229
+    - _RippleIntesity: 0.71
     - _RippleSpeed: 0
-    - _RippleSpeed_1: 1
+    - _RippleSpeed_1: 1.44
     - _RippleStrength: 4.28
-    - _Smoothness: 0.618
-    - _Stretch: 1
+    - _Smoothness: 0.835
+    - _Stretch: 10
     m_Colors:
-    - _BaseColor: {r: 0.4009434, g: 0.9078374, b: 1, a: 0}
+    - _BaseColor: {r: 0.654902, g: 0.82745105, b: 0.8588236, a: 0}
     - _DepthColor: {r: 0, g: 0.3921569, b: 1, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
