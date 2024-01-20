@@ -8,13 +8,13 @@ namespace FinalScripts.Fish
     {
         public Fish fish;
         private Rigidbody _rigidbody;
-        // [SerializeField] private bool showDebugLines;
         
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
         }
-        
+
+        #region ---Collision---
         private void OnCollisionEnter(Collision other)
         {
             switch (other.transform.tag)
@@ -33,7 +33,7 @@ namespace FinalScripts.Fish
                     break;
             }
         }
-        
+
         private void OnCollisionExit(Collision other)
         {
             switch (other.transform.tag)
@@ -46,7 +46,17 @@ namespace FinalScripts.Fish
                     break;
             }
         }
+        #endregion
 
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Water"))
+            {
+                fish.FishHitWater(_rigidbody.velocity);
+            }
+        }
+
+        #region ---IPunchable---
         public void PunchObject(ControllerManager controllerManager, string fistUsed)
         {
             var v = fistUsed == "LeftFist" ? controllerManager.leftControllerVelocity : controllerManager.rightControllerVelocity;
@@ -75,38 +85,7 @@ namespace FinalScripts.Fish
 
             fish.Log($"PunchForce: {punchForce} | Direction: {direction} | Debuff: {forceDebuff}");
             _rigidbody.AddForce(fishLaunch, ForceMode.VelocityChange);
-            
-            // CalculatePunchedTrajectory(punchForce, fishLaunchDir:direction);
         }
-
-        // private void CalculatePunchedTrajectory(float punchForce, Vector3 fishLaunchDir)
-        // {
-        //     // Use the following variables for calculating trajectory:
-        //     // Landing position = origin + time * velocity a.k.a. _rigidbody.position + timeToTarget * punchForce.
-        //     
-        //     // Velocity (v) = punchForceMultiplier,
-        //     // Direction (d) = cubeLaunchDir.normalized,
-        //     // Angle = arcSin(direction.y)
-        //     // Gravity = 9.81 = Newton.
-        //
-        //     // Time = (2*v*sin (a))/gravity.
-        //
-        //     // Sin x where is x = arcSin x, a.k.a. "sin (arcSin x)" is just x.
-        //     // Therefore we can just write in fishLaunchDir.normalized.y.
-        //     // t = (2*punchForce*fishLaunchDir.normalized.y)/9.81.
-        //     
-        //     // does this gravity have to match the fish's own gravity? Probably.
-        //     var gravity = 9.81f;
-        //     var timeToTarget = (2 * punchForce * fishLaunchDir.normalized.y) / gravity;
-        //
-        //     var startPosFish = transform.position;
-        //     var landingPos = startPosFish + punchForce * fishLaunchDir.normalized * timeToTarget - 
-        //                      0.5f * gravity * Mathf.Pow(timeToTarget, 2) * Vector3.up;
-        //
-        //     if (showDebugLines)
-        //     {
-        //         Debug.DrawLine(startPosFish, landingPos, Color.yellow, timeToTarget);
-        //     }
-        // }
+        #endregion
     }
 }
