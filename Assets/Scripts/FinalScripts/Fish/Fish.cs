@@ -12,7 +12,8 @@ namespace FinalScripts.Fish
         private Vector3 _punchedPosition; // Compared with landing position to calculate points
         
         #region ---PublicStates---
-        [HideInInspector] public bool hasBeenPunched;
+        [FormerlySerializedAs("hasBeenPunched")] [HideInInspector] public bool hasBeenPunchedSuccessfully;
+        [FormerlySerializedAs("hasBeenPunchedWeekly")] [HideInInspector] public bool hasBeenPunchedUnsuccessfully;
         [HideInInspector] public bool hasHitGround;
         private bool _hasHitPlayer;
         private bool _hasEmergedFromWater;
@@ -38,7 +39,8 @@ namespace FinalScripts.Fish
         
         [Header("Score")]
         [SerializeField] private float baseScoreOfPunch = 10f;
-        [FormerlySerializedAs("scoreLostFromHit")] [SerializeField] private float scoreLostFromPlayerHit = 20f;
+        [SerializeField] private float minDistanceForScore = 2f;
+        [SerializeField] private float scoreLostFromPlayerHit = 20f;
         
         [Header("Skipping")]
         [SerializeField] private float fSpeedNeededMultiplier = 1f;
@@ -62,7 +64,8 @@ namespace FinalScripts.Fish
         private void OnEnable()
         {
             _startTime = Time.time;
-            hasBeenPunched = false;
+            hasBeenPunchedSuccessfully = false;
+            hasBeenPunchedUnsuccessfully = false;
             hasHitGround = false;
             _hasHitPlayer = false;
             _hasEnteredWater = false;
@@ -171,10 +174,10 @@ namespace FinalScripts.Fish
         public void FishHitGround()
         {
             hasHitGround = true;
-            if (hasBeenPunched)
+            if (hasBeenPunchedSuccessfully || hasBeenPunchedUnsuccessfully)
             {
                 var dist = Vector3.Distance(transform.position, _punchedPosition) * fish.FishPool.FishRecord.ScoreMultiplierDistance;
-                if (dist > 2) EventManager.GainScore(dist);
+                EventManager.FishScore(dist, hasBeenPunchedSuccessfully);
             }
             Log("De-spawning: hit ground");
             StartCoroutine(DespawnAfterTime(despawnDelay));
@@ -204,7 +207,7 @@ namespace FinalScripts.Fish
             // TODO: Play Fist Impact SFX
             // TODO: Play FishScaleVFX
             // TODO: Play Random Player Hit Fish Voice Line
-            hasBeenPunched = true;
+            hasBeenPunchedSuccessfully = true;
             _punchedPosition = transform.position;
             EventManager.GainScore(baseScoreOfPunch);
             GainZen();

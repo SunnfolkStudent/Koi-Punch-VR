@@ -66,12 +66,16 @@ namespace FinalScripts.Fish
         {
             var v = fistUsed == "LeftFist" ? controllerManager.leftControllerVelocity : controllerManager.rightControllerVelocity;
             if (math.abs(v.magnitude) >= fish.successfulPunchThreshold) PunchObject(v);
-            else fish.Log("Punch Velocity was too weak");
+            else
+            {
+                fish.hasBeenPunchedUnsuccessfully = true;
+                fish.Log("Punch Velocity was too weak");
+            }
         }
 
         private void PunchObject(Vector3 velocity)
         {
-            if (fish.hasBeenPunched || fish.hasHitGround)
+            if (fish.hasBeenPunchedSuccessfully || fish.hasHitGround)
             {
                 fish.Log("Punch does not qualify as it has already been punched or hit the ground");
                 return;

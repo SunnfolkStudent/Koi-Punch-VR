@@ -202,7 +202,6 @@ namespace FinalScripts.Fish.BossBattle
         {
             Log("Phase 2 hit");
             Score += scorePerHitPhase2;
-            EventManager.ScoreChanged.Invoke(Score + Phase.Sum(pair => pair.Value.score));
             ZenMetreManager.Instance.AddHitZen(zenPerHitPhase2);
         }
         
@@ -223,7 +222,7 @@ namespace FinalScripts.Fish.BossBattle
             
             var totalScore = force.magnitude + Phase.Sum(pair => pair.Value.score);
             Log($"BossDefeated | TotalScore: {totalScore}");
-            EventManager.BossDefeatedTotalScore.Invoke(totalScore);
+            EventManager.GainScore.Invoke(totalScore);
         }
         #endregion
 

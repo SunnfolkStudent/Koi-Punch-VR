@@ -63,9 +63,8 @@ namespace FinalScripts.Fish
         #endregion
         
         #region ---ScoreActions---
+        public static Action<float, bool> FishScore; // Calculated by scoreManager Distance, SuccessFullPunch
         public static Action<float> GainScore; // Points gained call this eks: fish hit ground and end of bossBattle
-        public static Action<float> ScoreChanged; // Invoked with the current boss score
-        public static Action<float> BossDefeatedTotalScore; // Invoked at the end of the boss fight
         #endregion
     }
 }
