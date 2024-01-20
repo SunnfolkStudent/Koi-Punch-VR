@@ -7,9 +7,9 @@ namespace FinalScripts.Fish.Spawning
 {
     public class FishObjectPool : MonoBehaviour
     {
+        [SerializeField] private FishSrub[] fishTypes;
         private static List<FishPool> _fishPools;
         private static Transform _fishContainer;
-        [SerializeField] private FishSrub[] fishTypes;
         
         #region ---Initialization---
         private void Awake()

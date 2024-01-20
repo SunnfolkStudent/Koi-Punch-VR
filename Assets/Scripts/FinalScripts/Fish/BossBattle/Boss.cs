@@ -68,9 +68,9 @@ namespace FinalScripts.Fish.BossBattle
 
         #endregion
         
-        #region ---PhaseProperties---
-
-        public enum BossPhase
+        #region ---BossPhases---
+        #region >>>---PhaseProperties---
+        private enum BossPhase
         {
             Phase1,
             Phase2,
@@ -79,14 +79,14 @@ namespace FinalScripts.Fish.BossBattle
             Phase0
         }
 
-        public static readonly Dictionary<BossPhase, PhaseInfo> Phase = new()
+        private static readonly Dictionary<BossPhase, PhaseInfo> Phase = new()
         {
             { BossPhase.Phase1, new PhaseInfo(() => EventManager.StartBossPhase1.Invoke()) },
             { BossPhase.Phase2, new PhaseInfo(() => EventManager.StartBossPhase2.Invoke()) },
             { BossPhase.Phase3, new PhaseInfo(() => EventManager.StartBossPhase3.Invoke()) }
         };
 
-        public class PhaseInfo
+        private class PhaseInfo
         {
             public float score { get; set; }
             public readonly Action Event;
@@ -99,11 +99,11 @@ namespace FinalScripts.Fish.BossBattle
         }
         #endregion
         
-        #region ---BossPhasesStart---
+        #region >>>---BossPhasesStart---
         private IEnumerator OnSpawn()
         {
-            // FMODManager.instance.zenMusic.setParameterByName("zenLevel", 0);
-            // FMODManager.instance.zenMusic.start()
+            // TODO: FMODManager.instance.zenMusic.setParameterByName("zenLevel", 0);
+            // TODO: FMODManager.instance.zenMusic.start()
             yield return new WaitForSeconds(phase0Delay);
             EventManager.StartBossPhase0.Invoke();
         }
@@ -148,7 +148,7 @@ namespace FinalScripts.Fish.BossBattle
         }
         #endregion
         
-        #region ---PhaseCompletion---
+        #region >>>---PhaseCompletion---
         private void Phase0Completed()
         {
             var (key, value) = Phase.FirstOrDefault(keyValuePair => keyValuePair.Value.score == 0);
@@ -164,7 +164,7 @@ namespace FinalScripts.Fish.BossBattle
         }
         #endregion
         
-        #region ---PunchBoss--
+        #region >>>---PunchBoss--
         public void PunchObject(ControllerManager controllerManager, string fistUsed)
         {
             switch(_currentBossState){
@@ -214,7 +214,6 @@ namespace FinalScripts.Fish.BossBattle
         {
             if (!SpecialAttackScript.punchCharged) return;
             Log("Phase 3 hit charged");
-            // TODO: Play "Puuuunch" voice line
             
             var controllerVelocity = fistUsed == "LeftFist" ? controllerManager.leftControllerVelocity : controllerManager.rightControllerVelocity;
             var zenPunchForce = SpecialAttackScript.punchForce * controllerVelocity.normalized;
@@ -228,9 +227,19 @@ namespace FinalScripts.Fish.BossBattle
             var totalScore = (int)(force.magnitude + Phase.Sum(pair => pair.Value.score));
             Log($"BossDefeated | TotalScore: {totalScore}");
             EventManager.GainScore.Invoke(totalScore);
+
+            StartCoroutine(PuuuunchSound());
+        }
+
+        private IEnumerator PuuuunchSound()
+        {
+            // TODO: FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 1);
+            yield return new WaitForSeconds(4);
+            // TODO: FMODManager.instance.koiPunch.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
         #endregion
-
+        #endregion
+        
         #region ---Collision---
         private void OnCollisionEnter(Collision other)
         {

@@ -2,18 +2,17 @@ using System;
 using System.Collections;
 using FinalScripts.Fish.Spawning;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace FinalScripts.Fish
 {
     public class Fish : MonoBehaviour
     {
         public FishObjectPool.Fish fish { get; set; } // Reference to itself in the FishPool
-        private Vector3 _punchedPosition; // Compared with landing position to calculate points
+        private Vector3 _punchedPosition; // Compared with landing position to calculate distance
         
-        #region ---PublicStates---
-        [FormerlySerializedAs("hasBeenPunched")] [HideInInspector] public bool hasBeenPunchedSuccessfully;
-        [FormerlySerializedAs("hasBeenPunchedWeekly")] [HideInInspector] public bool hasBeenPunchedUnsuccessfully;
+        #region ---States---
+        [HideInInspector] public bool hasBeenPunchedSuccessfully;
+        [HideInInspector] public bool hasBeenPunchedUnsuccessfully;
         [HideInInspector] public bool hasHitGround;
         private bool _hasHitPlayer;
         private bool _hasEmergedFromWater;
@@ -106,7 +105,7 @@ namespace FinalScripts.Fish
             _hasHitBird = true;
             // TODO: FMODManager.instance.PlayOneShot("event:/SFX/FishSounds/FishSlap", transform.position);
             // TODO: Play Obstacle VFX
-            // Gain Score Modifier x2 for 10 Seconds
+            // TODO: Score bonus
         }
         
         #region >>>---Water---
