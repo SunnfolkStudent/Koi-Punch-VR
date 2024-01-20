@@ -295,14 +295,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 172372518}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a14cfe4ec7559c74ba40872022fb1e45, type: 3}
+  m_Script: {fileID: 11500000, guid: eb67997a41c5e6844912684d67db798f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishObject: {fileID: 272420137}
-  landingMarkPrefab: {fileID: 3249833221167807415, guid: e1a3efc8d1a4230418bfd45728adbcbe,
-    type: 3}
-  punchSpeed: 10
-  launchAngle: 45
+  despawnDelay: 2.5
+  despawnTime: 10
+  despawnAltitude: -5
+  punchVelMultiplier: 0
+  successfulPunchThreshold: 3
+  hasBeenPunched: 0
+  hasHitGround: 0
+  hasHitPlayer: 0
+  isDebugging: 0
 --- !u!1 &272420137
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,9 +457,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215e8ce7a4b4b344a88418a3de1da878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  punchedFishTrajectoryManager: {fileID: 172372520}
-  fishTrajectorySimulator: {fileID: 172372521}
-  fishRigidbody: {fileID: 272420140}
+  fish: {fileID: 172372521}
+  landingMarkPrefab: {fileID: 3249833221167807415, guid: e1a3efc8d1a4230418bfd45728adbcbe,
+    type: 3}
+  fishAsleep: 1
 --- !u!1 &692684215
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,12 +617,12 @@ PrefabInstance:
     - target: {fileID: 2178579604510318227, guid: 4cdda0ba778360847a2a76512a5b77fb,
         type: 3}
       propertyPath: m_IsKinematic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2178579604510318227, guid: 4cdda0ba778360847a2a76512a5b77fb,
         type: 3}
       propertyPath: m_CollisionDetection
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2767121513800863933, guid: 4cdda0ba778360847a2a76512a5b77fb,
         type: 3}
@@ -637,7 +642,7 @@ PrefabInstance:
     - target: {fileID: 2767121513800863933, guid: 4cdda0ba778360847a2a76512a5b77fb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.58
+      value: -16.34
       objectReference: {fileID: 0}
     - target: {fileID: 2767121513800863933, guid: 4cdda0ba778360847a2a76512a5b77fb,
         type: 3}
@@ -647,7 +652,7 @@ PrefabInstance:
     - target: {fileID: 2767121513800863933, guid: 4cdda0ba778360847a2a76512a5b77fb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.11
+      value: -9.62
       objectReference: {fileID: 0}
     - target: {fileID: 2767121513800863933, guid: 4cdda0ba778360847a2a76512a5b77fb,
         type: 3}
@@ -707,7 +712,7 @@ PrefabInstance:
     - target: {fileID: 8673738096678714885, guid: 4cdda0ba778360847a2a76512a5b77fb,
         type: 3}
       propertyPath: punchDirection.y
-      value: 0.6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8673738096678714885, guid: 4cdda0ba778360847a2a76512a5b77fb,
         type: 3}

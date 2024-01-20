@@ -142,6 +142,7 @@ namespace InDevelopment.Fish.Trajectory
         [SerializeField] [Range(0, 300)] private float zDirection;
         
         [SerializeField] private float gravity = 9.81f;
+        [Range(0,1)] private float _timer;
         
         [SerializeField] private bool fishAsleep = true;
         
@@ -184,8 +185,12 @@ namespace InDevelopment.Fish.Trajectory
         // TODO: Set a limit to have the below function respond to entering Ground every 1 sec.
         public void FishHitGround()
         {
-            Instantiate(landingMarkPrefab, _fish.position, Quaternion.identity);
+            if (_timer > 1)
+            {
+                Instantiate(landingMarkPrefab, _fish.position, Quaternion.identity);
+            }
             print("Distance Travelled:" + (_fish.position - startPos));
+            _timer = 0;
         }
         
         void CalculateApex()
@@ -200,33 +205,16 @@ namespace InDevelopment.Fish.Trajectory
         // Step 4 - Set up keyboard input to trigger launch
         private void Update()
         {
+            _timer += Time.deltaTime;
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 LaunchObject(punchVelocity);
             }
         }
-
+        
         private void FixedUpdate()
         {
             landingPos += _fish.position;
-        }
-
-        private void OnCollisionEnter(Collision other)
-        {
-            switch (other.transform.tag)
-            {
-                case "Ground":
-                    Instantiate(landingMarkPrefab, _fish.position, Quaternion.identity);
-                    break;
-                case "LeftFist":
-                    HapticManager.leftFishPunch = true;
-                    break;
-                case "RightFist":
-                    HapticManager.rightFishPunch = true;
-                    break;
-            }
-            
-            Debug.Log("Distance Travelled:" + (landingPos - startPos));
         }
         
         // TODO: The below is for LineRenderer - to be set up once predicted trajectory works.
