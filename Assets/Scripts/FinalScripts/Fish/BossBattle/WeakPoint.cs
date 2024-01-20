@@ -1,11 +1,11 @@
 using System.Collections;
-using System.Linq;
 using UnityEngine;
 
 namespace FinalScripts.Fish.BossBattle
 {
     public class WeakPoint : MonoBehaviour, IPunchable
     {
+        #region ---InspectorSettings---
         [Header("Despawn Time")]
         [SerializeField] private float despawnTime = 2f;
         
@@ -14,11 +14,14 @@ namespace FinalScripts.Fish.BossBattle
         
         [Header("Weak Point")]
         [SerializeField] private int weakPointScore = 60;
-        
+        #endregion
+
+        #region ---Despawn---
         private void OnEnable()
         {
             Destroy(gameObject, despawnTime);
         }
+        #endregion
         
         #region ---IPunchable---
         public void PunchObject(ControllerManager controllerManager, string fistUsed)

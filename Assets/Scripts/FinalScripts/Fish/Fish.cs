@@ -102,13 +102,12 @@ namespace FinalScripts.Fish
 
         public void FishHitBird()
         {
-            // TODO: implement in FishChild script
             if (_hasHitBird) return;
             _hasHitBird = true;
             // TODO: Play Obstacle VFX
             // Gain Score Modifier x2 for 10 Seconds
         }
-
+        
         #region >>>---Water---
         public void FishHitWater(Vector3 velocity)
         {
@@ -168,14 +167,14 @@ namespace FinalScripts.Fish
         }
         #endregion
         #endregion
-
+        
         #region >>>---Ground---
         public void FishHitGround()
         {
             hasHitGround = true;
             if (hasBeenPunchedSuccessfully || hasBeenPunchedUnsuccessfully)
             {
-                var dist = Vector3.Distance(transform.position, _punchedPosition) * fish.FishPool.FishRecord.ScoreMultiplierDistance;
+                var dist = Vector3.Distance(transform.position, _punchedPosition);
                 EventManager.FishScore(dist, hasBeenPunchedSuccessfully);
             }
             Log("De-spawning: hit ground");
@@ -188,7 +187,7 @@ namespace FinalScripts.Fish
             Despawn();
         }
         #endregion
-
+        
         #region >>>---Player---
         public void FishHitPlayer()
         {
