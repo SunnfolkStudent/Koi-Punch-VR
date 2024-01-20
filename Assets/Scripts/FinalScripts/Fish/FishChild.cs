@@ -94,7 +94,6 @@ namespace FinalScripts.Fish
 
             fish.Log($"PunchForce: {punchForce} | Direction: {direction} | Debuff: {forceDebuff}");
             _rigidbody.AddForce(fishLaunch, ForceMode.VelocityChange);
-            EventManager.GainScore(math.abs(fishLaunch.magnitude));
         }
         #endregion
     }

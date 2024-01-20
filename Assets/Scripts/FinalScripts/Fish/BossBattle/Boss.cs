@@ -220,7 +220,7 @@ namespace FinalScripts.Fish.BossBattle
             _rigidbody.AddForce(force);
             EventManager.BossDefeated.Invoke();
             
-            var totalScore = force.magnitude + Phase.Sum(pair => pair.Value.score);
+            var totalScore = (int)(force.magnitude + Phase.Sum(pair => pair.Value.score));
             Log($"BossDefeated | TotalScore: {totalScore}");
             EventManager.GainScore.Invoke(totalScore);
         }
