@@ -12,7 +12,7 @@ namespace FinalScripts.Fish
         {
             _rigidbody = GetComponent<Rigidbody>();
         }
-
+        
         #region ---Collision---
         private void OnCollisionEnter(Collision other)
         {
@@ -23,6 +23,10 @@ namespace FinalScripts.Fish
                     break;
                 case "Ground":
                     fish.FishHitGround();
+                    break;
+                case "Bird":
+                    // TODO: make bird collision have "Bird" tag
+                    fish.FishHitBird();
                     break;
                 case "LeftFist":
                     HapticManager.leftFishPunch = true;
@@ -46,7 +50,8 @@ namespace FinalScripts.Fish
             }
         }
         #endregion
-
+        
+        #region ---Trigger---
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Water"))
@@ -54,7 +59,8 @@ namespace FinalScripts.Fish
                 fish.FishHitWater(_rigidbody.velocity);
             }
         }
-
+        #endregion
+        
         #region ---IPunchable---
         public void PunchObject(ControllerManager controllerManager, string fistUsed)
         {
@@ -84,6 +90,7 @@ namespace FinalScripts.Fish
 
             fish.Log($"PunchForce: {punchForce} | Direction: {direction} | Debuff: {forceDebuff}");
             _rigidbody.AddForce(fishLaunch, ForceMode.VelocityChange);
+            EventManager.GainScore(math.abs(fishLaunch.magnitude));
         }
         #endregion
     }
