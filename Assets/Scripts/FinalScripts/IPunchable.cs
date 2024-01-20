@@ -1,4 +1,4 @@
-namespace InDevelopment.Punch
+namespace FinalScripts
 {
     public interface IPunchable
     {
