@@ -102,6 +102,8 @@ namespace FinalScripts.Fish.BossBattle
         #region ---BossPhasesStart---
         private IEnumerator OnSpawn()
         {
+            // FMODManager.instance.zenMusic.setParameterByName("zenLevel", 0);
+            // FMODManager.instance.zenMusic.start()
             yield return new WaitForSeconds(phase0Delay);
             EventManager.StartBossPhase0.Invoke();
         }
@@ -109,8 +111,7 @@ namespace FinalScripts.Fish.BossBattle
         private void Phase0()
         {
             _currentBossState = BossPhase.Phase0;
-            // TODO: Play Fight the Dragon audio
-            
+            // TODO: FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/BossSpawn");
             Invoke(nameof(Attack), attackDelay);
         }
 
@@ -126,20 +127,22 @@ namespace FinalScripts.Fish.BossBattle
         
         private void Phase1()
         {
-            // TODO: Play Punch out voice line
+            // TODO: FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/PunchTheWeakpoints");
             Score = 0;
             _currentBossState = BossPhase.Phase1;
         }
         
         private void Phase2()
         {
-            // TODO: Play Punch out voice line
+            // TODO: FMODManager.instance.zenMusic.setParameterByName("zenLevel", 1);
             Score = 0;
             _currentBossState = BossPhase.Phase2;
         }
         
         private void Phase3()
         {
+            // TODO: FMODManager.instance.zenMusic.setParameterByName("zenLevel", 2);
+            // TODO: FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/BossPhase3");
             Score = 0;
             _currentBossState = BossPhase.Phase3;
         }
@@ -188,6 +191,7 @@ namespace FinalScripts.Fish.BossBattle
         private void Phase0Hit()
         {
             Log("Phase 0 hit");
+            // TODO: Play FishScaleVFX
             EventManager.BossPhase0Completed.Invoke();
         }
 
@@ -201,6 +205,7 @@ namespace FinalScripts.Fish.BossBattle
         private void Phase2Hit()
         {
             Log("Phase 2 hit");
+            // TODO: FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/BossPhase2");
             Score += scorePerHitPhase2;
             ZenMetreManager.Instance.AddHitZen(zenPerHitPhase2);
         }

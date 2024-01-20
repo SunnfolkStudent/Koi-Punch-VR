@@ -41,6 +41,7 @@ namespace FinalScripts.Fish.BossBattle
         
         private void Hit()
         {
+            // TODO: FMODManager.instance.PlayOneShot("event:/SFX/KoiPunch/ZenModeCircleImpact", transform.position);
             Boss.Score += weakPointScore;
             ZenMetreManager.Instance.AddAttackFieldZen();
             Destroy(gameObject);

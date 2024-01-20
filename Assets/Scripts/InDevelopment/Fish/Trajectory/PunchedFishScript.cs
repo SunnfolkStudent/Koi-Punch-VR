@@ -113,7 +113,7 @@ namespace InDevelopment.Fish.Trajectory
                 return;
             }
 
-            fish.FishPunched();
+            fish.FishPunchedSuccessful();
 
             var direction = punchVelocity.normalized;
             var punchForce = punchVelocity.magnitude * fish.punchVelMultiplier;

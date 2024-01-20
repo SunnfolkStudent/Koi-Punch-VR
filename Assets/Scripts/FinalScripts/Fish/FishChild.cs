@@ -67,7 +67,7 @@ namespace FinalScripts.Fish
             if (math.abs(v.magnitude) >= fish.successfulPunchThreshold) PunchObject(v);
             else
             {
-                fish.hasBeenPunchedUnsuccessfully = true;
+                fish.FishPunchedUnsuccessful();
                 fish.Log("Punch Velocity was too weak");
             }
         }
@@ -80,7 +80,7 @@ namespace FinalScripts.Fish
                 return;
             }
             
-            fish.FishPunched();
+            fish.FishPunchedSuccessful();
             
             var direction = velocity.normalized;
             var punchForce = velocity.magnitude * fish.punchVelMultiplier;

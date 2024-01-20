@@ -104,6 +104,7 @@ namespace FinalScripts.Fish
         {
             if (_hasHitBird) return;
             _hasHitBird = true;
+            // TODO: FMODManager.instance.PlayOneShot("event:/SFX/FishSounds/FishSlap", transform.position);
             // TODO: Play Obstacle VFX
             // Gain Score Modifier x2 for 10 Seconds
         }
@@ -114,9 +115,10 @@ namespace FinalScripts.Fish
             if (_hasEnteredWater) return;
             if (!_hasEmergedFromWater)
             {
-                // TODO: Play Water Exit VFX and SFX (From Water)
                 Log("Emerging from water");
                 _hasEmergedFromWater = true;
+                // TODO: FMODManager.instance.PlayOneShot("event:/SFX/FishSounds/FishSplash", transform.position);
+                // TODO: Play Water Exit VFX
                 return;
             }
             
@@ -129,7 +131,8 @@ namespace FinalScripts.Fish
             if (velocity.y >= 0) return;
             Log("Entering Water");
             _hasEnteredWater = true;
-            // TODO: Play Water Entry VFX and SFX (From Water)
+            // TODO: FMODManager.instance.PlayOneShot("event:/SFX/FishSounds/FishSplash", transform.position);
+            // TODO: Play Water Entry VFX
         }
         
         private bool CheckIfCanSkipp(Vector3 velocity)
@@ -172,6 +175,7 @@ namespace FinalScripts.Fish
         public void FishHitGround()
         {
             hasHitGround = true;
+            // TODO: FMODManager.instance.PlayOneShot("event:/SFX/FishSounds/FishSlap", transform.position);
             if (hasBeenPunchedSuccessfully || hasBeenPunchedUnsuccessfully)
             {
                 var dist = Vector3.Distance(transform.position, _punchedPosition);
@@ -192,23 +196,28 @@ namespace FinalScripts.Fish
         public void FishHitPlayer()
         {
             if (_hasHitPlayer) return;
-            // TODO: Play PlayerHit Voice Line
+            // TODO: FMODManager.instance.PlayOneShot("event:/SFX/Voice/PlayerHit");
             // TODO: Add Slime shader to camera
             _hasHitPlayer = true;
             EventManager.GainScore(-scoreLostFromPlayerHit);
             ZenMetreManager.Instance.RemoveZen(fish.FishPool.FishRecord.ZenAmount * 2);
         }
         
-        public void FishPunched()
+        public void FishPunchedSuccessful()
         {
-            // TODO: Play Fish Punched SFX
-            // TODO: Play Fist Impact SFX
+            // TODO: FMODManager.instance.PlayOneShot("event:/SFX/FishSounds/FishImpact", transform.position);
+            // TODO: FMODManager.instance.SelectRandomPunchSound();
             // TODO: Play FishScaleVFX
-            // TODO: Play Random Player Hit Fish Voice Line
             hasBeenPunchedSuccessfully = true;
             _punchedPosition = transform.position;
             EventManager.GainScore(baseScoreOfPunch);
             GainZen();
+        }
+
+        public void FishPunchedUnsuccessful()
+        {
+            hasBeenPunchedUnsuccessfully = true;
+            // TODO: FMODManager.instance.PlayOneShot("event:/SFX/PlayerSounds/HandSounds/FailedPunch", transform.position);
         }
         
         private void GainZen()
