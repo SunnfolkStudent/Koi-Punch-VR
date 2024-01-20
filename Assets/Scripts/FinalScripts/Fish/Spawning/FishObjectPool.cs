@@ -34,7 +34,7 @@ namespace FinalScripts.Fish.Spawning
             
             public FishPool(FishSrub fishSrub)
             {
-                FishRecord = new FishRecord(fishSrub.prefab, fishSrub.zenFromFish, fishSrub.scoreMultiplierDistance);
+                FishRecord = new FishRecord(fishSrub.prefab, fishSrub.zenFromFish);
                 Fishes = new List<Fish>();
                 AddMultipleFishToPool(fishSrub.initialAmountInPool, this);
                 Weight = fishSrub.weightInRandomTable;
@@ -48,14 +48,12 @@ namespace FinalScripts.Fish.Spawning
             public readonly GameObject GameObject;
             public readonly PrefabChild[] Children;
             public readonly float ZenAmount;
-            public readonly float ScoreMultiplierDistance;
             
-            public FishRecord(GameObject gameObject, float zenFromFish, float scoreMultiplierDistance)
+            public FishRecord(GameObject gameObject, float zenFromFish)
             {
                 GameObject = gameObject;
                 Children = gameObject.GetComponentsInChildren<Transform>().Select(transform1 => new PrefabChild(transform1)).ToArray();
                 ZenAmount = zenFromFish;
-                ScoreMultiplierDistance = scoreMultiplierDistance;
             }
         }
         

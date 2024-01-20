@@ -25,7 +25,6 @@ namespace FinalScripts.Fish
                     fish.FishHitGround();
                     break;
                 case "Bird":
-                    // TODO: make bird collision have "Bird" tag
                     fish.FishHitBird();
                     break;
                 case "LeftFist":

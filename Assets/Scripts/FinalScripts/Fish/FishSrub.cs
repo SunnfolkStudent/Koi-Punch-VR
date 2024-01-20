@@ -9,7 +9,6 @@ namespace FinalScripts.Fish
         public GameObject prefab;
         public int initialAmountInPool = 5;
         public float zenFromFish = 5;
-        public float scoreMultiplierDistance = 1;
         public float weightInRandomTable = 100;
     }
 }
