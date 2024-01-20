@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 
 public class SpecialAttackScript : MonoBehaviour
@@ -13,6 +14,9 @@ public class SpecialAttackScript : MonoBehaviour
     
     [Header("Static variables for special attack")]
     public static float punchForce;
+    
+    [Header("Visual effects")]
+    public VisualEffectAsset chargeEffectAsset;
 
 
     void Start()
@@ -86,5 +90,10 @@ public class SpecialAttackScript : MonoBehaviour
         ZenMetreManager.Instance.zenMetreValue = 0f;
         InternalZenEventManager.updateVisualZenBar.Invoke();
         InternalZenEventManager.hideSparkles.Invoke();
+    }
+    
+    public void PlayChargeEffect()
+    {
+        VisualEffectAsset.PlayEventName(chargeEffectAsset, "Charge");
     }
 }
