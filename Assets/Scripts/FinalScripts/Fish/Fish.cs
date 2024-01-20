@@ -2,18 +2,23 @@ using System;
 using System.Collections;
 using FinalScripts.Fish.Spawning;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace FinalScripts.Fish
 {
     public class Fish : MonoBehaviour
     {
-        public FishObjectPool.Fish fish { get; set; }
-        private Vector3 _punchedPosition;
+        public FishObjectPool.Fish fish { get; set; } // Reference to itself in the FishPool
+        private Vector3 _punchedPosition; // Compared with landing position to calculate points
+        
+        #region ---PublicStates---
         [HideInInspector] public bool hasBeenPunched;
         [HideInInspector] public bool hasHitGround;
         [HideInInspector] public bool hasHitPlayer;
         [HideInInspector] public bool hasEmergedFromWater;
         [HideInInspector] public bool hasEnteredWater;
+        [HideInInspector] public bool hasHitBird;
+        #endregion
         
         #region ---InspectorSettings---
         [Header("Despawn")] 
@@ -31,8 +36,12 @@ namespace FinalScripts.Fish
         [Tooltip("The punch velocity need to exceed this value for the punch to count as successful.")]
         [Range(0f, 5f)]public float successfulPunchThreshold = 3f;
         
+        [Header("Score")]
+        [SerializeField] private float baseScoreOfPunch = 10f;
+        [FormerlySerializedAs("scoreLostFromHit")] [SerializeField] private float scoreLostFromPlayerHit = 20f;
+        
         [Header("Skipping")]
-        [SerializeField] private float fSpeedNeededMultilier = 1f;
+        [SerializeField] private float fSpeedNeededMultiplier = 1f;
         [SerializeField] private float attackAngleMaximum = 15f;
         
         [Header("debug")]
@@ -58,6 +67,7 @@ namespace FinalScripts.Fish
             hasHitPlayer = false;
             hasEnteredWater = false;
             hasEmergedFromWater = false;
+            hasHitBird = false;
             StopCoroutine(DespawnAfterTime(despawnDelay));
         }
         #endregion
@@ -68,7 +78,7 @@ namespace FinalScripts.Fish
             if(isDebugging) Debug.Log(message);
         }
         #endregion
-
+        
         #region ---FishActions---
         private void Update()
         {
@@ -84,7 +94,17 @@ namespace FinalScripts.Fish
         
         private void Despawn()
         {
+            // TODO: Play Smoke explosion VFX
             FishObjectPool.DespawnFish(fish);
+        }
+
+        public void FishHitBird()
+        {
+            // TODO: implement in FishChild script
+            if (hasHitBird) return;
+            hasHitBird = true;
+            // TODO: Play Obstacle VFX
+            // Gain Score Modifier x2 for 10 Seconds
         }
 
         #region >>>---Water---
@@ -118,7 +138,7 @@ namespace FinalScripts.Fish
             var ySpeed = velocity.y;
             var fSpeed = Mathf.Abs(velocity.magnitude - ySpeed);
             
-            return attackAngle < attackAngleMaximum && fSpeed > ySpeed * fSpeedNeededMultilier;
+            return attackAngle < attackAngleMaximum && fSpeed > ySpeed * fSpeedNeededMultiplier;
         }
         
         private void Skip()
@@ -153,16 +173,11 @@ namespace FinalScripts.Fish
             hasHitGround = true;
             if (hasBeenPunched)
             {
-                GainPoints();
+                var dist = Vector3.Distance(transform.position, _punchedPosition) * fish.FishPool.FishRecord.ScoreMultiplierDistance;
+                if (dist > 2) EventManager.GainScore(dist);
             }
             Log("De-spawning: hit ground");
             StartCoroutine(DespawnAfterTime(despawnDelay));
-        }
-
-        private void GainPoints()
-        {
-            var points = Vector3.Distance(transform.position, _punchedPosition) * fish.FishPool.FishRecord.ScoreMultiplierDistance;
-            EventManager.GainScore(points);
         }
         
         private IEnumerator DespawnAfterTime(float time)
@@ -176,14 +191,22 @@ namespace FinalScripts.Fish
         public void FishHitPlayer()
         {
             if (hasHitPlayer) return;
+            // TODO: Play PlayerHit Voice Line
+            // TODO: Add Slime shader to camera
             hasHitPlayer = true;
+            EventManager.GainScore(-scoreLostFromPlayerHit);
             ZenMetreManager.Instance.RemoveZen(fish.FishPool.FishRecord.ZenAmount * 2);
         }
         
         public void FishPunched()
         {
+            // TODO: Play Fish Punched SFX
+            // TODO: Play Fist Impact SFX
+            // TODO: Play FishScaleVFX
+            // TODO: Play Random Player Hit Fish Voice Line
             hasBeenPunched = true;
             _punchedPosition = transform.position;
+            EventManager.GainScore(baseScoreOfPunch);
             GainZen();
         }
         
@@ -194,6 +217,5 @@ namespace FinalScripts.Fish
         }
         #endregion
         #endregion
-
     }
 }
