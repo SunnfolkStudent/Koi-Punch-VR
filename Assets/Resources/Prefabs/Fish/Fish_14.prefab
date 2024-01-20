@@ -123,6 +123,10 @@ PrefabInstance:
     - {fileID: -7376990135834022435, guid: 10eb0a20b63491e49bc39debdee535bd, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 10eb0a20b63491e49bc39debdee535bd,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2715212578888985471}
     - targetCorrespondingSourceObject: {fileID: -8519931663936982330, guid: 10eb0a20b63491e49bc39debdee535bd,
         type: 3}
       insertIndex: -1
@@ -275,6 +279,37 @@ CapsuleCollider:
   m_Height: 0.24027838
   m_Direction: 2
   m_Center: {x: -8.121661e-15, y: 0.061508972, z: -0.013664799}
+--- !u!1 &4581297114911933465 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 10eb0a20b63491e49bc39debdee535bd,
+    type: 3}
+  m_PrefabInstance: {fileID: 3698968934713932104}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2715212578888985471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4581297114911933465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb67997a41c5e6844912684d67db798f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasBeenPunchedSuccessfully: 0
+  hasBeenPunchedUnsuccessfully: 0
+  hasHitGround: 0
+  despawnDelay: 2.5
+  despawnTime: 10
+  despawnAltitude: -5
+  punchVelMultiplier: 30
+  successfulPunchThreshold: 3
+  baseScoreOfPunch: 10
+  scoreLostFromPlayerHit: 20
+  fSpeedNeededMultiplier: 1
+  attackAngleMaximum: 15
+  isDebugging: 0
 --- !u!1 &5490981628896823059 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -43204110609842597, guid: 10eb0a20b63491e49bc39debdee535bd,

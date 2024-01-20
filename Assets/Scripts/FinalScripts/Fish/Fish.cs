@@ -33,7 +33,7 @@ namespace FinalScripts.Fish
         
         [Header("FishChild")]
         [Tooltip("A higher value will apply more force to the object after it is punched")]
-        public float punchVelMultiplier;
+        public float punchVelMultiplier = 30;
         [Tooltip("The punch velocity need to exceed this value for the punch to count as successful.")]
         [Range(0f, 5f)]public float successfulPunchThreshold = 3f;
         
