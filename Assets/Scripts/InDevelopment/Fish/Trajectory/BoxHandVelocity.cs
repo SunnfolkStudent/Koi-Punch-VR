@@ -1,10 +1,13 @@
 using System;
+using InDevelopment.Punch;
 using UnityEngine;
 
 namespace InDevelopment.Fish.Trajectory
 {
     public class BoxHandVelocity : MonoBehaviour
     {
+        private BoxHandVelocity _boxHandVelocityScript;
+        
         [Header("PunchVelocity:")]
         public Vector3 punchVelocity = new (1, 1, 1);
         private Vector3 _punchDirection;
@@ -37,6 +40,11 @@ namespace InDevelopment.Fish.Trajectory
             {
                 // Print the velocity of the punch on collision
                 Debug.Log("Collision Velocity: " + collision.relativeVelocity);
+            }
+            
+            if (collision.gameObject.TryGetComponent(out IPunchable2 punchableObject))
+            {
+                punchableObject.PunchObject(_boxHandVelocityScript);
             }
         }
         

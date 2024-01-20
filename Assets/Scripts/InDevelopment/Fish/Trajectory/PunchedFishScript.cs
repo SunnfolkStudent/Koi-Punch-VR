@@ -1,11 +1,18 @@
+using System;
 using InDevelopment.Punch;
 using Unity.Mathematics;
 using UnityEngine;
 
 namespace InDevelopment.Fish.Trajectory
 {
-    public class PunchedFishScript : MonoBehaviour, IPunchable
+    public interface IPunchable2
     {
+        void PunchObject(BoxHandVelocity boxHandVelScript);
+    }
+    
+    public class PunchedFishScript : MonoBehaviour, IPunchable2
+    {
+        public BoxHandVelocity boxHandVelocityScript;
         public FinalScripts.Fish.Fish fish;
         public GameObject landingMarkPrefab;
 
@@ -19,9 +26,13 @@ namespace InDevelopment.Fish.Trajectory
         // Gravity constant
         private const float Gravity = -9.81f;
 
+        private void Awake()
+        {
+            _rbFish = GetComponent<Rigidbody>();
+        }
+
         void Start()
         {
-            _rbFish = GetComponentInChildren<Rigidbody>();
             _startPos = _rbFish.position;
             print("StartPos in worldSpace:" + _startPos);
             print("StartPos Reset:" + (_startPos - _startPos));
@@ -32,17 +43,59 @@ namespace InDevelopment.Fish.Trajectory
                 _rbFish.Sleep();
             }
         }
-        
+
         private void FixedUpdate()
         {
             _landingPos += _rbFish.position;
         }
+        
+        private void OnCollisionEnter(Collision other)
+        {
+            switch (other.transform.tag)
+            {
+                case "Player":
+                    fish.FishHitPlayer();
+                    break;
+                case "Ground":
+                    fish.FishHitGround();
+                    break;
+                case "LeftFist":
+                    HapticManager.leftFishPunch = true;
+                    break;
+                case "RightFist":
+                    HapticManager.rightFishPunch = true;
+                    break;
+            }
+        }
 
-        public void PunchObject(ControllerManager controllerManager, string fistUsed)
+        private void OnCollisionExit(Collision other)
+        {
+            switch (other.transform.tag)
+            {
+                case "LeftFist":
+                    HapticManager.leftFishPunch = false;
+                    break;
+                case "RightFist":
+                    HapticManager.rightFishPunch = false;
+                    break;
+            }
+        }
+
+        // TODO: Integrate this finished code into the below comment, which is from the original script.
+        // TODO: Actually, make it a copy, cuz this testing set-up is good.
+        
+        /*public void PunchObject(ControllerManager controllerManager, string fistUsed)
         {
             var v = fistUsed == "LeftFist"
                 ? controllerManager.leftControllerVelocity
                 : controllerManager.rightControllerVelocity;
+            if (math.abs(v.magnitude) >= fish.successfulPunchThreshold) LaunchObject(v);
+            else fish.Log("Punch Velocity was too weak");
+        }*/
+
+        public void PunchObject(BoxHandVelocity boxHandVelScript)
+        {
+            var v = boxHandVelScript.punchVelocity;
             if (math.abs(v.magnitude) >= fish.successfulPunchThreshold) LaunchObject(v);
             else fish.Log("Punch Velocity was too weak");
         }
@@ -54,8 +107,8 @@ namespace InDevelopment.Fish.Trajectory
                 _rbFish.WakeUp();
                 fishAsleep = false;
             }
-            
-            if (fish.hasBeenPunched)
+
+            if (fish.hasBeenPunched || fish.hasHitGround)
             {
                 fish.Log("Punch does not qualify as it has already been punched");
                 return;
@@ -74,13 +127,13 @@ namespace InDevelopment.Fish.Trajectory
 
             fish.Log($"PunchForce: {punchForce} | Direction: {direction} | Debuff: {forceDebuff}");
             _rbFish.AddForce(fishLaunch, ForceMode.VelocityChange);
-            
+            Debug.Log("Fish launches self with a force of:" + fishLaunch);
+
             SimulateTrajectory(fishLaunch);
         }
 
         private void SimulateTrajectory(Vector3 fishLaunch)
         {
-            
             // Calculate launch data
             LaunchData launchData = CalculateLaunchData(fishLaunch);
 
@@ -102,10 +155,10 @@ namespace InDevelopment.Fish.Trajectory
         {
             var launchSpeed = fishLaunch.magnitude;
             var fishLaunchNormalized = fishLaunch.normalized;
-            
+
             // TODO: Fix the below code to have 1 unified xz-Vector.
             float launchAngle = Mathf.Acos(fishLaunchNormalized.x * fishLaunchNormalized.y);
-            
+
             float radianAngle = Mathf.Deg2Rad * launchAngle;
             float totalTime = (2f * launchSpeed * Mathf.Sin(radianAngle)) / Mathf.Abs(Gravity);
             float maxHeight = (launchSpeed * launchSpeed * Mathf.Pow(Mathf.Sin(radianAngle), 2)) /
@@ -114,7 +167,7 @@ namespace InDevelopment.Fish.Trajectory
             LaunchData launchData = new LaunchData(totalTime, maxHeight);
             return launchData;
         }
-        
+
         /*LaunchData CalculateLaunchData(float punchSpeed, float launchAngle)
         {
             float radianAngle = Mathf.Deg2Rad * launchAngle;
@@ -135,25 +188,6 @@ namespace InDevelopment.Fish.Trajectory
             {
                 TimeToTarget = timeToTarget;
                 ApexHeight = apexHeight;
-            }
-        }
-
-        private void OnCollisionEnter(Collision other)
-        {
-            switch (other.transform.tag)
-            {
-                case "Player":
-                    fish.FishHitPlayer();
-                    break;
-                case "Ground":
-                    fish.FishHitGround();
-                    break;
-                case "LeftFist":
-                    HapticManager.leftFishPunch = true;
-                    break;
-                case "RightFist":
-                    HapticManager.rightFishPunch = true;
-                    break;
             }
         }
     }
