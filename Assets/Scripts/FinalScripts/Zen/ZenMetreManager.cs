@@ -9,14 +9,14 @@ public class ZenMetreManager : MonoBehaviour
     public static ZenMetreManager Instance;
     
     [Header("Variables for zen events")]
-    public bool zenAttackActive;
+    [HideInInspector] public bool zenAttackActive;
     private float _tripleScoreTimer = 10f;
     private float _attackFieldsActiveTime = 15f;
     
     [Header("Zen Metre Values")]
     public float zenMetreValue;
     public int zenLevel;
-    public int zenLevelCheckpoint;
+    [HideInInspector] public int zenLevelCheckpoint;
     private bool _zenBossSpawnInvoked;
     [SerializeField] private float zenFromWeakpoint = 10f;
     
