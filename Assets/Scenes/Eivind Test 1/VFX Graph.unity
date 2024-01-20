@@ -825,6 +825,9 @@ VisualEffect:
       - m_Value: 0.9
         m_Name: Power
         m_Overridden: 1
+      - m_Value: 0
+        m_Name: ConstantBurst
+        m_Overridden: 0
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -859,6 +862,9 @@ VisualEffect:
       m_Array:
       - m_Value: 0
         m_Name: Loop
+        m_Overridden: 1
+      - m_Value: 1
+        m_Name: ConstantBurst
         m_Overridden: 1
 --- !u!4 &390232124
 Transform:
