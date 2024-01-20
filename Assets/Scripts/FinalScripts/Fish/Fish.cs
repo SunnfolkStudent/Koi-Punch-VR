@@ -14,10 +14,10 @@ namespace FinalScripts.Fish
         #region ---PublicStates---
         [HideInInspector] public bool hasBeenPunched;
         [HideInInspector] public bool hasHitGround;
-        [HideInInspector] public bool hasHitPlayer;
-        [HideInInspector] public bool hasEmergedFromWater;
-        [HideInInspector] public bool hasEnteredWater;
-        [HideInInspector] public bool hasHitBird;
+        private bool _hasHitPlayer;
+        private bool _hasEmergedFromWater;
+        private bool _hasEnteredWater;
+        private bool _hasHitBird;
         #endregion
         
         #region ---InspectorSettings---
@@ -64,10 +64,10 @@ namespace FinalScripts.Fish
             _startTime = Time.time;
             hasBeenPunched = false;
             hasHitGround = false;
-            hasHitPlayer = false;
-            hasEnteredWater = false;
-            hasEmergedFromWater = false;
-            hasHitBird = false;
+            _hasHitPlayer = false;
+            _hasEnteredWater = false;
+            _hasEmergedFromWater = false;
+            _hasHitBird = false;
             StopCoroutine(DespawnAfterTime(despawnDelay));
         }
         #endregion
@@ -101,8 +101,8 @@ namespace FinalScripts.Fish
         public void FishHitBird()
         {
             // TODO: implement in FishChild script
-            if (hasHitBird) return;
-            hasHitBird = true;
+            if (_hasHitBird) return;
+            _hasHitBird = true;
             // TODO: Play Obstacle VFX
             // Gain Score Modifier x2 for 10 Seconds
         }
@@ -110,12 +110,12 @@ namespace FinalScripts.Fish
         #region >>>---Water---
         public void FishHitWater(Vector3 velocity)
         {
-            if (hasEnteredWater) return;
-            if (!hasEmergedFromWater)
+            if (_hasEnteredWater) return;
+            if (!_hasEmergedFromWater)
             {
                 // TODO: Play Water Exit VFX and SFX (From Water)
                 Log("Emerging from water");
-                hasEmergedFromWater = true;
+                _hasEmergedFromWater = true;
                 return;
             }
             
@@ -127,7 +127,7 @@ namespace FinalScripts.Fish
             
             if (velocity.y >= 0) return;
             Log("Entering Water");
-            hasEnteredWater = true;
+            _hasEnteredWater = true;
             // TODO: Play Water Entry VFX and SFX (From Water)
         }
         
@@ -190,10 +190,10 @@ namespace FinalScripts.Fish
         #region >>>---Player---
         public void FishHitPlayer()
         {
-            if (hasHitPlayer) return;
+            if (_hasHitPlayer) return;
             // TODO: Play PlayerHit Voice Line
             // TODO: Add Slime shader to camera
-            hasHitPlayer = true;
+            _hasHitPlayer = true;
             EventManager.GainScore(-scoreLostFromPlayerHit);
             ZenMetreManager.Instance.RemoveZen(fish.FishPool.FishRecord.ZenAmount * 2);
         }
