@@ -174,6 +174,7 @@ namespace FinalScripts.Fish
         #region >>>---Ground---
         public void FishHitGround()
         {
+            if (hasHitGround) return;
             hasHitGround = true;
             // TODO: FMODManager.instance.PlayOneShot("event:/SFX/FishSounds/FishSlap", transform.position);
             if (hasBeenPunchedSuccessfully || hasBeenPunchedUnsuccessfully)

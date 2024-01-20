@@ -82,7 +82,7 @@ namespace FinalScripts.Fish.Spawning
                 FishPool = fishPool;
                 ParentGameObject = Instantiate(fishPool.FishRecord.GameObject, _fishContainer);
                 ParentGameObject.SetActive(false);
-                
+                ParentGameObject.GetComponent<FinalScripts.Fish.Fish>().fish = this;
                 Children = ParentGameObject.GetComponentsInChildren<Transform>().Select(transform1 => new Child(transform1)).ToArray();
             }
         }
