@@ -107,7 +107,7 @@ namespace InDevelopment.Fish.Trajectory
                 fishAsleep = false;
             }
 
-            if (fish.hasBeenPunched || fish.hasHitGround)
+            if (fish.hasBeenPunchedSuccessfully || fish.hasHitGround)
             {
                 fish.Log("Punch does not qualify as it has already been punched");
                 return;

@@ -5,7 +5,7 @@ public class HandAnimator : MonoBehaviour
 {
     [SerializeField] private InputActionReference gripAction;
     
-    [SerializeField] private float _grip;
+    [SerializeField] private bool _grip;
     
     [Header("Animator")] 
     private Animator Anim;
@@ -16,9 +16,9 @@ public class HandAnimator : MonoBehaviour
     
     void Update()
     {
-        _grip = gripAction.action.ReadValue<float>();
+        _grip = gripAction.action.IsPressed();
         
-        Anim.SetFloat("Grip", _grip);
+        Anim.SetBool("Grip", _grip);
         
     }
 }
