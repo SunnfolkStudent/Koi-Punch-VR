@@ -721,12 +721,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb67997a41c5e6844912684d67db798f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasBeenPunchedSuccessfully: 0
+  hasBeenPunchedUnsuccessfully: 0
+  hasHitGround: 0
+  despawnDelay: 2.5
   despawnTime: 10
   despawnAltitude: -5
   punchVelMultiplier: 30
   successfulPunchThreshold: 3
-  hasBeenPunched: 0
-  hasHitGround: 0
+  baseScoreOfPunch: 10
+  scoreLostFromPlayerHit: 20
+  fSpeedNeededMultiplier: 1
+  attackAngleMaximum: 15
   isDebugging: 1
 --- !u!1 &7974519432445708140 stripped
 GameObject:
