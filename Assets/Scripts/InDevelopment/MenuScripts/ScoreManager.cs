@@ -7,7 +7,7 @@ using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
-    public int fishPunchPoints, distancePoints, bonusPoints, hitByFish, zenPoints;
+    public int fishPunchPoints, distancePoints, bonusPoints, penaltyPoints, zenPoints;
     
     [SerializeField] private GameObject textPrefab;
     [SerializeField] private GameObject textSpawner;
@@ -24,10 +24,9 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
-        fishPunchPoints = distancePoints = bonusPoints = hitByFish = zenPoints = 0;
+        fishPunchPoints = distancePoints = bonusPoints = penaltyPoints = zenPoints = 0;
         zenModeOn = false;
-        //EventManager.ScoreChanged += ShowZenPoints;
-        //EventManager.BossDefeatedTotalScore += ZenEnd;
+        //EventManager.BossDefeatedTotalScore += ZenEnd();
     }
 
     /*Added to the beginning of each script that adds to ScoreManager
@@ -54,16 +53,13 @@ public class ScoreManager : MonoBehaviour
         if (successful)
         {
             if (multiplierOn)
-                fishPunchPoints += 10;
+                fishPunchPoints += 20;
             else
-                fishPunchPoints += 5;
+                fishPunchPoints += 10;
         }
         else
         {
-            if (multiplierOn)
-                fishPunchPoints += 2;
-            else
-                fishPunchPoints += 1;
+            penaltyPoints -= 5;
         }
     }
     
@@ -79,7 +75,7 @@ public class ScoreManager : MonoBehaviour
     //each hit is subtracted from hitByFish int
     public void HitByFish()
     {
-        hitByFish -= 1;
+        penaltyPoints -= 1;
     }
     
     /*Function on Fish/body to show hit by fish
@@ -143,28 +139,7 @@ public class ScoreManager : MonoBehaviour
     {
         zenPoints += allZenPoints;
     }
-
-
-    public void ShowZenPoints(int currentZenPoints)
-    {
-        if (!zenModeOn)
-        {
-            //set zentext prefab to active? or instantiate
-            zenTextPrefab.SetActive(true);
-            zenText = zenTextPrefab.GetComponent<TextMeshPro>();
-      
-            zenText.text = currentZenPoints.ToString("0");
-            
-            zenModeOn = true;
-        }
-        else
-        {
-            zenText.text = currentZenPoints.ToString("0");
-        }
-    }
     
-    
-
     /*****************************************/
     
     //Floating text
