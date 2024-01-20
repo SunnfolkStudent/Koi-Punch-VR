@@ -78,7 +78,7 @@ public class LevelCompleteManager : MonoBehaviour
       distancePoints = _scoreManager.distancePoints;
       bonusPoints = _scoreManager.bonusPoints;
       zenPoints = _scoreManager.zenPoints;
-      penaltyPoints = _scoreManager.hitByFish;
+      penaltyPoints = _scoreManager.penaltyPoints;
       totalPoints = 0;
       
       if(!scoringOver)

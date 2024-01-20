@@ -9,10 +9,10 @@ using UnityEngine.VFX;
 public class ZenMetreVisualManager : MonoBehaviour
 {
     [Header("Zen Metre Bar Images and materials")]
-    public GameObject[] zenMetreBars;
+    [SerializeField] private GameObject[] zenMetreBars;
     private List<Material> _zenMetreBarMaterials = new List<Material>();
     private int _fillAmountPropertyID;
-    private VisualEffect _sparkleVFX;
+    private List<VisualEffect> _sparkleVFX = new List<VisualEffect>();
     
     [Header("Zen Metre Values")]
     private float _maxZenMetreValue = 100f;
@@ -21,7 +21,7 @@ public class ZenMetreVisualManager : MonoBehaviour
     private List<GameObject> _sparkleList = new List<GameObject>();
     
     [Header("Prompt Text")]
-    public TextMeshProUGUI promptText;
+    [SerializeField] private TextMeshProUGUI promptText;
     public static string promptTextToBeShown;
 
     // Start is called before the first frame update
@@ -44,8 +44,9 @@ public class ZenMetreVisualManager : MonoBehaviour
             {
                 zenMetrebarMaterial.SetFloat(_fillAmountPropertyID, 0f);
             }
-
-            _sparkleVFX = zenMetreBars[2].GetComponent<VisualEffect>();
+            
+            VisualEffect[] vfxArray = GetComponentsInChildren<VisualEffect>();
+            _sparkleVFX.AddRange(vfxArray);
             
             zenMetreBars[1].gameObject.SetActive(false);
             zenMetreBars[2].gameObject.SetActive(false);
@@ -130,12 +131,15 @@ public class ZenMetreVisualManager : MonoBehaviour
             foreach (GameObject sparkle in _sparkleList)
             {
                 sparkle.SetActive(true);
-                StartSparklesVFX();
+            }
+            foreach (var vfx in _sparkleVFX)
+            {
+                vfx.Play();
             }
         }
-        catch (Exception)
+        catch (Exception e)
         {
-            Debug.LogError("No sparkles");
+            Debug.LogError("Exception: " + e + " occurred while showing sparkles.");
         }
     }
     
@@ -146,32 +150,11 @@ public class ZenMetreVisualManager : MonoBehaviour
             foreach (GameObject sparkle in _sparkleList)
             {
                 sparkle.SetActive(false);
-                StopSparklesVFX();
             }
-        }
-        catch (Exception)
-        {
-            Debug.LogError("No sparkles");
-        }
-    }
-    
-    private void StartSparklesVFX()
-    {
-        try
-        {
-            _sparkleVFX.Play();
-        }
-        catch (Exception)
-        {
-            Debug.LogError("No sparkles");
-        }
-    }
-    
-    private void StopSparklesVFX()
-    {
-        try
-        {
-            _sparkleVFX.Stop();
+            foreach (var vfx in _sparkleVFX)
+            {
+                vfx.Stop();
+            }
         }
         catch (Exception)
         {
