@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.VFX;
 
 public class ZenMetreVisualManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class ZenMetreVisualManager : MonoBehaviour
     public GameObject[] zenMetreBars;
     private List<Material> _zenMetreBarMaterials = new List<Material>();
     private int _fillAmountPropertyID;
+    private VisualEffect _sparkleVFX;
     
     [Header("Zen Metre Values")]
     private float _maxZenMetreValue = 100f;
@@ -42,6 +44,8 @@ public class ZenMetreVisualManager : MonoBehaviour
             {
                 zenMetrebarMaterial.SetFloat(_fillAmountPropertyID, 0f);
             }
+
+            _sparkleVFX = zenMetreBars[2].GetComponent<VisualEffect>();
             
             zenMetreBars[1].gameObject.SetActive(false);
             zenMetreBars[2].gameObject.SetActive(false);
@@ -126,6 +130,7 @@ public class ZenMetreVisualManager : MonoBehaviour
             foreach (GameObject sparkle in _sparkleList)
             {
                 sparkle.SetActive(true);
+                StartSparklesVFX();
             }
         }
         catch (Exception)
@@ -141,7 +146,32 @@ public class ZenMetreVisualManager : MonoBehaviour
             foreach (GameObject sparkle in _sparkleList)
             {
                 sparkle.SetActive(false);
+                StopSparklesVFX();
             }
+        }
+        catch (Exception)
+        {
+            Debug.LogError("No sparkles");
+        }
+    }
+    
+    private void StartSparklesVFX()
+    {
+        try
+        {
+            _sparkleVFX.Play();
+        }
+        catch (Exception)
+        {
+            Debug.LogError("No sparkles");
+        }
+    }
+    
+    private void StopSparklesVFX()
+    {
+        try
+        {
+            _sparkleVFX.Stop();
         }
         catch (Exception)
         {

@@ -62,6 +62,12 @@ public class ZenMetreManager : MonoBehaviour
     
     private void Update()
     {
+        AddHitZen(1);
+        if (zenMetreValue >= 100)
+        {
+            zenLevel++;
+        }
+        
         if (zenMetreValue >= 100 && zenLevel == 0 && !_zenBossSpawnInvoked)
         {
             _zenBossSpawnInvoked = true;
