@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,16 +8,16 @@ public class SceneController : MonoBehaviour
 {
     #region Definitions
     [SerializeField] private string[] Levels;
-    [SerializeField] private string[] LightingForLevels;
     [SerializeField] private Transform Goal;
     [SerializeField] private GameObject Title;
     [SerializeField] private AudioClip musicLength;
     [SerializeField] private AnimationCurve titleSpeed;
     private float speed;
     private float time;
-    //private bool ReadyToStart;
+    private bool ReadyToStart;
     private GameObject _fadeScreenObj;
     private FadeScreenScript _fadeScreen;
+    private bool canChangeScene = true;
     
     private static SceneController instance;
 
@@ -41,29 +42,39 @@ public class SceneController : MonoBehaviour
         _fadeScreen = _fadeScreenObj.GetComponent<FadeScreenScript>();
     }
 
+    private void Update()
+    {
+        if (ReadyToStart)
+        {
+            speed = titleSpeed.Evaluate(time);
+            time += Time.deltaTime;
+            Title.transform.position = Vector3.MoveTowards(Title.transform.position, Goal.transform.position, speed);
+        }
+    }
+
 
     private IEnumerator TitleCard()
     {
         print("Play Music"); //Play music here
-        
-        speed = titleSpeed.Evaluate(time);
-        time += Time.deltaTime;
-        Title.transform.position = Vector3.MoveTowards(Title.transform.position, Goal.transform.position, speed);
 
+        ReadyToStart = true;
+        
         Debug.Log("second start sign appear!");
+
+        yield return new WaitForSeconds(5);
+        
         Instantiate(secondStartSign);
         
-        yield return new WaitForSeconds(musicLength.length);
+        //yield return new WaitForSeconds(musicLength.length - 5);
+        yield return new WaitForSeconds(10);
 
-        StartCoroutine(ChangeLevel(1));
-
-        //ReadyToStart = true;
-
+        ChangeScenes(1);
     }
 
     public void ChangeScenes(int scene)
     {
-        StartCoroutine(ChangeLevel(scene));
+        if(canChangeScene)
+            StartCoroutine(ChangeLevel(scene));
     }
 
     public void StartGame()
@@ -73,14 +84,13 @@ public class SceneController : MonoBehaviour
 
     private IEnumerator ChangeLevel(int scene)
     {
+        canChangeScene = false;
         _fadeScreenObj = GameObject.FindGameObjectWithTag("FadeScreen");
         _fadeScreen = _fadeScreenObj.GetComponent<FadeScreenScript>();
         _fadeScreen.FadeOut();
+        ReadyToStart = false;
         yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene(Levels[scene]);
-        if (scene is 1 or 2 or 3)
-        {
-            SceneManager.LoadScene(LightingForLevels[scene], LoadSceneMode.Additive);
-        }
+        canChangeScene = true;
     }
 }

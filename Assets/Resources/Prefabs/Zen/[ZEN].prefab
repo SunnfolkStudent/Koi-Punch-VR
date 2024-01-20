@@ -25,8 +25,8 @@ RectTransform:
   m_GameObject: {fileID: 127273563166614508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5617998925925370395}
   - {fileID: 2704121611351763410}
@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -50}
+  m_AnchoredPosition: {x: 0, y: -190}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &479725647043643955
@@ -290,7 +290,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 0}
-  m_PlaneDistance: 1
+  m_PlaneDistance: 0.1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -300,7 +300,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10000
   m_TargetDisplay: 0
 --- !u!114 &8144904480020145488
 MonoBehaviour:
@@ -445,14 +445,14 @@ RectTransform:
   m_GameObject: {fileID: 2670557852702627436}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8594415868613233371}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 125.7}
   m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6070142381829037448
@@ -690,7 +690,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weakPointPrefab: {fileID: 1259329698490334870, guid: 825a7aab160dfa747a6f8797e196939d,
     type: 3}
-  distanceBetweenSpawns: 1
+  spawnTightness: 0.5
+  minDistBetweenPoints: 0.75
   spawnInterval: 2
   maxWhileLooping: 10
 --- !u!114 &3483118490097113330
@@ -709,6 +710,7 @@ MonoBehaviour:
   zenMetreValue: 0
   zenLevel: 1
   zenLevelCheckpoint: 0
+  zenFromWeakpoint: 10
   bossPrefab: {fileID: 471582657252072425, guid: e3792d775295884418e0ab41c2a97d11,
     type: 3}
 --- !u!114 &6941716316594716263
