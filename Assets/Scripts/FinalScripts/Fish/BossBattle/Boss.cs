@@ -112,7 +112,13 @@ namespace FinalScripts.Fish.BossBattle
         {
             _currentBossState = BossPhase.Phase0;
             // TODO: FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/BossSpawn");
-            Invoke(nameof(Attack), attackDelay);
+            StartCoroutine(AttackWithDelay());
+        }
+
+        private IEnumerator AttackWithDelay()
+        {
+            yield return new WaitForSeconds(attackDelay);
+            Attack();
         }
 
         private void Attack()
