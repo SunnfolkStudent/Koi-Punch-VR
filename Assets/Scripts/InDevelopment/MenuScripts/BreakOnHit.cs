@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+//using FMOD.Studio;
+//using FMODUnity;
 
 public class BreakOnHit : TransitionAnimation//, IPunchable
 {
@@ -36,6 +38,7 @@ public class BreakOnHit : TransitionAnimation//, IPunchable
     private void HittingSign()
     {
         Instantiate(_brokenPrefab, transform.position, _brokenPrefab.transform.rotation);
+        // TODO FMODManager.instance.PlayOneShot("event:/SFX/MenuSounds/PlankBreak", transform.position);
         MenuEventManager.ExplodeTransition();
         
         //TODO play break audio

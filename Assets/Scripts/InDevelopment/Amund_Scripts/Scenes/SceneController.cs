@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+//using FMOD.Studio;
+//using FMODUnity;
 
 public class SceneController : MonoBehaviour
 {
@@ -39,9 +41,6 @@ public class SceneController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         
         //Play intro music
-        
-        _fadeScreenObj = GameObject.FindGameObjectWithTag("FadeScreen");
-        _fadeScreen = _fadeScreenObj.GetComponent<FadeScreenScript>();
     }
 
     private void Update()
@@ -54,6 +53,7 @@ public class SceneController : MonoBehaviour
         }
         if (Title.transform.position == Goal.transform.position && ReadyToStart)
         {
+            // TODO FMODManager.instance.menuTheme.setParameterByName("PunchedThing", 1);
             Instantiate(secondStartSign);
             ReadyToStart = false;
         }
@@ -98,6 +98,8 @@ public class SceneController : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         Debug.Log("Changing scenes");
         CheckStartScene();
+        // TODO FMODManager.instance.menuTheme.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        // TODO FMODManager.instance.ambientOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         SceneManager.LoadScene(Levels[startScene]);
         canChangeScene = true;
     }
@@ -130,6 +132,8 @@ public class SceneController : MonoBehaviour
         _fadeScreen.FadeOut();
         yield return new WaitForSeconds(1.5f);
         Debug.Log("Changing scenes");
+        // TODO FMODManager.instance.menuTheme.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        // TODO FMODManager.instance.ambientOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         SceneManager.LoadScene(Levels[scene]);
         canChangeScene = true;
     }
