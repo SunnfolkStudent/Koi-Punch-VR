@@ -3329,9 +3329,9 @@ Transform:
   m_GameObject: {fileID: 2173336351228211729}
   serializedVersion: 2
   m_LocalRotation: {x: -5.353689e-15, y: 1, z: 0.000000037748947, w: 0.0000000754979}
-  m_LocalPosition: {x: 0, y: -2, z: 10}
-  m_LocalScale: {x: 5, y: 5, z: 5}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: -0.2, z: 7.86}
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8903779556364512765}
   - {fileID: 1562153913653827185}
@@ -9049,6 +9049,7 @@ GameObject:
   - component: {fileID: 363512022961873907}
   - component: {fileID: 1639159181732499575}
   - component: {fileID: 2068525779756588112}
+  - component: {fileID: 3371369820062977679}
   m_Layer: 0
   m_Name: sign_mainmenu
   m_TagString: SceneChanger
@@ -9189,6 +9190,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!95 &3371369820062977679
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5727491235072864191}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8eec308873d810049897d29f41f56bfd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5826207570272978102
 GameObject:
   m_ObjectHideFlags: 0
@@ -12545,7 +12568,7 @@ Transform:
   m_GameObject: {fileID: 7695080969794925172}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.769, y: 5.756, z: -0.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12676,6 +12699,7 @@ GameObject:
   - component: {fileID: 8233048700913783033}
   - component: {fileID: 4754551558165065382}
   - component: {fileID: 7264392270115768941}
+  - component: {fileID: 5432628725949723680}
   m_Layer: 0
   m_Name: sign_nextlevel
   m_TagString: SceneChanger
@@ -12816,6 +12840,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.006147481, y: 0.00095160946, z: 0.0045315702}
   m_Center: {x: -0.000060482536, y: -0.00001562908, z: 0.009573168}
+--- !u!95 &5432628725949723680
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7822196605841973296}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 20ea7216cad6bf04f8c2f607cfa8a1b5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7888323234839870351
 GameObject:
   m_ObjectHideFlags: 0

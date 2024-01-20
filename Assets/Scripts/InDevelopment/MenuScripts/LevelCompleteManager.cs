@@ -98,19 +98,20 @@ public class LevelCompleteManager : MonoBehaviour
          totalScore.text = totalPoints.ToString("0");
       }
       
-      if(totalPoints < 1000)
-         totalScore.color = Color.gray;
-      else if (totalPoints < 2000)
+      if(totalPoints < 500)
          totalScore.color = Color.red;
-      else if (totalPoints < 5000)
-         totalScore.color = Color.green;
-      else if(totalPoints < 7000)
+      else if (totalPoints < 1500)
+         totalScore.color = Color.gray;
+      else if (totalPoints < 3000)
+         totalScore.color = new Color32( 255, 140, 0,255);
+      else if(totalPoints < 5000)
+         totalScore.color = new Color32(34, 139, 34,255);
+      else if(totalPoints < 7500)
          totalScore.color = Color.blue;
-      else if (totalPoints < 9000)
+      else if (totalPoints < 10000)
+         totalScore.color = new Color32(160, 32, 240, 255);
+      else if (totalPoints > 10000)
          totalScore.color = Color.magenta;
-      else
-         totalScore.color = Color.yellow;
-
    }
 
    private void CalculateScore()
