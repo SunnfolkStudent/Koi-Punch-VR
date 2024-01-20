@@ -30,8 +30,6 @@ public class ResetPosition : MonoBehaviour
         targetForward.y = 0;
         Vector3 cameraForward = head.forward;
         cameraForward.y = 0;
-        Vector3 originForward = origin.forward;
-        originForward.y = 0;
 
         float angle = Vector3.SignedAngle(cameraForward, targetForward, Vector3.up);
         
