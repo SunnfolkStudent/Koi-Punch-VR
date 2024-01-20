@@ -125,9 +125,9 @@ public class SceneController : MonoBehaviour
     private IEnumerator ChangeLevelFish(int scene)
     {
         canChangeScene = false;
-        //_fadeScreenObj = GameObject.FindGameObjectWithTag("FadeScreen");
-        //_fadeScreen = _fadeScreenObj.GetComponent<FadeScreenScript>();
-        //_fadeScreen.FadeOut();
+        _fadeScreenObj = GameObject.FindGameObjectWithTag("FishTransition");
+        _fadeScreen = _fadeScreenObj.GetComponent<FadeScreenScript>();
+        _fadeScreen.FadeOut();
         yield return new WaitForSeconds(1.5f);
         Debug.Log("Changing scenes");
         SceneManager.LoadScene(Levels[scene]);
