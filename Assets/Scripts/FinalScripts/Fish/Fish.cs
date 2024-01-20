@@ -38,9 +38,8 @@ namespace FinalScripts.Fish
         [Range(0f, 5f)]public float successfulPunchThreshold = 3f;
         
         [Header("Score")]
-        [SerializeField] private float baseScoreOfPunch = 10f;
-        [SerializeField] private float minDistanceForScore = 2f;
-        [SerializeField] private float scoreLostFromPlayerHit = 20f;
+        [SerializeField] private int baseScoreOfPunch = 10;
+        [SerializeField] private int scoreLostFromPlayerHit = 20;
         
         [Header("Skipping")]
         [SerializeField] private float fSpeedNeededMultiplier = 1f;

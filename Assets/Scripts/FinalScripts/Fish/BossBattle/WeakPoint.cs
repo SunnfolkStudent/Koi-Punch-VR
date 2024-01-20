@@ -39,7 +39,6 @@ namespace FinalScripts.Fish.BossBattle
         private void Hit()
         {
             Boss.Score += weakPointScore;
-            EventManager.ScoreChanged.Invoke(Boss.Score + Boss.Phase.Sum(pair => pair.Value.score));
             ZenMetreManager.Instance.AddAttackFieldZen();
             Destroy(gameObject);
         }
