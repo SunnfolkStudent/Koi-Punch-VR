@@ -11,6 +11,8 @@ public class ChargeVFX : MonoBehaviour
     {
         InternalZenEventManager.startChargeVfx += PlayChargeVFX;
         InternalZenEventManager.stopChargeVfx += StopChargeVFX;
+        
+        StopChargeVFX();
     }
     
     public void PlayChargeVFX()
