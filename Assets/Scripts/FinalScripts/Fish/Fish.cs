@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using FinalScripts.Fish.Spawning;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace FinalScripts.Fish
 {
@@ -29,6 +31,7 @@ namespace FinalScripts.Fish
         [HideInInspector] public bool hasBeenPunched;
         [HideInInspector] public bool hasHitGround;
         [HideInInspector] public bool hasHitPlayer;
+        public bool hasEmergedFromWater;
         
         [Header("debug")]
         public bool isDebugging;
@@ -71,6 +74,29 @@ namespace FinalScripts.Fish
             if (transform.position.y > despawnAltitude && _startTime > Time.time - despawnTime) return;
             Log("De-spawned: either to time or y altitude to low");
             Despawn();
+        }
+
+        public void FishHitWater()
+        {
+            if (!hasEmergedFromWater)
+            {
+                // TODO: Play Water Exit VFX (From Water)
+                hasEmergedFromWater = true;
+                return;
+            }
+            
+            var canSkipp = CheckIfCanSkipp();
+            if (canSkipp)
+            {
+                // TODO: Skipp on Water
+                return;
+            }
+            // TODO: Play Water Entry VFX (From Water)
+        }
+        
+        private bool CheckIfCanSkipp()
+        {
+            return false;
         }
         
         public void FishHitGround()

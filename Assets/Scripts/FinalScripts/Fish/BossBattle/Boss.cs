@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,9 +90,9 @@ namespace FinalScripts.Fish.BossBattle
         public class PhaseInfo
         {
             public float score { get; set; }
-            public readonly EventManager.Event Event;
+            public readonly Action Event;
 
-            public PhaseInfo(EventManager.Event @event)
+            public PhaseInfo(Action @event)
             {
                 score = 0;
                 Event = @event;
