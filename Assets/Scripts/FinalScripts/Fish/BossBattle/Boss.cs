@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using FinalScripts.Fish.Spawning;
 using FinalScripts.Fish.Spawning.RandomWeightedTables;
-using InDevelopment.Punch;
 using UnityEngine;
 
 namespace FinalScripts.Fish.BossBattle
