@@ -134,7 +134,6 @@ namespace InDevelopment.Fish.Trajectory
         [Header("Adjustable Parameters for our testCapsule:")]
         [Header("Force applied with given Direction:")]
         [SerializeField] [Range(0, 150)] private float initialForce = 10f;
-        [SerializeField] [Range(0, 90)] private float launchAngleFromXAxis = 60f;
 
         [Header("Direction for each axis given to testCapsule:")]
         [SerializeField] [Range(0, 300)] private float xDirection;
@@ -183,16 +182,6 @@ namespace InDevelopment.Fish.Trajectory
         }
 
         // TODO: Set a limit to have the below function respond to entering Ground every 1 sec.
-        public void FishHitGround()
-        {
-            if (_timer > 1)
-            {
-                Instantiate(landingMarkPrefab, _fish.position, Quaternion.identity);
-            }
-            print("Distance Travelled:" + (_fish.position - startPos));
-            _timer = 0;
-        }
-        
         void CalculateApex()
         {
             // Step 3.2 - Calculate y-apex

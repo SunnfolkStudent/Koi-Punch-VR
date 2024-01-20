@@ -1,12 +1,11 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace InDevelopment.Fish.Trajectory
 {
     public class BoxHandVelocity : MonoBehaviour
     {
-        private BoxHandVelocity _boxHandVelocityScript;
-        
         [Header("PunchVelocity:")]
         public Vector3 punchVelocity = new (1, 1, 1);
         private Vector3 _punchDirection;
@@ -16,8 +15,8 @@ namespace InDevelopment.Fish.Trajectory
             // Set initial velocity to move the punch in the specified direction
             _punchSpeed = punchVelocity.magnitude;
             _punchDirection = punchVelocity.normalized;
-            Vector3 worldDirection = transform.TransformDirection(_punchDirection);
-            GetComponent<Rigidbody>().velocity = worldDirection * _punchSpeed;
+            // Vector3 worldDirection = transform.TransformDirection(_punchDirection);
+            GetComponent<Rigidbody>().velocity = punchVelocity;
         }
 
         private void Update()
@@ -38,12 +37,12 @@ namespace InDevelopment.Fish.Trajectory
             if (otherRigidbody != null)
             {
                 // Print the velocity of the punch on collision
-                Debug.Log("Collision Velocity: " + collision.relativeVelocity);
+                Debug.Log($"Collision Velocity: {collision.relativeVelocity} | CollisionForce: {collision.relativeVelocity.magnitude}");
             }
             
             if (collision.gameObject.TryGetComponent(out IPunchable2 punchableObject))
             {
-                punchableObject.PunchObject(_boxHandVelocityScript);
+                punchableObject.PunchObject(this);
             }
         }
         

@@ -1,6 +1,8 @@
 using System;
+using System.Threading;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace InDevelopment.Fish.Trajectory
 {
@@ -11,13 +13,21 @@ namespace InDevelopment.Fish.Trajectory
     
     public class PunchedFishScript : MonoBehaviour, IPunchable2
     {
-        public BoxHandVelocity boxHandVelocityScript;
         public FinalScripts.Fish.Fish fish;
+        public GameObject travelMarkPrefab;
         public GameObject landingMarkPrefab;
+        public LineRenderer lineRenderer;
+        public LayerMask fishCollisionMask;
+
+        [SerializeField] [Range(10, 100)] private int linePoints = 25;
+        [SerializeField] [Range(0.01f, 0.25f)] private float timeBetweenPoints = 0.1f;
 
         private Rigidbody _rbFish;
         private Vector3 _startPos;
         private Vector3 _landingPos;
+        
+        private float _timer;
+        private float _landingTimer = 1.5f;
 
         private bool _punched;
         [SerializeField] private bool fishAsleep;
@@ -28,13 +38,22 @@ namespace InDevelopment.Fish.Trajectory
         private void Awake()
         {
             _rbFish = GetComponent<Rigidbody>();
+
+            int fishLayer = fish.gameObject.layer;
+            for (int i = 0; i < 32; i++)
+            {
+                if (!Physics.GetIgnoreLayerCollision(fishLayer, i))
+                {
+                    fishCollisionMask |= 1 << i;
+                }
+                
+            }
         }
 
         void Start()
         {
             _startPos = _rbFish.position;
-            print("StartPos in worldSpace:" + _startPos);
-            print("StartPos Reset:" + (_startPos - _startPos));
+            print($"StartPos in worldSpace: {_startPos} | StartPos Reset: {_startPos - _startPos}");
 
             // Put the Rigidbody to sleep initially (no physics are being calculated)
             if (fishAsleep)
@@ -47,7 +66,13 @@ namespace InDevelopment.Fish.Trajectory
         {
             _landingPos += _rbFish.position;
         }
-        
+
+        private void Update()
+        {
+            _timer += Time.deltaTime;
+            _landingTimer += Time.deltaTime;
+        }
+
         private void OnCollisionEnter(Collision other)
         {
             switch (other.transform.tag)
@@ -56,7 +81,8 @@ namespace InDevelopment.Fish.Trajectory
                     fish.FishHitPlayer();
                     break;
                 case "Ground":
-                    fish.FishHitGround();
+                    // fish.FishHitGround();
+                    FishHitGround();
                     break;
                 case "LeftFist":
                     HapticManager.leftFishPunch = true;
@@ -73,13 +99,32 @@ namespace InDevelopment.Fish.Trajectory
             {
                 case "LeftFist":
                     HapticManager.leftFishPunch = false;
+                    // We're updating the startPos based on when fish leaves the punch.
+                    _startPos = _rbFish.position;
+                    print($"New StartPos in worldSpace: {_startPos} | StartPos Reset: {_startPos - _startPos}");
                     break;
                 case "RightFist":
                     HapticManager.rightFishPunch = false;
+                    _startPos = _rbFish.position;
+                    print($"New StartPos in worldSpace: {_startPos} | StartPos Reset: {_startPos - _startPos}");
                     break;
             }
+            
         }
 
+        private void FishHitGround()
+        {
+            lineRenderer.enabled = false;
+            if (_landingTimer > 1f)
+            {
+                Instantiate(landingMarkPrefab, _rbFish.position, Quaternion.identity);
+            }
+            var fishGroundPosition = _rbFish.position;
+            print($"Distance: {fishGroundPosition - _startPos} | LandingPos: {fishGroundPosition}");
+            print($"Distance.magnitude: {(fishGroundPosition - _startPos).magnitude}");
+            _landingTimer = 0;
+        }
+        
         // TODO: Integrate this finished code into the below comment, which is from the original script.
         // TODO: Actually, make it a copy, cuz this testing set-up is good.
         
@@ -126,27 +171,37 @@ namespace InDevelopment.Fish.Trajectory
 
             fish.Log($"PunchForce: {punchForce} | Direction: {direction} | Debuff: {forceDebuff}");
             _rbFish.AddForce(fishLaunch, ForceMode.VelocityChange);
-            Debug.Log("Fish launches self with a force of:" + fishLaunch);
+            Debug.Log($"Fish Self-Launch-Force: {fishLaunch}");
 
             SimulateTrajectory(fishLaunch);
         }
-
+        
+        // TODO: Get the right variables updated from when launching fish.
         private void SimulateTrajectory(Vector3 fishLaunch)
         {
-            // Calculate launch data
-            LaunchData launchData = CalculateLaunchData(fishLaunch);
-
-            // TODO: Get the right variables updated from when launching fish.
-            // TODO: The fish actually launches itself, the punch does not! Keep this in mind.
-
-            // Simulate trajectory
-            float timeInterval = launchData.TimeToTarget / 10f; // Adjust interval as needed
-            for (float t = 0; t <= launchData.TimeToTarget; t += timeInterval)
+            lineRenderer.enabled = true;
+            lineRenderer.positionCount = Mathf.CeilToInt(linePoints / timeBetweenPoints) + 1;
+            Vector3 startPosition = _startPos;
+            Vector3 startVelocity = fishLaunch / _rbFish.mass; 
+            int i = 0;
+            lineRenderer.SetPosition(i, startPosition);
+            for (float time = 0; time < linePoints; time += timeBetweenPoints)
             {
-                // Instantiate fish object at calculated position
-                var position = transform.position;
-                Vector3 fishPosition = new Vector3(position.x, position.y, position.z);
-                Instantiate(landingMarkPrefab, fishPosition, Quaternion.identity);
+                i++;
+                Vector3 point = startPosition + time * startVelocity;
+                point.y = startPosition.y + startVelocity.y * time + (Physics.gravity.y / 2f * time * time);
+
+                lineRenderer.SetPosition(i, point);
+
+                Vector3 lastPosition = lineRenderer.GetPosition(i - 1);
+
+                if (Physics.Raycast(lastPosition, (point-lastPosition).normalized, 
+                        out RaycastHit hit, (point - lastPosition).magnitude, fishCollisionMask))
+                {
+                    lineRenderer.SetPosition(i, hit.point);
+                    lineRenderer.positionCount = i + 1;
+                    return;
+                }
             }
         }
 
