@@ -196,7 +196,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 67c9a229cc5ed1f4cac3bebfd3284344,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2001479447342095585}
+      addedObject: {fileID: -2833691813364326098}
     - targetCorrespondingSourceObject: {fileID: -4258411891960909470, guid: 67c9a229cc5ed1f4cac3bebfd3284344,
         type: 3}
       insertIndex: -1
@@ -280,7 +280,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 741418542568810168}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2001479447342095585
+--- !u!114 &-2833691813364326098
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -295,16 +295,7 @@ MonoBehaviour:
   hasBeenPunchedSuccessfully: 0
   hasBeenPunchedUnsuccessfully: 0
   hasHitGround: 0
-  despawnDelay: 2.5
-  despawnTime: 10
-  despawnAltitude: -5
-  punchVelMultiplier: 30
-  successfulPunchThreshold: 3
-  baseScoreOfPunch: 10
-  scoreLostFromPlayerHit: 20
-  fSpeedNeededMultiplier: 1
-  attackAngleMaximum: 15
-  isDebugging: 1
+  isDebugging: 0
 --- !u!1 &3175621927757653919 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6460379112260501209, guid: 67c9a229cc5ed1f4cac3bebfd3284344,

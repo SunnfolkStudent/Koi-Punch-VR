@@ -34,7 +34,7 @@ namespace FinalScripts.Fish.Spawning
             
             public FishPool(FishSrub fishSrub)
             {
-                FishRecord = new FishRecord(fishSrub.prefab, fishSrub.zenFromFish);
+                FishRecord = new FishRecord(fishSrub);
                 Fishes = new List<Fish>();
                 AddMultipleFishToPool(fishSrub.initialAmountInPool, this);
                 Weight = fishSrub.weightInRandomTable;
@@ -42,27 +42,26 @@ namespace FinalScripts.Fish.Spawning
             }
         }
         
-        #region >>>---Prefab---
+        #region >>>---FishRecord---
         public record FishRecord
         {
-            public readonly GameObject GameObject;
-            public readonly PrefabChild[] Children;
-            public readonly float ZenAmount;
+            public readonly FishSrub FishSrub;
+            public readonly FishRecordChild[] Children;
             
-            public FishRecord(GameObject gameObject, float zenFromFish)
+            public FishRecord(FishSrub fishSrub)
             {
-                GameObject = gameObject;
-                Children = gameObject.GetComponentsInChildren<Transform>().Select(transform1 => new PrefabChild(transform1)).ToArray();
-                ZenAmount = zenFromFish;
+                FishSrub = fishSrub;
+                if (!fishSrub.prefab.GetComponent<FinalScripts.Fish.Fish>()) fishSrub.prefab.AddComponent<FinalScripts.Fish.Fish>();
+                Children = fishSrub.prefab.gameObject.GetComponentsInChildren<Transform>().Select(transform1 => new FishRecordChild(transform1)).ToArray();
             }
         }
         
-        public struct PrefabChild
+        public struct FishRecordChild
         {
             public readonly Transform InitialTransform;
             public readonly Rigidbody Rigidbody;
             
-            public PrefabChild(Transform transform)
+            public FishRecordChild(Transform transform)
             {
                 InitialTransform = transform;
                 Rigidbody = transform.gameObject.GetComponent<Rigidbody>();
@@ -80,7 +79,7 @@ namespace FinalScripts.Fish.Spawning
             public Fish(FishPool fishPool)
             {
                 FishPool = fishPool;
-                ParentGameObject = Instantiate(fishPool.FishRecord.GameObject, _fishContainer);
+                ParentGameObject = Instantiate(fishPool.FishRecord.FishSrub.prefab, _fishContainer);
                 ParentGameObject.SetActive(false);
                 ParentGameObject.GetComponent<FinalScripts.Fish.Fish>().fish = this;
                 Children = ParentGameObject.GetComponentsInChildren<Transform>().Select(transform1 => new Child(transform1)).ToArray();

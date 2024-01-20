@@ -114,13 +114,13 @@ namespace FinalScripts.Fish.BossBattle
             // TODO: FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/BossSpawn");
             StartCoroutine(AttackWithDelay());
         }
-
+        
         private IEnumerator AttackWithDelay()
         {
             yield return new WaitForSeconds(attackDelay);
             Attack();
         }
-
+        
         private void Attack()
         {
             var spawnPos = _fishSpawnAreas.GetNextFishSpawnPosition();

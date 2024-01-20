@@ -140,7 +140,7 @@ namespace InDevelopment.Fish.Trajectory
         public void PunchObject(BoxHandVelocity boxHandVelScript)
         {
             var v = boxHandVelScript.punchVelocity;
-            if (math.abs(v.magnitude) >= fish.successfulPunchThreshold) LaunchObject(v);
+            if (math.abs(v.magnitude) >= fish.fish.FishPool.FishRecord.FishSrub.successfulPunchThreshold) LaunchObject(v);
             else fish.Log("Punch Velocity was too weak");
         }
 
@@ -161,9 +161,9 @@ namespace InDevelopment.Fish.Trajectory
             fish.FishPunchedSuccessful();
 
             var direction = punchVelocity.normalized;
-            var punchForce = punchVelocity.magnitude * fish.punchVelMultiplier;
+            var punchForce = punchVelocity.magnitude * fish.fish.FishPool.FishRecord.FishSrub.punchVelMultiplier;
 
-            var forceDebuff = (punchVelocity.magnitude - fish.successfulPunchThreshold) + 0.70f;
+            var forceDebuff = (punchVelocity.magnitude - fish.fish.FishPool.FishRecord.FishSrub.successfulPunchThreshold) + 0.70f;
             forceDebuff = forceDebuff >= 1f ? 1f : forceDebuff;
             punchForce *= forceDebuff;
 
