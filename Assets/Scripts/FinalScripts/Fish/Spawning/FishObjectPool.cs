@@ -45,14 +45,14 @@ namespace FinalScripts.Fish.Spawning
         #region >>>---FishRecord---
         public record FishRecord
         {
-            public readonly FishSrub FishSrub;
+            public readonly FishSrub FishScrub;
             public readonly FishRecordChild[] Children;
             
-            public FishRecord(FishSrub fishSrub)
+            public FishRecord(FishSrub fishScrub)
             {
-                FishSrub = fishSrub;
-                if (!fishSrub.prefab.GetComponent<FinalScripts.Fish.Fish>()) fishSrub.prefab.AddComponent<FinalScripts.Fish.Fish>();
-                Children = fishSrub.prefab.gameObject.GetComponentsInChildren<Transform>().Select(transform1 => new FishRecordChild(transform1)).ToArray();
+                FishScrub = fishScrub;
+                if (!fishScrub.prefab.GetComponent<FinalScripts.Fish.Fish>()) fishScrub.prefab.AddComponent<FinalScripts.Fish.Fish>();
+                Children = fishScrub.prefab.gameObject.GetComponentsInChildren<Transform>().Select(transform1 => new FishRecordChild(transform1)).ToArray();
             }
         }
         
@@ -79,7 +79,7 @@ namespace FinalScripts.Fish.Spawning
             public Fish(FishPool fishPool)
             {
                 FishPool = fishPool;
-                ParentGameObject = Instantiate(fishPool.FishRecord.FishSrub.prefab, _fishContainer);
+                ParentGameObject = Instantiate(fishPool.FishRecord.FishScrub.prefab, _fishContainer);
                 ParentGameObject.SetActive(false);
                 ParentGameObject.GetComponent<FinalScripts.Fish.Fish>().fish = this;
                 Children = ParentGameObject.GetComponentsInChildren<Transform>().Select(transform1 => new Child(transform1)).ToArray();

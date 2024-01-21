@@ -66,8 +66,8 @@ namespace FinalScripts.Fish
         
         private void DespawnIfOutOfTimeOrTooLow()
         {
-            if (transform.position.y > fish.FishPool.FishRecord.FishSrub.despawnAltitude && 
-                _startTime > Time.time - fish.FishPool.FishRecord.FishSrub.despawnTime) return;
+            if (transform.position.y > fish.FishPool.FishRecord.FishScrub.despawnAltitude && 
+                _startTime > Time.time - fish.FishPool.FishRecord.FishScrub.despawnTime) return;
             Log("De-spawned: either to time or y altitude to low");
             Despawn();
         }
@@ -84,7 +84,7 @@ namespace FinalScripts.Fish
             _hasHitBird = true;
             // TODO: FMODManager.instance.PlayOneShot("event:/SFX/FishSounds/FishSlap", transform.position);
             // TODO: Play Obstacle VFX
-            EventManager.GainScore.Invoke(fish.FishPool.FishRecord.FishSrub.scoreFromHittingBird);
+            EventManager.GainScore.Invoke(fish.FishPool.FishRecord.FishScrub.scoreFromHittingBird);
         }
         
         #region >>>---Water---
@@ -120,7 +120,7 @@ namespace FinalScripts.Fish
             var ySpeed = velocity.y;
             var fSpeed = Mathf.Abs(velocity.magnitude - ySpeed);
             
-            return attackAngle < fish.FishPool.FishRecord.FishSrub.attackAngleMaximum && fSpeed > ySpeed * fish.FishPool.FishRecord.FishSrub.fSpeedNeededMultiplier;
+            return attackAngle < fish.FishPool.FishRecord.FishScrub.attackAngleMaximum && fSpeed > ySpeed * fish.FishPool.FishRecord.FishScrub.fSpeedNeededMultiplier;
         }
         
         private void Skip()
@@ -129,7 +129,7 @@ namespace FinalScripts.Fish
             // TODO: Skipping SFX and VFX
             foreach (var child in fish.Children)
             {
-                child.Rigidbody.AddForce(new Vector3(0, fish.FishPool.FishRecord.FishSrub.ySkippSpeedAmount, 0));
+                child.Rigidbody.AddForce(new Vector3(0, fish.FishPool.FishRecord.FishScrub.ySkippSpeedAmount, 0));
             }
         }
         
@@ -163,7 +163,7 @@ namespace FinalScripts.Fish
                 EventManager.FishScore(dist, hasBeenPunchedSuccessfully);
             }
             Log("De-spawning: hit ground");
-            StartCoroutine(DespawnAfterTime(fish.FishPool.FishRecord.FishSrub.despawnDelay));
+            StartCoroutine(DespawnAfterTime(fish.FishPool.FishRecord.FishScrub.despawnDelay));
         }
         
         private IEnumerator DespawnAfterTime(float time)
@@ -180,8 +180,8 @@ namespace FinalScripts.Fish
             // TODO: FMODManager.instance.PlayOneShot("event:/SFX/Voice/PlayerHit");
             // TODO: Add Slime shader to camera
             _hasHitPlayer = true;
-            EventManager.GainScore(-fish.FishPool.FishRecord.FishSrub.damageAmount);
-            ZenMetreManager.Instance.RemoveZen(fish.FishPool.FishRecord.FishSrub.zenLostByHit);
+            EventManager.GainScore(-fish.FishPool.FishRecord.FishScrub.damageAmount);
+            ZenMetreManager.Instance.RemoveZen(fish.FishPool.FishRecord.FishScrub.zenLostByHit);
         }
         
         public void FishPunchedSuccessful()
@@ -203,8 +203,8 @@ namespace FinalScripts.Fish
         
         private void GainZen()
         {
-            ZenMetreManager.Instance.AddHitZen(fish.FishPool.FishRecord.FishSrub.zenGainedFromPunched);
-            Log("Zen gained: " + fish.FishPool.FishRecord.FishSrub.zenGainedFromPunched);
+            ZenMetreManager.Instance.AddHitZen(fish.FishPool.FishRecord.FishScrub.zenGainedFromPunched);
+            Log("Zen gained: " + fish.FishPool.FishRecord.FishScrub.zenGainedFromPunched);
         }
         #endregion
         #endregion
