@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FinalScripts;
 using Unity.Mathematics;
 using UnityEngine;
 //using FMOD.Studio;
 //using FMODUnity;
 
-public class BreakOnHit : TransitionAnimation
+public class BreakOnHit : TransitionAnimation, IPunchable
 {
     [SerializeField] private GameObject _brokenPrefab;
     [SerializeField] private int LevelToGoTo;
@@ -41,8 +42,6 @@ public class BreakOnHit : TransitionAnimation
         // TODO FMODManager.instance.PlayOneShot("event:/SFX/MenuSounds/PlankBreak", transform.position);
         MenuEventManager.ExplodeTransition();
         
-        //TODO play break audio
-        
         if (gameObject.CompareTag("SceneChanger"))
         {
             gameObject.transform.localScale = new Vector3(0, 0, 0);
@@ -62,13 +61,13 @@ public class BreakOnHit : TransitionAnimation
             Destroy(gameObject);
         }
     }
-
-    /*public void PunchObject(ControllerManager controllerManager, string fistUsed)
+    
+    public void PunchObject(ControllerManager controllerManager, string fistUsed)
     {
-        var v = fistUsed == "LeftFist"
+        /*var v = fistUsed == "LeftFist"
             ? controllerManager.leftControllerVelocity
             : controllerManager.rightControllerVelocity;
         if (math.abs(v.magnitude) >= fish.successfulPunchThreshold) HittingSign();
-        else Debug.Log("Not Good Enough!");
-    }*/
+        else Debug.Log("Not Good Enough!");*/
+    }
 }

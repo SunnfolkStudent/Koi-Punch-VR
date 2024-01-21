@@ -2730,7 +2730,7 @@ GameObject:
   - component: {fileID: 8970581618120538318}
   m_Layer: 0
   m_Name: sign_resetscores01
-  m_TagString: Untagged
+  m_TagString: ResetScores
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2889,6 +2889,9 @@ MonoBehaviour:
   _nextPrefab: {fileID: 5220242096916699801, guid: e3be5ec905b8c7e4fba78d5cd0ce8c60,
     type: 3}
   isBreaking: 0
+  levelOneScore: {fileID: 3250059327854538284}
+  levelTwoScore: {fileID: 1055588159346919252}
+  levelThreeScore: {fileID: 87586880895868926}
 --- !u!1 &7498679915716116366
 GameObject:
   m_ObjectHideFlags: 0
@@ -4162,7 +4165,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6902428758939556926}
   - component: {fileID: 5425463185058559691}
-  - component: {fileID: 3318184415490805613}
   m_Layer: 0
   m_Name: LevelsMenuParent
   m_TagString: Untagged
@@ -4199,21 +4201,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba81770eff73ed842801dc1f9dea014e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3318184415490805613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8809015906901388078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b12d932e03d25043baf38b9ed1e7d13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelOneScore: {fileID: 3250059327854538284}
-  levelTwoScore: {fileID: 1055588159346919252}
-  levelThreeScore: {fileID: 87586880895868926}
 --- !u!1 &8868064233646004333
 GameObject:
   m_ObjectHideFlags: 0
