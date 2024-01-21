@@ -15,10 +15,10 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638413601099169334
+  lastModified: 638414478708176116
   FileSizes:
   - Name: Desktop
-    Value: 3242
+    Value: 3290
   Exists: 1
 --- !u!114 &-8109356598145742215
 MonoBehaviour:
@@ -677,10 +677,10 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638413601103644486
+  lastModified: 638414478713877956
   FileSizes:
   - Name: Desktop
-    Value: 4209632
+    Value: 4339392
   Exists: 1
 --- !u!114 &-733588973798191999
 MonoBehaviour:
@@ -824,12 +824,13 @@ MonoBehaviour:
   - {fileID: -7591426892256243061}
   - {fileID: 7375219772682049789}
   - {fileID: 4508762753797456821}
+  - {fileID: 3552343922188073556}
   EditorParameters: []
   MasterBanks:
   - {fileID: 1559442095300902716}
   StringsBanks:
   - {fileID: -9216946279702738478}
-  cacheTime: 638413601103644486
+  cacheTime: 638414478713877956
   cacheVersion: 131616
 --- !u!114 &53606116969686336
 MonoBehaviour:
@@ -1063,10 +1064,37 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638413601099149352
+  lastModified: 638414478708156102
   FileSizes:
   - Name: Desktop
     Value: 1340
+  Exists: 1
+--- !u!114 &1600420212866072359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/KoiPunchVocals/koiPunchSoundState
+  m_EditorClassIdentifier: 
+  Name: koiPunchSoundState
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 2249693165
+    data2: 1579170967
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Charging
+  - Ready
+  - Impact
   Exists: 1
 --- !u!114 &1994738907624628319
 MonoBehaviour:
@@ -1203,6 +1231,34 @@ MonoBehaviour:
   - Ready
   - Impact
   Exists: 1
+--- !u!114 &3552343922188073556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/KoiPunch/KoiPunchVocals
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/KoiPunch/KoiPunchVocals
+  Guid:
+    Data1: -670264013
+    Data2: 1284170528
+    Data3: 1129892794
+    Data4: -768949595
+  Banks:
+  - {fileID: -1567451530557062852}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 1600420212866072359}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 13840
 --- !u!114 &3726557772772731504
 MonoBehaviour:
   m_ObjectHideFlags: 0

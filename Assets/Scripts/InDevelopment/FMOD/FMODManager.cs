@@ -23,6 +23,7 @@ public class FMODManager: MonoBehaviour
     public EventInstance menuTheme;
     public EventInstance zenMusic;
     public EventInstance koiPunch;
+    public EventInstance koiPunchVocals;
     //private EventInstance koiPunch = RuntimeManager.CreateInstance("event:/SFX/PlayerSounds/ChargeSounds/KoiPunch"); //not done!
     
     [SerializeField] [Range(0,100)] private float velocityFloor; 
@@ -89,6 +90,7 @@ public class FMODManager: MonoBehaviour
         menuTheme = RuntimeManager.CreateInstance(("event:/Music/LevelMusic/MenuTheme"));
         zenMusic = RuntimeManager.CreateInstance("event:/Music/ZenMusic/ZenMusic");
         koiPunch = RuntimeManager.CreateInstance("event:/SFX/KoiPunch/KoiPunch");
+        koiPunchVocals = RuntimeManager.CreateInstance(("event:/SFX/KoiPunch/KoiPunchVocals"));
     }
     
     private void Update()
