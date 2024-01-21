@@ -9,12 +9,12 @@ public class DoubleCheckSigns : TransitionAnimation
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Player") && !isBreaking)
+        if (other.gameObject.CompareTag("RightFist") && !isBreaking)
         {
             HitSign();
         }
         
-        if (other.gameObject.CompareTag("Player") && isBreaking)
+        if (other.gameObject.CompareTag("RightFist") && isBreaking)
         {
             DestroySign();
         }
@@ -22,21 +22,16 @@ public class DoubleCheckSigns : TransitionAnimation
 
     private void HitSign()
     {
-        Debug.Log("hit once");
-        Instantiate(_nextPrefab, gameObject.transform.position, Quaternion.identity);
+        Instantiate(_nextPrefab, transform.position, _nextPrefab.transform.rotation);
         Destroy(gameObject);
-        Debug.Log("hit once after");
     }
 
     private void DestroySign()
     {
-        Debug.Log("hit twice");
-        
-        Instantiate(_nextPrefab,gameObject.transform.position,Quaternion.identity);
-        
-        //TODO play break audio
-        
-        MenuEventManager.ExplodeTransition();
+        PlayerPrefs.SetInt("HighScoreLevelOne",0);
+        PlayerPrefs.SetInt("HighScoreLevelTwo",0);
+        PlayerPrefs.SetInt("HighScoreLevelThree",0);
+        Instantiate(_nextPrefab, transform.position, _nextPrefab.transform.rotation);
         Destroy(gameObject);
     }
 }

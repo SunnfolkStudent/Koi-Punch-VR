@@ -6,7 +6,7 @@ public class HideLevelsSign : MonoBehaviour
 {
     void Start()
     {
-        if (PlayerPrefs.GetInt("HighScoreLevelThree") <= 0)
+        if (PlayerPrefs.GetInt("LevelsAvailable") == 0)
         {
             Destroy(gameObject);
         }
