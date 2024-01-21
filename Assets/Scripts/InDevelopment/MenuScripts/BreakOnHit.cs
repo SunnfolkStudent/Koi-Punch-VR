@@ -6,7 +6,7 @@ using UnityEngine;
 //using FMOD.Studio;
 //using FMODUnity;
 
-public class BreakOnHit : TransitionAnimation//, IPunchable
+public class BreakOnHit : TransitionAnimation
 {
     [SerializeField] private GameObject _brokenPrefab;
     [SerializeField] private int LevelToGoTo;
@@ -65,6 +65,10 @@ public class BreakOnHit : TransitionAnimation//, IPunchable
 
     /*public void PunchObject(ControllerManager controllerManager, string fistUsed)
     {
-        throw new NotImplementedException();
+        var v = fistUsed == "LeftFist"
+            ? controllerManager.leftControllerVelocity
+            : controllerManager.rightControllerVelocity;
+        if (math.abs(v.magnitude) >= fish.successfulPunchThreshold) HittingSign();
+        else Debug.Log("Not Good Enough!");
     }*/
 }

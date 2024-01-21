@@ -28,11 +28,11 @@ public class LevelCompleteManager : MonoBehaviour
    {
       if (arenaNumber == 1)
       {
-         /*if (PlayerPrefs.HasKey("HighScoreLevelOne"))
+         if (PlayerPrefs.HasKey("HighScoreLevelOne"))
          {
             highScore = PlayerPrefs.GetInt("HighScoreLevelOne");
          }
-         else*/
+         else
          {
             PlayerPrefs.SetInt("HighScoreLevelOne", 0);
             highScore = PlayerPrefs.GetInt("HighScoreLevelOne");

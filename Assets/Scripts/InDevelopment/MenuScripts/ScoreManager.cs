@@ -17,36 +17,17 @@ public class ScoreManager : MonoBehaviour
     public float multiplierTime;
     public bool multiplierOn;
 
-    private int visableZenPoints;
-    private bool zenModeOn;
-    [SerializeField] private GameObject zenTextPrefab;
-    private TMP_Text zenText;
-
     private void Start()
     {
         fishPunchPoints = distancePoints = bonusPoints = penaltyPoints = zenPoints = 0;
-        zenModeOn = false;
         //EventManager.BossDefeatedTotalScore += ZenEnd();
     }
-
-    /*Added to the beginning of each script that adds to ScoreManager
-     *
-     * private GameObject _scoreManagerObj;
-        private ScoreManager _scoreManager;
-        
-        private void Start()
-    {
-       _scoreManagerObj = GameObject.FindGameObjectWithTag("ScoreManager");
-       _scoreManager = _scoreManagerObj.GetComponent<ScoreManager>();
-    }
-
-     */
     
     /******************************************/
     
     //Successful or Failed Fish punch
     //successful punch = 10 points
-    //failed punch = ? point
+    //failed punch = - point
     //add to fishPunchPoints int (check if multiplier on)
     public void FishPunch(bool successful)
     {
