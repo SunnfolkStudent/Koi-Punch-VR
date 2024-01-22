@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using FinalScripts.Fish.Spawning;
 using UnityEngine;
+using FMOD.Studio;
+using FMODUnity;
 
 namespace FinalScripts.Fish
 {

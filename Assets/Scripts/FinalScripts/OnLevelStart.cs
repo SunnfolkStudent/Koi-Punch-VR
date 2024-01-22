@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
-using FinalScripts.Fish;
 using UnityEngine;
-// TODO: using FMODUnity;
-// TODO: using FMODStudio;
+using EventManager = FinalScripts.Fish.EventManager;
+using FMOD.Studio;
+using FMODUnity;
 
 namespace FinalScripts
 {
@@ -31,22 +31,22 @@ namespace FinalScripts
             switch (currentLevel)
             {
                 case Levels.Area1:
-                    // TODO: FMODManager.instance.ambientOne.start();
-                    // TODO: FMODManager.instance.levelOne.start();
+                    FMODManager.instance.ambientOne.start();
+                    FMODManager.instance.levelOne.start();
                     break;
                 case Levels.Area2:
-                    // TODO: FMODManager.instance.ambientTwo.start();
-                    // TODO: FMODManager.instance.levelTwo.start();
+                    FMODManager.instance.ambientTwo.start();
+                    FMODManager.instance.levelTwo.start();
                     break;
                 case Levels.Area3:
-                    // TODO: FMODManager.instance.ambientThree.start();
-                    // TODO: FMODManager.instance.levelThree.start();
+                    FMODManager.instance.ambientThree.start();
+                    FMODManager.instance.levelThree.start();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
             yield return new WaitForSeconds(initialVoiceLineDelay);
-            // TODO: FMODManager.instance.PlayOneShot("event:/SFX/Voice/GameStart");
+            FMODManager.instance.PlayOneShot("event:/SFX/Voice/GameStart");
             yield return new WaitForSeconds(startSpawningFishDelayAfterVoiceLine);
             EventManager.FishSpawning.Invoke();
         }
