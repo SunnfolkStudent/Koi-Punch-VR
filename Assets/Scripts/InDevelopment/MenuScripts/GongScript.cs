@@ -23,14 +23,14 @@ public class GongScript : MonoBehaviour
                     if (PlayerPrefs.GetFloat("MusicVolume") < 1)
                     {
                         PlayerPrefs.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicVolume") + .1f);
-                        //FMODManager.instance.MusicBus += .1f;
-                        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
+                        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong",2f, transform.position);
                         _soundManager.SetMusicVolume();
                     }
                     else
                     {
-                        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
+                        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong",2f, transform.position);
                         PlayerPrefs.SetFloat("MusicVolume", 1);
+                        _soundManager.SetMusicVolume();
                     }
                 }
 
@@ -39,14 +39,14 @@ public class GongScript : MonoBehaviour
                     if (PlayerPrefs.GetFloat("MusicVolume") > 0)
                     {
                         PlayerPrefs.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicVolume") - .1f);
-                        //FMODManager.instance.MusicBus -= .1f;
-                        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
+                        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong",0.5f, transform.position);
                         _soundManager.SetMusicVolume();
                     }
                     else
                     {
-                        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
+                        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong",0.5f, transform.position);
                         PlayerPrefs.SetFloat("MusicVolume", 0);
+                        _soundManager.SetMusicVolume();
                     }
                 }
             }
@@ -58,14 +58,14 @@ public class GongScript : MonoBehaviour
                     if (PlayerPrefs.GetFloat("SFXVolume") < 1)
                     {
                         PlayerPrefs.SetFloat("SFXVolume", PlayerPrefs.GetFloat("SFXVolume") + .1f);
-                        //FMODManager.instance.SfxBus += .1f;
-                        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
+                        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong",2f, transform.position);
                         _soundManager.SetSFXVolume();
                     }
                     else
                     {
-                        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
+                        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong",2f, transform.position);
                         PlayerPrefs.SetFloat("SFXVolume", 1);
+                        _soundManager.SetSFXVolume();
                     }
                 }
 
@@ -74,14 +74,14 @@ public class GongScript : MonoBehaviour
                     if (PlayerPrefs.GetFloat("SFXVolume") > 0)
                     {
                         PlayerPrefs.SetFloat("SFXVolume", PlayerPrefs.GetFloat("SFXVolume") - .1f);
-                        //FMODManager.instance.SfxBus -= .1f;
-                        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
+                        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong",0.5f, transform.position);
                         _soundManager.SetSFXVolume();
                     }
                     else
                     {
-                        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
+                        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong",0.5f, transform.position);
                         PlayerPrefs.SetFloat("SFXVolume", 0);
+                        _soundManager.SetSFXVolume();
                     }
                 }
             }

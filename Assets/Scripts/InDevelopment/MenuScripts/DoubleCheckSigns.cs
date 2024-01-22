@@ -45,6 +45,7 @@ public class DoubleCheckSigns : TransitionAnimation
     private void HitSign()
     {
         Instantiate(_nextPrefab, transform.position, _nextPrefab.transform.rotation);
+        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/PlankTap", transform.position);
         transform.localScale = new Vector3(0,0,0);
     }
 
@@ -56,7 +57,7 @@ public class DoubleCheckSigns : TransitionAnimation
         _resetScore = GameObject.FindGameObjectWithTag("ResetScores");
         _resetScore.GetComponent<DoubleCheckSigns>().UpdateScore();
         Instantiate(_nextPrefab, transform.position, _nextPrefab.transform.rotation);
-        //TODO FMODManager.instance.PlayOneShot("event:/SFX/MenuSounds/PlankBreak", transform.position);
+        FMODManager.instance.PlayOneShot("event:/SFX/MenuSounds/PlankBreak", transform.position);
         Destroy(gameObject);
     }
     
