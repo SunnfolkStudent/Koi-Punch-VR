@@ -18,10 +18,10 @@ public class SceneController : MonoBehaviour
     private float time;
     private bool ReadyToStart;
     
-    private GameObject _fadeScreenObj;
-    private FadeScreenScript _fadeScreen;
-    private GameObject _fishScreenObj;
-    private FadeScreenScript _fishScreen;
+    //private GameObject _fadeScreenObj;
+    [SerializeField] private FadeScreenScript _fadeScreen;
+    //private GameObject _fishScreenObj;
+    [SerializeField] private FadeScreenScript _fishScreen;
     
     private bool canChangeScene = true;
     
@@ -49,6 +49,8 @@ public class SceneController : MonoBehaviour
 
     private void Update()
     {
+        if (!Title || !Goal)
+            return;
         if (ReadyToStart)
         {
             speed = titleSpeed.Evaluate(time);
@@ -97,15 +99,16 @@ public class SceneController : MonoBehaviour
     {
         Debug.Log("change scene");
         canChangeScene = false;
-        _fadeScreenObj = GameObject.FindGameObjectWithTag("FadeScreen");
-        _fadeScreen = _fadeScreenObj.GetComponent<FadeScreenScript>();
+        //_fadeScreenObj = GameObject.FindGameObjectWithTag("FadeScreen");
+        //_fadeScreen = _fadeScreenObj.GetComponent<FadeScreenScript>();
         _fadeScreen.FadeOut();
         yield return new WaitForSeconds(1.5f);
         Debug.Log("Changing scenes");
         CheckStartScene();
         // TODO FMODManager.instance.menuTheme.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         // TODO FMODManager.instance.ambientOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        //SceneManager.LoadScene(Levels[startScene]);
+        SceneManager.LoadScene(Levels[startScene]);
+        _fadeScreen.FadeIn();
         canChangeScene = true;
     }
 
@@ -132,14 +135,15 @@ public class SceneController : MonoBehaviour
     private IEnumerator ChangeLevelFish(int scene)
     {
         canChangeScene = false;
-        _fishScreenObj = GameObject.FindGameObjectWithTag("FishTransition");
-        _fishScreen = _fishScreenObj.GetComponent<FadeScreenScript>();
+        //_fishScreenObj = GameObject.FindGameObjectWithTag("FishTransition");
+        //_fishScreen = _fishScreenObj.GetComponent<FadeScreenScript>();
         _fishScreen.FadeOut();
         yield return new WaitForSeconds(1.5f);
         Debug.Log("Changing scenes");
         // TODO FMODManager.instance.menuTheme.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         // TODO FMODManager.instance.ambientOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        //SceneManager.LoadScene(Levels[scene]);
+        SceneManager.LoadScene(Levels[scene]);
+        _fishScreen.FadeIn();
         canChangeScene = true;
     }
 }

@@ -24,12 +24,12 @@ public class GongScript : MonoBehaviour
                     {
                         PlayerPrefs.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicVolume") + .1f);
                         //FMODManager.instance.MusicBus += .1f;
-                        // TODO RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
+                        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
                         _soundManager.SetMusicVolume();
                     }
                     else
                     {
-                        // TODO RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
+                        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
                         PlayerPrefs.SetFloat("MusicVolume", 1);
                     }
                 }
@@ -40,12 +40,12 @@ public class GongScript : MonoBehaviour
                     {
                         PlayerPrefs.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicVolume") - .1f);
                         //FMODManager.instance.MusicBus -= .1f;
-                        // TODO RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
+                        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
                         _soundManager.SetMusicVolume();
                     }
                     else
                     {
-                        // TODO RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
+                        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
                         PlayerPrefs.SetFloat("MusicVolume", 0);
                     }
                 }
@@ -59,12 +59,12 @@ public class GongScript : MonoBehaviour
                     {
                         PlayerPrefs.SetFloat("SFXVolume", PlayerPrefs.GetFloat("SFXVolume") + .1f);
                         //FMODManager.instance.SfxBus += .1f;
-                        // TODO RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
+                        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
                         _soundManager.SetSFXVolume();
                     }
                     else
                     {
-                        // TODO RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
+                        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
                         PlayerPrefs.SetFloat("SFXVolume", 1);
                     }
                 }
@@ -75,12 +75,12 @@ public class GongScript : MonoBehaviour
                     {
                         PlayerPrefs.SetFloat("SFXVolume", PlayerPrefs.GetFloat("SFXVolume") - .1f);
                         //FMODManager.instance.SfxBus -= .1f;
-                        // TODO RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
+                        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
                         _soundManager.SetSFXVolume();
                     }
                     else
                     {
-                        // TODO RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
+                        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
                         PlayerPrefs.SetFloat("SFXVolume", 0);
                     }
                 }
