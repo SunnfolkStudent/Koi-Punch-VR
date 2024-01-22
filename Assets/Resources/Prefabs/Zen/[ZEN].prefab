@@ -87,7 +87,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 4d09699d6f9dee44b9caedb7c5275c83, type: 2}
+  sharedProfile: {fileID: 0}
 --- !u!1 &1026234401038934196
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,8 +690,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weakPointPrefab: {fileID: 1259329698490334870, guid: 825a7aab160dfa747a6f8797e196939d,
     type: 3}
-  spawnTightness: 0.5
-  minDistBetweenPoints: 0.75
+  spawnTightness: 0.65
+  minDistBetweenPoints: 0.65
   spawnInterval: 2
   maxWhileLooping: 10
 --- !u!114 &3483118490097113330

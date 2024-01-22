@@ -18,12 +18,12 @@ namespace FinalScripts
             Area2,
             Area3
         }
-    
+        
         private void Start()
         {
             StartCoroutine(LevelStart());
         }
-    
+        
         private IEnumerator LevelStart()
         {
             StopAllAmbientSounds();
@@ -49,7 +49,7 @@ namespace FinalScripts
             yield return new WaitForSeconds(startSpawningFishDelayAfterVoiceLine);
             EventManager.FishSpawning.Invoke();
         }
-
+        
         private static void StopAllAmbientSounds()
         {
             FMODManager.instance.ambientOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
