@@ -44,7 +44,14 @@ namespace FinalScripts.Fish
         private void Start()
         {
             _rbFish = GetComponentInChildren<Rigidbody>();
+            
+            if (TryGetComponent(out Rigidbody rigidbodyPart))
+            { _rbFish = rigidbodyPart; }
+            else
+            { _rbFish = GetComponentInChildren<Rigidbody>(); }
+
             var c = GetComponentsInChildren<Transform>();
+                
             foreach (var child in c)
             {
                 var fishChild = child.gameObject.AddComponent<FishChild>();
@@ -53,9 +60,10 @@ namespace FinalScripts.Fish
             
             // Put the below lines in Awake() if faulty:
             if (TryGetComponent(out LineRenderer lineRenderComponent))
-            {
-                lineRenderer = lineRenderComponent;
-            }
+            { lineRenderer = lineRenderComponent; }
+            else
+            { lineRenderer = GetComponent<LineRenderer>(); }
+            
             lineRenderer.enabled = false;
             int fishLayer = gameObject.layer;
             
@@ -66,7 +74,6 @@ namespace FinalScripts.Fish
                     fishCollisionMask |= 1 << i;
                 }
             }
-            
             _startPos = _rbFish.position;
             print($"StartPos in worldSpace: {_startPos} | StartPos Reset: {_startPos - _startPos}");
         }
