@@ -1,6 +1,6 @@
 using UnityEngine;
-//using FMOD.Studio;
-//using FMODUnity;
+using FMOD.Studio;
+using FMODUnity;
 
 public class SpecialAttackScript : MonoBehaviour
 {
@@ -36,7 +36,7 @@ public class SpecialAttackScript : MonoBehaviour
             
             InternalZenEventManager.startChargeVfx.Invoke();
             
-            //TODO: PLAY "KOOOOOOOOOOOOOOOOOOOOOOOOO"
+            InternalZenEventManager.PlayChargeSfx.Invoke();
         }
         
         //IF BUTTON WAS RELEASED
@@ -51,9 +51,8 @@ public class SpecialAttackScript : MonoBehaviour
             HapticManager.zenCharge = false;
             CalculatePunchForce();
             
-            //TODO: STOP PLAYING "KOOOOOOOOOOOOOOOOOOOOOOOOO"
-            //FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 1);
-            //FMODManager.instance.koiPunch.setParameterByName("koiPunchImpactState", 1);
+            FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 1);
+            FMODManager.instance.koiPunch.setParameterByName("koiPunchImpactState", 1);
         }
         
         if (chargingPunch && !punchCharged)
@@ -75,10 +74,8 @@ public class SpecialAttackScript : MonoBehaviour
                 HapticManager.zenCharge = false;
                 CalculatePunchForce();
                 
-                //TODO: STOP PLAYING "KOOOOOOOOOOOOOOOOOOOOOOOOO"
-                //FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 1);
-                //FMODManager.instance.koiPunch.setParameterByName("koiPunchImpactState", 1);
-                //TODO: PS: THERE IS NO DUPLICATE. EITHER THIS RUNS OR THE OTHER ONE. NOT BOTH
+                FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 1);
+                FMODManager.instance.koiPunch.setParameterByName("koiPunchImpactState", 1);
             }
             
             InternalZenEventManager.updateVisualZenBar.Invoke();
