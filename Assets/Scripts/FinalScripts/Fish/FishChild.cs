@@ -14,7 +14,6 @@ namespace FinalScripts.Fish
         
         public Fish fish;
         public GameObject landingMarkPrefab;
-        [SerializeField] private LineRenderer lineRenderer;
         public LayerMask fishCollisionMask;
 
         [SerializeField] [Range(10, 100)] private int linePoints = 25;
@@ -197,7 +196,7 @@ namespace FinalScripts.Fish
         #endregion
 
         #region ---Trajectory---
-        private void SimulateTrajectory(Vector3 fishLaunch)
+        /*private void SimulateTrajectory(Vector3 fishLaunch)
         {
             lineRenderer.enabled = true;
             if (!enableTrajectoryLine)
@@ -228,7 +227,7 @@ namespace FinalScripts.Fish
                     return;
                 }
             }
-        }
+        }*/
         #endregion
     }
 }
