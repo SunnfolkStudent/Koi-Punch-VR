@@ -1,5 +1,6 @@
+using System;
+using System.Collections;
 using FinalScripts;
-using FMODUnity;
 using UnityEngine;
 
 namespace InDevelopment
@@ -13,13 +14,11 @@ namespace InDevelopment
         private bool _collidedPreviously;
         private ControllerManager _controllerManager;
         private string _whichFistUsed;
-        
+
         private void Start()
         {
             _controllerManager = GetComponentInParent<ControllerManager>();
             _whichFistUsed = gameObject.tag;
-            
-            InternalZenEventManager.playChargeSfx += PlayChargeSFX;
         }
         
         private void OnCollisionEnter(Collision other)
@@ -53,17 +52,5 @@ namespace InDevelopment
                 _collidedPreviously = true;
             }
         }
-
-        #region SFX
-
-        private void PlayChargeSFX()
-        {
-            RuntimeManager.AttachInstanceToGameObject(FMODManager.instance.koiPunch, gameObject.transform, this.GetComponent<Rigidbody>());
-            FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 0);
-            FMODManager.instance.koiPunch.setParameterByName("koiPunchImpactState", 0);
-            //do this for each hand
-        }
-        
-        #endregion
     }
 }
