@@ -143,7 +143,7 @@ public class FMODManager: MonoBehaviour
         RuntimeManager.PlayOneShot(sound, volume, worldPos);
     }
     
-    void SelectRandomPunchSound()
+    public void SelectRandomPunchSound()
     {
         if (ShouldRun())
         {
@@ -177,5 +177,22 @@ public class FMODManager: MonoBehaviour
             // Checks if the random value is less than 0.1 (10% chance)
             return randomValue < 0.1;
         }
+    }
+    
+    //Emergency stop for all music and SFX INSTANCES (Does Not Include OneShotSFX)
+    //Could be used to remove all currently existing Instances that are not being used
+    public void StopAllInstances()
+    {
+        instance.zenMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        instance.levelOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        instance.levelTwo.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        instance.levelThree.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        instance.ambientOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        instance.ambientTwo.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        instance.ambientThree.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT); 
+        instance.menuTheme.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        instance.zenMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        instance.koiPunch.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        instance.koiPunchVocals.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 }
