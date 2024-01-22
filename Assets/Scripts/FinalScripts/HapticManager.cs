@@ -112,6 +112,8 @@ public class HapticManager : MonoBehaviour
             StopRumble();
         }
 
+        leftWoodPunch = false;
+        rightWoodPunch = false;
         leftZenPunch1 = false;
         rightZenPunch1 = false;
         leftZenPunch2 = false;

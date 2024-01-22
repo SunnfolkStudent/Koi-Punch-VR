@@ -53,27 +53,20 @@ public class BreakOnHit : TransitionAnimation, IPunchable
     }
     public void PunchObject(ControllerManager controllerManager, string fistUsed)
     {
-        if (fistUsed == "LeftFist" && CylinderTrigger.LeftHandCanHit && controllerManager.leftVelMagnitude > 10)
+        if (fistUsed == "LeftFist" && CylinderTrigger.LeftHandCanHit && controllerManager.leftVelMagnitude > 1)
         {
             HapticManager.leftWoodPunch = true;
-            Invoke("StopBuzzing", .5f);
             HittingSign();
         }
-        else if (fistUsed == "RightFist" && CylinderTrigger.RightHandCanHit && controllerManager.rightVelMagnitude > 10)
+        else if (fistUsed == "RightFist" && CylinderTrigger.RightHandCanHit && controllerManager.rightVelMagnitude > 1)
         {
             HapticManager.rightWoodPunch = true;
-            Invoke("StopBuzzing",.5f);
             HittingSign();
         }
         else
         {
+            Debug.Log("Sign Hit");
             RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/PlankTap", transform.position);
         }
-    }
-
-    private void StopBuzzing()
-    {
-        HapticManager.leftWoodPunch = false;
-        HapticManager.rightWoodPunch = false;
     }
 }
