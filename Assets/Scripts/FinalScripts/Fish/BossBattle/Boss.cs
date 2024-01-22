@@ -276,6 +276,7 @@ namespace FinalScripts.Fish.BossBattle
             var totalScore = (int)(force.magnitude + Phase.Sum(pair => pair.Value.score));
             Log($"BossDefeated | TotalScore: {totalScore}");
             EventManager.BossScore.Invoke(totalScore);
+            InternalZenEventManager.stopChargeVfx.Invoke();
         }
         
         private IEnumerator PunchSound()
