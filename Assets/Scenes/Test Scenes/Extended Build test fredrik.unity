@@ -219,6 +219,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &172411816 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6888654536758804116, guid: a3f01cd55883a4f39b4940adf883d190,
+    type: 3}
+  m_PrefabInstance: {fileID: 1511051304}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &172411820
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172411816}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.26035526, y: 0.23712157, z: 1.8499354e-15}
+  m_Center: {x: 0.03345908, y: -0.02616403, z: -2.3774105e-16}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -8389,6 +8416,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Ground
       objectReference: {fileID: 0}
+    - target: {fileID: 6888654536758804116, guid: a3f01cd55883a4f39b4940adf883d190,
+        type: 3}
+      propertyPath: m_TagString
+      value: Water
+      objectReference: {fileID: 0}
     - target: {fileID: 6890634451717697539, guid: a3f01cd55883a4f39b4940adf883d190,
         type: 3}
       propertyPath: m_TagString
@@ -8497,7 +8529,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6888654536758804116, guid: a3f01cd55883a4f39b4940adf883d190,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 172411820}
   m_SourcePrefab: {fileID: 100100000, guid: a3f01cd55883a4f39b4940adf883d190, type: 3}
 --- !u!1 &1581663716
 GameObject:
