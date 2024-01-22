@@ -64,6 +64,7 @@ public class ZenMetreManager : MonoBehaviour
     {
         if (zenMetreValue >= 100 && zenLevel == 0 && !_zenBossSpawnInvoked)
         {
+            Debug.LogError("Spawn boss");
             _zenBossSpawnInvoked = true;
             EventManager.SpawnBoss.Invoke();
         }
