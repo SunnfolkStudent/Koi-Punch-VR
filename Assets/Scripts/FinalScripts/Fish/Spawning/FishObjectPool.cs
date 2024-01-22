@@ -16,9 +16,9 @@ namespace FinalScripts.Fish.Spawning
         {
             _fishContainer = transform.GetChild(0);
             _fishPools = new List<FishPool>();
-            foreach (var fishScrub in fishTypes)
+            foreach (var fishSrub in fishTypes)
             {
-                _fishPools.Add(new FishPool(fishScrub));
+                _fishPools.Add(new FishPool(fishSrub));
             }
             FishSpawnType.InitializeFishSpawnTypes(_fishPools);
         }
