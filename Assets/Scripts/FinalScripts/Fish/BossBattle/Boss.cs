@@ -16,6 +16,7 @@ namespace FinalScripts.Fish.BossBattle
         private Rigidbody[] _rigidities;
         private static BossPhase _currentBossState;
         private bool _bossIsDead;
+        private bool _hasSaidPhase0VoiceLine;
         
         #region ---InspectorSettings---
         [Header("Delay")]
@@ -104,7 +105,11 @@ namespace FinalScripts.Fish.BossBattle
         {
             FMODManager.instance.zenMusic.setParameterByName("zenLevel", 0);
             FMODManager.instance.zenMusic.start();
-            FMODManager.instance.PlayOneShot("event:/SFX/FishSounds/DragonRyu", transform.position);
+            if (!_hasSaidPhase0VoiceLine)
+            {
+                FMODManager.instance.PlayOneShot("event:/SFX/FishSounds/DragonRyu", transform.position);
+                _hasSaidPhase0VoiceLine = true;
+            }
             yield return new WaitForSeconds(phase0Delay);
             EventManager.StartBossPhase0.Invoke();
         }
