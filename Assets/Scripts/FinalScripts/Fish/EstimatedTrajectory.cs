@@ -44,24 +44,27 @@ namespace FinalScripts.Fish
         
         public void SimulateTrajectory(Vector3 fishLaunch)
         {
+            lineRenderer.enabled = true;
             _startPos = gameObject.transform.position;
             print($"StartPos in worldSpace: {_startPos} | StartPos Reset: {_startPos - _startPos}");
-            lineRenderer.enabled = true;
+            
             if (!enableTrajectoryLine)
             {
                 lineRenderer.material = null;
             }
             lineRenderer.positionCount = Mathf.CeilToInt(linePoints / timeBetweenPoints) + 1;
             Vector3 startPosition = _startPos;
-            Vector3 startVelocity = fishLaunch; 
             int i = 0;
             lineRenderer.SetPosition(i, startPosition);
             for (float time = 0; time < linePoints; time += timeBetweenPoints)
             {
                 i++;
-                Vector3 point = startPosition + time * startVelocity;
-                point.y = startPosition.y + startVelocity.y * time + (Physics.gravity.y / 2f * time * time);
+                Vector3 point = startPosition + time * fishLaunch;
+                point.y = startPosition.y + fishLaunch.y * time + (Physics.gravity.y / 2f * time * time);
 
+                print("EstimatedPoint Y" + point.y);
+                print("Starting Position Y:" + startPosition.y);
+                
                 lineRenderer.SetPosition(i, point);
 
                 Vector3 lastPosition = lineRenderer.GetPosition(i - 1);
