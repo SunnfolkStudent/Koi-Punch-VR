@@ -65,8 +65,8 @@ namespace FinalScripts.Fish
         #region ---ScoreActions---
         public static Action<float, bool> FishScore = FishScoreDebug; // Calculated by scoreManager Distance, SuccessFullPunch
         public static Action<int> BossScore = GainScoreDebug; // Points gained call this eks: fish hit ground and end of bossBattle
-        public static Action<int> PenaltyScore = PenaltyScoreDebug; // Points lost call this
-        public static Action<int> BonusScore = BonusScoreDebug; // Points Gained from objects
+        public static Action<int> PenaltyScore = PenaltyScoreDebug; // Points lost call this (player hit by fish)
+        public static Action<int> BonusScore = BonusScoreDebug; // Points Gained from objects (bird)
         
         #region >>>---ActionDebugs---
         private static void FishScoreDebug(float distance, bool successFullPunch)

@@ -70,12 +70,15 @@ namespace FinalScripts.Fish
             if (transform.position.y > fish.FishPool.FishRecord.FishScrub.despawnAltitude && 
                 _startTime > Time.time - fish.FishPool.FishRecord.FishScrub.despawnTime) return;
             Log("De-spawned: either to time or y altitude to low");
-            if (hasBeenPunchedSuccessfully || hasBeenPunchedUnsuccessfully)
-            {
-                var dist = Vector3.Distance(transform.position, _punchedPosition);
-                EventManager.FishScore(dist, hasBeenPunchedSuccessfully);
-            }
+            FishScore();
             Despawn();
+        }
+
+        private void FishScore()
+        {
+            if (!hasBeenPunchedSuccessfully && !hasBeenPunchedUnsuccessfully) return;
+            var dist = Vector3.Distance(transform.position, _punchedPosition);
+            EventManager.FishScore(dist, hasBeenPunchedSuccessfully);
         }
         
         private void Despawn()
@@ -163,11 +166,7 @@ namespace FinalScripts.Fish
             if (hasHitGround) return;
             hasHitGround = true;
             FMODManager.instance.PlayOneShot("event:/SFX/FishSounds/FishSlap", transform.position);
-            if (hasBeenPunchedSuccessfully || hasBeenPunchedUnsuccessfully)
-            {
-                var dist = Vector3.Distance(transform.position, _punchedPosition);
-                EventManager.FishScore(dist, hasBeenPunchedSuccessfully);
-            }
+            FishScore();
             Log("De-spawning: hit ground");
             StartCoroutine(DespawnAfterTime(fish.FishPool.FishRecord.FishScrub.despawnDelay));
         }
