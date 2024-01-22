@@ -34,6 +34,8 @@ public class SpecialAttackScript : MonoBehaviour
             
             InternalZenEventManager.startChargeVfx.Invoke();
             
+            FMODManager.instance.koiPunchVocals.setParameterByName("koiPunchSoundState", 0);
+            FMODManager.instance.koiPunchVocals.start();
             InternalZenEventManager.playChargeSfx.Invoke();
         }
         
@@ -49,8 +51,7 @@ public class SpecialAttackScript : MonoBehaviour
             HapticManager.zenCharge = false;
             CalculatePunchForce();
             
-            FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 1);
-            FMODManager.instance.koiPunch.setParameterByName("koiPunchImpactState", 1);
+            InternalZenEventManager.playChargeReadySfx.Invoke();
         }
         
         if (chargingPunch && !punchCharged)
@@ -72,8 +73,7 @@ public class SpecialAttackScript : MonoBehaviour
                 HapticManager.zenCharge = false;
                 CalculatePunchForce();
                 
-                FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 1);
-                FMODManager.instance.koiPunch.setParameterByName("koiPunchImpactState", 1);
+                InternalZenEventManager.playChargeReadySfx.Invoke();
             }
             
             InternalZenEventManager.updateVisualZenBar.Invoke();
