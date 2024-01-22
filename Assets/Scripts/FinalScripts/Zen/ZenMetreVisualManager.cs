@@ -59,8 +59,8 @@ public class ZenMetreVisualManager : MonoBehaviour
         
         _sparkleList = GameObject.FindGameObjectsWithTag("Sparkle").ToList();
         HideSparkles();
-
-        promptTextToBeShown = "Hold all buttons to charge!";
+        
+        
         HidePromptText();
         #endregion
         

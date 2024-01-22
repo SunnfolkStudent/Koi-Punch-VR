@@ -1,17 +1,16 @@
+using UnityEditor.EditorTools;
 using UnityEngine;
 
 public class LookAtPlayer : MonoBehaviour
 {
-    public Transform player;
-    private Transform correctTransform;
-
-    private void Start()
+    [ContextMenu("SetRandomRot")]
+    void SetRandomRot()
     {
-        if (Camera.main != null) player = Camera.main.transform;
+        var trans = transform.eulerAngles;
+
+        trans.y = Random.Range(0, 360);
+
+        transform.eulerAngles = new Vector3(trans.x, trans.y, trans.z);
     }
 
-    private void Update()
-    {
-        transform.LookAt(player);
-    }
 }
