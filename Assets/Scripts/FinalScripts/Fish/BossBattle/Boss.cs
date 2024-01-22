@@ -258,6 +258,7 @@ namespace FinalScripts.Fish.BossBattle
                 }
                 else
                 {
+                    Debug.LogError("Collision with ground resetting boss to phase0");
                     EventManager.StartBossPhase0.Invoke();
                 }
             }

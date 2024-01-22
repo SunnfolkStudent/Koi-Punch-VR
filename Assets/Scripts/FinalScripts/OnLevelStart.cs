@@ -50,7 +50,7 @@ namespace FinalScripts
             EventManager.FishSpawning.Invoke();
         }
 
-        private void StopAllAmbientSounds()
+        private static void StopAllAmbientSounds()
         {
             FMODManager.instance.ambientOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             FMODManager.instance.ambientTwo.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
