@@ -12,7 +12,7 @@ namespace FinalScripts.Fish
         private float _startTime;
         
         [Header("Trajectory Line:")]
-        [SerializeField] private LineRenderer lineRenderer; // LineRenderer to help calculate distance for fish
+        // [SerializeField] private LineRenderer lineRenderer; // LineRenderer to help calculate distance for fish
         public LayerMask fishCollisionMask;
         [SerializeField] [Range(10, 100)] private int linePoints = 25;
         [SerializeField] [Range(0.01f, 0.25f)] private float timeBetweenPoints = 0.1f;
@@ -59,12 +59,12 @@ namespace FinalScripts.Fish
             }
             
             // Put the below lines in Awake() if faulty:
-            if (TryGetComponent(out LineRenderer lineRenderComponent))
+            /*if (TryGetComponent(out LineRenderer lineRenderComponent))
             { lineRenderer = lineRenderComponent; }
             else
             { lineRenderer = GetComponent<LineRenderer>(); }
             
-            lineRenderer.enabled = false;
+            lineRenderer.enabled = false;*/
             int fishLayer = gameObject.layer;
             
             for (int i = 0; i < 32; i++)
@@ -257,7 +257,7 @@ namespace FinalScripts.Fish
         #endregion
         
         #region ---SimulateTrajectory---
-        public void SimulateTrajectory(Vector3 fishLaunch)
+        /*public void SimulateTrajectory(Vector3 fishLaunch)
         {
             lineRenderer.enabled = true;
             if (!enableTrajectoryLine)
@@ -288,7 +288,7 @@ namespace FinalScripts.Fish
                     return;
                 }
             }
-        }
+        }*/
         #endregion
     }
 }

@@ -190,7 +190,7 @@ namespace FinalScripts.Fish
             _rbFishPart.AddForce(fishLaunch, ForceMode.VelocityChange);
             Debug.Log($"Fish Self-Launch-Force: {fishLaunch}");
             
-            fish.SimulateTrajectory(fishLaunch);
+            // fish.SimulateTrajectory(fishLaunch);
         }
 
         #endregion
