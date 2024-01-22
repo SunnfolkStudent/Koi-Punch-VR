@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace FinalScripts.Fish
 {
@@ -6,6 +7,7 @@ namespace FinalScripts.Fish
     {
         public Fish fish;
         public GameObject landingMarkPrefab;
+        [SerializeField] private Transform armatureTransform;
         [SerializeField] private LineRenderer lineRenderer;
         public LayerMask fishCollisionMask;
         
@@ -21,6 +23,7 @@ namespace FinalScripts.Fish
         
         private void Awake()
         {
+            armatureTransform = GetComponentInChildren<Transform>();
             lineRenderer = GetComponent<LineRenderer>();
             lineRenderer.enabled = false;
 
@@ -45,7 +48,7 @@ namespace FinalScripts.Fish
         public void SimulateTrajectory(Vector3 fishLaunch)
         {
             lineRenderer.enabled = true;
-            _startPos = gameObject.transform.position;
+            _startPos = armatureTransform.position;
             print($"StartPos in worldSpace: {_startPos} | StartPos Reset: {_startPos - _startPos}");
             
             if (!enableTrajectoryLine)
