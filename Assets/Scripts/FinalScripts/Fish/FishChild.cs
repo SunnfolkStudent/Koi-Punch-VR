@@ -1,3 +1,4 @@
+using System;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -6,13 +7,19 @@ namespace FinalScripts.Fish
     public class FishChild : MonoBehaviour, IPunchable
     {
         public Fish fish;
+        public EstimatedTrajectory estimatedTrajectoryScript;
         private Rigidbody _rigidbody;
         
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
         }
-        
+
+        private void Start()
+        {
+            estimatedTrajectoryScript = fish.estimatedTrajectoryScript;
+        }
+
         #region ---Collision---
         private void OnCollisionEnter(Collision other)
         {
@@ -64,7 +71,7 @@ namespace FinalScripts.Fish
         public void PunchObject(ControllerManager controllerManager, string fistUsed)
         {
             var v = fistUsed == "LeftFist" ? controllerManager.leftControllerVelocity : controllerManager.rightControllerVelocity;
-            if (math.abs(v.magnitude) >= fish.fish.FishPool.FishRecord.FishScrub.successfulPunchThreshold) PunchObject(v);
+            if (math.abs(v.magnitude) >= fish.fish.FishPool.FishRecord.FishScrub.successfulPunchThreshold) LaunchObject(v);
             else
             {
                 fish.FishPunchedUnsuccessful();
@@ -72,7 +79,7 @@ namespace FinalScripts.Fish
             }
         }
 
-        private void PunchObject(Vector3 velocity)
+        private void LaunchObject(Vector3 velocity)
         {
             if (fish.hasBeenPunchedSuccessfully || fish.hasHitGround)
             {
@@ -93,6 +100,8 @@ namespace FinalScripts.Fish
 
             fish.Log($"PunchForce: {punchForce} | Direction: {direction} | Debuff: {forceDebuff}");
             _rigidbody.AddForce(fishLaunch, ForceMode.VelocityChange);
+            
+            estimatedTrajectoryScript.SimulateTrajectory(fishLaunch);
         }
         #endregion
     }
