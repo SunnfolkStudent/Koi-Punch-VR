@@ -52,7 +52,8 @@ public class SpecialAttackScript : MonoBehaviour
             CalculatePunchForce();
             
             //TODO: STOP PLAYING "KOOOOOOOOOOOOOOOOOOOOOOOOO"
-            //TODO: PLAY "I"
+            //FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 1);
+            //FMODManager.instance.koiPunch.setParameterByName("koiPunchImpactState", 1);
         }
         
         if (chargingPunch && !punchCharged)
@@ -75,7 +76,8 @@ public class SpecialAttackScript : MonoBehaviour
                 CalculatePunchForce();
                 
                 //TODO: STOP PLAYING "KOOOOOOOOOOOOOOOOOOOOOOOOO"
-                //TODO: PLAY "I"
+                //FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 1);
+                //FMODManager.instance.koiPunch.setParameterByName("koiPunchImpactState", 1);
                 //TODO: PS: THERE IS NO DUPLICATE. EITHER THIS RUNS OR THE OTHER ONE. NOT BOTH
             }
             
