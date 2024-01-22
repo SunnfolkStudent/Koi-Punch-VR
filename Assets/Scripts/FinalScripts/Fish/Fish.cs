@@ -17,7 +17,7 @@ namespace FinalScripts.Fish
         [SerializeField] [Range(10, 100)] private int linePoints = 25;
         [SerializeField] [Range(0.01f, 0.25f)] private float timeBetweenPoints = 0.1f;
 
-        // private Rigidbody _rbFish;
+        private Rigidbody _rbFish;
         private Vector3 _startPos;
         private Vector3 _landingPos;
         
@@ -43,12 +43,12 @@ namespace FinalScripts.Fish
 
         private void Start()
         {
-            /*_rbFish = GetComponentInChildren<Rigidbody>();
+            _rbFish = GetComponentInChildren<Rigidbody>();
             
             if (!TryGetComponent(out Rigidbody rigidbodyPart))
             { _rbFish = GetComponentInChildren<Rigidbody>(); }
             else
-            { _rbFish = rigidbodyPart; }*/
+            { _rbFish = rigidbodyPart; }
             
             var c = GetComponentsInChildren<Transform>();
             
@@ -74,14 +74,14 @@ namespace FinalScripts.Fish
                     fishCollisionMask |= 1 << i;
                 }
             }
-            // _startPos = _rbFish.position;
+            _startPos = _rbFish.position;
             print($"StartPos in worldSpace: {_startPos} | StartPos Reset: {_startPos - _startPos}");
         }
         
-        /*private void FixedUpdate()
+        private void FixedUpdate()
         {
             _landingPos += _rbFish.position;
-        }*/
+        }
 
         private void OnEnable()
         {
