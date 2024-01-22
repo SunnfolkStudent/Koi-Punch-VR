@@ -227,7 +227,7 @@ namespace FinalScripts.Fish.BossBattle
         
         private void Phase3Hit(ControllerManager controllerManager, string fistUsed)
         {
-            if (!SpecialAttackScript.punchCharged) return;
+            if (!SpecialAttackScript.punchCharged || _bossIsDead) return;
             Log("Phase 3 hit charged");
             
             var controllerVelocity = fistUsed == "LeftFist" ? controllerManager.leftControllerVelocity : controllerManager.rightControllerVelocity;
@@ -248,7 +248,7 @@ namespace FinalScripts.Fish.BossBattle
         
         private static IEnumerator PunchSound()
         {
-            FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 1);
+            FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 2);
             yield return new WaitForSeconds(4);
             FMODManager.instance.koiPunch.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
