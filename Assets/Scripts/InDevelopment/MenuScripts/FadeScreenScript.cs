@@ -22,12 +22,12 @@ public class FadeScreenScript : MonoBehaviour
         if (!isFishTransition)
         {
             _image.enabled = true;
-            _animator.Play("CircleTransitionAnimationEnter");
+            _animator.Play("CircleTransitionAnimationStart");
         }
         else
         {
             _image.enabled = true;
-            _animator.Play("FishTransitionAnimationEnter");
+            _animator.Play("FishTransitionAnimationStart");
         }
     }
 

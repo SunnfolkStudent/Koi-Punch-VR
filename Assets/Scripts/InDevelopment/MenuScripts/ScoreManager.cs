@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using FinalScripts.Fish;
 using UnityEngine;
 using TMPro;
+using UnityEditor.Analytics;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class ScoreManager : MonoBehaviour
     //[SerializeField] private float multiplierTime;
     //[SerializeField] private bool multiplierOn;
 
+    [SerializeField] private GameObject _endScoreBoard;
+
     private void Start()
     {
         fishPunchPoints = distancePoints = bonusPoints = penaltyPoints = zenPoints = 0;
@@ -25,6 +28,7 @@ public class ScoreManager : MonoBehaviour
         EventManager.FishScore += FishPunch;
         EventManager.PenaltyScore += HitByFish;
         EventManager.BonusScore += BonusHit;
+        EventManager.BossDefeated += EndGame;
     }
     public void FishPunch(float distance, bool successFullPunch)
     {
@@ -66,6 +70,11 @@ public class ScoreManager : MonoBehaviour
         TextMeshPro FloatingTxt = instantiated.GetComponent<TextMeshPro>();
         FloatingTxt.text = msg;
         FloatingTxt.color = txtColor;
+    }
+
+    private void EndGame()
+    {
+        Instantiate(_endScoreBoard);
     }
     /*private IEnumerator Multiplier()
     {

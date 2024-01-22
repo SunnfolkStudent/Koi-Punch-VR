@@ -522,6 +522,37 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &327753451
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 327753452}
+  m_Layer: 0
+  m_Name: TextOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &327753452
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327753451}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 22.7, y: -1.277, z: -2.6521595}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &355206584
 GameObject:
   m_ObjectHideFlags: 0
@@ -5664,6 +5695,60 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1944063851}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2007144481
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2007144483}
+  - component: {fileID: 2007144482}
+  m_Layer: 0
+  m_Name: ScoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2007144482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2007144481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce9604f31922a234389e75aef0fc6ae2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishPunchPoints: 0
+  distancePoints: 0
+  bonusPoints: 0
+  penaltyPoints: 0
+  zenPoints: 0
+  textPrefab: {fileID: 723132749056987256, guid: 8908d5a38e0bee743b1856e8437ab0e8,
+    type: 3}
+  textSpawner: {fileID: 327753451}
+  _endScoreBoard: {fileID: 7695080969794925172, guid: d2fd98a77244bdf4a8e01d7ac1be60e3,
+    type: 3}
+--- !u!4 &2007144483
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2007144481}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.89684, y: 9.085945, z: -2.6521595}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2053105717
 GameObject:
   m_ObjectHideFlags: 0
@@ -6605,3 +6690,5 @@ SceneRoots:
   - {fileID: 1780532421}
   - {fileID: 4181966852470098059}
   - {fileID: 1638927510}
+  - {fileID: 2007144483}
+  - {fileID: 327753452}
