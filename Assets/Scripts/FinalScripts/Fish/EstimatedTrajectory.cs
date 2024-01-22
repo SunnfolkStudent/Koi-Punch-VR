@@ -9,68 +9,43 @@ namespace FinalScripts.Fish
         [SerializeField] private LineRenderer lineRenderer;
         public LayerMask fishCollisionMask;
         
-        [SerializeField] [Range(10, 100)] private int linePoints = 25;
-        [SerializeField] [Range(0.01f, 0.25f)] private float timeBetweenPoints = 0.1f;
+        [SerializeField] [Range(10, 100)] private int linePoints = 30;
+        [SerializeField] [Range(0.01f, 0.25f)] private float timeBetweenPoints = 0.075f;
 
         private Rigidbody _rbFish;
         private Vector3 _startPos;
         private Vector3 _landingPos;
         
-        private float _landingTimer = 1.5f;
-        
-        [SerializeField] private bool createLandingMark = true;
+        [Header("Enable visibility of trajectory line:")]
         [SerializeField] private bool enableTrajectoryLine = true;
         
         private void Awake()
         {
-            _rbFish = GetComponent<Rigidbody>();
             lineRenderer = GetComponent<LineRenderer>();
             lineRenderer.enabled = false;
 
-            int fishLayer = fish.gameObject.layer;
+            int fishLayer = gameObject.layer;
             for (int i = 0; i < 32; i++)
             {
                 if (!Physics.GetIgnoreLayerCollision(fishLayer, i))
                 {
                     fishCollisionMask |= 1 << i;
                 }
-                
             }
-        }
-        
-        void Start()
-        {
-            _startPos = _rbFish.position;
-            print($"StartPos in worldSpace: {_startPos} | StartPos Reset: {_startPos - _startPos}");
-        }
-        
-        private void FixedUpdate()
-        {
-            _landingPos += _rbFish.position;
-        }
-
-        private void Update()
-        {
-            _landingTimer += Time.deltaTime;
         }
         
         public void FishMeetsGround()
         {
             lineRenderer.enabled = false;
-            if (_landingTimer > 5f && createLandingMark)
-            {
-                Instantiate(landingMarkPrefab, _rbFish.position, Quaternion.identity);
-            }
-            var fishGroundPosition = _rbFish.position;
+            var fishGroundPosition = transform.position;
             print($"Distance: {fishGroundPosition - _startPos} | LandingPos: {fishGroundPosition}");
             print($"Distance.magnitude: {(fishGroundPosition - _startPos).magnitude}");
-            _landingTimer = 0;
-            
-            fish.FishHitGround();
         }
         
-        private void SimulateTrajectory(Vector3 fishLaunch)
+        public void SimulateTrajectory(Vector3 fishLaunch)
         {
+            _startPos = gameObject.transform.position;
+            print($"StartPos in worldSpace: {_startPos} | StartPos Reset: {_startPos - _startPos}");
             lineRenderer.enabled = true;
             if (!enableTrajectoryLine)
             {
@@ -78,7 +53,7 @@ namespace FinalScripts.Fish
             }
             lineRenderer.positionCount = Mathf.CeilToInt(linePoints / timeBetweenPoints) + 1;
             Vector3 startPosition = _startPos;
-            Vector3 startVelocity = fishLaunch / _rbFish.mass; 
+            Vector3 startVelocity = fishLaunch; 
             int i = 0;
             lineRenderer.SetPosition(i, startPosition);
             for (float time = 0; time < linePoints; time += timeBetweenPoints)

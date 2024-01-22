@@ -11,6 +11,7 @@ namespace FinalScripts.Fish
     public class FishChild : MonoBehaviour, IPunchable
     {
         public Fish fish;
+        public EstimatedTrajectory estimatedTrajectoryScript;
         
         private Rigidbody _rbFishPart;
         private bool _rigidbodyFound;
@@ -151,7 +152,7 @@ namespace FinalScripts.Fish
             _rbFishPart.AddForce(fishLaunch, ForceMode.VelocityChange);
             Debug.Log($"Fish Self-Launch-Force: {fishLaunch}");
             
-            // fish.SimulateTrajectory(fishLaunch);
+            estimatedTrajectoryScript.SimulateTrajectory(fishLaunch);
         }
 
         #endregion

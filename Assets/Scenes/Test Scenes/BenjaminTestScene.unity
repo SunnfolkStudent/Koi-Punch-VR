@@ -963,13 +963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb67997a41c5e6844912684d67db798f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineRenderer: {fileID: 272420145}
-  fishCollisionMask:
-    serializedVersion: 2
-    m_Bits: 823
-  linePoints: 25
-  timeBetweenPoints: 0.1
-  enableTrajectoryLine: 0
+  estimatedTrajectoryScript: {fileID: 0}
   hasBeenPunchedSuccessfully: 0
   hasBeenPunchedUnsuccessfully: 0
   hasHitGround: 0
@@ -1763,6 +1757,11 @@ PrefabInstance:
       propertyPath: fishCollisionMask.m_Bits
       value: 528
       objectReference: {fileID: 0}
+    - target: {fileID: -2833691813364326098, guid: f48f7339ab6428b4f922a0b20e52134a,
+        type: 3}
+      propertyPath: estimatedTrajectoryScript
+      value: 
+      objectReference: {fileID: 1272055300}
     - target: {fileID: 471582657252072425, guid: f48f7339ab6428b4f922a0b20e52134a,
         type: 3}
       propertyPath: m_Name
@@ -1826,6 +1825,10 @@ PrefabInstance:
         type: 3}
       insertIndex: 1
       addedObject: {fileID: 1272055297}
+    - targetCorrespondingSourceObject: {fileID: 471582657252072425, guid: f48f7339ab6428b4f922a0b20e52134a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1272055300}
     - targetCorrespondingSourceObject: {fileID: 5669214779977062362, guid: f48f7339ab6428b4f922a0b20e52134a,
         type: 3}
       insertIndex: -1
@@ -1973,6 +1976,41 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &1272055298 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2833691813364326098, guid: f48f7339ab6428b4f922a0b20e52134a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1272055294}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272055296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb67997a41c5e6844912684d67db798f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1272055300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272055296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5d3ab5749e20f47895257fbae6f6a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fish: {fileID: 1272055298}
+  landingMarkPrefab: {fileID: 3249833221167807415, guid: e1a3efc8d1a4230418bfd45728adbcbe,
+    type: 3}
+  lineRenderer: {fileID: 1272055297}
+  fishCollisionMask:
+    serializedVersion: 2
+    m_Bits: 592
+  linePoints: 30
+  timeBetweenPoints: 0.075
+  createLandingMark: 1
+  enableTrajectoryLine: 1
 --- !u!1001 &1660535682
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -11,9 +11,6 @@ namespace FinalScripts.Fish
         public EstimatedTrajectory estimatedTrajectoryScript;
         private Vector3 _punchedPosition; // Compared with landing position to calculate distance
         private float _startTime;
-        
-        [Header("Trajectory Line:")]
-        // [SerializeField] private LineRenderer lineRenderer; // LineRenderer to help calculate distance for fish
 
         private Rigidbody _rbFish;
         
@@ -49,6 +46,7 @@ namespace FinalScripts.Fish
             {
                 var fishChild = child.gameObject.AddComponent<FishChild>();
                 fishChild.fish = this;
+                fishChild.estimatedTrajectoryScript = estimatedTrajectoryScript;
             }
         }
 
