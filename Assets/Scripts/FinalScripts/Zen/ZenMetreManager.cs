@@ -170,6 +170,7 @@ public class ZenMetreManager : MonoBehaviour
         
         //Start of level 3
         zenAttackActive = true;
+        ZenMetreVisualManager.promptTextToBeShown = "Hold all buttons to charge!";
         InternalZenEventManager.showPromptText.Invoke();
     }
     #endregion
@@ -229,11 +230,21 @@ public class ZenMetreManager : MonoBehaviour
     //Then wait for a certain amount of time and then set tripleScoreActive to false.
     private IEnumerator TripleScoreTimer()
     {
+        ZenMetreVisualManager.promptTextToBeShown = "Punchout!";
+        InternalZenEventManager.showPromptText.Invoke();
+        
         float elapsedTime = 0f;
         bool maxReached = false;
+        bool promptShown = true;
         while (elapsedTime < _attackFieldsActiveTime)
         {
             elapsedTime += Time.unscaledDeltaTime;
+
+            if (elapsedTime >= 3f && promptShown)
+            {
+                promptShown = false;
+                InternalZenEventManager.hidePromptText.Invoke();
+            }
 
             if (zenMetreValue >= 100 && !maxReached)
             {
