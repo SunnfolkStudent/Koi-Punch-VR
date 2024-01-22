@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using FinalScripts.Fish;
 using UnityEngine;
+using FMOD.Studio;
+using FMODUnity;
+using EventManager = FinalScripts.Fish.EventManager;
 
 public class ZenMetreManager : MonoBehaviour
 {
@@ -23,10 +26,6 @@ public class ZenMetreManager : MonoBehaviour
     [Header("Time Stop Values")]
     private float _slowdownFactor = 0.001f;
     private float _slowdownTime = 0.1f;
-    
-    //[Header("FMOD")
-    //using FMOD.Studio;
-    //using FMODUnity;]
     
     [Header("Particle systems and original simulation speeds for time stop")]
     private List<ParticleSystem> _particleSystems = new List<ParticleSystem>();
@@ -133,14 +132,14 @@ public class ZenMetreManager : MonoBehaviour
     //Method that moves on to the second level of zen
     private void LevelOne()
     {
-        //FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/PunchTheWeakpoints");
+        FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/PunchTheWeakpoints");
         
         //MUSIC
-        //FMODManager.instance.levelOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        //FMODManager.instance.levelTwo.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        //FMODManager.instance.levelThree.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        //FMODManager.instance.zenMusic.setParameterByName("zenLevel", 0);
-        //FMODManager.instance.zenMusic.start()
+        FMODManager.instance.levelOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        FMODManager.instance.levelTwo.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        FMODManager.instance.levelThree.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        FMODManager.instance.zenMusic.setParameterByName("zenLevel", 0);
+        FMODManager.instance.zenMusic.start();
         
         Debug.Log("Level1");
         zenLevel = 1;
@@ -153,8 +152,8 @@ public class ZenMetreManager : MonoBehaviour
     //Method that moves on to the third level of zen
     private void LevelTwo()
     {
-        //FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/BossPhase2");
-        //FMODManager.instance.zenMusic.setParameterByName("zenLevel", 1);
+        FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/BossPhase2");
+        FMODManager.instance.zenMusic.setParameterByName("zenLevel", 1);
         
         zenMetreValue = 0;
         zenLevel = 2;
@@ -167,8 +166,8 @@ public class ZenMetreManager : MonoBehaviour
     //Level four is the last level of zen and is the level where you unlock your ultimate move.
     private void LevelThree()
     {
-        //FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/BossPhase3");
-        //FMODManager.instance.zenMusic.setParameterByName("zenLevel", 2);
+        FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/BossPhase3");
+        FMODManager.instance.zenMusic.setParameterByName("zenLevel", 2);
         
         zenMetreValue = 0;
         
@@ -186,7 +185,22 @@ public class ZenMetreManager : MonoBehaviour
     {
         Debug.Log("AttackFieldSpawnTimer");
         InternalZenEventManager.spawnWeakPoints.Invoke();
-        yield return new WaitForSecondsRealtime(_attackFieldsActiveTime);
+
+        float elapsedTime = 0f;
+        bool maxReached = false;
+        while (elapsedTime < _attackFieldsActiveTime)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+
+            if (zenMetreValue >= 100 && !maxReached)
+            {
+                maxReached = true;
+                FMODManager.instance.PlayOneShot("event:/Music/Stingers/Zen1Full");
+            }
+
+            yield return null;
+        }
+        
         InternalZenEventManager.stopSpawnWeakPoints.Invoke();
         
         DestroyAllAttackFields();
@@ -218,7 +232,20 @@ public class ZenMetreManager : MonoBehaviour
     //Then wait for a certain amount of time and then set tripleScoreActive to false.
     private IEnumerator TripleScoreTimer()
     {
-        yield return new WaitForSecondsRealtime(_tripleScoreTimer);
+        float elapsedTime = 0f;
+        bool maxReached = false;
+        while (elapsedTime < _attackFieldsActiveTime)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+
+            if (zenMetreValue >= 100 && !maxReached)
+            {
+                maxReached = true;
+                FMODManager.instance.PlayOneShot("event:/Music/Stingers/Zen2Full");
+            }
+
+            yield return null;
+        }
         
         if (zenMetreValue >= 100)
         {
