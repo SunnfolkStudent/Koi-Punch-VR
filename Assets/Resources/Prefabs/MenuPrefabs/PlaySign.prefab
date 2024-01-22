@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3787985053987095685}
   - component: {fileID: 5882203891643102686}
   - component: {fileID: 640690518597602004}
+  - component: {fileID: 5695325792404580202}
   m_Layer: 0
   m_Name: PlaySign
   m_TagString: StartButton2
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 5597181391170590368}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: 0, y: 0.0911, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 70, y: 70, z: 57.155712}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -100,7 +101,7 @@ Animator:
   m_GameObject: {fileID: 5597181391170590368}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cbf770d75c0dcbf4489552d52f4dcfee, type: 2}
+  m_Controller: {fileID: 9100000, guid: ca43a602d630d4340a45363782eedcbe, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -176,3 +177,15 @@ MonoBehaviour:
     type: 3}
   LevelToGoTo: 2
   newMenuParent: {fileID: 0}
+--- !u!114 &5695325792404580202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5597181391170590368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417b6623ae6cc074ba58d0af4e6f485d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

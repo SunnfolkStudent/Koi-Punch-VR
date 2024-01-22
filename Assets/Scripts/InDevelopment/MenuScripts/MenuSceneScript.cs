@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using FMOD.Studio;
-//using FMODUnity;
+using FMOD.Studio;
+using FMODUnity;
 
 public class MenuSceneScript : MonoBehaviour
 {
