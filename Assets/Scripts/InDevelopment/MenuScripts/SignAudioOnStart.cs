@@ -8,6 +8,6 @@ public class SignAudioOnStart : MonoBehaviour
 {
     void Start()
     {
-        //TODO play wood hitting ground sound
+        RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/WoodHitGrass", transform.position);
     }
 }

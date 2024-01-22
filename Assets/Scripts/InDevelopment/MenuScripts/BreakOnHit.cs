@@ -7,7 +7,7 @@ using UnityEngine;
 using FMOD.Studio;
 using FMODUnity;
 
-public class BreakOnHit : TransitionAnimation
+public class BreakOnHit : TransitionAnimation, IPunchable
 {
     [SerializeField] private GameObject _brokenPrefab;
     [SerializeField] private int LevelToGoTo;
@@ -22,21 +22,12 @@ public class BreakOnHit : TransitionAnimation
         _sceneController = _sceneControllerObj.GetComponent<SceneController>();
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if ((other.gameObject.CompareTag("LeftFist") && CylinderTrigger.LeftHandCanHit) || (other.gameObject.CompareTag("RightFist") && CylinderTrigger.RightHandCanHit))
-        {
-            Debug.Log("Hit went through");
-            CylinderTrigger.LeftHandCanHit = false;
-            CylinderTrigger.RightHandCanHit = false;
-            HittingSign();
-        }
-    }
-
     private void HittingSign()
     {
+        CylinderTrigger.LeftHandCanHit = false;
+        CylinderTrigger.RightHandCanHit = false;
         Instantiate(_brokenPrefab, transform.position, _brokenPrefab.transform.rotation);
-        //TODO FMODManager.instance.PlayOneShot("event:/SFX/MenuSounds/PlankBreak", transform.position);
+        FMODManager.instance.PlayOneShot("event:/SFX/MenuSounds/PlankBreak", transform.position);
         MenuEventManager.ExplodeTransition();
         
         if (gameObject.CompareTag("SceneChanger"))
@@ -59,5 +50,30 @@ public class BreakOnHit : TransitionAnimation
             Instantiate(newMenuParent);
             Destroy(gameObject);
         }
+    }
+    public void PunchObject(ControllerManager controllerManager, string fistUsed)
+    {
+        if (fistUsed == "LeftFist" && CylinderTrigger.LeftHandCanHit && controllerManager.leftVelMagnitude > 10)
+        {
+            HapticManager.leftWoodPunch = true;
+            Invoke("StopBuzzing", .5f);
+            HittingSign();
+        }
+        else if (fistUsed == "RightFist" && CylinderTrigger.RightHandCanHit && controllerManager.rightVelMagnitude > 10)
+        {
+            HapticManager.rightWoodPunch = true;
+            Invoke("StopBuzzing",.5f);
+            HittingSign();
+        }
+        else
+        {
+            RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/PlankTap", transform.position);
+        }
+    }
+
+    private void StopBuzzing()
+    {
+        HapticManager.leftWoodPunch = false;
+        HapticManager.rightWoodPunch = false;
     }
 }
