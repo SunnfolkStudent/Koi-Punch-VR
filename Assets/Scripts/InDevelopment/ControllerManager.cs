@@ -121,5 +121,5 @@ public class ControllerManager : MonoBehaviour
             leftOpenHand.SetActive(true); 
             leftClosedHand.SetActive(false); 
         }
-    } 
+    }
 }

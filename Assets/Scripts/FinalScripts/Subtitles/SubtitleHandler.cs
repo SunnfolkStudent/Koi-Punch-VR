@@ -22,8 +22,6 @@ public class SubtitleHandler : MonoBehaviour
         {
             _canvasGroup = subtitleText.gameObject.AddComponent<CanvasGroup>();
         }
-
-        SubtitleEventManager.PlaySubtitle.Invoke(VoiceLinesLoader.GetValueForKey("OnPunch"));
     }
 
     private void ShowSubtitle(string subtitle)

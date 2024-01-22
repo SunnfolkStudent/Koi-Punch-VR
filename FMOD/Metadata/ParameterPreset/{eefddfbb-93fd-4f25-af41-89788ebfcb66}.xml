@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{eefddfbb-93fd-4f25-af41-89788ebfcb66}">
+		<property name="name">
+			<value>koiPunchImpactState</value>
+		</property>
+		<relationship name="folder">
+			<destination>{b9c84acb-6ed7-49b2-be46-8f76f5b14868}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{8e3bbdd1-98c3-4dd4-98f0-87c8f3b44360}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{8e3bbdd1-98c3-4dd4-98f0-87c8f3b44360}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>2</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Weak</value>
+			<value>Strong</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
