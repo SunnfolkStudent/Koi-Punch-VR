@@ -1,20 +1,18 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using EventManager = FinalScripts.Fish.EventManager;
-using FMOD.Studio;
-using FMODUnity;
+using FinalScripts.Fish;
 
 namespace FinalScripts
 {
     public class OnLevelStart : MonoBehaviour
     {
         [Header("OnLevelStart")]
-        [SerializeField] private Levels currentLevel;
+        [SerializeField] private Arenas currentArena;
         [SerializeField] private float initialVoiceLineDelay = 3f;
         [SerializeField] private float startSpawningFishDelayAfterVoiceLine = 2f;
 
-        private enum Levels
+        private enum Arenas
         {
             Area1,
             Area2,
@@ -28,17 +26,18 @@ namespace FinalScripts
     
         private IEnumerator LevelStart()
         {
-            switch (currentLevel)
+            StopAllAmbientSounds();
+            switch (currentArena)
             {
-                case Levels.Area1:
+                case Arenas.Area1:
                     FMODManager.instance.ambientOne.start();
                     FMODManager.instance.levelOne.start();
                     break;
-                case Levels.Area2:
+                case Arenas.Area2:
                     FMODManager.instance.ambientTwo.start();
                     FMODManager.instance.levelTwo.start();
                     break;
-                case Levels.Area3:
+                case Arenas.Area3:
                     FMODManager.instance.ambientThree.start();
                     FMODManager.instance.levelThree.start();
                     break;
@@ -49,6 +48,13 @@ namespace FinalScripts
             FMODManager.instance.PlayOneShot("event:/SFX/Voice/GameStart");
             yield return new WaitForSeconds(startSpawningFishDelayAfterVoiceLine);
             EventManager.FishSpawning.Invoke();
+        }
+
+        private void StopAllAmbientSounds()
+        {
+            FMODManager.instance.ambientOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            FMODManager.instance.ambientTwo.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            FMODManager.instance.ambientThree.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
     }
 }
