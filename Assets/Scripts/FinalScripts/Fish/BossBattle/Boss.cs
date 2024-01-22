@@ -17,6 +17,12 @@ namespace FinalScripts.Fish.BossBattle
         private static BossPhase _currentBossState;
         private bool _bossIsDead;
         private bool _hasSaidPhase0VoiceLine;
+        private LayerMask _spawnAreaMask;
+        
+        [Header("Spawn in FieldOfView")]
+        [SerializeField] private float areaSearchRadius = 15;
+        [SerializeField] private float viewAngle = 92;
+        [SerializeField] private int maxSpawnAreas = 10;
         
         #region ---InspectorSettings---
         [Header("Delay")]
@@ -51,6 +57,7 @@ namespace FinalScripts.Fish.BossBattle
         private void Awake()
         {
             _fishSpawnAreas = GameObject.FindGameObjectWithTag("FishSpawnManager").GetComponent<FishSpawnAreas>();
+            _spawnAreaMask = LayerMask.NameToLayer("SpawnAreas");
             EventManager.StartBossPhase0 += Phase0;
             EventManager.BossPhase0Completed += Phase0Completed;
             EventManager.BossPhaseSuccessful += PhaseSuccessful;
@@ -129,12 +136,37 @@ namespace FinalScripts.Fish.BossBattle
         
         private void Attack()
         {
-            var spawnPos = _fishSpawnAreas.GetNextFishSpawnPosition();
+            var spawnPos = GetSpawnAreaPos();
             transform.position = spawnPos;
             var playerPosition = _player.position;
             transform.LookAt(playerPosition, Vector3.up);
             var velocity2D = FishTrajectory.TrajectoryVelocity2DFromPeakHeight(spawnPos, playerPosition, height);
             FishSpawnManager.LaunchRigiditiesDirectionWithVelocityTowards(_rigidities, (playerPosition - spawnPos).normalized, velocity2D);
+        }
+        
+        private Vector3 GetSpawnAreaPos()
+        {
+            var sourceTransform = _player.transform;
+            var spawnArea = new Collider[maxSpawnAreas];
+            var spawnAreasCount = Physics.OverlapSphereNonAlloc(sourceTransform.position, areaSearchRadius, spawnArea, _spawnAreaMask);
+            
+            for (var i = 0; i < spawnAreasCount; i++)
+            {
+                var spawnAreaPos = spawnArea[i].transform.position;
+                var dirToSpawnArea = (spawnAreaPos - sourceTransform.position).normalized;
+
+                if (Vector3.Angle(sourceTransform.forward, dirToSpawnArea) > viewAngle * 0.5f) continue;
+                
+                var distanceToSpawnArea = Vector3.Distance(sourceTransform.position, spawnAreaPos);
+
+                if (!Physics.Raycast(sourceTransform.position, dirToSpawnArea, distanceToSpawnArea))
+                {
+                    return spawnAreaPos;
+                }
+            }
+            
+            Log("Couldn't find SpawnArea In FieldOfView | getting spawn pos from FishSpawnArea script");
+            return _fishSpawnAreas.GetNextFishSpawnPosition();
         }
         
         private void Phase1()
@@ -243,11 +275,12 @@ namespace FinalScripts.Fish.BossBattle
             
             var totalScore = (int)(force.magnitude + Phase.Sum(pair => pair.Value.score));
             Log($"BossDefeated | TotalScore: {totalScore}");
-            EventManager.GainScore.Invoke(totalScore);
+            EventManager.BossScore.Invoke(totalScore);
         }
         
-        private static IEnumerator PunchSound()
+        private IEnumerator PunchSound()
         {
+            StartCoroutine(ChargeSfx.PlayChargePunchSfx());
             FMODManager.instance.koiPunchVocals.setParameterByName("koiPunchSoundState", 2);
             yield return new WaitForSeconds(4);
             FMODManager.instance.koiPunchVocals.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
