@@ -8,7 +8,7 @@ namespace FinalScripts.Fish
     public class Fish : MonoBehaviour
     {
         public FishObjectPool.Fish fish { get; set; } // Reference to itself in the FishPool
-        public EstimatedTrajectory estimatedTrajectoryScript;
+        public Fish estimatedTrajectoryScript;
         private LineRenderer _lineRenderer;
         private Vector3 _punchedPosition; // Compared with landing position to calculate distance
         private float _startTime;
@@ -32,7 +32,7 @@ namespace FinalScripts.Fish
 
         private void Awake()
         {
-            estimatedTrajectoryScript = GetComponent<EstimatedTrajectory>();
+            // estimatedTrajectoryScript = GetComponent<EstimatedTrajectory>();
             _lineRenderer = estimatedTrajectoryScript.GetComponent<LineRenderer>();
         }
 
@@ -166,7 +166,7 @@ namespace FinalScripts.Fish
         {
             if (hasHitGround) return;
             hasHitGround = true;
-            estimatedTrajectoryScript.FishMeetsGround();
+            // estimatedTrajectoryScript.FishMeetsGround();
             FMODManager.instance.PlayOneShot("event:/SFX/FishSounds/FishSlap", transform.position);
             if (hasBeenPunchedSuccessfully || hasBeenPunchedUnsuccessfully)
             {

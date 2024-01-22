@@ -7,7 +7,7 @@ namespace FinalScripts.Fish
     public class FishChild : MonoBehaviour, IPunchable
     {
         public Fish fish;
-        public EstimatedTrajectory estimatedTrajectoryScript;
+        //public EstimatedTrajectory estimatedTrajectoryScript;
         private Rigidbody _rigidbody;
         
         private void Awake()
@@ -17,7 +17,7 @@ namespace FinalScripts.Fish
 
         private void Start()
         {
-            estimatedTrajectoryScript = fish.estimatedTrajectoryScript;
+            //estimatedTrajectoryScript = fish.estimatedTrajectoryScript;
         }
 
         #region ---Collision---
@@ -101,7 +101,7 @@ namespace FinalScripts.Fish
             fish.Log($"PunchForce: {punchForce} | Direction: {direction} | Debuff: {forceDebuff}");
             _rigidbody.AddForce(fishLaunch, ForceMode.VelocityChange);
             
-            estimatedTrajectoryScript.SimulateTrajectory(fishLaunch);
+            // estimatedTrajectoryScript.SimulateTrajectory(fishLaunch);
         }
         #endregion
     }
