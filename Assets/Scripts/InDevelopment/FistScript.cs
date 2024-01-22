@@ -63,9 +63,6 @@ namespace InDevelopment
             FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 0);
             FMODManager.instance.koiPunch.setParameterByName("koiPunchImpactState", 0);
             //do this for each hand
-            //when charge ready:
-            FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 1);
-            FMODManager.instance.koiPunch.setParameterByName("koiPunchImpactState", 1);
         }
         
         #endregion
