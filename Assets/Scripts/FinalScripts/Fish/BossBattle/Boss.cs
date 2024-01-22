@@ -5,6 +5,8 @@ using System.Linq;
 using FinalScripts.Fish.Spawning;
 using FinalScripts.Fish.Spawning.RandomWeightedTables;
 using UnityEngine;
+using FMOD.Studio;
+using FMODUnity;
 
 namespace FinalScripts.Fish.BossBattle
 {

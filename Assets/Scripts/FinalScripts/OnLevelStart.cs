@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
-using FinalScripts.Fish;
 using UnityEngine;
+using EventManager = FinalScripts.Fish.EventManager;
+using FMOD.Studio;
+using FMODUnity;
 
 namespace FinalScripts
 {
