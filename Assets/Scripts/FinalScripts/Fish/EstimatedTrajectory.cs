@@ -7,7 +7,7 @@ namespace FinalScripts.Fish
     {
         public Fish fish;
         public GameObject landingMarkPrefab;
-        [SerializeField] private Transform armatureTransform;
+        [SerializeField] private Transform armatureTransform = new RectTransform();
         [SerializeField] private LineRenderer lineRenderer;
         public LayerMask fishCollisionMask;
         
