@@ -187,7 +187,7 @@ namespace FinalScripts.Fish.BossBattle
                     Phase1Hit();
                     break;
                 case BossPhase.Phase2:
-                    Phase2Hit();
+                    Phase2Hit(fistUsed);
                     break;
                 case BossPhase.Phase3:
                     Phase3Hit(controllerManager, fistUsed);
@@ -214,12 +214,15 @@ namespace FinalScripts.Fish.BossBattle
         }
 
         [ContextMenu("HitBossPhase2")]
-        private void Phase2Hit()
+        private void Phase2Hit(string lFist)
         {
             Log("Phase 2 hit");
             FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/BossPhase2");
             Score += scorePerHitPhase2;
             ZenMetreManager.Instance.AddHitZen(zenPerHitPhase2);
+            
+            if (lFist == "LeftFist") HapticManager.leftZenPunch2 = true;
+            else HapticManager.rightZenPunch2 = true;
         }
         
         private void Phase3Hit(ControllerManager controllerManager, string fistUsed)
