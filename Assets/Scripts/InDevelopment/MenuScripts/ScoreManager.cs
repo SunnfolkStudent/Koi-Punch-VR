@@ -11,18 +11,20 @@ public class ScoreManager : MonoBehaviour
     
     [SerializeField] private GameObject textPrefab;
     [SerializeField] private GameObject textSpawner;
-    [SerializeField] private GameObject multiplierVisual;
+    //[SerializeField] private GameObject multiplierVisual;
 
     private int _distanceConverted;
 
-    [SerializeField] private float multiplierTime;
-    [SerializeField] private bool multiplierOn;
+    //[SerializeField] private float multiplierTime;
+    //[SerializeField] private bool multiplierOn;
 
     private void Start()
     {
         fishPunchPoints = distancePoints = bonusPoints = penaltyPoints = zenPoints = 0;
-        //EventManager.BossDefeatedTotalScore += ZenEnd;
+        EventManager.BossScore += ZenEnd;
         EventManager.FishScore += FishPunch;
+        EventManager.PenaltyScore += HitByFish;
+        EventManager.BonusScore += BonusHit;
     }
     public void FishPunch(float distance, bool successFullPunch)
     {

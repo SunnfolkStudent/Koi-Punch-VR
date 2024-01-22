@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FinalScripts;
 using UnityEngine;
 using TMPro;
 using FMOD.Studio;
 using FMODUnity;
 
-public class DoubleCheckSigns : TransitionAnimation
+public class DoubleCheckSigns : TransitionAnimation, IPunchable
 {
     [SerializeField] private GameObject _nextPrefab;
     [SerializeField] private bool isBreaking = false;
@@ -27,9 +28,6 @@ public class DoubleCheckSigns : TransitionAnimation
         
         if ((other.gameObject.CompareTag("LeftFist") && CylinderTrigger.LeftHandCanHit) || (other.gameObject.CompareTag("RightFist") && CylinderTrigger.RightHandCanHit))
         {
-            CylinderTrigger.LeftHandCanHit = false;
-            CylinderTrigger.RightHandCanHit = false;
-            
             if (!isBreaking)
             {
                 HitSign();
@@ -44,6 +42,8 @@ public class DoubleCheckSigns : TransitionAnimation
 
     private void HitSign()
     {
+        CylinderTrigger.LeftHandCanHit = false;
+        CylinderTrigger.RightHandCanHit = false;
         Instantiate(_nextPrefab, transform.position, _nextPrefab.transform.rotation);
         RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/PlankTap", transform.position);
         transform.localScale = new Vector3(0,0,0);
@@ -51,6 +51,8 @@ public class DoubleCheckSigns : TransitionAnimation
 
     private void DestroySign()
     {
+        CylinderTrigger.LeftHandCanHit = false;
+        CylinderTrigger.RightHandCanHit = false;
         PlayerPrefs.SetInt("HighScoreLevelOne",0);
         PlayerPrefs.SetInt("HighScoreLevelTwo",0);
         PlayerPrefs.SetInt("HighScoreLevelThree",0);
@@ -67,5 +69,39 @@ public class DoubleCheckSigns : TransitionAnimation
         levelOneScore.text = PlayerPrefs.GetInt("HighScoreLevelOne").ToString("0");
         levelTwoScore.text = PlayerPrefs.GetInt("HighScoreLevelTwo").ToString("0");
         levelThreeScore.text = PlayerPrefs.GetInt("HighScoreLevelThree").ToString("0");
+    }
+    public void PunchObject(ControllerManager controllerManager, string fistUsed)
+    {
+        if (fistUsed == "LeftFist" && CylinderTrigger.LeftHandCanHit && controllerManager.leftVelMagnitude > 1)
+        {
+            HapticManager.leftWoodPunch = true;
+            if (!isBreaking)
+            {
+                HitSign();
+            }
+
+            if (isBreaking)
+            {
+                DestroySign();
+            }
+        }
+        else if (fistUsed == "RightFist" && CylinderTrigger.RightHandCanHit && controllerManager.rightVelMagnitude > 1)
+        {
+            HapticManager.rightWoodPunch = true;
+            if (!isBreaking)
+            {
+                HitSign();
+            }
+
+            if (isBreaking)
+            {
+                DestroySign();
+            }
+        }
+        else
+        {
+            Debug.Log("Sign Hit");
+            RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/PlankTap", transform.position);
+        }
     }
 }
