@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-//using FMOD.Studio;
-//using FMODUnity;
+using FMOD.Studio;
+using FMODUnity;
 
 public class SceneController : MonoBehaviour
 {
@@ -17,8 +17,12 @@ public class SceneController : MonoBehaviour
     private float speed;
     private float time;
     private bool ReadyToStart;
+    
     private GameObject _fadeScreenObj;
     private FadeScreenScript _fadeScreen;
+    private GameObject _fishScreenObj;
+    private FadeScreenScript _fishScreen;
+    
     private bool canChangeScene = true;
     
     private static SceneController instance;
@@ -91,6 +95,7 @@ public class SceneController : MonoBehaviour
 
     private IEnumerator ChangeLevelStart()
     {
+        Debug.Log("change scene");
         canChangeScene = false;
         _fadeScreenObj = GameObject.FindGameObjectWithTag("FadeScreen");
         _fadeScreen = _fadeScreenObj.GetComponent<FadeScreenScript>();
@@ -100,7 +105,7 @@ public class SceneController : MonoBehaviour
         CheckStartScene();
         // TODO FMODManager.instance.menuTheme.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         // TODO FMODManager.instance.ambientOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        SceneManager.LoadScene(Levels[startScene]);
+        //SceneManager.LoadScene(Levels[startScene]);
         canChangeScene = true;
     }
 
@@ -127,14 +132,14 @@ public class SceneController : MonoBehaviour
     private IEnumerator ChangeLevelFish(int scene)
     {
         canChangeScene = false;
-        _fadeScreenObj = GameObject.FindGameObjectWithTag("FishTransition");
-        _fadeScreen = _fadeScreenObj.GetComponent<FadeScreenScript>();
-        _fadeScreen.FadeOut();
+        _fishScreenObj = GameObject.FindGameObjectWithTag("FishTransition");
+        _fishScreen = _fishScreenObj.GetComponent<FadeScreenScript>();
+        _fishScreen.FadeOut();
         yield return new WaitForSeconds(1.5f);
         Debug.Log("Changing scenes");
         // TODO FMODManager.instance.menuTheme.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         // TODO FMODManager.instance.ambientOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        SceneManager.LoadScene(Levels[scene]);
+        //SceneManager.LoadScene(Levels[scene]);
         canChangeScene = true;
     }
 }

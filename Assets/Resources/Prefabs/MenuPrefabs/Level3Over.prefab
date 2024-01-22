@@ -10104,6 +10104,8 @@ GameObject:
   - component: {fileID: 4345441186134933736}
   - component: {fileID: 987921622427700182}
   - component: {fileID: 599312782658999589}
+  - component: {fileID: 2110646834349119484}
+  - component: {fileID: 3088394480344420458}
   m_Layer: 0
   m_Name: sign_credits01
   m_TagString: Untagged
@@ -10266,6 +10268,31 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2110646834349119484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6113081092368495101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417b6623ae6cc074ba58d0af4e6f485d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3088394480344420458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6113081092368495101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc32b8f88c5fb0b4faaa60b9cbd65b56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  credits: 1
 --- !u!1 &6141104715312015101
 GameObject:
   m_ObjectHideFlags: 0

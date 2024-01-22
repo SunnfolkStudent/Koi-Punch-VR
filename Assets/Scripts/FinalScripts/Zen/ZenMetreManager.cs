@@ -64,6 +64,7 @@ public class ZenMetreManager : MonoBehaviour
     {
         if (zenMetreValue >= 100 && zenLevel == 0 && !_zenBossSpawnInvoked)
         {
+            Debug.LogError("Spawn boss");
             _zenBossSpawnInvoked = true;
             EventManager.SpawnBoss.Invoke();
         }
@@ -129,15 +130,6 @@ public class ZenMetreManager : MonoBehaviour
     //Method that moves on to the second level of zen
     private void LevelOne()
     {
-        FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/PunchTheWeakpoints");
-        
-        //MUSIC
-        FMODManager.instance.levelOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        FMODManager.instance.levelTwo.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        FMODManager.instance.levelThree.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        FMODManager.instance.zenMusic.setParameterByName("zenLevel", 0);
-        FMODManager.instance.zenMusic.start();
-        
         Debug.Log("Level1");
         zenLevel = 1;
         zenLevelCheckpoint = 1;
@@ -149,9 +141,6 @@ public class ZenMetreManager : MonoBehaviour
     //Method that moves on to the third level of zen
     private void LevelTwo()
     {
-        FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/BossPhase2");
-        FMODManager.instance.zenMusic.setParameterByName("zenLevel", 1);
-        
         zenMetreValue = 0;
         zenLevel = 2;
         zenLevelCheckpoint = 2;
@@ -163,9 +152,6 @@ public class ZenMetreManager : MonoBehaviour
     //Level four is the last level of zen and is the level where you unlock your ultimate move.
     private void LevelThree()
     {
-        FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/BossPhase3");
-        FMODManager.instance.zenMusic.setParameterByName("zenLevel", 2);
-        
         zenMetreValue = 0;
         
         //Start of level 3

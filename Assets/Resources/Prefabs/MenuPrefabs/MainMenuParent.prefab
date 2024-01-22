@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6256400223501135893}
   - component: {fileID: 888188543696024833}
   - component: {fileID: 4666696107057504440}
+  - component: {fileID: 827191318941589059}
   m_Layer: 0
   m_Name: MainLevelsSign
   m_TagString: Untagged
@@ -191,6 +192,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc32b8f88c5fb0b4faaa60b9cbd65b56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &827191318941589059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687358442793080091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417b6623ae6cc074ba58d0af4e6f485d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2380400597701980781
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,6 +266,7 @@ GameObject:
   - component: {fileID: 7266744043857258766}
   - component: {fileID: 9050650311765246365}
   - component: {fileID: 3896741055832646474}
+  - component: {fileID: 5309497100010475962}
   m_Layer: 0
   m_Name: MainSettingsSign
   m_TagString: Untagged
@@ -416,6 +430,18 @@ MonoBehaviour:
   LevelToGoTo: 0
   newMenuParent: {fileID: 3294393430637400887, guid: 62bb32f5400521e4695e3fdcb8ef4fdb,
     type: 3}
+--- !u!114 &5309497100010475962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4497546961887014316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417b6623ae6cc074ba58d0af4e6f485d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6566504091566886333
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,6 +457,7 @@ GameObject:
   - component: {fileID: 3784095613974485673}
   - component: {fileID: 7495024309679677333}
   - component: {fileID: 3180043430705345422}
+  - component: {fileID: 9144623422912152670}
   m_Layer: 0
   m_Name: sign_play01
   m_TagString: StartButton
@@ -592,3 +619,15 @@ MonoBehaviour:
     type: 3}
   LevelToGoTo: 0
   newMenuParent: {fileID: 0}
+--- !u!114 &9144623422912152670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6566504091566886333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417b6623ae6cc074ba58d0af4e6f485d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using FMOD.Studio;
+using FMODUnity;
 
 public class DoubleCheckSigns : TransitionAnimation
 {
@@ -54,6 +56,7 @@ public class DoubleCheckSigns : TransitionAnimation
         _resetScore = GameObject.FindGameObjectWithTag("ResetScores");
         _resetScore.GetComponent<DoubleCheckSigns>().UpdateScore();
         Instantiate(_nextPrefab, transform.position, _nextPrefab.transform.rotation);
+        //TODO FMODManager.instance.PlayOneShot("event:/SFX/MenuSounds/PlankBreak", transform.position);
         Destroy(gameObject);
     }
     

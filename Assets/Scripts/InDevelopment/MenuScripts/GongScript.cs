@@ -2,8 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using FMOD.Studio;
-//using FMODUnity;
+using FMOD.Studio;
+using FMODUnity;
 
 public class GongScript : MonoBehaviour
 {
@@ -23,6 +23,7 @@ public class GongScript : MonoBehaviour
                     if (PlayerPrefs.GetFloat("MusicVolume") < 1)
                     {
                         PlayerPrefs.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicVolume") + .1f);
+                        //FMODManager.instance.MusicBus += .1f;
                         // TODO RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
                         _soundManager.SetMusicVolume();
                     }
@@ -38,6 +39,7 @@ public class GongScript : MonoBehaviour
                     if (PlayerPrefs.GetFloat("MusicVolume") > 0)
                     {
                         PlayerPrefs.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicVolume") - .1f);
+                        //FMODManager.instance.MusicBus -= .1f;
                         // TODO RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
                         _soundManager.SetMusicVolume();
                     }
@@ -56,6 +58,7 @@ public class GongScript : MonoBehaviour
                     if (PlayerPrefs.GetFloat("SFXVolume") < 1)
                     {
                         PlayerPrefs.SetFloat("SFXVolume", PlayerPrefs.GetFloat("SFXVolume") + .1f);
+                        //FMODManager.instance.SfxBus += .1f;
                         // TODO RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
                         _soundManager.SetSFXVolume();
                     }
@@ -71,6 +74,7 @@ public class GongScript : MonoBehaviour
                     if (PlayerPrefs.GetFloat("SFXVolume") > 0)
                     {
                         PlayerPrefs.SetFloat("SFXVolume", PlayerPrefs.GetFloat("SFXVolume") - .1f);
+                        //FMODManager.instance.SfxBus -= .1f;
                         // TODO RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
                         _soundManager.SetSFXVolume();
                     }

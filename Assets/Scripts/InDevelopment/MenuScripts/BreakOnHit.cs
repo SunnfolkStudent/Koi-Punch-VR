@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using FinalScripts;
 using Unity.Mathematics;
 using UnityEngine;
-//using FMOD.Studio;
-//using FMODUnity;
+using FMOD.Studio;
+using FMODUnity;
 
-public class BreakOnHit : TransitionAnimation, IPunchable
+public class BreakOnHit : TransitionAnimation
 {
     [SerializeField] private GameObject _brokenPrefab;
     [SerializeField] private int LevelToGoTo;
@@ -18,11 +18,8 @@ public class BreakOnHit : TransitionAnimation, IPunchable
 
     private void Awake()
     {
-        if (gameObject.CompareTag("SceneChanger") || gameObject.CompareTag("StartButton"))
-        {
-            _sceneControllerObj = GameObject.FindGameObjectWithTag("SceneController");
-            _sceneController = _sceneControllerObj.GetComponent<SceneController>();
-        }
+        _sceneControllerObj = GameObject.FindGameObjectWithTag("SceneController");
+        _sceneController = _sceneControllerObj.GetComponent<SceneController>();
     }
 
     private void OnCollisionEnter(Collision other)
@@ -39,7 +36,7 @@ public class BreakOnHit : TransitionAnimation, IPunchable
     private void HittingSign()
     {
         Instantiate(_brokenPrefab, transform.position, _brokenPrefab.transform.rotation);
-        // TODO FMODManager.instance.PlayOneShot("event:/SFX/MenuSounds/PlankBreak", transform.position);
+        //TODO FMODManager.instance.PlayOneShot("event:/SFX/MenuSounds/PlankBreak", transform.position);
         MenuEventManager.ExplodeTransition();
         
         if (gameObject.CompareTag("SceneChanger"))
@@ -49,10 +46,12 @@ public class BreakOnHit : TransitionAnimation, IPunchable
         }
         else if (gameObject.CompareTag("StartButton"))
         {
+            gameObject.transform.localScale = new Vector3(0, 0, 0);
             _sceneController.StartGame();
         }
         else if (gameObject.CompareTag("StartButton2"))
         {
+            gameObject.transform.localScale = new Vector3(0, 0, 0);
             _sceneController.StartGameAfterIntro();
         }
         else
@@ -60,14 +59,5 @@ public class BreakOnHit : TransitionAnimation, IPunchable
             Instantiate(newMenuParent);
             Destroy(gameObject);
         }
-    }
-    
-    public void PunchObject(ControllerManager controllerManager, string fistUsed)
-    {
-        /*var v = fistUsed == "LeftFist"
-            ? controllerManager.leftControllerVelocity
-            : controllerManager.rightControllerVelocity;
-        if (math.abs(v.magnitude) >= fish.successfulPunchThreshold) HittingSign();
-        else Debug.Log("Not Good Enough!");*/
     }
 }
