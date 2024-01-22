@@ -148,11 +148,6 @@ public class FMODManager: MonoBehaviour
         RuntimeManager.PlayOneShot(sound, volume, worldPos);
     }
     
-    public void ZenModeMusicManager(int zenStage, float zenPercent)
-    {
-        
-    }
-    
     void SelectRandomPunchSound()
     {
         if (ShouldRun())
