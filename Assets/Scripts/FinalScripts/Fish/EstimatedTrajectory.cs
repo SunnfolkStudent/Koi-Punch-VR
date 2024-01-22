@@ -7,7 +7,6 @@ namespace FinalScripts.Fish
     {
         public Fish fish;
         public GameObject landingMarkPrefab;
-        [SerializeField] private Transform armatureTransform = new RectTransform();
         [SerializeField] private LineRenderer lineRenderer;
         public LayerMask fishCollisionMask;
         
@@ -23,7 +22,6 @@ namespace FinalScripts.Fish
         
         private void Awake()
         {
-            armatureTransform = GetComponentInChildren<Transform>();
             lineRenderer = GetComponent<LineRenderer>();
             lineRenderer.enabled = false;
 
@@ -45,10 +43,10 @@ namespace FinalScripts.Fish
             print($"Distance.magnitude: {(fishGroundPosition - _startPos).magnitude}");
         }
         
-        public void SimulateTrajectory(Vector3 fishLaunch)
+        public void SimulateTrajectory(Vector3 fishLaunch, Vector3 startPosition)
         {
             lineRenderer.enabled = true;
-            _startPos = armatureTransform.position;
+            _startPos = startPosition;
             print($"StartPos in worldSpace: {_startPos} | StartPos Reset: {_startPos - _startPos}");
             
             if (!enableTrajectoryLine)
@@ -56,7 +54,6 @@ namespace FinalScripts.Fish
                 lineRenderer.material = null;
             }
             lineRenderer.positionCount = Mathf.CeilToInt(linePoints / timeBetweenPoints) + 1;
-            Vector3 startPosition = _startPos;
             int i = 0;
             lineRenderer.SetPosition(i, startPosition);
             for (float time = 0; time < linePoints; time += timeBetweenPoints)

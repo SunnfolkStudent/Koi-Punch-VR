@@ -101,7 +101,7 @@ namespace FinalScripts.Fish
             fish.Log($"PunchForce: {punchForce} | Direction: {direction} | Debuff: {forceDebuff}");
             _rigidbody.AddForce(fishLaunch, ForceMode.VelocityChange);
             
-            estimatedTrajectoryScript.SimulateTrajectory(fishLaunch);
+            estimatedTrajectoryScript.SimulateTrajectory(fishLaunch, transform.position);
         }
         #endregion
     }
