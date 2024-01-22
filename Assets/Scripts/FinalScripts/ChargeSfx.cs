@@ -43,10 +43,6 @@ public class ChargeSfx : MonoBehaviour
         FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 2);
         yield return new WaitForSecondsRealtime(4f);
         FMODManager.instance.koiPunch.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        //this is for the vocals:
-        FMODManager.instance.koiPunchVocals.setParameterByName("koiPunchSoundState", 0);
-        yield return new WaitForSecondsRealtime(4f);
-        FMODManager.instance.koiPunchVocals.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
     #endregion
 }
