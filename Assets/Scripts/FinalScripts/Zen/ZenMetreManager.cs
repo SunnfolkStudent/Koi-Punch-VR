@@ -185,7 +185,22 @@ public class ZenMetreManager : MonoBehaviour
     {
         Debug.Log("AttackFieldSpawnTimer");
         InternalZenEventManager.spawnWeakPoints.Invoke();
-        yield return new WaitForSecondsRealtime(_attackFieldsActiveTime);
+
+        float elapsedTime = 0f;
+        bool maxReached = false;
+        while (elapsedTime < _attackFieldsActiveTime)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+
+            if (zenMetreValue >= 100 && !maxReached)
+            {
+                maxReached = true;
+                FMODManager.instance.PlayOneShot("event:/Music/Stingers/Zen1Full");
+            }
+
+            yield return null;
+        }
+        
         InternalZenEventManager.stopSpawnWeakPoints.Invoke();
         
         DestroyAllAttackFields();
@@ -217,7 +232,20 @@ public class ZenMetreManager : MonoBehaviour
     //Then wait for a certain amount of time and then set tripleScoreActive to false.
     private IEnumerator TripleScoreTimer()
     {
-        yield return new WaitForSecondsRealtime(_tripleScoreTimer);
+        float elapsedTime = 0f;
+        bool maxReached = false;
+        while (elapsedTime < _attackFieldsActiveTime)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+
+            if (zenMetreValue >= 100 && !maxReached)
+            {
+                maxReached = true;
+                FMODManager.instance.PlayOneShot("event:/Music/Stingers/Zen2Full");
+            }
+
+            yield return null;
+        }
         
         if (zenMetreValue >= 100)
         {
