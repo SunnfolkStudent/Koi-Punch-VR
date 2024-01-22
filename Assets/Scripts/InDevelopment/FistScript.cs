@@ -20,7 +20,7 @@ namespace InDevelopment
             _controllerManager = GetComponentInParent<ControllerManager>();
             _whichFistUsed = gameObject.tag;
             
-            InternalZenEventManager.PlayChargeSfx += PlayChargeSFX;
+            InternalZenEventManager.playChargeSfx += PlayChargeSFX;
         }
         
         private void OnCollisionEnter(Collision other)

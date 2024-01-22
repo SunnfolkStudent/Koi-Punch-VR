@@ -1,6 +1,4 @@
 using UnityEngine;
-using FMOD.Studio;
-using FMODUnity;
 
 public class SpecialAttackScript : MonoBehaviour
 {
@@ -36,7 +34,7 @@ public class SpecialAttackScript : MonoBehaviour
             
             InternalZenEventManager.startChargeVfx.Invoke();
             
-            InternalZenEventManager.PlayChargeSfx.Invoke();
+            InternalZenEventManager.playChargeSfx.Invoke();
         }
         
         //IF BUTTON WAS RELEASED
