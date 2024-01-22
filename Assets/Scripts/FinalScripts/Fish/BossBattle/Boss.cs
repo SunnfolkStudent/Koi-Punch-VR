@@ -5,8 +5,6 @@ using System.Linq;
 using FinalScripts.Fish.Spawning;
 using FinalScripts.Fish.Spawning.RandomWeightedTables;
 using UnityEngine;
-using FMOD.Studio;
-using FMODUnity;
 
 namespace FinalScripts.Fish.BossBattle
 {
@@ -106,6 +104,7 @@ namespace FinalScripts.Fish.BossBattle
         {
             FMODManager.instance.zenMusic.setParameterByName("zenLevel", 0);
             FMODManager.instance.zenMusic.start();
+            FMODManager.instance.PlayOneShot("event:/SFX/FishSounds/DragonRyu", transform.position);
             yield return new WaitForSeconds(phase0Delay);
             EventManager.StartBossPhase0.Invoke();
         }
@@ -235,10 +234,10 @@ namespace FinalScripts.Fish.BossBattle
             var totalScore = (int)(force.magnitude + Phase.Sum(pair => pair.Value.score));
             Log($"BossDefeated | TotalScore: {totalScore}");
             EventManager.GainScore.Invoke(totalScore);
-
+            
             StartCoroutine(PunchSound());
         }
-
+        
         private static IEnumerator PunchSound()
         {
             FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 1);

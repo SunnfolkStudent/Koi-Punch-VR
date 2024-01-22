@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using FinalScripts.Fish.Spawning;
 using UnityEngine;
-using FMOD.Studio;
-using FMODUnity;
 
 namespace FinalScripts.Fish
 {
@@ -50,6 +48,7 @@ namespace FinalScripts.Fish
             _hasEmergedFromWater = false;
             _hasHitBird = false;
             StopCoroutine(DespawnAfterTime(0));
+            FMODManager.instance.PlayOneShot("event:/SFX/Voice/FishTalk/KoiTalk", transform.position);
         }
         #endregion
         
@@ -180,6 +179,7 @@ namespace FinalScripts.Fish
         {
             if (_hasHitPlayer) return;
             FMODManager.instance.PlayOneShot("event:/SFX/Voice/PlayerHit");
+            FMODManager.instance.PlayOneShot("event:/SFX/FishSounds/FishImpact", transform.position);
             // TODO: Add Slime shader to camera
             _hasHitPlayer = true;
             EventManager.GainScore(-fish.FishPool.FishRecord.FishScrub.damageAmount);
@@ -189,7 +189,9 @@ namespace FinalScripts.Fish
         public void FishPunchedSuccessful()
         {
             _punchedPosition = transform.position;
+            FMODManager.instance.SelectRandomPunchSound();
             FMODManager.instance.PlayOneShot("event:/SFX/FishSounds/FishImpact", _punchedPosition);
+            FMODManager.instance.PlayOneShot("event:/SFX/PlayerSounds/HandSounds/SuccessfulPunch", _punchedPosition);
             // TODO: Play FishScaleVFX
             hasBeenPunchedSuccessfully = true;
             EventManager.GainScore(fish.FishPool.FishRecord.FishScrub.baseScoreAmount);
