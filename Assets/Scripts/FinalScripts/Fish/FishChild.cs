@@ -10,6 +10,8 @@ namespace FinalScripts.Fish
      }
     public class FishChild : MonoBehaviour, IPunchable
     {
+        // TODO: Transfer LineRenderer to Fish Script, and reference it through the fishChild scripts.
+        
         public Fish fish;
         public GameObject landingMarkPrefab;
         [SerializeField] private LineRenderer lineRenderer;
@@ -18,48 +20,44 @@ namespace FinalScripts.Fish
         [SerializeField] [Range(10, 100)] private int linePoints = 25;
         [SerializeField] [Range(0.01f, 0.25f)] private float timeBetweenPoints = 0.1f;
         
-        private Rigidbody _rbFish;
+        private Rigidbody _rbFishPart;
+        private bool _rigidbodyFound;
         private Vector3 _startPos;
         private Vector3 _landingPos;
 
         private float _landingTimer = 1.5f;
 
         private bool _punched;
+        [SerializeField] private bool enableTrajectoryLine;
         [SerializeField] private bool createLandingMark = true;
         [SerializeField] private bool fishAsleep = true;
 
         #region ---Initialization & Update---
         private void Awake()
         {
-            _rbFish = GetComponent<Rigidbody>();
-            lineRenderer = GetComponent<LineRenderer>();
-            lineRenderer.enabled = false;
+            if (TryGetComponent(out Rigidbody rigidbodyPart))
+            {
+                _rbFishPart = rigidbodyPart;
+                _rigidbodyFound = true;
+            }
 
-            int fishLayer = fish.gameObject.layer;
+            /*int fishLayer = fish.gameObject.layer;
             for (int i = 0; i < 32; i++)
             {
                 if (!Physics.GetIgnoreLayerCollision(fishLayer, i))
                 {
                     fishCollisionMask |= 1 << i;
                 }
-            }
+            }*/
         }
 
         void Start()
         {
-            _startPos = _rbFish.position;
-            print($"StartPos in worldSpace: {_startPos} | StartPos Reset: {_startPos - _startPos}");
-
             // Put the Rigidbody to sleep initially (no physics are being calculated)
-            if (fishAsleep)
+            if (fishAsleep && _rigidbodyFound)
             {
-                _rbFish.Sleep();
+                _rbFishPart.Sleep();
             }
-        }
-
-        private void FixedUpdate()
-        {
-            _landingPos += _rbFish.position;
         }
 
         private void Update()
@@ -105,26 +103,31 @@ namespace FinalScripts.Fish
                 case "LeftFist":
                     HapticManager.leftFishPunch = false;
                     // We're updating the startPos based on when fish leaves the punch.
-                    _startPos = _rbFish.position;
-                    print($"New StartPos in worldSpace: {_startPos} | StartPos Reset: {_startPos - _startPos}");
+                    if (_rigidbodyFound)
+                    {
+                        _startPos = _rbFishPart.position;
+                        print($"New StartPos in worldSpace: {_startPos} | StartPos Reset: {_startPos - _startPos}"); 
+                    }
                     break;
                 case "RightFist":
                     HapticManager.rightFishPunch = false;
                     // We're updating the startPos based on when fish leaves the punch.
-                    _startPos = _rbFish.position;
-                    print($"New StartPos in worldSpace: {_startPos} | StartPos Reset: {_startPos - _startPos}");
+                    if (_rigidbodyFound)
+                    {
+                        _startPos = _rbFishPart.position;
+                        print($"New StartPos in worldSpace: {_startPos} | StartPos Reset: {_startPos - _startPos}"); 
+                    }
                     break;
             }
         }
 
         private void FishMeetsGround()
         {
-            lineRenderer.enabled = false;
             if (_landingTimer > 5f && createLandingMark)
             {
-                Instantiate(landingMarkPrefab, _rbFish.position, Quaternion.identity);
+                Instantiate(landingMarkPrefab, _rbFishPart.position, Quaternion.identity);
             }
-            var fishGroundPosition = _rbFish.position;
+            var fishGroundPosition = _rbFishPart.position;
             print($"Distance: {fishGroundPosition - _startPos} | LandingPos: {fishGroundPosition}");
             print($"Distance.magnitude: {(fishGroundPosition - _startPos).magnitude}");
             _landingTimer = 0;
@@ -140,7 +143,7 @@ namespace FinalScripts.Fish
         {
             if (other.CompareTag("Water"))
             {
-                fish.FishHitWater(_rbFish.velocity);
+                fish.FishHitWater(_rbFishPart.velocity);
             }
         }
 
@@ -163,7 +166,7 @@ namespace FinalScripts.Fish
         {
             if (fishAsleep)
             {
-                _rbFish.WakeUp();
+                _rbFishPart.WakeUp();
                 fishAsleep = false;
             }
 
@@ -185,18 +188,22 @@ namespace FinalScripts.Fish
             var fishLaunch = direction * punchForce;
 
             fish.Log($"PunchForce: {punchForce} | Direction: {direction} | Debuff: {forceDebuff}");
-            _rbFish.AddForce(fishLaunch, ForceMode.VelocityChange);
+            _rbFishPart.AddForce(fishLaunch, ForceMode.VelocityChange);
             Debug.Log($"Fish Self-Launch-Force: {fishLaunch}");
-
-            SimulateTrajectory(fishLaunch);
+            
+            fish.SimulateTrajectory(fishLaunch);
         }
 
         #endregion
 
-        #region ---SimulateTrajectory---
+        #region ---Trajectory---
         private void SimulateTrajectory(Vector3 fishLaunch)
         {
             lineRenderer.enabled = true;
+            if (!enableTrajectoryLine)
+            {
+                lineRenderer.material = null;
+            }
             lineRenderer.positionCount = Mathf.CeilToInt(linePoints / timeBetweenPoints) + 1;
             Vector3 startPosition = _startPos;
             Vector3 startVelocity = fishLaunch;

@@ -7,7 +7,7 @@ namespace FinalScripts.Fish.Spawning
 {
     public class FishObjectPool : MonoBehaviour
     {
-        [SerializeField] private FishSrub[] fishTypes;
+        [SerializeField] private FishScrub[] fishTypes;
         private static List<FishPool> _fishPools;
         private static Transform _fishContainer;
         
@@ -16,9 +16,9 @@ namespace FinalScripts.Fish.Spawning
         {
             _fishContainer = transform.GetChild(0);
             _fishPools = new List<FishPool>();
-            foreach (var fishSrub in fishTypes)
+            foreach (var fishScrub in fishTypes)
             {
-                _fishPools.Add(new FishPool(fishSrub));
+                _fishPools.Add(new FishPool(fishScrub));
             }
             FishSpawnType.InitializeFishSpawnTypes(_fishPools);
         }
@@ -32,12 +32,12 @@ namespace FinalScripts.Fish.Spawning
             public float Weight;
             public int TimesSpawned;
             
-            public FishPool(FishSrub fishSrub)
+            public FishPool(FishScrub fishScrub)
             {
-                FishRecord = new FishRecord(fishSrub);
+                FishRecord = new FishRecord(fishScrub);
                 Fishes = new List<Fish>();
-                AddMultipleFishToPool(fishSrub.initialAmountInPool, this);
-                Weight = fishSrub.weightInRandomTable;
+                AddMultipleFishToPool(fishScrub.initialAmountInPool, this);
+                Weight = fishScrub.weightInRandomTable;
                 TimesSpawned = 0;
             }
         }
@@ -45,10 +45,10 @@ namespace FinalScripts.Fish.Spawning
         #region >>>---FishRecord---
         public record FishRecord
         {
-            public readonly FishSrub FishScrub;
+            public readonly FishScrub FishScrub;
             public readonly FishRecordChild[] Children;
             
-            public FishRecord(FishSrub fishScrub)
+            public FishRecord(FishScrub fishScrub)
             {
                 FishScrub = fishScrub;
                 if (!fishScrub.prefab.GetComponent<FinalScripts.Fish.Fish>()) fishScrub.prefab.AddComponent<FinalScripts.Fish.Fish>();

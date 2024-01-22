@@ -630,6 +630,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fish_02
       objectReference: {fileID: 0}
+    - target: {fileID: 6937156405640096190, guid: a728f0727fa784048a4d32c0a423ba3d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7714220118983619332, guid: a728f0727fa784048a4d32c0a423ba3d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -822,8 +827,6 @@ GameObject:
   - component: {fileID: 272420139}
   - component: {fileID: 272420145}
   - component: {fileID: 272420144}
-  - component: {fileID: 272420143}
-  - component: {fileID: 272420146}
   m_Layer: 6
   m_Name: Capsule
   m_TagString: Untagged
@@ -840,7 +843,7 @@ Transform:
   m_GameObject: {fileID: 272420137}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.01, y: 9.94, z: -1.04}
+  m_LocalPosition: {x: -3.01, y: 9.94, z: -2.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -948,29 +951,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 272420137}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &272420143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 272420137}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 215e8ce7a4b4b344a88418a3de1da878, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fish: {fileID: 272420144}
-  travelMarkPrefab: {fileID: 0}
-  landingMarkPrefab: {fileID: 3249833221167807415, guid: e1a3efc8d1a4230418bfd45728adbcbe,
-    type: 3}
-  lineRenderer: {fileID: 172372521}
-  fishCollisionMask:
-    serializedVersion: 2
-    m_Bits: 0
-  linePoints: 40
-  timeBetweenPoints: 0.05
-  fishAsleep: 1
 --- !u!114 &272420144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -983,6 +963,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb67997a41c5e6844912684d67db798f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lineRenderer: {fileID: 272420145}
+  fishCollisionMask:
+    serializedVersion: 2
+    m_Bits: 823
+  linePoints: 25
+  timeBetweenPoints: 0.1
+  enableTrajectoryLine: 0
   hasBeenPunchedSuccessfully: 0
   hasBeenPunchedUnsuccessfully: 0
   hasHitGround: 0
@@ -1093,28 +1080,6 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!114 &272420146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 272420137}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec4bc692f0064323b2c0d26dca2c3759, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fish: {fileID: 0}
-  landingMarkPrefab: {fileID: 0}
-  fishCollisionMask:
-    serializedVersion: 2
-    m_Bits: 0
-  linePoints: 25
-  timeBetweenPoints: 0.1
-  lineRenderer: {fileID: 0}
-  createLandingMark: 0
-  fishAsleep: 0
 --- !u!1001 &492308684
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1672,7 +1637,7 @@ PrefabInstance:
     - target: {fileID: 2767121513800863933, guid: 4cdda0ba778360847a2a76512a5b77fb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.39
+      value: -10.8
       objectReference: {fileID: 0}
     - target: {fileID: 2767121513800863933, guid: 4cdda0ba778360847a2a76512a5b77fb,
         type: 3}
@@ -1783,6 +1748,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 172372519}
     m_Modifications:
+    - target: {fileID: -2833691813364326098, guid: f48f7339ab6428b4f922a0b20e52134a,
+        type: 3}
+      propertyPath: lineRenderer
+      value: 
+      objectReference: {fileID: 1272055297}
+    - target: {fileID: -2833691813364326098, guid: f48f7339ab6428b4f922a0b20e52134a,
+        type: 3}
+      propertyPath: enableTrajectoryLine
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2833691813364326098, guid: f48f7339ab6428b4f922a0b20e52134a,
+        type: 3}
+      propertyPath: fishCollisionMask.m_Bits
+      value: 528
+      objectReference: {fileID: 0}
     - target: {fileID: 471582657252072425, guid: f48f7339ab6428b4f922a0b20e52134a,
         type: 3}
       propertyPath: m_Name
@@ -1791,17 +1771,17 @@ PrefabInstance:
     - target: {fileID: 990991208883863891, guid: f48f7339ab6428b4f922a0b20e52134a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.6900003
+      value: -6.93
       objectReference: {fileID: 0}
     - target: {fileID: 990991208883863891, guid: f48f7339ab6428b4f922a0b20e52134a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.369999
+      value: 10.49
       objectReference: {fileID: 0}
     - target: {fileID: 990991208883863891, guid: f48f7339ab6428b4f922a0b20e52134a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.84
+      value: 5.21
       objectReference: {fileID: 0}
     - target: {fileID: 990991208883863891, guid: f48f7339ab6428b4f922a0b20e52134a,
         type: 3}

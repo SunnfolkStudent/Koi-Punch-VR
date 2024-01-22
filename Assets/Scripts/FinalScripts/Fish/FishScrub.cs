@@ -3,7 +3,7 @@ using UnityEngine;
 namespace FinalScripts.Fish
 {
     [CreateAssetMenu(fileName = "NewFish", menuName = "Fish/New Fish", order = 1)]
-    public class FishSrub : ScriptableObject
+    public class FishScrub : ScriptableObject
     {
         [Header("Fish Properties")] 
         public GameObject prefab;

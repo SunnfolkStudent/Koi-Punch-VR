@@ -29,6 +29,7 @@ namespace InDevelopment.Fish.Trajectory
 
         private bool _punched;
         [SerializeField] private bool createLandingMark = true;
+        [SerializeField] private bool enableTrajectoryLine = true;
         [SerializeField] private bool fishAsleep = true;
         
         private const float Gravity = -9.81f;
@@ -177,6 +178,10 @@ namespace InDevelopment.Fish.Trajectory
         private void SimulateTrajectory(Vector3 fishLaunch)
         {
             lineRenderer.enabled = true;
+            if (!enableTrajectoryLine)
+            {
+                lineRenderer.material = null;
+            }
             lineRenderer.positionCount = Mathf.CeilToInt(linePoints / timeBetweenPoints) + 1;
             Vector3 startPosition = _startPos;
             Vector3 startVelocity = fishLaunch / _rbFish.mass; 
