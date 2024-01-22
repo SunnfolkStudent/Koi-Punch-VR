@@ -122,23 +122,20 @@ namespace FinalScripts.Fish
             // TODO: Play Water Entry VFX
         }
         
-        private bool CheckIfCanSkipp(Vector3 velocity)
+        private static bool CheckIfCanSkipp(Vector3 velocity)
         {
-            var nor = velocity.normalized;
-            var attackAngle = AngleBetweenVectors(new Vector3(nor.x,0, nor.z), new Vector3(0, nor.y, 0));
-            var ySpeed = velocity.y;
-            var fSpeed = Mathf.Abs(velocity.magnitude - ySpeed);
-            
-            return attackAngle < fish.FishPool.FishRecord.FishScrub.attackAngleMaximum && fSpeed > ySpeed * fish.FishPool.FishRecord.FishScrub.fSpeedNeededMultiplier;
+            return Mathf.Abs(velocity.x + velocity.z) > -velocity.y;
         }
         
         private void Skip()
         {
-            Log("Skipp fish");
+            Log("***SkippingFish***");
             // TODO: Skipping SFX and VFX
             foreach (var child in fish.Children)
             {
-                child.Rigidbody.AddForce(new Vector3(0, fish.FishPool.FishRecord.FishScrub.ySkippSpeedAmount, 0));
+                var velocity = child.Rigidbody.velocity;
+                velocity = (new Vector3(velocity.x, -velocity.y, velocity.z));
+                child.Rigidbody.velocity = velocity;
             }
         }
         
