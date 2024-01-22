@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using FinalScripts;
 using FMODUnity;
 using UnityEngine;
@@ -13,13 +15,20 @@ namespace InDevelopment
         private bool _collidedPreviously;
         private ControllerManager _controllerManager;
         private string _whichFistUsed;
-        
+
+        private void Awake()
+        {
+            RuntimeManager.AttachInstanceToGameObject(FMODManager.instance.koiPunch, gameObject.transform, this.GetComponent<Rigidbody>());
+        }
+
         private void Start()
         {
             _controllerManager = GetComponentInParent<ControllerManager>();
             _whichFistUsed = gameObject.tag;
             
-            InternalZenEventManager.playChargeSfx += PlayChargeSFX;
+            InternalZenEventManager.playChargeSfx += PlayChargeSfx;
+            InternalZenEventManager.playChargeReadySfx += PlayChargeReadySfx;
+            InternalZenEventManager.playChargePunchSfx += PlayChargePunchSfxCoroutine;
         }
         
         private void OnCollisionEnter(Collision other)
@@ -56,14 +65,35 @@ namespace InDevelopment
 
         #region SFX
 
-        private void PlayChargeSFX()
+        private void PlayChargeSfx()
         {
-            RuntimeManager.AttachInstanceToGameObject(FMODManager.instance.koiPunch, gameObject.transform, this.GetComponent<Rigidbody>());
             FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 0);
             FMODManager.instance.koiPunch.setParameterByName("koiPunchImpactState", 0);
-            //do this for each hand
+            FMODManager.instance.koiPunch.start();
         }
         
+        private void PlayChargeReadySfx()
+        {
+            FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 1);
+            FMODManager.instance.koiPunch.setParameterByName("koiPunchImpactState", 1);
+        }
+        
+        private void PlayChargePunchSfxCoroutine()
+        {
+            StartCoroutine(PlayChargePunchSfx());
+        }
+
+        private IEnumerator PlayChargePunchSfx()
+        {
+            //do this in each hand :3
+            FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 2);
+            yield return new WaitForSecondsRealtime(4f);
+            FMODManager.instance.koiPunch.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            //this is for the vocals:
+            FMODManager.instance.koiPunchVocals.setParameterByName("koiPunchSoundState", 0);
+            yield return new WaitForSecondsRealtime(4f);
+            FMODManager.instance.koiPunchVocals.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
         #endregion
     }
 }
