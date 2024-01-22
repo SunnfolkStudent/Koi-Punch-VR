@@ -14,8 +14,9 @@ namespace InDevelopment.Fish.Trajectory
     public class PunchedFishScript : MonoBehaviour, IPunchable2
     {
         public FinalScripts.Fish.Fish fish;
+        public GameObject travelMarkPrefab;
         public GameObject landingMarkPrefab;
-        [SerializeField] private LineRenderer lineRenderer;
+        public LineRenderer lineRenderer;
         public LayerMask fishCollisionMask;
 
         [SerializeField] [Range(10, 100)] private int linePoints = 25;
@@ -25,20 +26,18 @@ namespace InDevelopment.Fish.Trajectory
         private Vector3 _startPos;
         private Vector3 _landingPos;
         
+        private float _timer;
         private float _landingTimer = 1.5f;
 
         private bool _punched;
-        [SerializeField] private bool createLandingMark = true;
-        [SerializeField] private bool enableTrajectoryLine = true;
-        [SerializeField] private bool fishAsleep = true;
-        
+        [SerializeField] private bool fishAsleep;
+
+        // Gravity constant
         private const float Gravity = -9.81f;
 
         private void Awake()
         {
             _rbFish = GetComponent<Rigidbody>();
-            lineRenderer = GetComponent<LineRenderer>();
-            lineRenderer.enabled = false;
 
             int fishLayer = fish.gameObject.layer;
             for (int i = 0; i < 32; i++)
@@ -70,6 +69,7 @@ namespace InDevelopment.Fish.Trajectory
 
         private void Update()
         {
+            _timer += Time.deltaTime;
             _landingTimer += Time.deltaTime;
         }
 
@@ -82,7 +82,7 @@ namespace InDevelopment.Fish.Trajectory
                     break;
                 case "Ground":
                     // fish.FishHitGround();
-                    FishMeetsGround();
+                    FishHitGround();
                     break;
                 case "LeftFist":
                     HapticManager.leftFishPunch = true;
@@ -112,10 +112,10 @@ namespace InDevelopment.Fish.Trajectory
             
         }
 
-        private void FishMeetsGround()
+        private void FishHitGround()
         {
             lineRenderer.enabled = false;
-            if (_landingTimer > 5f && createLandingMark)
+            if (_landingTimer > 1f)
             {
                 Instantiate(landingMarkPrefab, _rbFish.position, Quaternion.identity);
             }
@@ -123,9 +123,10 @@ namespace InDevelopment.Fish.Trajectory
             print($"Distance: {fishGroundPosition - _startPos} | LandingPos: {fishGroundPosition}");
             print($"Distance.magnitude: {(fishGroundPosition - _startPos).magnitude}");
             _landingTimer = 0;
-            
-            fish.FishHitGround();
         }
+        
+        // TODO: Integrate this finished code into the below comment, which is from the original script.
+        // TODO: Actually, make it a copy, cuz this testing set-up is good.
         
         /*public void PunchObject(ControllerManager controllerManager, string fistUsed)
         {
@@ -139,7 +140,7 @@ namespace InDevelopment.Fish.Trajectory
         public void PunchObject(BoxHandVelocity boxHandVelScript)
         {
             var v = boxHandVelScript.punchVelocity;
-            if (math.abs(v.magnitude) >= fish.fish.FishPool.FishRecord.FishScrub.successfulPunchThreshold) LaunchObject(v);
+            if (math.abs(v.magnitude) >= fish.fish.FishPool.FishRecord.FishSrub.successfulPunchThreshold) LaunchObject(v);
             else fish.Log("Punch Velocity was too weak");
         }
 
@@ -160,9 +161,9 @@ namespace InDevelopment.Fish.Trajectory
             fish.FishPunchedSuccessful();
 
             var direction = punchVelocity.normalized;
-            var punchForce = punchVelocity.magnitude * fish.fish.FishPool.FishRecord.FishScrub.punchVelMultiplier;
+            var punchForce = punchVelocity.magnitude * fish.fish.FishPool.FishRecord.FishSrub.punchVelMultiplier;
 
-            var forceDebuff = (punchVelocity.magnitude - fish.fish.FishPool.FishRecord.FishScrub.successfulPunchThreshold) + 0.70f;
+            var forceDebuff = (punchVelocity.magnitude - fish.fish.FishPool.FishRecord.FishSrub.successfulPunchThreshold) + 0.70f;
             forceDebuff = forceDebuff >= 1f ? 1f : forceDebuff;
             punchForce *= forceDebuff;
 
@@ -175,13 +176,10 @@ namespace InDevelopment.Fish.Trajectory
             SimulateTrajectory(fishLaunch);
         }
         
+        // TODO: Get the right variables updated from when launching fish.
         private void SimulateTrajectory(Vector3 fishLaunch)
         {
             lineRenderer.enabled = true;
-            if (!enableTrajectoryLine)
-            {
-                lineRenderer.material = null;
-            }
             lineRenderer.positionCount = Mathf.CeilToInt(linePoints / timeBetweenPoints) + 1;
             Vector3 startPosition = _startPos;
             Vector3 startVelocity = fishLaunch / _rbFish.mass; 
@@ -207,11 +205,12 @@ namespace InDevelopment.Fish.Trajectory
             }
         }
 
-        /*LaunchData CalculateLaunchData(Vector3 fishLaunch)
+        LaunchData CalculateLaunchData(Vector3 fishLaunch)
         {
             var launchSpeed = fishLaunch.magnitude;
             var fishLaunchNormalized = fishLaunch.normalized;
 
+            // TODO: Fix the below code to have 1 unified xz-Vector.
             float launchAngle = Mathf.Acos(fishLaunchNormalized.x * fishLaunchNormalized.y);
 
             float radianAngle = Mathf.Deg2Rad * launchAngle;
@@ -223,7 +222,7 @@ namespace InDevelopment.Fish.Trajectory
             return launchData;
         }
 
-        LaunchData CalculateLaunchData(float punchSpeed, float launchAngle)
+        /*LaunchData CalculateLaunchData(float punchSpeed, float launchAngle)
         {
             float radianAngle = Mathf.Deg2Rad * launchAngle;
             float totalTime = (2f * punchSpeed * Mathf.Sin(radianAngle)) / Mathf.Abs(Gravity);
@@ -232,7 +231,7 @@ namespace InDevelopment.Fish.Trajectory
 
             LaunchData launchData = new LaunchData(totalTime, maxHeight);
             return launchData;
-        }
+        }*/
 
         private struct LaunchData
         {
@@ -244,6 +243,6 @@ namespace InDevelopment.Fish.Trajectory
                 TimeToTarget = timeToTarget;
                 ApexHeight = apexHeight;
             }
-        } */
+        }
     }
 }

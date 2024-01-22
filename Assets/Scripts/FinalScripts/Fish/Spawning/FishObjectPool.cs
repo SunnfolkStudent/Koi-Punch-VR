@@ -7,7 +7,7 @@ namespace FinalScripts.Fish.Spawning
 {
     public class FishObjectPool : MonoBehaviour
     {
-        [SerializeField] private FishScrub[] fishTypes;
+        [SerializeField] private FishSrub[] fishTypes;
         private static List<FishPool> _fishPools;
         private static Transform _fishContainer;
         
@@ -16,9 +16,9 @@ namespace FinalScripts.Fish.Spawning
         {
             _fishContainer = transform.GetChild(0);
             _fishPools = new List<FishPool>();
-            foreach (var fishScrub in fishTypes)
+            foreach (var fishSrub in fishTypes)
             {
-                _fishPools.Add(new FishPool(fishScrub));
+                _fishPools.Add(new FishPool(fishSrub));
             }
             FishSpawnType.InitializeFishSpawnTypes(_fishPools);
         }
@@ -32,12 +32,12 @@ namespace FinalScripts.Fish.Spawning
             public float Weight;
             public int TimesSpawned;
             
-            public FishPool(FishScrub fishScrub)
+            public FishPool(FishSrub fishSrub)
             {
-                FishRecord = new FishRecord(fishScrub);
+                FishRecord = new FishRecord(fishSrub);
                 Fishes = new List<Fish>();
-                AddMultipleFishToPool(fishScrub.initialAmountInPool, this);
-                Weight = fishScrub.weightInRandomTable;
+                AddMultipleFishToPool(fishSrub.initialAmountInPool, this);
+                Weight = fishSrub.weightInRandomTable;
                 TimesSpawned = 0;
             }
         }
@@ -45,14 +45,14 @@ namespace FinalScripts.Fish.Spawning
         #region >>>---FishRecord---
         public record FishRecord
         {
-            public readonly FishScrub FishScrub;
+            public readonly FishSrub FishSrub;
             public readonly FishRecordChild[] Children;
             
-            public FishRecord(FishScrub fishScrub)
+            public FishRecord(FishSrub fishSrub)
             {
-                FishScrub = fishScrub;
-                if (!fishScrub.prefab.GetComponent<FinalScripts.Fish.Fish>()) fishScrub.prefab.AddComponent<FinalScripts.Fish.Fish>();
-                Children = fishScrub.prefab.gameObject.GetComponentsInChildren<Transform>().Select(transform1 => new FishRecordChild(transform1)).ToArray();
+                FishSrub = fishSrub;
+                if (!fishSrub.prefab.GetComponent<FinalScripts.Fish.Fish>()) fishSrub.prefab.AddComponent<FinalScripts.Fish.Fish>();
+                Children = fishSrub.prefab.gameObject.GetComponentsInChildren<Transform>().Select(transform1 => new FishRecordChild(transform1)).ToArray();
             }
         }
         
@@ -79,7 +79,7 @@ namespace FinalScripts.Fish.Spawning
             public Fish(FishPool fishPool)
             {
                 FishPool = fishPool;
-                ParentGameObject = Instantiate(fishPool.FishRecord.FishScrub.prefab, _fishContainer);
+                ParentGameObject = Instantiate(fishPool.FishRecord.FishSrub.prefab, _fishContainer);
                 ParentGameObject.SetActive(false);
                 ParentGameObject.GetComponent<FinalScripts.Fish.Fish>().fish = this;
                 Children = ParentGameObject.GetComponentsInChildren<Transform>().Select(transform1 => new Child(transform1)).ToArray();

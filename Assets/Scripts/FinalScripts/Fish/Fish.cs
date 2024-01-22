@@ -11,19 +11,6 @@ namespace FinalScripts.Fish
         private Vector3 _punchedPosition; // Compared with landing position to calculate distance
         private float _startTime;
         
-        [Header("Trajectory Line:")]
-        // [SerializeField] private LineRenderer lineRenderer; // LineRenderer to help calculate distance for fish
-        public LayerMask fishCollisionMask;
-        [SerializeField] [Range(10, 100)] private int linePoints = 25;
-        [SerializeField] [Range(0.01f, 0.25f)] private float timeBetweenPoints = 0.1f;
-
-        private Rigidbody _rbFish;
-        private Vector3 _startPos;
-        private Vector3 _landingPos;
-        
-        private float _landingTimer = 1.5f;
-        [SerializeField] private bool enableTrajectoryLine;
-        
         #region ---States---
         [HideInInspector] public bool hasBeenPunchedSuccessfully;
         [HideInInspector] public bool hasBeenPunchedUnsuccessfully;
@@ -40,47 +27,14 @@ namespace FinalScripts.Fish
         #endregion
         
         #region ---Initialization---
-
         private void Start()
         {
-            _rbFish = GetComponentInChildren<Rigidbody>();
-            
-            if (!TryGetComponent(out Rigidbody rigidbodyPart))
-            { _rbFish = GetComponentInChildren<Rigidbody>(); }
-            else
-            { _rbFish = rigidbodyPart; }
-            
             var c = GetComponentsInChildren<Transform>();
-            
             foreach (var child in c)
             {
                 var fishChild = child.gameObject.AddComponent<FishChild>();
                 fishChild.fish = this;
             }
-            
-            // Put the below lines in Awake() if faulty:
-            /*if (TryGetComponent(out LineRenderer lineRenderComponent))
-            { lineRenderer = lineRenderComponent; }
-            else
-            { lineRenderer = GetComponent<LineRenderer>(); }
-            
-            lineRenderer.enabled = false;*/
-            int fishLayer = gameObject.layer;
-            
-            for (int i = 0; i < 32; i++)
-            {
-                if (!Physics.GetIgnoreLayerCollision(fishLayer, i))
-                {
-                    fishCollisionMask |= 1 << i;
-                }
-            }
-            _startPos = _rbFish.position;
-            print($"StartPos in worldSpace: {_startPos} | StartPos Reset: {_startPos - _startPos}");
-        }
-        
-        private void FixedUpdate()
-        {
-            _landingPos += _rbFish.position;
         }
 
         private void OnEnable()
@@ -107,17 +61,16 @@ namespace FinalScripts.Fish
         #region ---FishActions---
         private void Update()
         {
-            _landingTimer += Time.deltaTime;
-            // DespawnIfOutOfTimeOrTooLow();
+            DespawnIfOutOfTimeOrTooLow();
         }
         
-        /*private void DespawnIfOutOfTimeOrTooLow()
+        private void DespawnIfOutOfTimeOrTooLow()
         {
-            if (transform.position.y > fish.FishPool.FishRecord.FishScrub.despawnAltitude && 
-                _startTime > Time.time - fish.FishPool.FishRecord.FishScrub.despawnTime) return;
+            if (transform.position.y > fish.FishPool.FishRecord.FishSrub.despawnAltitude && 
+                _startTime > Time.time - fish.FishPool.FishRecord.FishSrub.despawnTime) return;
             Log("De-spawned: either to time or y altitude to low");
             Despawn();
-        }*/
+        }
         
         private void Despawn()
         {
@@ -131,9 +84,8 @@ namespace FinalScripts.Fish
             _hasHitBird = true;
             // TODO: FMODManager.instance.PlayOneShot("event:/SFX/FishSounds/FishSlap", transform.position);
             // TODO: Play Obstacle VFX
-            EventManager.GainScore.Invoke(fish.FishPool.FishRecord.FishScrub.scoreFromHittingBird);
+            EventManager.GainScore.Invoke(fish.FishPool.FishRecord.FishSrub.scoreFromHittingBird);
         }
-        #endregion
         
         #region >>>---Water---
         public void FishHitWater(Vector3 velocity)
@@ -168,7 +120,7 @@ namespace FinalScripts.Fish
             var ySpeed = velocity.y;
             var fSpeed = Mathf.Abs(velocity.magnitude - ySpeed);
             
-            return attackAngle < fish.FishPool.FishRecord.FishScrub.attackAngleMaximum && fSpeed > ySpeed * fish.FishPool.FishRecord.FishScrub.fSpeedNeededMultiplier;
+            return attackAngle < fish.FishPool.FishRecord.FishSrub.attackAngleMaximum && fSpeed > ySpeed * fish.FishPool.FishRecord.FishSrub.fSpeedNeededMultiplier;
         }
         
         private void Skip()
@@ -177,7 +129,7 @@ namespace FinalScripts.Fish
             // TODO: Skipping SFX and VFX
             foreach (var child in fish.Children)
             {
-                child.Rigidbody.AddForce(new Vector3(0, fish.FishPool.FishRecord.FishScrub.ySkippSpeedAmount, 0));
+                child.Rigidbody.AddForce(new Vector3(0, fish.FishPool.FishRecord.FishSrub.ySkippSpeedAmount, 0));
             }
         }
         
@@ -211,7 +163,7 @@ namespace FinalScripts.Fish
                 EventManager.FishScore(dist, hasBeenPunchedSuccessfully);
             }
             Log("De-spawning: hit ground");
-            // StartCoroutine(DespawnAfterTime(fish.FishPool.FishRecord.FishScrub.despawnDelay));
+            StartCoroutine(DespawnAfterTime(fish.FishPool.FishRecord.FishSrub.despawnDelay));
         }
         
         private IEnumerator DespawnAfterTime(float time)
@@ -228,8 +180,8 @@ namespace FinalScripts.Fish
             // TODO: FMODManager.instance.PlayOneShot("event:/SFX/Voice/PlayerHit");
             // TODO: Add Slime shader to camera
             _hasHitPlayer = true;
-            EventManager.GainScore(-fish.FishPool.FishRecord.FishScrub.damageAmount);
-            ZenMetreManager.Instance.RemoveZen(fish.FishPool.FishRecord.FishScrub.zenLostByHit);
+            EventManager.GainScore(-fish.FishPool.FishRecord.FishSrub.damageAmount);
+            ZenMetreManager.Instance.RemoveZen(fish.FishPool.FishRecord.FishSrub.zenLostByHit);
         }
         
         public void FishPunchedSuccessful()
@@ -239,7 +191,7 @@ namespace FinalScripts.Fish
             // TODO: Play FishScaleVFX
             hasBeenPunchedSuccessfully = true;
             _punchedPosition = transform.position;
-            // EventManager.GainScore(fish.FishPool.FishRecord.FishScrub.baseScoreAmount);
+            // EventManager.GainScore(fish.FishPool.FishRecord.FishSrub.baseScoreAmount);
             GainZen();
         }
 
@@ -251,44 +203,10 @@ namespace FinalScripts.Fish
         
         private void GainZen()
         {
-            ZenMetreManager.Instance.AddHitZen(fish.FishPool.FishRecord.FishScrub.zenGainedFromPunched);
-            Log("Zen gained: " + fish.FishPool.FishRecord.FishScrub.zenGainedFromPunched);
+            ZenMetreManager.Instance.AddHitZen(fish.FishPool.FishRecord.FishSrub.zenGainedFromPunched);
+            Log("Zen gained: " + fish.FishPool.FishRecord.FishSrub.zenGainedFromPunched);
         }
         #endregion
-        
-        #region ---SimulateTrajectory---
-        /*public void SimulateTrajectory(Vector3 fishLaunch)
-        {
-            lineRenderer.enabled = true;
-            if (!enableTrajectoryLine)
-            {
-                lineRenderer.material = null;
-            }
-            lineRenderer.positionCount = Mathf.CeilToInt(linePoints / timeBetweenPoints) + 1;
-            Vector3 startPosition = _startPos;
-            Vector3 startVelocity = fishLaunch;
-            int i = 0;
-            lineRenderer.SetPosition(i, startPosition);
-            for (float time = 0; time < linePoints; time += timeBetweenPoints)
-            {
-                i++;
-                Vector3 point = startPosition + time * startVelocity;
-                point.y = startPosition.y + startVelocity.y * time + (Physics.gravity.y / 2f * time * time);
-
-                lineRenderer.SetPosition(i, point);
-
-                Vector3 lastPosition = lineRenderer.GetPosition(i - 1);
-
-                if (Physics.Raycast(lastPosition, (point - lastPosition).normalized,
-                        out RaycastHit hit, (point - lastPosition).magnitude, fishCollisionMask))
-                {
-                    lineRenderer.SetPosition(i, hit.point);
-                    lineRenderer.positionCount = i + 1;
-                    print($"Estimated Landing Position: {lastPosition}");
-                    return;
-                }
-            }
-        }*/
         #endregion
     }
 }
