@@ -16,6 +16,7 @@ namespace FinalScripts.Fish.BossBattle
         private Rigidbody[] _rigidities;
         private static BossPhase _currentBossState;
         private bool _bossIsDead;
+        private bool _hasSaidPhase0VoiceLine;
         
         #region ---InspectorSettings---
         [Header("Delay")]
@@ -102,8 +103,13 @@ namespace FinalScripts.Fish.BossBattle
         #region >>>---BossPhasesStart---
         private IEnumerator OnSpawn()
         {
-            // TODO: FMODManager.instance.zenMusic.setParameterByName("zenLevel", 0);
-            // TODO: FMODManager.instance.zenMusic.start()
+            FMODManager.instance.zenMusic.setParameterByName("zenLevel", 0);
+            FMODManager.instance.zenMusic.start();
+            if (!_hasSaidPhase0VoiceLine)
+            {
+                FMODManager.instance.PlayOneShot("event:/SFX/FishSounds/DragonRyu", transform.position);
+                _hasSaidPhase0VoiceLine = true;
+            }
             yield return new WaitForSeconds(phase0Delay);
             EventManager.StartBossPhase0.Invoke();
         }
@@ -111,7 +117,7 @@ namespace FinalScripts.Fish.BossBattle
         private void Phase0()
         {
             _currentBossState = BossPhase.Phase0;
-            // TODO: FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/BossSpawn");
+            FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/BossSpawn");
             StartCoroutine(AttackWithDelay());
         }
         
@@ -133,22 +139,22 @@ namespace FinalScripts.Fish.BossBattle
         
         private void Phase1()
         {
-            // TODO: FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/PunchTheWeakpoints");
+            FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/PunchTheWeakpoints");
             Score = 0;
             _currentBossState = BossPhase.Phase1;
         }
         
         private void Phase2()
         {
-            // TODO: FMODManager.instance.zenMusic.setParameterByName("zenLevel", 1);
+            FMODManager.instance.zenMusic.setParameterByName("zenLevel", 1);
             Score = 0;
             _currentBossState = BossPhase.Phase2;
         }
         
         private void Phase3()
         {
-            // TODO: FMODManager.instance.zenMusic.setParameterByName("zenLevel", 2);
-            // TODO: FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/BossPhase3");
+            FMODManager.instance.zenMusic.setParameterByName("zenLevel", 2);
+            FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/BossPhase3");
             Score = 0;
             _currentBossState = BossPhase.Phase3;
         }
@@ -211,7 +217,7 @@ namespace FinalScripts.Fish.BossBattle
         private void Phase2Hit()
         {
             Log("Phase 2 hit");
-            // TODO: FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/BossPhase2");
+            FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/BossPhase2");
             Score += scorePerHitPhase2;
             ZenMetreManager.Instance.AddHitZen(zenPerHitPhase2);
         }
@@ -233,15 +239,15 @@ namespace FinalScripts.Fish.BossBattle
             var totalScore = (int)(force.magnitude + Phase.Sum(pair => pair.Value.score));
             Log($"BossDefeated | TotalScore: {totalScore}");
             EventManager.GainScore.Invoke(totalScore);
-
-            StartCoroutine(PuuuunchSound());
+            
+            StartCoroutine(PunchSound());
         }
-
-        private IEnumerator PuuuunchSound()
+        
+        private static IEnumerator PunchSound()
         {
-            // TODO: FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 1);
+            FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 1);
             yield return new WaitForSeconds(4);
-            // TODO: FMODManager.instance.koiPunch.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            FMODManager.instance.koiPunch.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
         #endregion
         #endregion
@@ -257,6 +263,7 @@ namespace FinalScripts.Fish.BossBattle
                 }
                 else
                 {
+                    Debug.LogError("Collision with ground resetting boss to phase0");
                     EventManager.StartBossPhase0.Invoke();
                 }
             }

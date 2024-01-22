@@ -1,6 +1,4 @@
 using UnityEngine;
-//using FMOD.Studio;
-//using FMODUnity;
 
 public class SpecialAttackScript : MonoBehaviour
 {
@@ -36,7 +34,9 @@ public class SpecialAttackScript : MonoBehaviour
             
             InternalZenEventManager.startChargeVfx.Invoke();
             
-            //TODO: PLAY "KOOOOOOOOOOOOOOOOOOOOOOOOO"
+            FMODManager.instance.koiPunchVocals.setParameterByName("koiPunchSoundState", 0);
+            FMODManager.instance.koiPunchVocals.start();
+            InternalZenEventManager.playChargeSfx.Invoke();
         }
         
         //IF BUTTON WAS RELEASED
@@ -51,9 +51,7 @@ public class SpecialAttackScript : MonoBehaviour
             HapticManager.zenCharge = false;
             CalculatePunchForce();
             
-            //TODO: STOP PLAYING "KOOOOOOOOOOOOOOOOOOOOOOOOO"
-            //FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 1);
-            //FMODManager.instance.koiPunch.setParameterByName("koiPunchImpactState", 1);
+            InternalZenEventManager.playChargeReadySfx.Invoke();
         }
         
         if (chargingPunch && !punchCharged)
@@ -75,10 +73,7 @@ public class SpecialAttackScript : MonoBehaviour
                 HapticManager.zenCharge = false;
                 CalculatePunchForce();
                 
-                //TODO: STOP PLAYING "KOOOOOOOOOOOOOOOOOOOOOOOOO"
-                //FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 1);
-                //FMODManager.instance.koiPunch.setParameterByName("koiPunchImpactState", 1);
-                //TODO: PS: THERE IS NO DUPLICATE. EITHER THIS RUNS OR THE OTHER ONE. NOT BOTH
+                InternalZenEventManager.playChargeReadySfx.Invoke();
             }
             
             InternalZenEventManager.updateVisualZenBar.Invoke();

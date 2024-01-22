@@ -11,4 +11,8 @@ public static class InternalZenEventManager
 
    public static InternalZenEvents startChargeVfx;
    public static InternalZenEvents stopChargeVfx;
+
+   public static InternalZenEvents playChargeSfx;
+   public static InternalZenEvents playChargeReadySfx;
+   public static InternalZenEvents playChargePunchSfx;
 }

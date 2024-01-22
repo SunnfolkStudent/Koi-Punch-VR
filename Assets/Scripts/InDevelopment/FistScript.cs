@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using FinalScripts;
 using UnityEngine;
 
@@ -12,7 +14,7 @@ namespace InDevelopment
         private bool _collidedPreviously;
         private ControllerManager _controllerManager;
         private string _whichFistUsed;
-        
+
         private void Start()
         {
             _controllerManager = GetComponentInParent<ControllerManager>();
