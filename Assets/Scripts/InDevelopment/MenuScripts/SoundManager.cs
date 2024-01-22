@@ -37,16 +37,12 @@ public class SoundManager : MonoBehaviour
 
     public void SetMusicVolume()
     {
-        // TODO RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
-        
         _musicSliderPos = PlayerPrefs.GetFloat("MusicVolume") - 0.5f;
         _musicSlider.transform.localPosition = new Vector3(transform.localPosition.x - _musicSliderPos, -0.1f, 0);
     }
 
     public void SetSFXVolume()
     {
-        // TODO RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/Gong", transform.position);
-        
         _sFXSliderPos = PlayerPrefs.GetFloat("SFXVolume") - 0.5f;
         _sFXSlider.transform.localPosition = new Vector3(transform.localPosition.x - _sFXSliderPos, -0.1f, 0);
     }
