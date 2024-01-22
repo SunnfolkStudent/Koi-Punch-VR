@@ -12,120 +12,51 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private GameObject textPrefab;
     [SerializeField] private GameObject textSpawner;
     [SerializeField] private GameObject multiplierVisual;
-    //[SerializeField] public float moveSpeed { get; private set; } = 5f;
 
-    public float multiplierTime;
-    public bool multiplierOn;
+    private int _distanceConverted;
+
+    [SerializeField] private float multiplierTime;
+    [SerializeField] private bool multiplierOn;
 
     private void Start()
     {
         fishPunchPoints = distancePoints = bonusPoints = penaltyPoints = zenPoints = 0;
-        //EventManager.BossDefeatedTotalScore += ZenEnd();
+        //EventManager.BossDefeatedTotalScore += ZenEnd;
+        EventManager.FishScore += FishPunch;
     }
-    
-    /******************************************/
-    
-    //Successful or Failed Fish punch
-    //successful punch = 10 points
-    //failed punch = - point
-    //add to fishPunchPoints int (check if multiplier on)
-    public void FishPunch(bool successful)
+    public void FishPunch(float distance, bool successFullPunch)
     {
-        if (successful)
+        if (successFullPunch)
         {
-            if (multiplierOn)
-                fishPunchPoints += 20;
-            else
-                fishPunchPoints += 10;
+            fishPunchPoints += 10;
         }
         else
         {
             penaltyPoints -= 5;
         }
-    }
-    
-    /*Function on fish/fist to get successful/unsuccessful punch points
-     *
-     * _scoreManager.FishPunch(success bool);
-     * 
-     */
 
-    /*********************************************/
-    
-    //Player hit by fish
-    //each hit is subtracted from hitByFish int
-    public void HitByFish()
-    {
-        penaltyPoints -= 1;
-    }
-    
-    /*Function on Fish/body to show hit by fish
-     *
-     * _scoreManager.HitByFish();
-     */
-    
-    /*********************************************/
-
-    //Fish hitting ground after being hit + distance from player
-    //distance from player converted into points (check if multiplier on)
-    //distance number, location and color of text sent to floating text
-    //points added to distancePoints int
-    public void DistancePoints(int distance)
-    {
-        if (multiplierOn)
-            distance *= 2;
-
-        distancePoints += distance;
+        //penalties for bad distance, bad hit, or both?
         
-        FloatingText("+" + distance, Color.green);
+        _distanceConverted = (int)distance;
+        
+        distancePoints += _distanceConverted;
+        
+        FloatingText("+" + _distanceConverted, Color.green);
     }
-    
-    /*Function on Fish? script to get distance points
-     *
-     *_scoreManager.DistancePoints(distance);
-     * 
-     */
-    
-    /*************************************************/
-
-    //Fish hit bird/other multiplier started
-    //multiplier multiplier IEnumerator turned on (added visuals turned on)
-    //points for hitting other calculated (check if multiplier on)
-    //points number, location and color of text sent to floating text
-    //points added to bonusPoints int
+    public void HitByFish(int minusScore)
+    {
+        penaltyPoints -= minusScore;
+    }
     public void BonusHit(int pointsGiven)
     {
-        multiplierTime += 10;
-        if(!multiplierOn)
-            StartCoroutine(Multiplier());
-        
-        if (multiplierOn)
-            pointsGiven *= 2;
-
         bonusPoints += pointsGiven;
 
-        FloatingText("+" + pointsGiven, new Color(255, 215, 0) );
+        FloatingText("+" + pointsGiven, new Color32(255, 215, 0,255) );
     }
-    
-    /*Function on Fish/bird/? to get points and start multiplier
-     *
-     * _scoreManager.BonusHit(pointsGiven);
-     */
-    
-    /************************************************/
-
-    //Zen points are added to the zen score
-
     public void ZenEnd(int allZenPoints)
     {
         zenPoints += allZenPoints;
     }
-    
-    /*****************************************/
-    
-    //Floating text
-    //takes number/text, location and color and creates a floating text object
-    
     private void FloatingText(string msg, Color txtColor)
     {
         GameObject instantiated = Instantiate(textPrefab, textSpawner.transform.position,
@@ -134,15 +65,7 @@ public class ScoreManager : MonoBehaviour
         FloatingTxt.text = msg;
         FloatingTxt.color = txtColor;
     }
-    
-    /*********************************************/
-    
-    //multiplier
-    //turn multiplier bool true
-    //wait for multiplier timer to go down
-    //turn multiplier bool false
-
-    private IEnumerator Multiplier()
+    /*private IEnumerator Multiplier()
     {
         multiplierOn = true;
         multiplierVisual.SetActive(true);
@@ -155,7 +78,7 @@ public class ScoreManager : MonoBehaviour
         multiplierTime = 0;
         multiplierOn = false;
         multiplierVisual.SetActive(false);
-    }
+    }*/
         
     //multiplier visuals
 }

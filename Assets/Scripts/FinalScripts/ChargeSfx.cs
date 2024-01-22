@@ -37,7 +37,7 @@ public class ChargeSfx : MonoBehaviour
         StartCoroutine(PlayChargePunchSfx());
     }
 
-    private IEnumerator PlayChargePunchSfx()
+    public static IEnumerator PlayChargePunchSfx()
     {
         //do this in each hand :3
         FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 2);
