@@ -1,4 +1,6 @@
 using FinalScripts;
+using FMODUnity;
+using FMOD.Studio;
 using UnityEngine;
 
 namespace InDevelopment
@@ -17,6 +19,8 @@ namespace InDevelopment
         {
             _controllerManager = GetComponentInParent<ControllerManager>();
             _whichFistUsed = gameObject.tag;
+            
+            InternalZenEventManager.playChargeSfx += PlayChargeSFX;
         }
         
         private void OnCollisionEnter(Collision other)
@@ -50,5 +54,20 @@ namespace InDevelopment
                 _collidedPreviously = true;
             }
         }
+
+        #region SFX
+
+        private void PlayChargeSFX()
+        {
+            RuntimeManager.AttachInstanceToGameObject(FMODManager.instance.koiPunch, gameObject.transform, this.GetComponent<Rigidbody>());
+            FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 0);
+            FMODManager.instance.koiPunch.setParameterByName("koiPunchImpactState", 0);
+            //do this for each hand
+            //when charge ready:
+            FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 1);
+            FMODManager.instance.koiPunch.setParameterByName("koiPunchImpactState", 1);
+        }
+        
+        #endregion
     }
 }
