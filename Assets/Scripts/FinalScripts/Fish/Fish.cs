@@ -45,13 +45,13 @@ namespace FinalScripts.Fish
         {
             _rbFish = GetComponentInChildren<Rigidbody>();
             
-            if (TryGetComponent(out Rigidbody rigidbodyPart))
-            { _rbFish = rigidbodyPart; }
-            else
+            if (!TryGetComponent(out Rigidbody rigidbodyPart))
             { _rbFish = GetComponentInChildren<Rigidbody>(); }
-
+            else
+            { _rbFish = rigidbodyPart; }
+            
             var c = GetComponentsInChildren<Transform>();
-                
+            
             foreach (var child in c)
             {
                 var fishChild = child.gameObject.AddComponent<FishChild>();
@@ -108,16 +108,16 @@ namespace FinalScripts.Fish
         private void Update()
         {
             _landingTimer += Time.deltaTime;
-            DespawnIfOutOfTimeOrTooLow();
+            // DespawnIfOutOfTimeOrTooLow();
         }
         
-        private void DespawnIfOutOfTimeOrTooLow()
+        /*private void DespawnIfOutOfTimeOrTooLow()
         {
             if (transform.position.y > fish.FishPool.FishRecord.FishScrub.despawnAltitude && 
                 _startTime > Time.time - fish.FishPool.FishRecord.FishScrub.despawnTime) return;
             Log("De-spawned: either to time or y altitude to low");
             Despawn();
-        }
+        }*/
         
         private void Despawn()
         {
@@ -211,7 +211,7 @@ namespace FinalScripts.Fish
                 EventManager.FishScore(dist, hasBeenPunchedSuccessfully);
             }
             Log("De-spawning: hit ground");
-            StartCoroutine(DespawnAfterTime(fish.FishPool.FishRecord.FishScrub.despawnDelay));
+            // StartCoroutine(DespawnAfterTime(fish.FishPool.FishRecord.FishScrub.despawnDelay));
         }
         
         private IEnumerator DespawnAfterTime(float time)

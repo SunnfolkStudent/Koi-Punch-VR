@@ -123,10 +123,10 @@ namespace FinalScripts.Fish
 
         private void FishMeetsGround()
         {
-            if (_landingTimer > 5f && createLandingMark)
+            /*if (_landingTimer > 5f && createLandingMark)
             {
                 Instantiate(landingMarkPrefab, _rbFishPart.position, Quaternion.identity);
-            }
+            }*/
             var fishGroundPosition = _rbFishPart.position;
             print($"Distance: {fishGroundPosition - _startPos} | LandingPos: {fishGroundPosition}");
             print($"Distance.magnitude: {(fishGroundPosition - _startPos).magnitude}");
