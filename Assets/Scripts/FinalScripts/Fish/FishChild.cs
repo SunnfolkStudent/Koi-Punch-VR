@@ -10,14 +10,8 @@ namespace FinalScripts.Fish
      }
     public class FishChild : MonoBehaviour, IPunchable
     {
-        // TODO: Transfer LineRenderer to Fish Script, and reference it through the fishChild scripts.
-        
         public Fish fish;
         public GameObject landingMarkPrefab;
-        public LayerMask fishCollisionMask;
-
-        [SerializeField] [Range(10, 100)] private int linePoints = 25;
-        [SerializeField] [Range(0.01f, 0.25f)] private float timeBetweenPoints = 0.1f;
         
         private Rigidbody _rbFishPart;
         private bool _rigidbodyFound;
@@ -27,18 +21,22 @@ namespace FinalScripts.Fish
         private float _landingTimer = 1.5f;
 
         private bool _punched;
-        [SerializeField] private bool enableTrajectoryLine;
-        [SerializeField] private bool createLandingMark = true;
-        [SerializeField] private bool fishAsleep = true;
+        [SerializeField] private bool fishAsleep;
 
         #region ---Initialization & Update---
         private void Awake()
         {
-            if (TryGetComponent(out Rigidbody rigidbodyPart))
+            if (TryGetComponent(out Rigidbody rb))
             {
-                _rbFishPart = rigidbodyPart;
+                 rb = _rbFishPart;
+                 _rbFishPart = GetComponent<Rigidbody>();
                 _rigidbodyFound = true;
             }
+           
+            /*if (TryGetComponent(out Rigidbody rigidbodyPart))
+            {
+                _rbFishPart = rigidbodyPart;
+            }*/
 
             /*int fishLayer = fish.gameObject.layer;
             for (int i = 0; i < 32; i++)
@@ -102,20 +100,14 @@ namespace FinalScripts.Fish
                 case "LeftFist":
                     HapticManager.leftFishPunch = false;
                     // We're updating the startPos based on when fish leaves the punch.
-                    if (_rigidbodyFound)
-                    {
-                        _startPos = _rbFishPart.position;
-                        print($"New StartPos in worldSpace: {_startPos} | StartPos Reset: {_startPos - _startPos}"); 
-                    }
+                    _startPos = _rbFishPart.position;
+                    print($"New StartPos in worldSpace: {_startPos} | StartPos Reset: {_startPos - _startPos}"); 
                     break;
                 case "RightFist":
                     HapticManager.rightFishPunch = false;
                     // We're updating the startPos based on when fish leaves the punch.
-                    if (_rigidbodyFound)
-                    {
-                        _startPos = _rbFishPart.position;
-                        print($"New StartPos in worldSpace: {_startPos} | StartPos Reset: {_startPos - _startPos}"); 
-                    }
+                    _startPos = _rbFishPart.position;
+                    print($"New StartPos in worldSpace: {_startPos} | StartPos Reset: {_startPos - _startPos}"); 
                     break;
             }
         }
@@ -163,12 +155,6 @@ namespace FinalScripts.Fish
 
         private void LaunchObject(Vector3 velocity)
         {
-            if (fishAsleep)
-            {
-                _rbFishPart.WakeUp();
-                fishAsleep = false;
-            }
-
             if (fish.hasBeenPunchedSuccessfully || fish.hasHitGround)
             {
                 fish.Log("Punch does not qualify as it has already been punched or hit the ground");
