@@ -97,11 +97,6 @@ public class FMODManager: MonoBehaviour
     {
         sfxBus.setVolume(sfxVolume);
         musicBus.setVolume(musicVolume);
-        
-        if (Input.GetKeyDown("space"))
-        {
-           SelectRandomPunchSound();
-        }
     }
 
     private void FixedUpdate()
