@@ -239,18 +239,18 @@ namespace FinalScripts.Fish.BossBattle
             _rigidbody.AddForce(force);
             EventManager.BossDefeated.Invoke();
             
+            StartCoroutine(PunchSound());
+            
             var totalScore = (int)(force.magnitude + Phase.Sum(pair => pair.Value.score));
             Log($"BossDefeated | TotalScore: {totalScore}");
             EventManager.GainScore.Invoke(totalScore);
-            
-            StartCoroutine(PunchSound());
         }
         
         private static IEnumerator PunchSound()
         {
-            FMODManager.instance.koiPunch.setParameterByName("koiPunchSoundState", 2);
+            FMODManager.instance.koiPunchVocals.setParameterByName("koiPunchSoundState", 2);
             yield return new WaitForSeconds(4);
-            FMODManager.instance.koiPunch.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            FMODManager.instance.koiPunchVocals.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
         #endregion
         #endregion
