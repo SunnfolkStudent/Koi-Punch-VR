@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using FinalScripts.Fish;
 using UnityEngine;
-using FMOD.Studio;
-using FMODUnity;
-using EventManager = FinalScripts.Fish.EventManager;
 
 public class ZenMetreManager : MonoBehaviour
 {
