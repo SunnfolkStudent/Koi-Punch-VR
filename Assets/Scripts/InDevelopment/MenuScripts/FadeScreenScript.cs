@@ -15,17 +15,24 @@ public class FadeScreenScript : MonoBehaviour
     {
         _image = GetComponent<Image>();
         _image.enabled = false;
-        
-        if (transitionOnStart)
+    }
+
+    public void FadeIn()
+    {
+        if (!isFishTransition)
         {
             _image.enabled = true;
+            _animator.Play("CircleTransitionAnimationEnter");
+        }
+        else
+        {
+            _image.enabled = true;
+            _animator.Play("FishTransitionAnimationEnter");
         }
     }
 
     public void FadeOut()
     {
-        _image.enabled = false;
-        
         if (!isFishTransition)
         {
             _image.enabled = true;
