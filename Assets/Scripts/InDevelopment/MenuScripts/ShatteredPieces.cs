@@ -20,6 +20,4 @@ public class ShatteredPieces : MonoBehaviour
         
         _rb.AddForce(other.rigidbody.velocity * 250);
     }
-    
-    
 }

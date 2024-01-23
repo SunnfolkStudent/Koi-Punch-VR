@@ -32,22 +32,19 @@ public class ScoreManager : MonoBehaviour
     }
     public void FishPunch(float distance, bool successFullPunch)
     {
-        if (successFullPunch)
-        {
-            fishPunchPoints += 10;
-        }
-        else
+        if (!successFullPunch)
         {
             penaltyPoints -= 5;
         }
-
-        //penalties for bad distance, bad hit, or both?
+        else
+        {
+            fishPunchPoints += 10;
+            
+            _distanceConverted = (int)distance;
+            distancePoints += _distanceConverted;
         
-        _distanceConverted = (int)distance;
-        
-        distancePoints += _distanceConverted;
-        
-        FloatingText("+" + _distanceConverted, Color.green);
+            FloatingText("+" + _distanceConverted, Color.green);
+        }
     }
     public void HitByFish(int minusScore)
     {

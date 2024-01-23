@@ -1,51 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &26889472592842959
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6243410772207375839}
-  - component: {fileID: 5501654013943292417}
-  m_Layer: 0
-  m_Name: SoundManager
-  m_TagString: SoundManager
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6243410772207375839
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 26889472592842959}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.024389047, y: 0.6846006, z: -0.22513771}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3248183195911850576}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5501654013943292417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 26889472592842959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3971c4682939b1949a0e27d83d1ede00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _musicSlider: {fileID: 1998888529538856589}
-  _sFXSlider: {fileID: 1732712114980728107}
 --- !u!1 &173211181037543266
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,7 +667,7 @@ GameObject:
   - component: {fileID: 4843666857412542}
   m_Layer: 0
   m_Name: SFXSlider
-  m_TagString: Untagged
+  m_TagString: SfxSlider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -883,7 +837,7 @@ GameObject:
   - component: {fileID: 2957429750688801808}
   m_Layer: 0
   m_Name: MusicSlider
-  m_TagString: Untagged
+  m_TagString: MusicSlider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1637,7 +1591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c905b894b6100924680d0f7034bf34d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundManager: {fileID: 5501654013943292417}
+  _soundManager: {fileID: 0}
   isMusic: 0
   isBig: 1
 --- !u!1 &2547783866951014841
@@ -1974,7 +1928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c905b894b6100924680d0f7034bf34d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundManager: {fileID: 5501654013943292417}
+  _soundManager: {fileID: 0}
   isMusic: 1
   isBig: 1
 --- !u!1 &2832524030164434867
@@ -2571,7 +2525,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 111972440605499178}
-  - {fileID: 6243410772207375839}
   - {fileID: 3820767784205730693}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3169,7 +3122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c905b894b6100924680d0f7034bf34d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundManager: {fileID: 5501654013943292417}
+  _soundManager: {fileID: 0}
   isMusic: 0
   isBig: 0
 --- !u!1 &4532379600947630792
@@ -7236,7 +7189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c905b894b6100924680d0f7034bf34d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundManager: {fileID: 5501654013943292417}
+  _soundManager: {fileID: 0}
   isMusic: 1
   isBig: 0
 --- !u!1 &8983997756287040371
