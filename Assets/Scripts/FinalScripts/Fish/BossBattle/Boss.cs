@@ -14,6 +14,7 @@ namespace FinalScripts.Fish.BossBattle
         private Animator _animator;
         private Rigidbody[] _rigidities;
         private static BossPhase _currentBossState;
+        private bool _canCollideWithGround;
         private bool _bossIsDead;
         private bool _hasSaidPhase0VoiceLine;
         private LayerMask _spawnAreaMask;
@@ -132,6 +133,7 @@ namespace FinalScripts.Fish.BossBattle
         private void Phase0()
         {
             _currentBossState = BossPhase.Phase0;
+            _canCollideWithGround = false;
             FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/BossSpawn");
             StartCoroutine(AttackWithDelay());
         }
@@ -176,6 +178,7 @@ namespace FinalScripts.Fish.BossBattle
             }
             
             _animator.enabled = false;
+            _canCollideWithGround = true;
             foreach (var rigidity in _rigidities)
             {
                 rigidity.useGravity = true;
@@ -355,6 +358,7 @@ namespace FinalScripts.Fish.BossBattle
 
         public void HitGround()
         {
+            if (!_canCollideWithGround) return;
             if (_bossIsDead)
             {
                 Destroy(gameObject);
