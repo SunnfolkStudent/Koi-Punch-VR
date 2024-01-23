@@ -98,7 +98,7 @@ namespace FinalScripts.Fish.BossBattle
 
         private static readonly Dictionary<BossPhase, PhaseInfo> Phase = new()
         {
-            { BossPhase.Phase1, new PhaseInfo(() => EventManager.StartBossPhase1.Invoke()) },
+            { BossPhase.Phase1, new PhaseInfo(() => EventManager.StartBossPhase2.Invoke()) },
             { BossPhase.Phase2, new PhaseInfo(() => EventManager.StartBossPhase2.Invoke()) },
             { BossPhase.Phase3, new PhaseInfo(() => EventManager.StartBossPhase3.Invoke()) }
         };
