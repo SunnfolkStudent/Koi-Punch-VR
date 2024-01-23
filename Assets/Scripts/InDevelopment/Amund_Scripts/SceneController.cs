@@ -17,8 +17,11 @@ public class SceneController : MonoBehaviour
     private float time;
     private bool ReadyToStart;
     
-    [SerializeField] private FadeScreenScript _fadeScreen;
-    [SerializeField] private FadeScreenScript _fishScreen;
+    [SerializeField] private GameObject _fadeScreen;
+    private Animator _fadeScreenAnim;
+    [SerializeField] private GameObject _fishScreen;
+    private Animator _fishScreenAnim;
+    [SerializeField] private GameObject _background;
     
     private static SceneController instance;
 
@@ -40,6 +43,8 @@ public class SceneController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         _title = GameObject.FindWithTag("Title");
+        _fadeScreenAnim = _fadeScreen.GetComponent<Animator>();
+        _fishScreenAnim = _fishScreen.GetComponent<Animator>();
     }
 
     private void Update()
@@ -72,17 +77,6 @@ public class SceneController : MonoBehaviour
         StartCoroutine(ChangeLevelStart());
     }
 
-    private IEnumerator ChangeLevelStart()
-    {
-        _fadeScreen.FadeOut();
-        yield return new WaitForSeconds(1.5f);
-        CheckStartScene();
-        FMODManager.instance.menuTheme.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        FMODManager.instance.ambientOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        SceneManager.LoadScene(Levels[startScene]);
-        _fadeScreen.FadeIn();
-    }
-
     private void CheckStartScene()
     {
         if (PlayerPrefs.GetInt("HighScoreLevelThree") > 0)
@@ -102,15 +96,28 @@ public class SceneController : MonoBehaviour
             startScene = 1;
         }
     }
-
+    private IEnumerator ChangeLevelStart()
+    {
+        _fadeScreen.SetActive(true);
+        _fadeScreenAnim.Play("CircleTransitionAnimationExit");
+        yield return new WaitForSeconds(3f);
+        CheckStartScene();
+        FMODManager.instance.menuTheme.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        FMODManager.instance.ambientOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        SceneManager.LoadScene(Levels[startScene]);
+        _fadeScreenAnim.Play("CircleTransitionAnimationStart");
+    }
     private IEnumerator ChangeLevelFish(int scene)
     {
-        _fishScreen.FadeOut();
-        yield return new WaitForSeconds(1.5f);
+        //_fishScreen.SetActive(true);
+        _fishScreenAnim.Play("FishTransitionAnimationExit");
+        yield return new WaitForSeconds(3f);
         Debug.Log("Changing scenes");
         FMODManager.instance.menuTheme.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         FMODManager.instance.ambientOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         SceneManager.LoadScene(Levels[scene]);
-        _fishScreen.FadeIn();
+        //_background.SetActive(false);
+        //_background.SetActive(true);
+        _fishScreenAnim.Play("FishTransitionAnimationStart");
     }
 }
