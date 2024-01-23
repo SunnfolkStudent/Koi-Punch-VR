@@ -60,6 +60,14 @@ namespace FinalScripts.Fish.BossBattle
         #region ---IPunchable---
         public void PunchObject(ControllerManager controllerManager, string fistUsed)
         {
+            if (Boss.CurrentBossState == Boss.BossPhase.Phase3)
+            {
+                var velocity = fistUsed == "LeftFist" ? controllerManager.leftControllerVelocity : controllerManager.rightControllerVelocity;
+                var force = velocity * 100;
+                
+                _rigidbody.AddForce(force, ForceMode.VelocityChange);
+            }
+            
             boss.Punched(controllerManager, fistUsed);
         }
         #endregion

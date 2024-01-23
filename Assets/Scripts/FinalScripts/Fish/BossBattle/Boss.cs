@@ -13,7 +13,7 @@ namespace FinalScripts.Fish.BossBattle
         private Transform _player;
         private Animator _animator;
         private Rigidbody[] _rigidities;
-        private static BossPhase _currentBossState;
+        public static BossPhase CurrentBossState;
         private bool _canCollideWithGround;
         private bool _bossIsDead;
         private bool _hasSaidPhase0VoiceLine;
@@ -87,7 +87,8 @@ namespace FinalScripts.Fish.BossBattle
         
         #region ---BossPhases---
         #region >>>---PhaseProperties---
-        private enum BossPhase
+
+        public enum BossPhase
         {
             Phase1,
             Phase2,
@@ -103,7 +104,7 @@ namespace FinalScripts.Fish.BossBattle
             { BossPhase.Phase3, new PhaseInfo(() => EventManager.StartBossPhase3.Invoke()) }
         };
 
-        private class PhaseInfo
+        public class PhaseInfo
         {
             public float score { get; set; }
             public readonly Action Event;
@@ -132,7 +133,7 @@ namespace FinalScripts.Fish.BossBattle
         
         private void Phase0()
         {
-            _currentBossState = BossPhase.Phase0;
+            CurrentBossState = BossPhase.Phase0;
             _canCollideWithGround = false;
             FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/BossSpawn");
             StartCoroutine(AttackWithDelay());
@@ -230,14 +231,14 @@ namespace FinalScripts.Fish.BossBattle
         {
             FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/PunchTheWeakpoints");
             Score = 0;
-            _currentBossState = BossPhase.Phase1;
+            CurrentBossState = BossPhase.Phase1;
         }
         
         private void Phase2()
         {
             FMODManager.instance.zenMusic.setParameterByName("zenLevel", 1);
             Score = 0;
-            _currentBossState = BossPhase.Phase2;
+            CurrentBossState = BossPhase.Phase2;
         }
         
         private void Phase3()
@@ -245,7 +246,7 @@ namespace FinalScripts.Fish.BossBattle
             FMODManager.instance.zenMusic.setParameterByName("zenLevel", 2);
             FMODManager.instance.PlayOneShot("event:/SFX/Voice/BossComments/BossPhase3");
             Score = 0;
-            _currentBossState = BossPhase.Phase3;
+            CurrentBossState = BossPhase.Phase3;
         }
         #endregion
         
@@ -259,9 +260,9 @@ namespace FinalScripts.Fish.BossBattle
         
         private void PhaseSuccessful()
         {
-            Phase[_currentBossState].score = Score;
-            Log($"boss phase: {_currentBossState} completed | invoke: {_currentBossState++}");
-            Phase[_currentBossState++].Event.Invoke();
+            Phase[CurrentBossState].score = Score;
+            Log($"boss phase: {CurrentBossState} completed | invoke: {CurrentBossState++}");
+            Phase[CurrentBossState++].Event.Invoke();
         }
         #endregion
         
@@ -330,7 +331,7 @@ namespace FinalScripts.Fish.BossBattle
         #region ---BossActions---
         public void Punched(ControllerManager controllerManager, string fistUsed)
         {
-            switch(_currentBossState){
+            switch(CurrentBossState){
                 case BossPhase.Phase0:
                     Phase0Hit();
                     break;
