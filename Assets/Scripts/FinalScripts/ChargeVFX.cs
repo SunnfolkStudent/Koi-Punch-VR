@@ -14,14 +14,15 @@ public class ChargeVFX : MonoBehaviour
         
         StopChargeVFX();
     }
-    
-    public void PlayChargeVFX()
+
+    private void PlayChargeVFX()
     {
+        Debug.Log("Playing Charge VFX");
         _chargeVFXLeft.Play();
         _chargeVFXRight.Play();
     }
-    
-    public void StopChargeVFX()
+
+    private void StopChargeVFX()
     {
         _chargeVFXLeft.Stop();
         _chargeVFXRight.Stop();

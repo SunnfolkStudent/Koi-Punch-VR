@@ -182,6 +182,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: -172813509643230911}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 59e64ca8026c1af48a4785bf68b9c7a0,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 444320649222328563}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 59e64ca8026c1af48a4785bf68b9c7a0,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -378735639400652628}
     - targetCorrespondingSourceObject: {fileID: 7036213049465896255, guid: 59e64ca8026c1af48a4785bf68b9c7a0,
         type: 3}
       insertIndex: -1
@@ -805,6 +813,79 @@ MonoBehaviour:
   hasBeenPunchedUnsuccessfully: 0
   hasHitGround: 0
   isDebugging: 0
+--- !u!54 &444320649222328563
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6656297611280775310}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!144 &-378735639400652628
+CharacterJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6656297611280775310}
+  serializedVersion: 3
+  m_ConnectedBody: {fileID: 852342952300049111}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_SwingAxis: {x: 0, y: 1, z: 0}
+  m_TwistLimitSpring:
+    spring: 0
+    damper: 0
+  m_LowTwistLimit:
+    limit: 0
+    bounciness: 0
+    contactDistance: 0
+  m_HighTwistLimit:
+    limit: 0
+    bounciness: 0
+    contactDistance: 0
+  m_SwingLimitSpring:
+    spring: 0
+    damper: 0
+  m_Swing1Limit:
+    limit: 0
+    bounciness: 0
+    contactDistance: 0
+  m_Swing2Limit:
+    limit: 0
+    bounciness: 0
+    contactDistance: 0
+  m_EnableProjection: 0
+  m_ProjectionDistance: 0.1
+  m_ProjectionAngle: 180
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &6982198649395659443 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3493458595592669036, guid: 59e64ca8026c1af48a4785bf68b9c7a0,
