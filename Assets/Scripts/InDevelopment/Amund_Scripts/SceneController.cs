@@ -59,7 +59,7 @@ public class SceneController : MonoBehaviour
         }
         if (_title.transform.position == _goal && ReadyToStart)
         {
-            FMODManager.instance.menuTheme.setParameterByName("PunchedThing", 1);
+            //FMODManager.instance.menuTheme.setParameterByName("PunchedThing", 1);
             Instantiate(secondStartSign);
             ReadyToStart = false;
         }
@@ -71,6 +71,7 @@ public class SceneController : MonoBehaviour
     public void StartGame()
     {
         ReadyToStart = true;
+        StartCoroutine("StartMenuMusic");
     }
     public void StartGameAfterIntro()
     {
@@ -119,5 +120,11 @@ public class SceneController : MonoBehaviour
         //_background.SetActive(false);
         //_background.SetActive(true);
         _fishScreenAnim.Play("FishTransitionAnimationStart");
+    }
+
+    private IEnumerator StartMenuMusic()
+    {
+        yield return new WaitForSeconds(.9f);
+        FMODManager.instance.menuTheme.setParameterByName("PunchedThing", 1);
     }
 }

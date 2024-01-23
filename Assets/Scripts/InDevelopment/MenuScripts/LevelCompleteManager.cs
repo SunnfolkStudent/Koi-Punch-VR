@@ -82,7 +82,7 @@ public class LevelCompleteManager : MonoBehaviour
       totalPoints = 0;
       
       if(!scoringOver)
-         InvokeRepeating("CalculateScore", 5f, .005f);
+         InvokeRepeating("CalculateScore", 3f, .05f);
    }
 
    private void Update()
