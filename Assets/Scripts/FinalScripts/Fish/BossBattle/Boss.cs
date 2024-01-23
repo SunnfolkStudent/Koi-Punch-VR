@@ -2,35 +2,36 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using FinalScripts.Fish.Spawning;
 using FinalScripts.Fish.Spawning.RandomWeightedTables;
 using UnityEngine;
 
 namespace FinalScripts.Fish.BossBattle
 {
-    public class Boss : MonoBehaviour, IPunchable
+    public class Boss : MonoBehaviour, IFish
     {
         private FishSpawnAreas _fishSpawnAreas;
         private Transform _player;
-        private Rigidbody _rigidbody;
+        private Animator _animator;
         private Rigidbody[] _rigidities;
         private static BossPhase _currentBossState;
         private bool _bossIsDead;
         private bool _hasSaidPhase0VoiceLine;
         private LayerMask _spawnAreaMask;
         
+        #region ---InspectorSettings---
         [Header("Spawn in FieldOfView")]
         [SerializeField] private float areaSearchRadius = 15;
         [SerializeField] private float viewAngle = 92;
         [SerializeField] private int maxSpawnAreas = 10;
         
-        #region ---InspectorSettings---
+        [Header("Attack")]
+        [SerializeField] private float speed = 15f;
+        [SerializeField] private float bossMoveInterval = 0.01f;
+        [SerializeField] private Vector3 spawnOffset = new(0, 2.25f, 0);
+        
         [Header("Delay")]
         [SerializeField] private float phase0Delay = 5f;
         [SerializeField] private float attackDelay = 5f;
-        
-        [Header("BossLaunch")]
-        [SerializeField] private float height;
         
         [Header("ZenGained")]
         [SerializeField] private int zenPerHitPhase2 = 5;
@@ -68,12 +69,19 @@ namespace FinalScripts.Fish.BossBattle
 
         private void Start()
         {
+            _rigidities = GetComponentsInChildren<Rigidbody>();
+            foreach (var rigidity in _rigidities)
+            {
+                var bossChild = rigidity.gameObject.AddComponent<BossChild>();
+                bossChild.boss = this;
+                rigidity.useGravity = false;
+            }
+            
             _player = GameObject.FindGameObjectWithTag("MainCamera").transform;
-            _rigidbody = GetComponent<Rigidbody>();
-            _rigidities = GetComponentsInChildren<Rigidbody>().ToArray();
+            _animator = GetComponent<Animator>();
             StartCoroutine(OnSpawn());
         }
-
+        
         #endregion
         
         #region ---BossPhases---
@@ -130,18 +138,64 @@ namespace FinalScripts.Fish.BossBattle
         
         private IEnumerator AttackWithDelay()
         {
-            yield return new WaitForSeconds(attackDelay);
-            Attack();
-        }
-        
-        private void Attack()
-        {
             var spawnPos = GetSpawnAreaPos();
-            transform.position = spawnPos;
-            var playerPosition = _player.position;
-            transform.LookAt(playerPosition, Vector3.up);
-            var velocity2D = FishTrajectory.TrajectoryVelocity2DFromPeakHeight(spawnPos, playerPosition, height);
-            FishSpawnManager.LaunchRigiditiesDirectionWithVelocityTowards(_rigidities, (playerPosition - spawnPos).normalized, velocity2D);
+            transform.position = spawnPos + spawnOffset;
+            _animator.enabled = false;
+
+            foreach (var rigidity in _rigidities)
+            {
+                rigidity.useGravity = false;
+                rigidity.velocity = Vector3.zero;
+            }
+            
+            yield return new WaitForSeconds(attackDelay);
+            StartCoroutine(MoveTowardsPlayer());
+        }
+
+        // TODO: fix why speed is build up upon respawning and position not actually set
+        private IEnumerator MoveTowardsPlayer()
+        {
+            var targetPos = _player.position;
+            targetPos.y = transform.position.y;
+            transform.LookAt(targetPos, Vector3.up);
+
+            StartCoroutine(Move());
+            
+            var inRange = false;
+            while (!inRange || IsPlaying(_animator, "Jump"))
+            {
+                var transform1 = transform;
+                if (Vector3.Distance(transform1.position, _player.position) < speed && !inRange)
+                {
+                    Log("Within range");
+                    _animator.enabled = true;
+                    inRange = true;
+                }
+                
+                yield return new WaitForSeconds(bossMoveInterval);
+            }
+            
+            _animator.enabled = false;
+            foreach (var rigidity in _rigidities)
+            {
+                rigidity.useGravity = true;
+            }
+        }
+
+        private IEnumerator Move()
+        {
+            while (true)
+            {
+                var transform1 = transform;
+                transform1.position += transform1.forward * (speed * bossMoveInterval);
+                yield return new WaitForSeconds(bossMoveInterval);
+            }
+        }
+
+        private static bool IsPlaying(Animator anim, string stateName)
+        {
+            return anim.GetCurrentAnimatorStateInfo(0).IsName(stateName) &&
+                   anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f;
         }
         
         private Vector3 GetSpawnAreaPos()
@@ -154,11 +208,11 @@ namespace FinalScripts.Fish.BossBattle
             {
                 var spawnAreaPos = spawnArea[i].transform.position;
                 var dirToSpawnArea = (spawnAreaPos - sourceTransform.position).normalized;
-
+        
                 if (Vector3.Angle(sourceTransform.forward, dirToSpawnArea) > viewAngle * 0.5f) continue;
                 
                 var distanceToSpawnArea = Vector3.Distance(sourceTransform.position, spawnAreaPos);
-
+        
                 if (!Physics.Raycast(sourceTransform.position, dirToSpawnArea, distanceToSpawnArea))
                 {
                     return spawnAreaPos;
@@ -208,34 +262,14 @@ namespace FinalScripts.Fish.BossBattle
         }
         #endregion
         
-        #region >>>---PunchBoss--
-        public void PunchObject(ControllerManager controllerManager, string fistUsed)
-        {
-            switch(_currentBossState){
-                case BossPhase.Phase0:
-                    Phase0Hit();
-                    break;
-                case BossPhase.Phase1:
-                    Phase1Hit();
-                    break;
-                case BossPhase.Phase2:
-                    Phase2Hit(fistUsed);
-                    break;
-                case BossPhase.Phase3:
-                    Phase3Hit(controllerManager, fistUsed);
-                    break;
-                case BossPhase.BossDefeated:
-                default:
-                    Log("Boss not in valid Phase");
-                    break;
-            }
-        }
-        
+        #region >>>---PhaseHits--
         [ContextMenu("HitBossPhase0")]
         private void Phase0Hit()
         {
             Log("Phase 0 hit");
             // TODO: Play FishScaleVFX
+            _animator.enabled = false;
+            StopCoroutine(Move());
             EventManager.BossPhase0Completed.Invoke();
         }
 
@@ -257,6 +291,7 @@ namespace FinalScripts.Fish.BossBattle
             else HapticManager.rightZenPunch2 = true;
         }
         
+        [ContextMenu("HitBossPhase3")]
         private void Phase3Hit(ControllerManager controllerManager, string fistUsed)
         {
             if (!SpecialAttackScript.punchCharged || _bossIsDead) return;
@@ -268,7 +303,7 @@ namespace FinalScripts.Fish.BossBattle
             force *= zenPunchMultiplier;
             
             _bossIsDead = true;
-            _rigidbody.AddForce(force);
+            // TODO: add force to rigidbody hit // _rigidbody.AddForce(force);
             EventManager.BossDefeated.Invoke();
             
             StartCoroutine(PunchSound());
@@ -288,26 +323,66 @@ namespace FinalScripts.Fish.BossBattle
         }
         #endregion
         #endregion
-        
-        #region ---Collision---
-        private void OnCollisionEnter(Collision other)
+
+        #region ---BossActions---
+        public void Punched(ControllerManager controllerManager, string fistUsed)
         {
-            if (other.transform.CompareTag("Ground"))
-            {
-                if (_bossIsDead)
-                {
-                    Destroy(gameObject);
-                }
-                else
-                {
-                    Debug.LogError("Collision with ground resetting boss to phase0");
-                    EventManager.StartBossPhase0.Invoke();
-                }
+            switch(_currentBossState){
+                case BossPhase.Phase0:
+                    Phase0Hit();
+                    break;
+                case BossPhase.Phase1:
+                    Phase1Hit();
+                    break;
+                case BossPhase.Phase2:
+                    Phase2Hit(fistUsed);
+                    break;
+                case BossPhase.Phase3:
+                    Phase3Hit(controllerManager, fistUsed);
+                    break;
+                case BossPhase.BossDefeated:
+                default:
+                    Log("Boss not in valid Phase");
+                    break;
             }
-            else if (other.transform.CompareTag("MainCamera"))
+        }
+        
+        public void HitPlayer()
+        {
+            Log("HitPlayer");
+            EventManager.StartBossPhase0.Invoke();
+        }
+
+        public void HitGround()
+        {
+            if (_bossIsDead)
             {
-                EventManager.StartBossPhase0.Invoke();
+                Destroy(gameObject);
+                return;
             }
+            
+            Log("Collision with ground resetting boss to phase0");
+            EventManager.StartBossPhase0.Invoke();
+        }
+
+        public void HitWater(Vector3 velocity)
+        {
+            
+        }
+
+        public void HitBird()
+        {
+            
+        }
+        
+        public void PunchedSuccessful()
+        {
+            
+        }
+        
+        public void PunchedUnsuccessful()
+        {
+            
         }
         #endregion
     }

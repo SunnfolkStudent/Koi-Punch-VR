@@ -78,7 +78,7 @@ namespace InDevelopment.Fish.Trajectory
             switch (other.transform.tag)
             {
                 case "Player":
-                    fish.FishHitPlayer();
+                    fish.HitPlayer();
                     break;
                 case "Ground":
                     // fish.FishHitGround();
@@ -158,7 +158,7 @@ namespace InDevelopment.Fish.Trajectory
                 return;
             }
 
-            fish.FishPunchedSuccessful();
+            fish.PunchedSuccessful();
 
             var direction = punchVelocity.normalized;
             var punchForce = punchVelocity.magnitude * fish.fish.FishPool.FishRecord.FishScrub.punchVelMultiplier;

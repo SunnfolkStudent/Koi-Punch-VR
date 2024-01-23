@@ -1,12 +1,11 @@
 using System;
 using System.Collections;
 using FinalScripts.Fish.Spawning;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 namespace FinalScripts.Fish
 {
-    public class Fish : MonoBehaviour
+    public class Fish : MonoBehaviour, IFish
     {
         public FishObjectPool.Fish fish { get; set; } // Reference to itself in the FishPool
         private Vector3 _punchedPosition; // Compared with landing position to calculate distance
@@ -79,7 +78,7 @@ namespace FinalScripts.Fish
             FishScore();
             Despawn();
         }
-
+        
         private void FishScore()
         {
             if (!hasBeenPunchedSuccessfully && !hasBeenPunchedUnsuccessfully) return;
@@ -93,7 +92,7 @@ namespace FinalScripts.Fish
             FishObjectPool.DespawnFish(fish);
         }
 
-        public void FishHitBird()
+        public void HitBird()
         {
             if (_hasHitBird) return;
             _hasHitBird = true;
@@ -103,7 +102,7 @@ namespace FinalScripts.Fish
         }
         
         #region >>>---Water---
-        public void FishHitWater(Vector3 velocity)
+        public void HitWater(Vector3 velocity)
         {
             if (_hasEnteredWater) return;
             if (!_hasEmergedFromWater)
@@ -150,26 +149,26 @@ namespace FinalScripts.Fish
             }
         }
         
-        #region >>>***---MathFormulas---
-        private static double AngleBetweenVectors(Vector3 v1, Vector3 v2)
-        {
-            double dotProduct = Vector3.Dot(v1, v2);
-            double normV1 = v1.magnitude;
-            double normV2 = v2.magnitude;
-
-            var angle = Math.Acos(dotProduct / (normV1 * normV2));
-            return ToDegrees(angle);
-        }
-        
-        private static double ToDegrees(double radians)
-        {
-            return radians * (180.0 / Math.PI);
-        }
-        #endregion
+        // #region >>>***---MathFormulas---
+        // private static double AngleBetweenVectors(Vector3 v1, Vector3 v2)
+        // {
+        //     double dotProduct = Vector3.Dot(v1, v2);
+        //     double normV1 = v1.magnitude;
+        //     double normV2 = v2.magnitude;
+        //
+        //     var angle = Math.Acos(dotProduct / (normV1 * normV2));
+        //     return ToDegrees(angle);
+        // }
+        //
+        // private static double ToDegrees(double radians)
+        // {
+        //     return radians * (180.0 / Math.PI);
+        // }
+        // #endregion
         #endregion
         
         #region >>>---Ground---
-        public void FishHitGround()
+        public void HitGround()
         {
             if (hasHitGround) return;
             hasHitGround = true;
@@ -187,7 +186,7 @@ namespace FinalScripts.Fish
         #endregion
         
         #region >>>---Player---
-        public void FishHitPlayer()
+        public void HitPlayer()
         {
             if (_hasHitPlayer) return;
             FMODManager.instance.PlayOneShot("event:/SFX/Voice/PlayerHit");
@@ -198,7 +197,7 @@ namespace FinalScripts.Fish
             ZenMetreManager.Instance.RemoveZen(fish.FishPool.FishRecord.FishScrub.zenLostByHit);
         }
         
-        public void FishPunchedSuccessful()
+        public void PunchedSuccessful()
         {
             _punchedPosition = transform.position;
             FMODManager.instance.SelectRandomPunchSound();
@@ -209,7 +208,7 @@ namespace FinalScripts.Fish
             GainZen();
         }
 
-        public void FishPunchedUnsuccessful()
+        public void PunchedUnsuccessful()
         {
             hasBeenPunchedUnsuccessfully = true;
             FMODManager.instance.PlayOneShot("event:/SFX/PlayerSounds/HandSounds/FailedPunch", transform.position);

@@ -19,13 +19,13 @@ namespace FinalScripts.Fish
             switch (other.transform.tag)
             {
                 case "MainCamera":
-                    fish.FishHitPlayer();
+                    fish.HitPlayer();
                     break;
                 case "Ground":
-                    fish.FishHitGround();
+                    fish.HitGround();
                     break;
                 case "Bird":
-                    fish.FishHitBird();
+                    fish.HitBird();
                     break;
                 case "LeftFist":
                     HapticManager.leftFishPunch = true;
@@ -35,7 +35,15 @@ namespace FinalScripts.Fish
                     break;
             }
         }
-
+        
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Water"))
+            {
+                fish.HitWater(_rigidbody.velocity);
+            }
+        }
+        
         private void OnCollisionExit(Collision other)
         {
             switch (other.transform.tag)
@@ -50,16 +58,6 @@ namespace FinalScripts.Fish
         }
         #endregion
         
-        #region ---Trigger---
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("Water"))
-            {
-                fish.FishHitWater(_rigidbody.velocity);
-            }
-        }
-        #endregion
-        
         #region ---IPunchable---
         public void PunchObject(ControllerManager controllerManager, string fistUsed)
         {
@@ -67,7 +65,7 @@ namespace FinalScripts.Fish
             if (math.abs(v.magnitude) >= fish.fish.FishPool.FishRecord.FishScrub.successfulPunchThreshold) PunchObject(v);
             else
             {
-                fish.FishPunchedUnsuccessful();
+                fish.PunchedUnsuccessful();
                 fish.Log("Punch Velocity was too weak");
             }
         }
@@ -80,7 +78,7 @@ namespace FinalScripts.Fish
                 return;
             }
             
-            fish.FishPunchedSuccessful();
+            fish.PunchedSuccessful();
             
             var direction = velocity.normalized;
             var punchForce = velocity.magnitude * fish.fish.FishPool.FishRecord.FishScrub.punchVelMultiplier;
