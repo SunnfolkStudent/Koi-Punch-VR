@@ -5,6 +5,15 @@ namespace FinalScripts.Fish
 {
     public static class EventManager
     {
+        private const bool IsDebugging = true;
+
+        #region ---Debugging---
+        private static void Log(string message)
+        {
+            if(IsDebugging) Debug.Log(message);
+        }
+        #endregion
+        
         #region >>>---FishSpawningActions---
         public static Action SpawnFish; // Spawns 1 fish and launches it to hit the player.
         public static Action FishSpawning = SpawnFishDebug; // Starts fish spawning with frequency gradually increasing.
@@ -14,17 +23,17 @@ namespace FinalScripts.Fish
         #region >>>---ActionDebugs---
         private static void SpawnFishDebug()
         {
-            Debug.Log("---Fish Spawning started---");
+            Log("---Fish Spawning started---");
         }
         
         private static void StopFishSpawningDebug()
         {
-            Debug.Log("---Fish Spawning stopped---");
+            Log("---Fish Spawning stopped---");
         }
         
         private static void StartBossPhase0Debug()
         {
-            Debug.Log("---BossPhase0 started---");
+            Log("---BossPhase0 started---");
         }
         #endregion
         #endregion
@@ -42,22 +51,22 @@ namespace FinalScripts.Fish
         #region >>>---ActionDebugs---
         private static void StartBossPhase1Debug()
         {
-            Debug.Log("---BossPhase1 started---");
+            Log("---BossPhase1 started---");
         }
         
         private static void StartBossPhase2Debug()
         {
-            Debug.Log("---BossPhase2 started---");
+            Log("---BossPhase2 started---");
         }
         
         private static void StartBossPhase3Debug()
         {
-            Debug.Log("---BossPhase3 started---");
+            Log("---BossPhase3 started---");
         }
         
         private static void BossDefeatedDebug()
         {
-            Debug.Log("---Boss Defeated---");
+            Log("---Boss Defeated---");
         }
         #endregion
         #endregion
@@ -71,22 +80,22 @@ namespace FinalScripts.Fish
         #region >>>---ActionDebugs---
         private static void FishScoreDebug(float distance, bool successFullPunch)
         {
-            Debug.Log($"---FishScore from distance: {distance}, SuccessfullPunch: {successFullPunch}---");
+            Log($"---FishScore from distance: {distance}, SuccessfullPunch: {successFullPunch}---");
         }
 
         private static void GainScoreDebug(int score)
         {
-            Debug.Log($"---Gained Score: {score}---");
+            Log($"---Gained Score: {score}---");
         }
 
         private static void PenaltyScoreDebug(int score)
         {
-            Debug.Log($"---Lost Score: {score}");
+            Log($"---Lost Score: {score}");
         }
         
         private static void BonusScoreDebug(int score)
         {
-            Debug.Log($"---Bonus Score Gained: {score}");
+            Log($"---Bonus Score Gained: {score}");
         }
         #endregion
         #endregion
