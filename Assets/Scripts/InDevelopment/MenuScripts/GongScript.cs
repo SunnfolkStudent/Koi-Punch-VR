@@ -7,10 +7,17 @@ using FMODUnity;
 
 public class GongScript : MonoBehaviour
 {
-    [SerializeField] private SoundManager _soundManager;
+    private GameObject _soundManagerObj;
+    private SoundManager _soundManager;
 
     [SerializeField] private bool isMusic;
     [SerializeField] private bool isBig;
+
+    private void Start()
+    {
+        _soundManagerObj = GameObject.FindGameObjectWithTag("SoundManager");
+        _soundManager = _soundManagerObj.GetComponent<SoundManager>();
+    }
 
     private void OnCollisionEnter(Collision other)
     {

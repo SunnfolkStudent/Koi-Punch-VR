@@ -69,4 +69,10 @@ public class BreakOnHit : TransitionAnimation, IPunchable
             RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/PlankTap", transform.position);
         }
     }
+
+   /* private void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.CompareTag("RightFist"))
+            HittingSign();
+    }*/
 }
