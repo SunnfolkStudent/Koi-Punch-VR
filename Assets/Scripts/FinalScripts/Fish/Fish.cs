@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using FinalScripts.Fish.Spawning;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 namespace FinalScripts.Fish
@@ -35,6 +36,11 @@ namespace FinalScripts.Fish
                 var fishChild = child.gameObject.AddComponent<FishChild>();
                 fishChild.fish = this;
             }
+
+            if (TryGetComponent(out FishChild component))
+            {
+                Destroy(component);
+            }
         }
 
         private void OnEnable()
@@ -44,8 +50,8 @@ namespace FinalScripts.Fish
             hasBeenPunchedUnsuccessfully = false;
             hasHitGround = false;
             _hasHitPlayer = false;
-            _hasEnteredWater = false;
             _hasEmergedFromWater = false;
+            _hasEnteredWater = false;
             _hasHitBird = false;
             StopCoroutine(DespawnAfterTime(0));
             FMODManager.instance.PlayOneShot("event:/SFX/Voice/FishTalk/KoiTalk", transform.position);
@@ -109,7 +115,7 @@ namespace FinalScripts.Fish
                 return;
             }
             
-            if (CheckIfCanSkipp(velocity))
+            if (CheckIfCanSkipp(velocity) && _hasEmergedFromWater && hasBeenPunchedSuccessfully)
             {
                 Skip();
                 return;
@@ -133,6 +139,11 @@ namespace FinalScripts.Fish
             // TODO: Skipping SFX and VFX
             foreach (var child in fish.Children)
             {
+                if (!child.Transform.GetComponent<Rigidbody>())
+                {
+                    Debug.LogWarning("No child Rigidbody");
+                    return;
+                }
                 var velocity = child.Rigidbody.velocity;
                 velocity = (new Vector3(velocity.x, -velocity.y, velocity.z));
                 child.Rigidbody.velocity = velocity;
