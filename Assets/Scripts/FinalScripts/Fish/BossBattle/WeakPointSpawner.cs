@@ -64,7 +64,6 @@ namespace FinalScripts.Fish.BossBattle
                 {
                     var attackFields = GameObject.FindGameObjectsWithTag("AttackField");
                     Instantiate(weakPointPrefab, GetWeakPointSpawnPosition(attackFields), Quaternion.identity);
-                    Debug.Log("Spawning attack field");
                     _timeSinceLastSpawn = 0f;
                 }
                 
@@ -75,6 +74,7 @@ namespace FinalScripts.Fish.BossBattle
         #region >>>---GetSpawningPositions---
         private Vector3 GetWeakPointSpawnPosition(GameObject[] attackFields)
         {
+            Debug.Log("Spawning attack field: " + _boss.transform.position);
             return _boss.transform.position;
             var whileCount = 0;
             while (whileCount < maxWhileLooping)
