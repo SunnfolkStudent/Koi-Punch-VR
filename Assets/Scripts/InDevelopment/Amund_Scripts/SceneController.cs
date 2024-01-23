@@ -21,7 +21,6 @@ public class SceneController : MonoBehaviour
     private Animator _fadeScreenAnim;
     [SerializeField] private GameObject _fishScreen;
     private Animator _fishScreenAnim;
-    [SerializeField] private GameObject _background;
     
     private static SceneController instance;
 
@@ -59,7 +58,6 @@ public class SceneController : MonoBehaviour
         }
         if (_title.transform.position == _goal && ReadyToStart)
         {
-            //FMODManager.instance.menuTheme.setParameterByName("PunchedThing", 1);
             Instantiate(secondStartSign);
             ReadyToStart = false;
         }
@@ -110,15 +108,13 @@ public class SceneController : MonoBehaviour
     }
     private IEnumerator ChangeLevelFish(int scene)
     {
-        //_fishScreen.SetActive(true);
+        _fishScreen.SetActive(true);
         _fishScreenAnim.Play("FishTransitionAnimationExit");
         yield return new WaitForSeconds(3f);
         Debug.Log("Changing scenes");
         FMODManager.instance.menuTheme.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         FMODManager.instance.ambientOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         SceneManager.LoadScene(Levels[scene]);
-        //_background.SetActive(false);
-        //_background.SetActive(true);
         _fishScreenAnim.Play("FishTransitionAnimationStart");
     }
 

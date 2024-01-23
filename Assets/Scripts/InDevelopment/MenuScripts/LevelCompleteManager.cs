@@ -96,22 +96,22 @@ public class LevelCompleteManager : MonoBehaviour
          zenScore.text = zenPointsEnd.ToString("0");
          penaltyScore.text = penaltyPointsEnd.ToString("0");
          totalScore.text = totalPoints.ToString("0");
+         
+         if(totalPoints < 100)
+            totalScore.color = Color.red;
+         else if (totalPoints < 200)
+            totalScore.color = Color.gray;
+         else if (totalPoints < 500)
+            totalScore.color = new Color32( 255, 140, 0,255);
+         else if(totalPoints < 750)
+            totalScore.color = new Color32(34, 139, 34,255);
+         else if(totalPoints < 1000)
+            totalScore.color = Color.blue;
+         else if (totalPoints < 2000)
+            totalScore.color = new Color32(160, 32, 240, 255);
+         else if (totalPoints > 5000)
+            totalScore.color = Color.magenta;
       }
-      
-      if(totalPoints < 500)
-         totalScore.color = Color.red;
-      else if (totalPoints < 1500)
-         totalScore.color = Color.gray;
-      else if (totalPoints < 3000)
-         totalScore.color = new Color32( 255, 140, 0,255);
-      else if(totalPoints < 5000)
-         totalScore.color = new Color32(34, 139, 34,255);
-      else if(totalPoints < 7500)
-         totalScore.color = Color.blue;
-      else if (totalPoints < 10000)
-         totalScore.color = new Color32(160, 32, 240, 255);
-      else if (totalPoints > 10000)
-         totalScore.color = Color.magenta;
    }
 
    private void CalculateScore()

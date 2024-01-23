@@ -10,7 +10,7 @@ using FMODUnity;
 public class DoubleCheckSigns : TransitionAnimation, IPunchable
 {
     [SerializeField] private GameObject _nextPrefab;
-    [SerializeField] private bool isBreaking = false;
+    [SerializeField] private bool isBreaking;
 
     private GameObject _resetScore;
     
@@ -100,7 +100,6 @@ public class DoubleCheckSigns : TransitionAnimation, IPunchable
         }
         else
         {
-            Debug.Log("Sign Hit");
             RuntimeManager.PlayOneShot("event:/SFX/MenuSounds/PlankTap", transform.position);
         }
     }

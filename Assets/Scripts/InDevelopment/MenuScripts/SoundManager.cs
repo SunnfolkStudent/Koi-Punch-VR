@@ -20,7 +20,7 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetFloat("MusicVolume", 1);
+            PlayerPrefs.SetFloat("MusicVolume", .5f);
             SetMusicVolume();
         }
         if (PlayerPrefs.HasKey("SFXVolume"))
@@ -30,7 +30,7 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetFloat("SFXVolume", 1);
+            PlayerPrefs.SetFloat("SFXVolume", .5f);
             SetSFXVolume();
         }
     }
