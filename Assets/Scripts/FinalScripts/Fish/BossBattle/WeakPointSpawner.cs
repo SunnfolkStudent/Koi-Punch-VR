@@ -74,6 +74,7 @@ namespace FinalScripts.Fish.BossBattle
         #region >>>---GetSpawningPositions---
         private Vector3 GetWeakPointSpawnPosition(GameObject[] attackFields)
         {
+            if (_bossCollider == null) return _boss.transform.position;
             var whileCount = 0;
             while (whileCount < maxWhileLooping)
             {
