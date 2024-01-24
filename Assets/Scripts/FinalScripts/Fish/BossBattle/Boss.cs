@@ -390,5 +390,11 @@ namespace FinalScripts.Fish.BossBattle
             
         }
         #endregion
+
+        [ContextMenu("Boss Defeated")]
+        public void DefeatBoss()
+        {
+            EventManager.BossDefeated.Invoke();
+        }
     }
 }

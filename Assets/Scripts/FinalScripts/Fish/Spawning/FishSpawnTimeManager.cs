@@ -14,7 +14,7 @@ namespace FinalScripts.Fish.Spawning
         [SerializeField] private AnimationCurve animationCurve;
         
         #region ---Initialization---
-        private void Start()
+        private void Awake()
         {
             EventManager.FishSpawning += StartSpawning;
             EventManager.FishSpawningAtMaxRate += StartSpawningAtMaxRate;

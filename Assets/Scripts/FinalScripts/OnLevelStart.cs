@@ -26,10 +26,11 @@ namespace FinalScripts
         
         private IEnumerator LevelStart()
         {
-            StopAllAmbientSounds();
+            FMODManager.instance.StopAllInstances();
             switch (currentArena)
             {
                 case Arenas.Area1:
+                    Debug.Log(FMODManager.instance.ambientOne);
                     FMODManager.instance.ambientOne.start();
                     FMODManager.instance.levelOne.start();
                     break;
@@ -48,13 +49,6 @@ namespace FinalScripts
             FMODManager.instance.PlayOneShot("event:/SFX/Voice/GameStart");
             yield return new WaitForSeconds(startSpawningFishDelayAfterVoiceLine);
             EventManager.FishSpawning.Invoke();
-        }
-        
-        private static void StopAllAmbientSounds()
-        {
-            FMODManager.instance.ambientOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            FMODManager.instance.ambientTwo.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            FMODManager.instance.ambientThree.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
     }
 }
