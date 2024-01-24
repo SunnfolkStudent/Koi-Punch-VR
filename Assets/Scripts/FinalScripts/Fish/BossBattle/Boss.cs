@@ -66,6 +66,7 @@ namespace FinalScripts.Fish.BossBattle
             EventManager.StartBossPhase1 += Phase1;
             EventManager.StartBossPhase2 += Phase2;
             EventManager.StartBossPhase3 += Phase3;
+            EventManager.BossDefeated += BossDefeated;
         }
 
         private void Start()
@@ -315,7 +316,7 @@ namespace FinalScripts.Fish.BossBattle
             
             var totalScore = (int)(force.magnitude + Phase.Sum(pair => pair.Value.score));
             Log($"BossDefeated | TotalScore: {totalScore}");
-            EventManager.BossScore.Invoke(totalScore);
+            EventManager.BossScore.Invoke((int)(totalScore * 0.01f));
             InternalZenEventManager.stopChargeVfx.Invoke();
         }
         
@@ -396,6 +397,17 @@ namespace FinalScripts.Fish.BossBattle
         public void DefeatBoss()
         {
             EventManager.BossDefeated.Invoke();
+        }
+
+        private void BossDefeated()
+        {
+            StartCoroutine(Despawn());
+        }
+
+        private IEnumerator Despawn()
+        {
+            yield return new WaitForSeconds(5);
+            Destroy(gameObject);
         }
     }
 }
