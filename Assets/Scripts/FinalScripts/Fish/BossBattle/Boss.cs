@@ -141,8 +141,9 @@ namespace FinalScripts.Fish.BossBattle
         
         private IEnumerator AttackWithDelay()
         {
-            var spawnPos = GetSpawnAreaPos();
-            transform.position = spawnPos + spawnOffset;
+            var spawnPos = GameObject.FindWithTag("BossSpawnArea").transform.position; // GetSpawnAreaPos();
+            // spawnPos.y = _player.position.y + spawnOffset.y;
+            transform.position = spawnPos;
             _animator.enabled = false;
 
             foreach (var rigidity in _rigidities)
