@@ -469,6 +469,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 970d916cd84b00546b6ec55c7cb264d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxColliders: 10
+  sphereCastRadius: 0.2
 --- !u!1 &5029026800916818781
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,6 +565,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 970d916cd84b00546b6ec55c7cb264d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxColliders: 10
+  sphereCastRadius: 0.2
 --- !u!1 &6564072810355661753
 GameObject:
   m_ObjectHideFlags: 0
@@ -790,7 +794,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0

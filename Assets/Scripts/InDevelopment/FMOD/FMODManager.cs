@@ -27,8 +27,8 @@ public class FMODManager: MonoBehaviour
     //private EventInstance koiPunch = RuntimeManager.CreateInstance("event:/SFX/PlayerSounds/ChargeSounds/KoiPunch"); //not done!
     
     [SerializeField] [Range(0,100)] private float velocityFloor; 
-    [Range(0, 1)] private float sfxVolume;
-    [Range(0, 1)] private float musicVolume;
+    [Range(0, 1)] [SerializeField] private float sfxVolume;
+    [Range(0, 1)] [SerializeField] private float musicVolume;
     private float playerLeftHandVelocity;
     private float playerRightHandVelocity;
     [SerializeField] [Range(0, 2)] private float wooshVolume;
@@ -59,6 +59,7 @@ public class FMODManager: MonoBehaviour
     }
     private void Awake()
     {
+        
         if (FMODManager.instance == null)
         {
             FMODManager.instance = this;
