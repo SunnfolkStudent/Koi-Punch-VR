@@ -33,6 +33,7 @@ public class BreakOnHit : TransitionAnimation, IPunchable
         if (gameObject.CompareTag("SceneChanger"))
         {
             gameObject.transform.localScale = new Vector3(0, 0, 0);
+            FMODManager.instance.StopAllInstances();
             _sceneController.ChangeScenes(LevelToGoTo);
         }
         else if (gameObject.CompareTag("StartButton"))
@@ -43,6 +44,7 @@ public class BreakOnHit : TransitionAnimation, IPunchable
         else if (gameObject.CompareTag("StartButton2"))
         {
             gameObject.transform.localScale = new Vector3(0, 0, 0);
+            FMODManager.instance.StopAllInstances();
             _sceneController.StartGameAfterIntro();
         }
         else

@@ -59,15 +59,15 @@ public class FMODManager: MonoBehaviour
     }
     private void Awake()
     {
-        
-        if (FMODManager.instance == null)
-        {
+        DontDestroyOnLoad(gameObject);
+        // if (FMODManager.instance == null)
+        // {
             FMODManager.instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        // }
+        // else
+        // {
+        //     Destroy(gameObject);
+        // }
         musicBus = RuntimeManager.GetBus("bus:/Music");
         sfxBus = RuntimeManager.GetBus("bus:/SFX");
     }
@@ -80,8 +80,8 @@ public class FMODManager: MonoBehaviour
             "event:/SFX/Voice/RandomPunchComments/PlayerFantasticHit",
         };
         
-        Left = GameObject.Find("Hand_L");
-        Right = GameObject.Find("Hand_R");
+        // Left = GameObject.Find("Hand_L");
+        // Right = GameObject.Find("Hand_R");
         levelOne = RuntimeManager.CreateInstance("event:/Music/LevelMusic/Level1");
         levelTwo = RuntimeManager.CreateInstance("event:/Music/LevelMusic/Level2");
         levelThree = RuntimeManager.CreateInstance("event:/Music/LevelMusic/Level3");
@@ -98,6 +98,9 @@ public class FMODManager: MonoBehaviour
     {
         sfxBus.setVolume(sfxVolume);
         musicBus.setVolume(musicVolume);
+        
+        Left = GameObject.Find("Hand_L");
+        Right = GameObject.Find("Hand_R");
     }
 
     private void FixedUpdate()

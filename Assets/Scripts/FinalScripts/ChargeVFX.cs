@@ -7,7 +7,7 @@ public class ChargeVFX : MonoBehaviour
     [SerializeField] private VisualEffect _chargeVFXRight;
     
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         InternalZenEventManager.startChargeVfx += PlayChargeVFX;
         InternalZenEventManager.stopChargeVfx += StopChargeVFX;

@@ -121,7 +121,11 @@ namespace FinalScripts.Fish.BossBattle
         #region >>>---BossPhasesStart---
         private IEnumerator OnSpawn()
         {
+            FMODManager.instance.levelOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            
             FMODManager.instance.zenMusic.setParameterByName("zenLevel", 0);
+            FMODManager.instance.zenMusic.setParameterByName("SwagLevel", 10);
+
             FMODManager.instance.zenMusic.start();
             if (!_hasSaidPhase0VoiceLine)
             {

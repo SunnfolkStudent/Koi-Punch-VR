@@ -43,6 +43,18 @@ namespace FinalScripts
             {
                 FMODManager.instance.levelOne.start();
             }
+
+            if (Keyboard.current.spaceKey.wasPressedThisFrame)
+            {
+                FMODManager.instance.StopAllInstances();
+            }
+
+            if (Keyboard.current.lKey.wasPressedThisFrame)
+            {
+                FMODManager.instance.levelOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                FMODManager.instance.ambientOne.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                FMODManager.instance.zenMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            }
         }
 
         private IEnumerator LevelStart()
