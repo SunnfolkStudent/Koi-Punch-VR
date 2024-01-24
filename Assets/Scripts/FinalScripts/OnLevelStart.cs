@@ -38,10 +38,20 @@ namespace FinalScripts
             Debug.Log("CurrentModeUpdate 2" + _2Play);
             
             Debug.Log("CurrentModeUpdate 3" + _3Play);
-
-            if (Keyboard.current.pKey.wasPressedThisFrame)
+            
+            if (Keyboard.current.digit1Key.wasPressedThisFrame)
             {
                 FMODManager.instance.levelOne.start();
+            }
+            
+            if (Keyboard.current.digit2Key.wasPressedThisFrame)
+            {
+                FMODManager.instance.levelTwo.start();
+            }
+            
+            if (Keyboard.current.digit3Key.wasPressedThisFrame)
+            {
+                FMODManager.instance.levelThree.start();
             }
         }
 
