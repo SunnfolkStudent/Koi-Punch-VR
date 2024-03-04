@@ -33,11 +33,11 @@ namespace FinalScripts
 
         private void Update()
         {
-            Debug.Log("CurrentModeUpdate 1" + _1Play);
-            
-            Debug.Log("CurrentModeUpdate 2" + _2Play);
-            
-            Debug.Log("CurrentModeUpdate 3" + _3Play);
+            // Debug.Log("CurrentModeUpdate 1" + _1Play);
+            //
+            // Debug.Log("CurrentModeUpdate 2" + _2Play);
+            //
+            // Debug.Log("CurrentModeUpdate 3" + _3Play);
 
             if (Keyboard.current.pKey.wasPressedThisFrame)
             {

@@ -78,6 +78,11 @@ namespace FinalScripts.Fish.BossBattle
                 bossChild.boss = this;
                 rigidity.useGravity = false;
             }
+
+            foreach (var keyValuePair in Phase)
+            {
+                keyValuePair.Value.score = 0;
+            }
             
             _player = GameObject.FindGameObjectWithTag("MainCamera").transform;
             _animator = GetComponent<Animator>();
@@ -95,17 +100,17 @@ namespace FinalScripts.Fish.BossBattle
             Phase2,
             Phase3,
             BossDefeated,
-            Phase0
+            Phase0,
         }
 
         private static readonly Dictionary<BossPhase, PhaseInfo> Phase = new()
         {
-            { BossPhase.Phase1, new PhaseInfo(() => EventManager.StartBossPhase2.Invoke()) },
             { BossPhase.Phase2, new PhaseInfo(() => EventManager.StartBossPhase2.Invoke()) },
+            // { BossPhase.Phase2, new PhaseInfo(() => EventManager.StartBossPhase2.Invoke()) },
             { BossPhase.Phase3, new PhaseInfo(() => EventManager.StartBossPhase3.Invoke()) }
         };
 
-        public class PhaseInfo
+        private class PhaseInfo
         {
             public float score { get; set; }
             public readonly Action Event;
@@ -289,7 +294,6 @@ namespace FinalScripts.Fish.BossBattle
             Log("Can't hit boss directly in phase 1");
         }
 
-        [ContextMenu("HitBossPhase2")]
         private void Phase2Hit(string lFist)
         {
             Log("Phase 2 hit");
@@ -299,6 +303,12 @@ namespace FinalScripts.Fish.BossBattle
             
             if (lFist == "LeftFist") HapticManager.leftZenPunch2 = true;
             else HapticManager.rightZenPunch2 = true;
+        }
+        
+        [ContextMenu("HitBossPhase2")]
+        private void Phase2HitContextMenu()
+        {
+            Phase2Hit("LeftFist");
         }
         
         [ContextMenu("HitBossPhase3")]
