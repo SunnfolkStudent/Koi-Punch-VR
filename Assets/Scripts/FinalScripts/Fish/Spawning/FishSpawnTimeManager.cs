@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -13,14 +14,23 @@ namespace FinalScripts.Fish.Spawning
         [SerializeField] private float timeToMaxSpawnRate = 20f;
         [SerializeField] private AnimationCurve animationCurve;
         
-        #region ---Initialization---
-        private void Awake()
+        #region ---EventFunctions---
+        private void Start()
         {
             EventManager.FishSpawning += StartSpawning;
             EventManager.FishSpawningAtMaxRate += StartSpawningAtMaxRate;
             EventManager.StopFishSpawning += StopSpawning;
             EventManager.SpawnBoss += StopSpawning;
         }
+
+        private void OnDestroy()
+        {
+            EventManager.FishSpawning -= StartSpawning;
+            EventManager.FishSpawningAtMaxRate -= StartSpawningAtMaxRate;
+            EventManager.StopFishSpawning -= StopSpawning;
+            EventManager.SpawnBoss -= StopSpawning;
+        }
+
         #endregion
         
         #region ---FishSpawnFrequencyControls---
