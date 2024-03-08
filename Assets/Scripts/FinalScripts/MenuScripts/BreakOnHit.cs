@@ -21,7 +21,8 @@ public class BreakOnHit : TransitionAnimation, IPunchable
         _sceneControllerObj = GameObject.FindGameObjectWithTag("SceneController");
         _sceneController = _sceneControllerObj.GetComponent<SceneController>();
     }
-
+    
+    [ContextMenu("HitSign")]
     private void HittingSign()
     {
         CylinderTrigger.LeftHandCanHit = false;

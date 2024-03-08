@@ -4,7 +4,7 @@ using FMOD.Studio;
 using FMODUnity;
 using Random = UnityEngine.Random;
 
-public class FMODManager: MonoBehaviour
+public class FMODManager : MonoBehaviour
 {
     public static FMODManager instance;
     
@@ -13,7 +13,7 @@ public class FMODManager: MonoBehaviour
     public ControllerManager controllerManager;
     
     private Camera cam;
-
+    
     public EventInstance levelOne;
     public EventInstance levelTwo;
     public EventInstance levelThree;
@@ -99,8 +99,9 @@ public class FMODManager: MonoBehaviour
         sfxBus.setVolume(sfxVolume);
         musicBus.setVolume(musicVolume);
         
-        Left = GameObject.Find("Hand_L");
-        Right = GameObject.Find("Hand_R");
+        Left ??= GameObject.Find("Hand_L");
+        Right ??= GameObject.Find("Hand_R");
+        controllerManager ??= GameObject.Find("XR Origin (XR Rig)").GetComponent<ControllerManager>();
     }
 
     private void FixedUpdate()

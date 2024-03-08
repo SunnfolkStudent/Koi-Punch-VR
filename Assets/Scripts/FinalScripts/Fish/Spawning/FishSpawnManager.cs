@@ -42,12 +42,17 @@ namespace FinalScripts.Fish.Spawning
         }
         #endregion
         
-        #region ---Initialization---
+        #region ---EventFunctions---
         private void Awake()
         {
             _target = GameObject.FindGameObjectWithTag("MainCamera").transform;
             _fishSpawnAreas = GetComponent<FishSpawnAreas>();
             EventManager.SpawnFish += SpawnFish;
+        }
+        
+        private void OnDestroy()
+        {
+            EventManager.SpawnFish -= SpawnFish;
         }
         #endregion
         
